@@ -11,7 +11,7 @@ import java.io.File;
  * 显示地图
  * Created by asus1 on 2016/2/1.
  */
-public class FuncMap extends FuncSrc{
+public class FuncMap extends FuncSrc {
 
 	public FuncMap(Game game) {
 		super(game);

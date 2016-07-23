@@ -4,7 +4,7 @@ import castle.Game;
 import funcs.FuncSrc;
 
 public class FuncExit extends FuncSrc {
-	
+
 	public FuncExit(Game game) {
 		super(game);
 	}

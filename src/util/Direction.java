@@ -11,11 +11,11 @@ public enum Direction {
 	EAST("east"),
 	WEST("west"),
 	NORTH("north"),
-	SOUTH("south")
-	;
+	SOUTH("south");
 
 	String s;
-	Direction(String s){
+
+	Direction(String s) {
 		this.s = s;
 	}
 

@@ -4,7 +4,7 @@ import castle.Game;
 import funcs.FuncSrc;
 
 public class FuncFight extends FuncSrc {
-	
+
 	public FuncFight(Game game) {
 		super(game);
 	}

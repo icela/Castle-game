@@ -16,11 +16,10 @@ public class FuncRename extends FuncSrc {
 	@Override
 	public void DoFunc(String cmd) {
 //		game.echoln("请问您的新名字是？");
-		if(!cmd.equals("")){
+		if (!cmd.equals("")) {
 			game.getPlayer().rename(cmd);
 			game.echoln("重命名成功。新名字：" + cmd);
-		}
-		else {
+		} else {
 			game.echoln("格式错误。请按照\"rename [新名字]\"的格式重命名！");
 		}
 	}

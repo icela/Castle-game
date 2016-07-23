@@ -16,11 +16,11 @@ public class GameMap {
 
 	private ArrayList<Room> theRooms;
 	private Room currentRoom;
-	private static final DirectionPair[] pairs ={
+	private static final DirectionPair[] pairs = {
 			null,
-		new DirectionPair(Direction.UP,   Direction.DOWN ),
-		new DirectionPair(Direction.NORTH,Direction.SOUTH),
-		new DirectionPair(Direction.EAST, Direction.WEST ),
+			new DirectionPair(Direction.UP, Direction.DOWN),
+			new DirectionPair(Direction.NORTH, Direction.SOUTH),
+			new DirectionPair(Direction.EAST, Direction.WEST),
 	};
 
 	public GameMap() {
@@ -42,70 +42,72 @@ public class GameMap {
 		currentRoom = theRooms.get(4);
 	}
 
-	private void setExit(int index_a, int index_b, DirectionPair pair){
+	private void setExit(int index_a, int index_b, DirectionPair pair) {
 		theRooms.get(index_a).setExit(String.valueOf(pair.getDirection1()), index_b);
 		theRooms.get(index_b).setExit(String.valueOf(pair.getDirection2()), index_a);
 	}
 
-	public void setCurrentRoom(Room room){
+	public void setCurrentRoom(Room room) {
 		currentRoom = room;
 	}
 
-	public boolean goRoom(String direction){
-		if( currentRoom.checkExit(direction) ) {
+	public boolean goRoom(String direction) {
+		if (currentRoom.checkExit(direction)) {
 			currentRoom = theRooms.get(currentRoom.showRoomId(direction));
 			return true;
-		}
-		else
+		} else
 			return false;
 	}
 
-	public boolean isRoomExists(String roomName){
+	public boolean isRoomExists(String roomName) {
 		for (Room room : theRooms) {
-			if(room.equals(roomName)){
+			if (room.equals(roomName)) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public Room getHome(){
+	public Room getHome() {
 		return theRooms.get(4);
 	}
 
-	public void setRoomsState(char[] state){
+	public void setRoomsState(char[] state) {
 		for (int i = 0; i < theRooms.size(); i++) {
 			char c;
-			try{c = state[i];}
-			catch (Exception e){c = 1;}
+			try {
+				c = state[i];
+			} catch (Exception e) {
+				c = 1;
+			}
 			theRooms.get(i).setBossGetItem(c == '1');
 		}
 	}
 
-	public void loadRoom(String room_){
+	public void loadRoom(String room_) {
 		for (Room room : theRooms) {
-			if(room.equals(room_)){
+			if (room.equals(room_)) {
 				currentRoom = room;
 				break;
 			}
 		}
 	}
 
-	public char[] getRoomsState(){
+	public char[] getRoomsState() {
 		char[] roomsState = new char[theRooms.size()];
 		for (int i = 0; i < theRooms.size(); i++)
 			roomsState[i] = theRooms.get(i).isBossGetItem() ? '1' : '0';
 		return roomsState;
 	}
 
-	public String wildRoom(){
-		int index = (int) (Math.random()*2000);
+	public String wildRoom() {
+		int index = (int) (Math.random() * 2000);
 		index %= theRooms.size();
 		currentRoom = theRooms.get(index);
 		return currentRoom.getPrompt();
 	}
 
-	public void fightBoss(Game game){
+	public void fightBoss(Game game) {
 		game.setPlayer(currentRoom.fightBoss(game.getPlayer(), game));
 	}
 

@@ -4,7 +4,7 @@ public class Item {
 	private String name = "";
 	private boolean get = false;
 	private int num = 1;
-	
+
 	public Item(String name) {
 		super();
 		this.name = name;
@@ -22,7 +22,7 @@ public class Item {
 	public void get() {
 		get = true;
 	}
-	
+
 	public boolean check() {
 		return get;
 	}

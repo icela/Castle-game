@@ -8,6 +8,7 @@ public class Exits {
 	public int from;
 	public int to;
 	public int dir;
+
 	public Exits(int from, int to, int dir) {
 		this.from = from;
 		this.to = to;

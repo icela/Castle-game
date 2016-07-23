@@ -17,10 +17,9 @@ public class FuncTalk extends FuncSrc {
 	@Override
 	public void DoFunc(String cmd) {
 		NPC npc = game.getMap().getCurrentRoom().isNPCExists(cmd);
-		if(npc != null){
+		if (npc != null) {
 			game.echoln(npc.getChat());
-		}
-		else{
+		} else {
 			game.echoln("你指定的名字不存在。注：Boss要在被打败之后才能对话。");
 		}
 	}

@@ -1,15 +1,15 @@
 package cells;
 
 public class Cell {
-	
+
 	String name = "";
 
 	Cell(String name) {
 //		super();
 		this.name = name;
 	}
-	
-	public Cell(){
+
+	public Cell() {
 		name = "unKown";
 	}
 

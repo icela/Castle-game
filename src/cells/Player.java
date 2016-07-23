@@ -69,7 +69,7 @@ public class Player extends Cell {
 	}
 
 	public String stateToString() {
-		return "等级：" + (level+1) +
+		return "等级：" + (level + 1) +
 				"\n经验值：" + experience +
 				"/" + limit[level] +
 				"\n姓名：" + name +
@@ -85,36 +85,52 @@ public class Player extends Cell {
 
 	int win(int experience, Echoer echoer) {
 		this.experience += experience;
-		if( this.experience >= limit[level] ){
+		if (this.experience >= limit[level]) {
 			this.experience -= limit[level];
-			level ++;
-			strike += level*2;
-			defence += level*2;
-			blood += level*20;
+			level++;
+			strike += level * 2;
+			defence += level * 2;
+			blood += level * 20;
 			echoer.echoln("恭喜您升级啦~\\(≧▽≦)/~啦啦啦\n各种属性加成哦~");
 		}
 		return experience;
 	}
 
-	public boolean treat(){
-		if( blood <= 120 ){
+	public boolean treat() {
+		if (blood <= 120) {
 			blood = 120;
 			return true;
-		}
-		else
+		} else
 			return false;
 	}
 
-	public Player getStateData(){
+	public Player getStateData() {
 		return this;
 	}
 
-	public void rename(String newName){this.name = newName;}
-	public int getBlood() {return blood;}
-	public int getLevel() {return level;}
-	public int getExperience() {return experience;}
-	public int getStrike() {return strike;}
-	public int getDefence() {return defence;}
+	public void rename(String newName) {
+		this.name = newName;
+	}
+
+	public int getBlood() {
+		return blood;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public int getExperience() {
+		return experience;
+	}
+
+	public int getStrike() {
+		return strike;
+	}
+
+	public int getDefence() {
+		return defence;
+	}
 
 	//	public void saveState(){
 //		database.saveState(

@@ -1,13 +1,13 @@
 package map;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import cells.Boss;
 import cells.NPC;
 import cells.Player;
 import com.sun.istack.internal.Nullable;
 import util.Echoer;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Room {
 
@@ -30,17 +30,22 @@ public class Room {
 		this.welcomeWord = welcomeWord;
 	}
 
-	public Room(String description,@Nullable String welcomeWord,
-	        @Nullable String BossName, int blood, int strike, int defence, int experience,
-            @Nullable String dieText) {
+	public Room(
+			String description,
+			@Nullable String welcomeWord,
+			@Nullable String BossName,
+			int blood,
+			int strike,
+			int defence,
+			int experience,
+			@Nullable String dieText) {
 		this(description, welcomeWord == null ? "欢迎来到这里。" : welcomeWord);
-		if(BossName != null){
+		if (BossName != null) {
 			if (dieText != null)
 				boss = new Boss(BossName, blood, strike, defence, experience, dieText);
 			else
 				boss = new Boss(BossName, blood, strike, defence, experience);
-		}
-		else
+		} else
 			boss = null;
 
 		NPCs = new ArrayList<>();
@@ -61,7 +66,7 @@ public class Room {
 	}
 
 	//    设置一个出口。
-	void setExit(String str, int targetRoomId){
+	void setExit(String str, int targetRoomId) {
 		exits.put(str, targetRoomId);
 	}
 
@@ -72,20 +77,20 @@ public class Room {
 		sb.append(welcomeWord).append('\n');
 		sb.append("你在").append(this.description).append('\n');
 		sb.append("出口有: ");
-		for ( String str : exits.keySet() ){
+		for (String str : exits.keySet()) {
 			sb.append(str).append(' ');
 		}
 		sb.append('\n');
-		if(boss != null) {
-			if( boss.ifGet() )
+		if (boss != null) {
+			if (boss.ifGet())
 				ifaBoss = "冰封".equals(boss.toString()) ?
 						"你来到了神秘空间。这里只能通过\\wild传送离开。冰封正坐在这写码呢。"
-						: "这里的Boss是"+ boss +",正准备接受你的挑战呢！";
+						: "这里的Boss是" + boss + ",正准备接受你的挑战呢！";
 			else
-				ifaBoss = "这里的Boss是"+ boss +",已经被你打败过啦O(∩_∩)O哈哈~";
+				ifaBoss = "这里的Boss是" + boss + ",已经被你打败过啦O(∩_∩)O哈哈~";
 		}
 		sb.append(ifaBoss);
-		if(NPCs != null && NPCs.size() > 0) {
+		if (NPCs != null && NPCs.size() > 0) {
 			sb.append("这里还有：\n");
 			for (NPC npc : NPCs) {
 				sb.append(npc.getName());
@@ -93,10 +98,12 @@ public class Room {
 		}
 		return sb.toString();
 	}
+
 	//   使用此类的返回值，赋给原本的Room。
 	int showRoomId(String direction) {
 		return exits.get(direction);
 	}
+
 	//   战斗函数
 	Player fightBoss(Player player, Echoer echoer) {
 		return boss.fight(player, echoer);
@@ -106,20 +113,20 @@ public class Room {
 	public boolean isBossGetItem() {
 		try {
 			return boss.ifGet();
-		} catch (NullPointerException e){
+		} catch (NullPointerException e) {
 			return true;
 		}
 	}
 
-	void setBossGetItem(boolean isGet){
-		if(boss != null){
+	void setBossGetItem(boolean isGet) {
+		if (boss != null) {
 			boss.setGetItem(isGet);
 		}
 	}
 
 	public NPC isNPCExists(String name) {
 		for (NPC npc : NPCs) {
-			if(name.equals(npc.getName()))
+			if (name.equals(npc.getName()))
 				return npc;
 		}
 		return null;

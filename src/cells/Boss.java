@@ -12,12 +12,12 @@ public class Boss extends Player {
 	private boolean getItem = true;
 
 	public Boss(String name, int blood, int strike, int defence, int experience, String dieText) {
-		this(name,blood,strike,defence,experience);
+		this(name, blood, strike, defence, experience);
 		this.dieText = dieText;
 	}
 
 	public Boss(String name, int blood, int strike, int defence, int experience) {
-		super(name,blood,strike,defence);
+		super(name, blood, strike, defence);
 		this.experience = experience;
 		dieText = name + "跪着向你哀求，不过你残忍地！";
 	}
@@ -30,24 +30,23 @@ public class Boss extends Player {
 		int beBeat = (this.strike - player.getDefence());
 		int Beat = (player.getStrike() - this.defence);
 
-		if( beBeat <= 0 ) {
+		if (beBeat <= 0) {
 			beBeat = 0;
 		}
 //			打不过
-		if( Beat <= 0 ){
+		if (Beat <= 0) {
 			player.blood -= 10;
 			stringBuffer
 					.append("你的攻击力小于")
 					.append(this.name)
 					.append("的防御力！\n落荒而逃！损失10点体力值！\n");
-		}
-		else{
-			while(survive){
+		} else {
+			while (survive) {
 //					互相扣血
 				this.blood -= Beat;
 				player.blood -= beBeat;
 //					判断
-				if( player.blood <= 0 ){
+				if (player.blood <= 0) {
 
 					bloodSave2 -= 5;
 					player.blood = bloodSave2;
@@ -56,7 +55,7 @@ public class Boss extends Player {
 					stringBuffer.append("以你现有的体力值无法打倒").append(this.name).append("！\n落荒而逃！损失5点体力值！\n");
 					break;
 				}
-				if( this.blood <= 0 ){
+				if (this.blood <= 0) {
 //						先把血补回去
 					this.blood = bloodSave;
 					stringBuffer
@@ -94,15 +93,14 @@ public class Boss extends Player {
 	}
 
 	public int getExperience(Echoer echoer) {
-		if( getItem ){
+		if (getItem) {
 			echoer.echoln("Boss挑战成功，获得挑战奖励和额外5点经验奖励！");
-			return (this.experience+5);
-		}
-		else
+			return (this.experience + 5);
+		} else
 			return this.experience;
 	}
 
-	public NPC toNPC(String chat){
+	public NPC toNPC(String chat) {
 		return new NPC(name, chat);
 	}
 }
