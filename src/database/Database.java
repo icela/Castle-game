@@ -14,9 +14,9 @@ import java.util.ArrayList;
  * Created by asus1 on 2016/1/28.
  */
 public class Database {
-	private static final String savePath = "."+ File.separator+"save.ice";
+	private static final String savePath = "." + File.separator + "save.ice";
 	private String playerName = "";
-	private char[] roomsState ;
+	private char[] roomsState;
 	private String roomName;
 	private int blood = 0;
 	private int strike = 0;
@@ -33,11 +33,11 @@ public class Database {
 			roomName = reader.readLine();
 			roomsState = reader.readLine().toCharArray();
 			playerName = reader.readLine();
-			blood      =  Integer.parseInt(reader.readLine());
-			strike     =  Integer.parseInt(reader.readLine());
-			defence    =  Integer.parseInt(reader.readLine());
-			level      =  Integer.parseInt(reader.readLine());
-			experience =  Integer.parseInt(reader.readLine());
+			blood = Integer.parseInt(reader.readLine());
+			strike = Integer.parseInt(reader.readLine());
+			defence = Integer.parseInt(reader.readLine());
+			level = Integer.parseInt(reader.readLine());
+			experience = Integer.parseInt(reader.readLine());
 
 			reader.close();
 
@@ -55,7 +55,7 @@ public class Database {
 
 	public void saveMap(GameMap map) throws IOException {
 		File file = new File(savePath);
-		if(file.exists()){
+		if (file.exists()) {
 			file.delete();
 		}
 		file.createNewFile();
@@ -66,16 +66,16 @@ public class Database {
 		writer.close();
 	}
 
-	public void saveMapAndState(GameMap map, Player player) throws IOException{
+	public void saveMapAndState(GameMap map, Player player) throws IOException {
 		File file = openFile();
 		BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 		this.roomName = map.getCurrentRoom().toString();
 		this.roomsState = map.getRoomsState();
 		this.playerName = player.toString();
-		this.blood      = player.getBlood();
-		this.strike     = player.getStrike();
-		this.defence    = player.getDefence();
-		this.level      = player.getLevel();
+		this.blood = player.getBlood();
+		this.strike = player.getStrike();
+		this.defence = player.getDefence();
+		this.level = player.getLevel();
 		this.experience = player.getExperience();
 
 		writer.write(this.toString());
@@ -85,22 +85,22 @@ public class Database {
 	@Override
 	public String toString() {
 		return
-				this.roomName   +  "\r\n" +
-				String.valueOf(this.roomsState) +  "\r\n" +
-				this.playerName +  "\r\n" +
-				this.blood      +  "\r\n" +
-				this.strike     +  "\r\n" +
-				this.defence    +  "\r\n" +
-				this.level      +  "\r\n" +
-				this.experience +  "\r\n"
+				this.roomName + "\r\n" +
+						String.valueOf(this.roomsState) + "\r\n" +
+						this.playerName + "\r\n" +
+						this.blood + "\r\n" +
+						this.strike + "\r\n" +
+						this.defence + "\r\n" +
+						this.level + "\r\n" +
+						this.experience + "\r\n"
 				;
 	}
 
 	/**
 	 * @param player 玩家指针
-	 * 读取数据
+	 *               读取数据
 	 */
-	public void loadState(Player player){
+	public void loadState(Player player) {
 		player.setValues(
 				playerName,
 				blood,
@@ -117,10 +117,10 @@ public class Database {
 		BufferedWriter writer;
 		writer = new BufferedWriter(new FileWriter(file));
 		this.playerName = player.toString();
-		this.blood      = player.getBlood();
-		this.strike     = player.getStrike();
-		this.defence    = player.getDefence();
-		this.level      = player.getLevel();
+		this.blood = player.getBlood();
+		this.strike = player.getStrike();
+		this.defence = player.getDefence();
+		this.level = player.getLevel();
 		this.experience = player.getExperience();
 
 		writer.write(this.toString());
@@ -128,25 +128,25 @@ public class Database {
 		writer.close();
 	}
 
-	public static boolean isFileExists(){
+	public static boolean isFileExists() {
 		return new File(savePath).exists();
 	}
 
-	private static Statement getStatement() throws ClassNotFoundException, SQLException{
+	private static Statement getStatement() throws ClassNotFoundException, SQLException {
 		Class.forName("org.sqlite.JDBC");
 		Connection connection = DriverManager.getConnection("jdbc:sqlite:data.db");
 		return connection.createStatement();
 	}
 
 	/**
-	 CREATE TABLE ROOM(id INTEGER PRIMARY KEY AUTOINCREMENT,
-	 disc TEXT, welc TEXT,boss TEXT,blood INTEGER,
-	 strike INTEGER, defence INTEGER,exp INTEGER, die TEXT);
+	 * CREATE TABLE ROOM(id INTEGER PRIMARY KEY AUTOINCREMENT,
+	 * disc TEXT, welc TEXT,boss TEXT,blood INTEGER,
+	 * strike INTEGER, defence INTEGER,exp INTEGER, die TEXT);
 	 */
 	public static ArrayList<Room> getRooms() throws ClassNotFoundException, SQLException {
 		ResultSet set = getStatement().executeQuery("SELECT * FROM ROOM ORDER BY id ASC");
 		ArrayList<Room> rooms = new ArrayList<>();
-		while (set.next()){
+		while (set.next()) {
 			rooms.add(new Room(
 					set.getString("disc"),
 					set.getString("welc"),
@@ -163,13 +163,13 @@ public class Database {
 	}
 
 	/**
-	 *  CREATE TABLE MAP( id INTEGER PRIMARY KEY AUTOINCREMENT, fromid INTEGER, toid INTEGER, dir INTEGER);
+	 * CREATE TABLE MAP( id INTEGER PRIMARY KEY AUTOINCREMENT, fromid INTEGER, toid INTEGER, dir INTEGER);
 	 */
-	public static ArrayList<Exits> getExits() throws ClassNotFoundException, SQLException{
+	public static ArrayList<Exits> getExits() throws ClassNotFoundException, SQLException {
 		// 与顺序无关
 		ResultSet set = getStatement().executeQuery("SELECT * FROM MAP");
 		ArrayList<Exits> exitses = new ArrayList<>();
-		while(set.next()){
+		while (set.next()) {
 			exitses.add(new Exits(
 					set.getInt("fromid"),
 					set.getInt("toid"),
@@ -182,7 +182,7 @@ public class Database {
 
 	private File openFile() throws IOException {
 		File file = new File(savePath);
-		if(file.exists()){
+		if (file.exists()) {
 			file.delete();
 		}
 		file.createNewFile();
