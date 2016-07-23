@@ -22,7 +22,6 @@ public class CUI extends Game {
 	public void echo(String words) {
 		System.out.print(words);
 	}
-
 	/**
 	 * 当游戏输出东西并换行的时候，调用这个方法并传入需要输出的字符串。
 	 * @param words 需要输出的字符串。

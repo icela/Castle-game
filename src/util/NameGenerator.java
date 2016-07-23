@@ -5,20 +5,14 @@ package util;
  * Created by asus1 on 2016/1/29.
  */
 public class NameGenerator {
-	public NameGenerator() {
-	}
 
 	private static String[] names = {
-			"金木研",
-			"赤羽业",
-			"泉新一",
 			"千里冰封",
-			"奶茶",
-			"3A",
-			"无",
+			"奶茶未凉",
+			"周明凯",
 			"SpiderKing",
-			"Direction.D.",
 			"Timothy",
+			"Eldath"
 	};
 
 	public static String generate() {
