@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact name="城堡游戏:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/_jar</output-path>
+    <root id="root">
+      <element id="archive" name="城堡游戏.jar">
+        <element id="module-output" name="城堡游戏" />
+      </element>
+      <element id="library" level="project" name="org.xerial:sqlite-jdbc:3.8.11.1" />
+    </root>
+  </artifact>
+</component>
