@@ -18,7 +18,7 @@ public class GUI extends Game
 
 	private JTextField textField;
 	private JTextArea textArea;
-	private JFrame frame;
+	public JFrame frame;
 	private JScrollPane scrollPane;
 
 	private static int FRAME_WIDTH = 500;
@@ -97,6 +97,7 @@ public class GUI extends Game
 		textArea.setBackground(new Color(43, 43, 43));
 		textArea.setForeground(new Color(169, 183, 198));
 		textArea.setEditable(false);
+
 		frame.setIconImage(Toolkit.getDefaultToolkit().createImage(
 				"." + File.separator + "src" + File.separator + "drawable" + File.separator + "ic_launcher.png"
 		));
@@ -111,6 +112,7 @@ public class GUI extends Game
 		frame.setResizable(false);
 		frame.setLocation(FRAME_WIDTH / 8, FRAME_HEIGHT / 8);
 		frame.setVisible(true);
+		textField.requestFocus(true);
 	}
 
 	public static void main(String[] args) {

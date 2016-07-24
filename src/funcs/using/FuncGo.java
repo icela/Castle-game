@@ -3,6 +3,8 @@ package funcs.using;
 import castle.Game;
 import funcs.FuncSrc;
 
+import javax.swing.*;
+
 public class FuncGo extends FuncSrc {
 
 	public FuncGo(Game game) {

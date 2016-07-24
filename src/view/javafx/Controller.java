@@ -1,4 +1,4 @@
-package view;
+package view.javafx;
 
 
 import castle.Game;
