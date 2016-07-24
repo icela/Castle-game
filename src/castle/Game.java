@@ -2,7 +2,7 @@ package castle;
 
 import cells.Item;
 import cells.Player;
-import database.Database;
+import database.TextDatabase;
 import funcs.FuncSrc;
 import funcs.using.*;
 import map.GameMap;
@@ -22,17 +22,15 @@ public abstract class Game
 	private GameMap map;
 	private ArrayList<Item> theItems = new ArrayList<>();
 	private Player player;
-	private Database database;
 
 	//    构造方法
 	public Game() {
-		onCreate();
+//		onCreate();
 	}
 
-	private void onCreate() {
+	protected void onCreate() {
 		map = new GameMap();
 		createItems();
-		database = new Database();
 		funcsString = new String[]{
 				"help", "go", "wild",
 				"exit", "state", "fight",
@@ -59,6 +57,7 @@ public abstract class Game
 	}
 
 	protected void onStart() {
+		onCreate();
 		echoln("欢迎来到Castle Game！");
 		echoln("这是一个超复古的CUI游戏。");
 		echoln("最新版本和源代码请见https://github.com/ProgramLeague/Castle-game");
@@ -66,7 +65,7 @@ public abstract class Game
 		echoln("敬请期待OL版本https://github.com/ProgramLeague/Castle-Online");
 //		太羞耻了！！
 //		echoln("不过在经过了冰封的改造后，你会觉得这个很有意思。");
-		if (!Database.isFileExists()) {
+		if (!TextDatabase.isFileExists()) {
 			echoln("您可以稍后使用\"rename [新名字]\"命令来更改自己的名字。");
 			new NameGenerator();
 			player = new Player(
@@ -83,8 +82,8 @@ public abstract class Game
 					-1,
 					-1
 			);
-			database.loadState(player);
-			database.loadMap(map, "宾馆");
+			TextDatabase.getInstance().loadState(player);
+			TextDatabase.getInstance().loadMap(map, "宾馆");
 			echoln("检测到存档。");
 		}
 
@@ -171,7 +170,7 @@ public abstract class Game
 
 	public void saveData() {
 		try {
-			database.saveMapAndState(map, player);
+			TextDatabase.getInstance().saveMapAndState(map, player);
 			echoln("保存成功。");
 		} catch (IOException e) {
 			echoln("保存失败，请检查是否有管理员权限！");

@@ -55,7 +55,7 @@ public class Player extends Cell {
 	}
 
 //	public Player(){
-//		database = new Database();
+//		database = new TextDatabase();
 //		loadState();
 //	}
 

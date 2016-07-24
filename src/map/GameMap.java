@@ -1,7 +1,7 @@
 package map;
 
 import castle.Game;
-import database.Database;
+import database.SQLiteDatabase;
 import util.Direction;
 import util.DirectionPair;
 
@@ -27,9 +27,9 @@ public class GameMap {
 		theRooms = new ArrayList<>();
 //			构造地图结构
 		try {
-			theRooms = Database.getRooms();
+			theRooms = SQLiteDatabase.getInstance().getRooms();
 //			System.out.println("theRooms.size = " + theRooms.size());
-			for (Exits exit : Database.getExits()) {
+			for (Exits exit : SQLiteDatabase.getInstance().getExits()) {
 				setExit(
 						exit.from, exit.to,
 						pairs[exit.dir]
