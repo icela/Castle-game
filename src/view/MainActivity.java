@@ -17,6 +17,7 @@ public class MainActivity extends Application {
 				600,
 				400
 		));
+        primaryStage.setResizable(false);
 		primaryStage.show();
 	}
 
