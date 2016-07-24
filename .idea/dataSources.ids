@@ -6,6 +6,10 @@
   <data-source name="Sqlite (Xerial) - data.db" uuid="fb52b906-6235-480b-b078-ddc8b2c84061">
     <database-info product="SQLite" version="3.8.9" jdbc-version="2.1" driver-name="SQLiteJDBC" driver-version="native"/>
     <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed"/>
-    <schema name="" catalog=""/>
+    <database-model serializer="dbm" rdbms="SQLITE" format-version="2.6">
+      <schema id="1">
+        <visible>1</visible>
+      </schema>
+    </database-model>
   </data-source>
 </component>
