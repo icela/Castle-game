@@ -40,14 +40,18 @@ public class GUI extends Game
 	}
 
 	public GUI() {
-		frame = new JFrame("城堡游戏   by 千里冰封");
+		frame = new JFrame(GUIPublicData.GUI_FORM_TITLE);
 		String note = "在这里输入指令";
 		textField = new JTextField(note);
 		textField.registerKeyboardAction(e -> {
 					HandleMessage(textField.getText());
 					textField.setText("");
 				},
-				KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, true),
+				KeyStroke.getKeyStroke(
+						KeyEvent.VK_ENTER,
+						0,
+						true
+				),
 				JComponent.WHEN_FOCUSED
 		);
 		textField.addFocusListener(new FocusListener() {

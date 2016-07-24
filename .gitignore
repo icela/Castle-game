@@ -5,3 +5,4 @@
 !/lib/README.md
 /bin
 .idea/workspace.xml
+/data.db
