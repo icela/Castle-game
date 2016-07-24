@@ -95,7 +95,7 @@ public abstract class Game
 	}
 
 	@Override
-	public boolean HandleMessage(String line) {
+	public boolean handleMessage(String line) {
 		String[] words = line.split(" ");
 		FuncSrc func = funcs.get(words[0]);
 		String value2 = "";
@@ -144,14 +144,14 @@ public abstract class Game
 	/**
 	 * 随机传送
 	 */
-	public void WildRoom() {
+	public void wildRoom() {
 		echoln(map.wildRoom());
 	}
 
 	/**
 	 * 战斗函数
 	 */
-	public void Fight() {
+	public void fight() {
 		map.fightBoss(this);
 		echoln(map.getCurrentRoom().getPrompt());
 	}
