@@ -15,7 +15,7 @@ public class FuncTalk extends FuncSrc {
 	}
 
 	@Override
-	public void DoFunc(String cmd) {
+	public void runCommend(String cmd) {
 		NPC npc = game.getMap().getCurrentRoom().isNPCExists(cmd);
 		if (npc != null) {
 			game.echoln(npc.getChat());

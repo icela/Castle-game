@@ -11,7 +11,7 @@ public class FuncPack extends FuncSrc {
 	}
 
 	@Override
-	public void DoFunc(String cmd) {
+	public void runCommend(String cmd) {
 		game.echoln("背包中物品如下：");
 		for (Item item : game.getTheItems()) {
 			game.echoln(item.toString());

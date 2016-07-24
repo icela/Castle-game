@@ -82,7 +82,7 @@ public class Room {
 		}
 		sb.append('\n');
 		if (boss != null) {
-			if (boss.ifGet())
+			if (boss.getOrNot())
 				ifaBoss = "冰封".equals(boss.toString()) ?
 						"你来到了神秘空间。这里只能通过\\wild传送离开。冰封正坐在这写码呢。"
 						: "这里的Boss是" + boss + ",正准备接受你的挑战呢！";
@@ -112,7 +112,7 @@ public class Room {
 	//    检查Boss是否已经被挑战过
 	public boolean isBossGetItem() {
 		try {
-			return boss.ifGet();
+			return boss.getOrNot();
 		} catch (NullPointerException e) {
 			return true;
 		}
@@ -120,7 +120,7 @@ public class Room {
 
 	void setBossGetItem(boolean isGet) {
 		if (boss != null) {
-			boss.setGetItem(isGet);
+			boss.setGotItem(isGet);
 		}
 	}
 

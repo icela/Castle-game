@@ -16,7 +16,7 @@ public class FuncUse extends FuncSrc {
 	}
 
 	@Override
-	public void DoFunc(String cmd) {
+	public void runCommend(String cmd) {
 
 	}
 }

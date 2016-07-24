@@ -9,15 +9,14 @@ public class FuncExit extends FuncSrc {
 		super(game);
 	}
 
-	private boolean Bye() {
+	private void bye() {
 		isGameEnded = true;
-		return true;
 	}
 
 	@Override
-	public void DoFunc(String cmd) {
+	public void runCommend(String cmd) {
 		game.saveData();
-		Bye();
+		bye();
 	}
 
 }

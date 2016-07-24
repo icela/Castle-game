@@ -14,7 +14,7 @@ public class FuncRename extends FuncSrc {
 	}
 
 	@Override
-	public void DoFunc(String cmd) {
+	public void runCommend(String cmd) {
 //		game.echoln("请问您的新名字是？");
 		if (!cmd.equals("")) {
 			game.getPlayer().rename(cmd);

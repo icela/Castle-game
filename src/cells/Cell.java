@@ -10,7 +10,7 @@ public class Cell {
 	}
 
 	public Cell() {
-		name = "unKown";
+		name = "unKnown";
 	}
 
 	public String getName() {

@@ -10,7 +10,7 @@ public class FuncHelp extends FuncSrc {
 	}
 
 	@Override
-	public void DoFunc(String cmd) {
+	public void runCommend(String cmd) {
 		game.echoln("迷路了吗？您可以执行的命令有：");
 		String[] strings = game.getFuncs();
 		for (String s : strings) {

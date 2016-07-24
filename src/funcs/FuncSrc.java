@@ -18,6 +18,6 @@ public abstract class FuncSrc {
 		return isGameEnded;
 	}
 
-	public abstract void DoFunc(String cmd);
+	public abstract void runCommend(String cmd);
 
 }

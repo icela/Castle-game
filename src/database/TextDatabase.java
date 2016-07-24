@@ -4,10 +4,6 @@ import cells.Player;
 import map.GameMap;
 
 import java.io.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 /**
  * 封装数据库操作
@@ -139,12 +135,6 @@ public class TextDatabase {
 
 	public static boolean isFileExists() {
 		return new File(savePath).exists();
-	}
-
-	private static Statement getStatement() throws ClassNotFoundException, SQLException {
-		Class.forName("org.sqlite.JDBC");
-		Connection connection = DriverManager.getConnection("jdbc:sqlite:data.db");
-		return connection.createStatement();
 	}
 
 	private File openFile() throws IOException {

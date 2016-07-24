@@ -1,6 +1,5 @@
 package cells;
 
-import funcs.using.FuncSleep;
 import util.Echoer;
 
 //import java.util.Scanner;
@@ -68,7 +67,6 @@ public class Boss extends Player {
 							.append("点经验值！\n");
 					survive = false;
 					getItem = false;
-					FuncSleep sleep = new FuncSleep();
 					stringBuffer.append("战斗结束");
 					stringBuffer.append("\n");
 				}
@@ -84,11 +82,11 @@ public class Boss extends Player {
 		return super.getName();
 	}
 
-	public boolean ifGet() {
+	public boolean getOrNot() {
 		return getItem;
 	}
 
-	public void setGetItem(boolean getItem) {
+	public void setGotItem(boolean getItem) {
 		this.getItem = getItem;
 	}
 

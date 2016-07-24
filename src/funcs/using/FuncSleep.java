@@ -13,7 +13,7 @@ public class FuncSleep extends FuncSrc {
 	}
 
 	@Override
-	public void DoFunc(String cmd) {
+	public void runCommend(String cmd) {
 //		int bloodMore = Integer.parseInt(cmd);
 		if (game.getMap().getCurrentRoom().toString().matches("宾馆|卧室")) {
 			if (!game.getMap().getCurrentRoom().isBossGetItem()) {

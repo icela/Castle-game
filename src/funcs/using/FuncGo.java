@@ -10,7 +10,7 @@ public class FuncGo extends FuncSrc {
 	}
 
 	@Override
-	public void DoFunc(String cmd) {
+	public void runCommend(String cmd) {
 		// 调用移动。
 		game.goRoom(cmd);
 	}

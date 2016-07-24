@@ -104,7 +104,7 @@ public abstract class Game
 
 //			如果找到了该指令
 		if (func != null) {
-			func.DoFunc(value2);
+			func.runCommend(value2);
 			if (func.isGameEnded()) {
 //					退出指令特殊处理
 				saveData();

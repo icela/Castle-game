@@ -23,7 +23,7 @@ public class FuncMap extends FuncSrc {
 	}
 
 	@Override
-	public void DoFunc(String cmd) {
+	public void runCommend(String cmd) {
 		if (!haveMap) {
 			game.echoln("您还没有得到地图呢，请继续游戏以得到地图吧！");
 			//TODO 记得处理掉

@@ -10,7 +10,7 @@ public class FuncWild extends FuncSrc {
 	}
 
 	@Override
-	public void DoFunc(String cmd) {
+	public void runCommend(String cmd) {
 		// 传送
 		game.wildRoom();
 	}
