@@ -1,4 +1,7 @@
 /*.ice
 /out
-/lib
+/lib/*.ttf
+/lib/*.jar
+!/lib/README.md
 /bin
+.idea/workspace.xml
