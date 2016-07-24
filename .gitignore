@@ -1,4 +1,6 @@
 /*.ice
 /out
 /lib
+!/lib/README.md
 /bin
+.idea/workspace.xml
