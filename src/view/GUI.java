@@ -44,7 +44,7 @@ public class GUI extends Game
 		String note = "在这里输入指令";
 		textField = new JTextField(note);
 		textField.registerKeyboardAction(e -> {
-					HandleMessage(textField.getText());
+					handleMessage(textField.getText());
 					textField.setText("");
 				},
 				KeyStroke.getKeyStroke(

@@ -5,5 +5,5 @@ package util;
  * Created by asus1 on 2016/1/31.
  */
 public interface MessageHandler {
-	boolean HandleMessage(String msg);
+	boolean handleMessage(String msg);
 }

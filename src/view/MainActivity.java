@@ -14,8 +14,8 @@ public class MainActivity extends Application {
 		primaryStage.setTitle(GUIPublicData.GUI_FORM_TITLE);
 		primaryStage.setScene(new Scene(
 				root,
-				300,
-				275
+				600,
+				400
 		));
 		primaryStage.show();
 	}

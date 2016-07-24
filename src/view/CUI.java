@@ -51,7 +51,7 @@ public class CUI extends Game {
 		while (loop) {
 			echoln("");
 			line = in.nextLine();
-			loop = HandleMessage(line);
+			loop = handleMessage(line);
 		}
 		in.close();
 	}

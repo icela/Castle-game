@@ -11,7 +11,7 @@ public class FuncFight extends FuncSrc {
 
 	@Override
 	public void DoFunc(String cmd) {
-		game.Fight();
+		game.fight();
 	}
 
 }

@@ -12,7 +12,7 @@ public class FuncWild extends FuncSrc {
 	@Override
 	public void DoFunc(String cmd) {
 		// 传送
-		game.WildRoom();
+		game.wildRoom();
 	}
 
 }
