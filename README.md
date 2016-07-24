@@ -21,6 +21,10 @@ GUI版与CUI版共存。<br/>
 + [ice1000](https://github.com/ice1000)
 + [lizhaohan001](https://github.com/lizhaohan001)
 
+# 维护须知
++ 严禁大括号换行，本项目遵从Java语言的传统
++ 重构必须通知[ice1000](https://github.com/ice1000)
+
 # 实现情况
 - [X] 一个图标
 - [X] 地图系统
