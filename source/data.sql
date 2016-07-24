@@ -5,6 +5,9 @@ CREATE TABLE ROOM(
   strike INTEGER, defence INTEGER,
   exp INTEGER, die TEXT
 );
+-- TODO 这个怎么玩。。。
+-- TODO 利用现有结构能够实现 拾起物品 使用物品的功能么。。。
+-- TODO 下面这一堆看不太懂。。抱歉
 INSERT INTO ROOM(id, disc, boss, blood, strike, defence, exp, die) VALUES (
   0, '城堡外','英俊的小偷头目', 200,25,10,15, '小偷头目的钱全掉出来了！'                        -- 0
 );

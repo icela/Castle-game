@@ -38,7 +38,7 @@ public abstract class Game
 				"exit", "state", "fight",
 				"sleep", "save", "rename",
 				"talk", "pack", "home",
-				"map"
+				"map", "pick", "use"
 		};
 		funcs.put(funcsString[0], new FuncHelp(this));
 		funcs.put(funcsString[1], new FuncGo(this));
@@ -53,7 +53,8 @@ public abstract class Game
 		funcs.put(funcsString[10], new FuncPack(this));
 		funcs.put(funcsString[11], new FuncHome(this));
 		funcs.put(funcsString[12], new FuncMap(this));
-
+		funcs.put(funcsString[13],new FuncPick(this));
+		funcs.put(funcsString[14],new FuncUse(this));
 	}
 
 	protected void onStart() {
@@ -84,8 +85,8 @@ public abstract class Game
 			echoln("检测到存档。");
 		}
 
-		echoln("你好" + player);
-		echoln("如果需要帮助，请输入 'help' 。\n");
+		echoln("您好，" + player);
+		echoln("如果您需要任何帮助，请输入 'help' 。\n");
 		echo("现在");
 		echoln(map.getCurrentRoom().getPrompt());
 	}

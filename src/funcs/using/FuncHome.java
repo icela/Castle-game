@@ -15,7 +15,7 @@ public class FuncHome extends FuncSrc {
 
 	@Override
 	public void DoFunc(String cmd) {
-		game.echoln("您与女仆的契约发动。回到了旅馆。");
+		game.echoln("您发动了与女仆的契约，回到了旅馆。");
 		game.getMap().setCurrentRoom(game.getMap().getHome());
 		game.echoln(game.getMap().getCurrentRoom().getPrompt());
 	}
