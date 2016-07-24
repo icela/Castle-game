@@ -21,9 +21,9 @@ public class GUI extends Game
 	private JFrame frame;
 	private JScrollPane scrollPane;
 
-	private static int FRAME_X = 500;
-	private static int FRAME_Y = 500;
-	private static int INPUT_Y = 500;
+	private static int FRAME_WIDTH = 500;
+	private static int FRAME_HEIGHT = 500;
+//	private static int INPUT_WIDTH = 500;
 
 	//第一个参数是外部字体名，第二个是字体大小
 	private static Font loadFont(String fontFileName, float fontSize) {
@@ -93,23 +93,23 @@ public class GUI extends Game
 			}
 		});
 
-		/// IntelliJ IDEA 标准配色
+//		IntelliJ IDEA 标准配色
 		textArea.setBackground(new Color(43, 43, 43));
 		textArea.setForeground(new Color(169, 183, 198));
 		textArea.setEditable(false);
 		frame.setIconImage(Toolkit.getDefaultToolkit().createImage(
 				"." + File.separator + "src" + File.separator + "drawable" + File.separator + "ic_launcher.png"
 		));
-		frame.setSize(FRAME_X, FRAME_Y);
-		// 绝对布局
-		// frame.setLayout(null);
+		frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+//		绝对布局
+//		frame.setLayout(null);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.add(textField, BorderLayout.SOUTH);
 		scrollPane = new JScrollPane(textArea);
-		JScrollBar scrollBar = scrollPane.getVerticalScrollBar();
+//		JScrollBar scrollBar = scrollPane.getVerticalScrollBar();
 		frame.add(scrollPane, BorderLayout.CENTER);
 		frame.setResizable(false);
-		frame.setLocation(FRAME_X / 8, FRAME_Y / 8);
+		frame.setLocation(FRAME_WIDTH / 8, FRAME_HEIGHT / 8);
 		frame.setVisible(true);
 	}
 
