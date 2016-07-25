@@ -25,7 +25,7 @@ public class FuncMap implements FuncSrc {
 	}
 	
 	public boolean isHaveMap(){
-		return haveMap
+		return haveMap;
 	}
 	
 	@Override

@@ -41,7 +41,7 @@ public class GUI extends Game
 	}
 
 	public GUI() {
-		frame = new JFrame(GUIPublicData.getTitle());
+		frame = new JFrame(GUIPublicData.GUI_FORM_TITLE);
 		String note = "在这里输入指令";
 		textField = new JTextField(note);
 		textField.registerKeyboardAction(e -> {

@@ -5,12 +5,17 @@ import cells.NPC;
 import cells.Player;
 import database.TextDatabase;
 import funcs.FuncSrc;
-import funcs.using.*;
+import funcs.using.FuncMap;
+import funcs.using.FuncPick;
+import funcs.using.FuncSleep;
+import funcs.using.FuncUse;
 import map.GameMap;
 import util.Echoer;
 import util.MessageHandler;
 import util.NameGenerator;
 
+import javax.swing.*;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -176,62 +181,57 @@ public abstract class Game
 			TextDatabase.getInstance().saveMapAndState(map, player);
 			echoln("保存成功。");
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "保存失败", "请在随后弹出的对话框中选择 “是”！", JOptionPane.ERROR_MESSAGE); 
+			JOptionPane.showMessageDialog(null, "保存失败", "请在随后弹出的对话框中选择 “是”！", JOptionPane.ERROR_MESSAGE);
 			try {
-			//TODO 记得加上 管理员权限获取器。
-			File file=new File("//temp//uac.bat");
-			file.createNewFile();
-			String data=":: BatchGotAdmin"+"/n"+
-			":-------------------------------------"+"/n" +
+				//TODO 记得加上 管理员权限获取器。
+				File file = new File("//temp//uac.bat");
+				file.createNewFile();
+				String data = ":: BatchGotAdmin\n" +
+						":-------------------------------------\n" +
+						"REM --> Check for permissions" + "\n" +
+						">nul 2>&1\n" + "%SYSTEMROOT%\\system32\\cacls.exe\n"
+						+ "%SYSTEMROOT%\\system32\\config\\system\n" +
+						"REM --> If error flag set, we do not have admin.\n" +
+				if '%errorlevel%' NEQ '0' (
+						echo Requesting administrative privileges...
+				"+"\n"+
+				"goto UACPrompt" +
+						")"+"\n"+
+				"else ( goto gotAdmin )" + "\n" +
+						"
+:UACPrompt "+"\n"+
+				"
+				echo Set UAC = CreateObject ^ ("Shell.Application" ^) > "%temp%\getadmin.vbs" "+"\n"+
+				"
+				echo UAC.ShellExecute "%~s0", "", "", "runas", 1 >> "%temp%\getadmin.vbs"
+				"%temp%\getadmin.vbs" "+"\n"+
+				"
+				exit / B "+"\n+
 
-		    "REM --> Check for permissions"+"/n"+
-			">nul 2>&1"+"/n"
-			+ ""%SYSTEMROOT%\system32\cacls.exe""+"/n"
-			+ ""%SYSTEMROOT%\system32\config\system""
-+"/n"+
-			"REM --> If error flag set, we do not have admin."+"/n"+
-			"
-if '%errorlevel%' NEQ '0' ( 
-echo Requesting administrative privileges... 
-"+"/n"+
-			"goto UACPrompt 
-) "+"/n"+
-			"else ( goto gotAdmin )"+"/n"+
-		  	"
-:UACPrompt "+"/n"+
-			"
-echo Set UAC = CreateObject^("Shell.Application"^) > "%temp%\getadmin.vbs""+"/n"+
-			"
-echo UAC.ShellExecute "%~s0", "", "", "runas", 1 >> "%temp%\getadmin.vbs" 
-"%temp%\getadmin.vbs""+"/n"+
-			"
-exit /B"+"/n+
-		   	
-":gotAdmin"+"/n+ 
-			"
-if exist "%temp%\getadmin.vbs" ( del "%temp%\getadmin.vbs" )"+"/n"+
-			"
-pushd "%CD%""+"/n"+
-			"
-CD /D "%~dp0""+"/n+
-			"
+						":gotAdmin" + "\n+
+				"
+				if exist "%temp%\getadmin.vbs" (del "%temp%\getadmin.vbs" )"+"\n"+
+				"
+				pushd "%CD%" "+"\n"+
+				"
+				CD / D "%~dp0" "+"\n+
+						"
 :--------------------------------------";";
-			FileWriter fw=new FileWriter(file.getName());
-			fw.write(data);
-			Process ps = Runtime.getRuntime().exec();
+				FileWriter fw = new FileWriter(file.getName());
+				fw.write(data);
+				Process ps = Runtime.getRuntime().exec();
 
-			InputStream in = ps.getInputStream("//temp//uac.bat");
+				InputStream in = ps.getInputStream("//temp//uac.bat");
 
-			intc;
-			
-while((c = in.read()) != -1) 
-				{
+				intc;
+
+				while ((c = in.read()) != -1) {
 				}
-				
-in.close
-				();
-ps.waitFor();
-			}catch (Exception e){
+
+				in.close
+						();
+				ps.waitFor();
+			} catch (Exception e1) {
 				//TODO 异常处理
 			}
 		}
