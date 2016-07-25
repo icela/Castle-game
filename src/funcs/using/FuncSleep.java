@@ -3,13 +3,12 @@ package funcs.using;
 import castle.Game;
 import funcs.FuncSrc;
 
-public class FuncSleep extends FuncSrc {
+public class FuncSleep implements FuncSrc {
+
+	private final Game game;
 
 	public FuncSleep(Game game) {
-		super(game);
-	}
-
-	public FuncSleep() {
+		this.game = game;
 	}
 
 	@Override
@@ -21,8 +20,7 @@ public class FuncSleep extends FuncSrc {
 				for (int i = 0; i < 8; i++) {
 					try {
 						Thread.sleep(50);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
+					} catch (InterruptedException ignored) {
 					}
 				}
 				game.echo("\n已经睡觉，体力");

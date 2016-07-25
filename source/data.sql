@@ -6,14 +6,6 @@ CREATE TABLE ROOM(
   exp INTEGER, die TEXT
 );
 
--- TODO 这exp和die是啥。。
--- TODO 还有，我觉得可能加个delay来延迟更有真实性。
--- TODO 数据库里保存地点距每个出口间的距离？感觉太复杂了点。
--- TODO 要不干脆就随机延迟算了。。。
--- TODO 或者你有啥好主意？
-
--- TODO 噢，可以定义一个枚举（如果可以的话），来保存延迟级别。
--- TODO 然后根据级别来延迟。
 
 INSERT INTO ROOM(id, disc, boss, blood, strike, defence, exp, die) VALUES (
   0, '城堡外','英俊的小偷头目', 200,25,10,15, '小偷头目的钱全掉出来了！'                        -- 0
@@ -118,6 +110,12 @@ INSERT INTO MAP(fromid, toid, dir) VALUES (14,16,3);
 INSERT INTO MAP(fromid, toid, dir) VALUES (17,14,3);
 INSERT INTO MAP(fromid, toid, dir) VALUES (18,13,3);
 INSERT INTO MAP(fromid, toid, dir) VALUES (19,18,3);
+
+CREATE TABLE NPC(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  hello TEXT, item INTEGER
+);
+ -- TODO NPC信息和物品信息
 
 
 SELECT * FROM ROOM ORDER BY id ASC;

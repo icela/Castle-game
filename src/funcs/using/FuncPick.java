@@ -10,10 +10,12 @@ import funcs.FuncSrc;
  *         本类作用即拾起周边的物体。
  *         //TODO 未完成
  */
-public class FuncPick extends FuncSrc {
+public class FuncPick implements FuncSrc {
+
+	private Game game;
 
 	public FuncPick(Game game) {
-		super(game);
+		this.game = game;
 	}
 
 	@Override

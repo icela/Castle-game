@@ -67,7 +67,7 @@ public class TextDatabase {
 		BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 		this.roomName = map.getCurrentRoom().toString();
 		this.roomsState = map.getRoomsState();
-		writer.write(this.toString());
+		writer.write(this.getInformation());
 		writer.close();
 	}
 
@@ -83,21 +83,19 @@ public class TextDatabase {
 		this.level = player.getLevel();
 		this.experience = player.getExperience();
 
-		writer.write(this.toString());
+		writer.write(this.getInformation());
 		writer.close();
 	}
 
-	@Override
-	public String toString() {
-		return
-				this.roomName + "\r\n" +
-						String.valueOf(this.roomsState) + "\r\n" +
-						this.playerName + "\r\n" +
-						this.blood + "\r\n" +
-						this.strike + "\r\n" +
-						this.defence + "\r\n" +
-						this.level + "\r\n" +
-						this.experience + "\r\n"
+	public String getInformation() {
+		return this.roomName + "\r\n" +
+				String.valueOf(this.roomsState) + "\r\n" +
+				this.playerName + "\r\n" +
+				this.blood + "\r\n" +
+				this.strike + "\r\n" +
+				this.defence + "\r\n" +
+				this.level + "\r\n" +
+				this.experience + "\r\n"
 				;
 	}
 
@@ -128,7 +126,7 @@ public class TextDatabase {
 		this.level = player.getLevel();
 		this.experience = player.getExperience();
 
-		writer.write(this.toString());
+		writer.write(this.getInformation());
 
 		writer.close();
 	}
