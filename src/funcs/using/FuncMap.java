@@ -19,7 +19,15 @@ public class FuncMap implements FuncSrc {
 	public FuncMap(Echoer echoer) {
 		this.echoer = echoer;
 	}
-
+	
+	public void setHaveMap(boolean flag){
+		this.haveMap=flag;
+	}
+	
+	public boolean isHaveMap(){
+		return haveMap
+	}
+	
 	@Override
 	public void runCommend(String cmd) {
 		if (!haveMap) {
