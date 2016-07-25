@@ -65,7 +65,7 @@ public abstract class Game
 				echoln("格式错误。请按照\"rename [新名字]\"的格式重命名！");
 		});
 		commands.put(commandNames[9], cmd -> {
-			NPC npc = getMap().getCurrentRoom().isNPCExists(cmd);
+			NPC npc = map.currentRoom.isNPCExists(cmd);
 			if (npc != null) {
 				echoln(npc.getChat());
 			} else
@@ -73,13 +73,13 @@ public abstract class Game
 		});
 		commands.put(commandNames[10], cmd -> {
 			echoln("背包中物品如下：");
-			for (Item item : getItems())
+			for (Item item : items)
 				echoln(item.toString());
 		});
 		commands.put(commandNames[11], cmd -> {
 			echoln("您发动了与女仆的契约，回到了旅馆。");
-			getMap().setCurrentRoom(getMap().getHome());
-			echoln(getMap().getCurrentRoom().getPrompt());
+			map.currentRoom = map.getHome();
+			echoln(map.currentRoom.getPrompt());
 		});
 		commands.put(commandNames[12], new FuncMap(this));
 		commands.put(commandNames[13], new FuncPick(this));
@@ -119,7 +119,7 @@ public abstract class Game
 		echoln("您好，" + player);
 		echoln("如果您需要任何帮助，请输入 'help' 。\n");
 		echo("现在");
-		echoln(map.getCurrentRoom().getPrompt());
+		echoln(map.currentRoom.getPrompt());
 	}
 
 	@Override
@@ -135,10 +135,7 @@ public abstract class Game
 		if (func != null) {
 			func.runCommend(value2);
 			if (gameEnded) {
-//					退出指令特殊处理
 				saveData();
-				echoln("退出游戏，再见！");//TODO 这行根本看不到
-//				System.exit(0);
 				closeScreen();
 				return false;
 			}
@@ -152,16 +149,12 @@ public abstract class Game
 		items.add(new Item("和女仆的契约"));
 	}
 
-	public ArrayList<Item> getItems() {
-		return items;
-	}
-
 	/**
 	 * 去一个房间
 	 */
 	public void goRoom(String direction) {
 		if (map.goRoom(direction))
-			echoln(map.getCurrentRoom().getPrompt());
+			echoln(map.currentRoom.getPrompt());
 		else
 			echoln("命令格式错误或该出口不存在。");
 	}
@@ -171,7 +164,7 @@ public abstract class Game
 	 */
 	public void fight() {
 		map.fightBoss(this);
-		echoln(map.getCurrentRoom().getPrompt());
+		echoln(map.currentRoom.getPrompt());
 	}
 
 	public GameMap getMap() {

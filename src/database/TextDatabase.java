@@ -65,7 +65,7 @@ public class TextDatabase {
 		}
 		file.createNewFile();
 		BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-		this.roomName = map.getCurrentRoom().toString();
+		this.roomName = map.currentRoom.toString();
 		this.roomsState = map.getRoomsState();
 		writer.write(this.getInformation());
 		writer.close();
@@ -74,7 +74,7 @@ public class TextDatabase {
 	public void saveMapAndState(GameMap map, Player player) throws IOException {
 		File file = openFile();
 		BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-		this.roomName = map.getCurrentRoom().toString();
+		this.roomName = map.currentRoom.toString();
 		this.roomsState = map.getRoomsState();
 		this.playerName = player.toString();
 		this.blood = player.getBlood();

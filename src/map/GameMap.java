@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class GameMap {
 
 	private ArrayList<Room> theRooms;
-	private Room currentRoom;
+	public Room currentRoom;
 	private static final DirectionPair[] pairs = {
 			null,
 			new DirectionPair(Direction.UP, Direction.DOWN),
@@ -45,10 +45,6 @@ public class GameMap {
 	private void setExit(int index_a, int index_b, DirectionPair pair) {
 		theRooms.get(index_a).setExit(String.valueOf(pair.getDirection1()), index_b);
 		theRooms.get(index_b).setExit(String.valueOf(pair.getDirection2()), index_a);
-	}
-
-	public void setCurrentRoom(Room room) {
-		currentRoom = room;
 	}
 
 	public boolean goRoom(String direction) {
@@ -111,7 +107,4 @@ public class GameMap {
 		game.player = currentRoom.fightBoss(game.player, game);
 	}
 
-	public Room getCurrentRoom() {
-		return currentRoom;
-	}
 }

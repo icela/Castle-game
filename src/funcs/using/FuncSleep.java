@@ -14,8 +14,8 @@ public class FuncSleep implements FuncSrc {
 	@Override
 	public void runCommend(String cmd) {
 //		int bloodMore = Integer.parseInt(cmd);
-		if (game.getMap().getCurrentRoom().toString().matches("宾馆|卧室")) {
-			if (!game.getMap().getCurrentRoom().isBossGetItem()) {
+		if (game.getMap().currentRoom.toString().matches("宾馆|卧室")) {
+			if (!game.getMap().currentRoom.isBossGetItem()) {
 				game.echo("女仆顺从地送你进入梦乡。睡觉中");
 				for (int i = 0; i < 8; i++) {
 					try {
