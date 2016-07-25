@@ -56,11 +56,9 @@ public class GameMap {
 	}
 
 	public boolean isRoomExists(String roomName) {
-		for (Room room : theRooms) {
-			if (room.equals(roomName)) {
+		for (Room room : theRooms)
+			if (room.equals(roomName))
 				return true;
-			}
-		}
 		return false;
 	}
 
