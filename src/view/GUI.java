@@ -36,11 +36,12 @@ public class GUI extends Game
 			return dynamicFontPt;
 		} catch (Exception e) {
 			return new java.awt.Font("宋体", Font.PLAIN, 14);
+			//TODO 记得添加异常处理。
 		}
 	}
 
 	public GUI() {
-		frame = new JFrame(GUIPublicData.GUI_FORM_TITLE);
+		frame = new JFrame(GUIPublicData.getTitle());
 		String note = "在这里输入指令";
 		textField = new JTextField(note);
 		textField.registerKeyboardAction(e -> {
