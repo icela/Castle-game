@@ -108,7 +108,7 @@ public class GameMap {
 	}
 
 	public void fightBoss(Game game) {
-		game.setPlayer(currentRoom.fightBoss(game.getPlayer(), game));
+		game.player = currentRoom.fightBoss(game.player, game);
 	}
 
 	public Room getCurrentRoom() {

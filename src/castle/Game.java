@@ -17,23 +17,23 @@ import java.util.HashMap;
 
 public abstract class Game
 		implements MessageHandler, Echoer {
-	private HashMap<String, FuncSrc> funcs = new HashMap<>();
-	private String[] funcsString;
+	private HashMap<String, FuncSrc> commands = new HashMap<>();
+	private String[] commandNames;
 	private GameMap map;
-	private ArrayList<Item> theItems = new ArrayList<>();
-	private Player player;
+	private ArrayList<Item> items = new ArrayList<>();
+	public Player player;
 
 	private boolean gameEnded = false;
 
 	//    构造方法
 	public Game() {
-//		onCreate();
+		onCreate();
 	}
 
 	protected void onCreate() {
 		map = new GameMap();
 		createItems();
-		funcsString = new String[]{
+		commandNames = new String[]{
 				"help", "go", "wild",
 				"exit", "state", "fight",
 				"sleep", "save", "rename",
@@ -41,53 +41,52 @@ public abstract class Game
 				"map", "pick", "use"
 		};
 
-		funcs.put(funcsString[0], cmd -> {
-			for (String s : funcsString)
+		commands.put(commandNames[0], cmd -> {
+			for (String s : commandNames)
 				echoln(s);
 			echoln("有些需要参数的命令请按如下格式输入：\n命令 [参数]\n如：go east");
 			echoln("如：rename 冰封");
 		});
-		funcs.put(funcsString[1], this::goRoom);
-		funcs.put(funcsString[2], cmd -> wildRoom());
-		funcs.put(funcsString[3], cmd -> {
+		commands.put(commandNames[1], this::goRoom);
+		commands.put(commandNames[2], cmd -> echoln(map.wildRoom()));
+		commands.put(commandNames[3], cmd -> {
 			saveData();
 			gameEnded = true;
 		});
-		funcs.put(funcsString[4], cmd -> echoln(getPlayer().stateToString()));
-		funcs.put(funcsString[5], cmd -> fight());
-		funcs.put(funcsString[6], new FuncSleep(this));
-		funcs.put(funcsString[7], cmd -> saveData());
-		funcs.put(funcsString[8], cmd -> {
+		commands.put(commandNames[4], cmd -> echoln(player.stateToString()));
+		commands.put(commandNames[5], cmd -> fight());
+		commands.put(commandNames[6], new FuncSleep(this));
+		commands.put(commandNames[7], cmd -> saveData());
+		commands.put(commandNames[8], cmd -> {
 			if (!cmd.equals("")) {
-				getPlayer().rename(cmd);
+				player.rename(cmd);
 				echoln("重命名成功。新名字：" + cmd);
 			} else
 				echoln("格式错误。请按照\"rename [新名字]\"的格式重命名！");
 		});
-		funcs.put(funcsString[9], cmd -> {
+		commands.put(commandNames[9], cmd -> {
 			NPC npc = getMap().getCurrentRoom().isNPCExists(cmd);
 			if (npc != null) {
 				echoln(npc.getChat());
 			} else
 				echoln("你指定的名字不存在。注：Boss要在被打败之后才能对话。");
 		});
-		funcs.put(funcsString[10], cmd -> {
+		commands.put(commandNames[10], cmd -> {
 			echoln("背包中物品如下：");
-			for (Item item : getTheItems())
+			for (Item item : getItems())
 				echoln(item.toString());
 		});
-		funcs.put(funcsString[11], cmd -> {
+		commands.put(commandNames[11], cmd -> {
 			echoln("您发动了与女仆的契约，回到了旅馆。");
 			getMap().setCurrentRoom(getMap().getHome());
 			echoln(getMap().getCurrentRoom().getPrompt());
 		});
-		funcs.put(funcsString[12], new FuncMap(this));
-		funcs.put(funcsString[13], new FuncPick(this));
-		funcs.put(funcsString[14], new FuncUse(this));
+		commands.put(commandNames[12], new FuncMap(this));
+		commands.put(commandNames[13], new FuncPick(this));
+		commands.put(commandNames[14], new FuncUse(this));
 	}
 
 	protected void onStart() {
-		onCreate();
 		echoln("欢迎来到Castle Game！");
 		echoln("这是一个超复古的CUI游戏。");
 		echoln("最新版本和源代码请见https://github.com/ProgramLeague/Castle-game");
@@ -126,7 +125,7 @@ public abstract class Game
 	@Override
 	public boolean handleMessage(String line) {
 		String[] words = line.split(" ");
-		FuncSrc func = funcs.get(words[0]);
+		FuncSrc func = commands.get(words[0]);
 		String value2 = "";
 
 		if (words.length > 1)
@@ -148,45 +147,23 @@ public abstract class Game
 		return true;
 	}
 
-	public String[] getFuncs() {
-		return funcsString;
-	}
-
 	private void createItems() {
-		theItems.add(new Item("传送宝石"));
-		theItems.add(new Item("和女仆的契约"));
+		items.add(new Item("传送宝石"));
+		items.add(new Item("和女仆的契约"));
 	}
 
-	public ArrayList<Item> getTheItems() {
-		return theItems;
+	public ArrayList<Item> getItems() {
+		return items;
 	}
 
 	/**
 	 * 去一个房间
 	 */
 	public void goRoom(String direction) {
-		if (map.goRoom(direction)) {
-		    /*
-	        //TODO 这里存在一个bug
-            //TODO 不管使用哪种延迟方式，延迟都是自按下回车开始，而不是自显示完“正在执行”后开始。
-            //TODO 可能与事件触发的机制有关，晚些时候再看看。。。
-            echoln("====================");
-            echoln("       正在执行      ");
-            echoln("====================");
-            echoln("");
-            coder.Delay.delay(5000);
-             */
+		if (map.goRoom(direction))
 			echoln(map.getCurrentRoom().getPrompt());
-		} else
+		else
 			echoln("命令格式错误或该出口不存在。");
-
-	}
-
-	/**
-	 * 随机传送
-	 */
-	public void wildRoom() {
-		echoln(map.wildRoom());
 	}
 
 	/**
@@ -195,15 +172,6 @@ public abstract class Game
 	public void fight() {
 		map.fightBoss(this);
 		echoln(map.getCurrentRoom().getPrompt());
-	}
-
-	public void setPlayer(Player player) {
-//    	减血赋值给原来的
-		this.player = player;
-	}
-
-	public Player getPlayer() {
-		return player;
 	}
 
 	public GameMap getMap() {

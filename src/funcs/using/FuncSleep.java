@@ -24,7 +24,7 @@ public class FuncSleep implements FuncSrc {
 					}
 				}
 				game.echo("\n已经睡觉，体力");
-				if (game.getPlayer().treat())
+				if (game.player.treat())
 					game.echoln("恢复至120.");
 				else
 					game.echoln("超过120不用恢复的~");
