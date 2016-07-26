@@ -9,9 +9,9 @@ import game.commands.implement.CommandMap;
 import game.commands.implement.CommandPick;
 import game.commands.implement.CommandSleep;
 import game.commands.implement.CommandUse;
-import game.map.GameMap;
+import game.map.Map;
 import game.map.Room;
-import util.AdminErrorHandler;
+import util.error.AdminErrorHandler;
 import util.interfaces.Echoer;
 import util.interfaces.MessageHandler;
 
@@ -23,7 +23,7 @@ public abstract class Game
 		implements MessageHandler, Echoer {
 	private HashMap<String, BaseCommand> commands = new HashMap<>();
 	private String[] commandNames;
-	private GameMap map;
+	private Map map;
 	private ArrayList<Item> items = new ArrayList<>();
 	public Player player;
 
@@ -35,7 +35,7 @@ public abstract class Game
 	}
 
 	protected void onCreate() {
-		map = new GameMap();
+		map = new Map();
 		initItems();
 		commandNames = new String[]{
 				"help", "go", "wild",
