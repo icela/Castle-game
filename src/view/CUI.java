@@ -12,8 +12,6 @@ import java.util.Scanner;
  */
 public class CUI extends Game {
 
-	private Logger logger = Logger.getInstance();
-
 	private CUI() {
 		super();
 	}
@@ -47,6 +45,15 @@ public class CUI extends Game {
 		System.exit(0);
 	}
 
+	@Override
+	public void clearScreen() {
+		try {
+			Runtime.getRuntime().exec("cls");
+		} catch (IOException e) {
+			Logger.getInstance().log(e);
+		}
+	}
+
 	/**
 	 * 游戏运行。
 	 * HandleMessage是Game类实现的一个方法，你传入用户输入的指令，然后它会就处理这个指令，并给与反馈。
@@ -70,14 +77,5 @@ public class CUI extends Game {
 		CUI game = new CUI();
 		game.onStart();
 		game.onResume();
-	}
-
-	@Override
-	public void clearScreen() {
-		try {
-			Runtime.getRuntime().exec("cls");
-		} catch (IOException e) {
-			logger.log(e);
-		}
 	}
 }
