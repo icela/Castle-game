@@ -1,7 +1,9 @@
 package view;
 
 import game.Game;
+import util.error.Logger;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -10,20 +12,25 @@ import java.util.Scanner;
  */
 public class CUI extends Game {
 
+	private Logger logger = Logger.getInstance();
+
 	private CUI() {
 		super();
 	}
 
 	/**
 	 * 当游戏输出东西的时候，调用这个方法并传入需要输出的字符串。
+	 *
 	 * @param words 需要输出的字符串。
 	 */
 	@Override
 	public void echo(String words) {
 		System.out.print(words);
 	}
+
 	/**
 	 * 当游戏输出东西并换行的时候，调用这个方法并传入需要输出的字符串。
+	 *
 	 * @param words 需要输出的字符串。
 	 * @see CUI#echo(String)
 	 */
@@ -67,6 +74,10 @@ public class CUI extends Game {
 
 	@Override
 	public void clearScreen() {
-		// TODO 清屏 @lzh
+		try {
+			Runtime.getRuntime().exec("cls");
+		} catch (IOException e) {
+			logger.log(e);
+		}
 	}
 }
