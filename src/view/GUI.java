@@ -159,4 +159,9 @@ public class GUI extends Game
 		frame.dispose();
 	}
 
+	@Override
+	public void clearScreen() {
+		textArea.setText("");
+		echoln("屏幕已清空。");
+	}
 }

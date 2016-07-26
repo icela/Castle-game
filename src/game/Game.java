@@ -12,6 +12,7 @@ import game.commands.implement.CommandUse;
 import game.map.Map;
 import game.map.Room;
 import util.error.AdminErrorHandler;
+import util.interfaces.Clearable;
 import util.interfaces.Echoer;
 import util.interfaces.MessageHandler;
 
@@ -20,7 +21,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public abstract class Game
-		implements MessageHandler, Echoer {
+		implements MessageHandler, Echoer, Clearable {
+
 	private HashMap<String, BaseCommand> commands = new HashMap<>();
 	private String[] commandNames;
 	private Map map;

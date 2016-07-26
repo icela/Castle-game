@@ -70,4 +70,9 @@ public class Controller extends Game{
 	public void closeScreen() {
 		System.exit(0);
 	}
+
+	@Override
+	public void clearScreen() {
+
+	}
 }

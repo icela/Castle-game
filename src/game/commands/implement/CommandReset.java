@@ -35,7 +35,7 @@ public class CommandReset implements BaseCommand {
             } catch (IOException e) {
                 //TODO 异常处理。
             }
-            //TODO 清屏？？
+            game.clearScreen();
         }
     }
 }

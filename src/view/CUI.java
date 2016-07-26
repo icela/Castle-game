@@ -64,4 +64,9 @@ public class CUI extends Game {
 		game.onStart();
 		game.onResume();
 	}
+
+	@Override
+	public void clearScreen() {
+		System.out.flush();
+	}
 }
