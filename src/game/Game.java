@@ -9,9 +9,9 @@ import game.commands.implement.CommandMap;
 import game.commands.implement.CommandPick;
 import game.commands.implement.CommandSleep;
 import game.commands.implement.CommandUse;
-import game.map.Map;
+import game.map.GameMap;
 import game.map.Room;
-import util.error.AdminErrorHandler;
+import util.AdminErrorHandler;
 import util.interfaces.Echoer;
 import util.interfaces.MessageHandler;
 
@@ -23,7 +23,7 @@ public abstract class Game
 		implements MessageHandler, Echoer {
 	private HashMap<String, BaseCommand> commands = new HashMap<>();
 	private String[] commandNames;
-	private Map map;
+	private GameMap map;
 	private ArrayList<Item> items = new ArrayList<>();
 	public Player player;
 
@@ -35,7 +35,7 @@ public abstract class Game
 	}
 
 	protected void onCreate() {
-		map = new Map();
+		map = new GameMap();
 		initItems();
 		commandNames = new String[]{
 				"help", "go", "wild",
@@ -71,9 +71,9 @@ public abstract class Game
 		});
 		commands.put(commandNames[++index], cmd -> {
 			NPC npc = map.currentRoom.isNPCExists(cmd);
-			if (npc != null)
+			if (npc != null) {
 				echoln(npc.getChat());
-			else
+			} else
 				echoln("指定的名字不存在。注：Boss要在被打败之后才能对话。");
 		});
 		commands.put(commandNames[++index], cmd -> {
