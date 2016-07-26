@@ -1,7 +1,7 @@
-package commands.implement;
+package game.commands.implement;
 
 import game.Game;
-import commands.BaseCommand;
+import game.commands.BaseCommand;
 
 /**
  * Created by Eldath on 2016/7/24 0024.

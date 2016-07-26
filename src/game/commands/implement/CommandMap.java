@@ -1,6 +1,6 @@
-package commands.implement;
+package game.commands.implement;
 
-import commands.BaseCommand;
+import game.commands.BaseCommand;
 import util.interfaces.Echoer;
 
 import javax.swing.*;

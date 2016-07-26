@@ -6,4 +6,4 @@
  * see it here.
  */
 
-package commands;
+package game.commands;

@@ -1,7 +1,7 @@
-package commands.implement;
+package game.commands.implement;
 
 import game.Game;
-import commands.BaseCommand;
+import game.commands.BaseCommand;
 
 public class CommandSleep implements BaseCommand {
 
