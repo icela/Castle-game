@@ -12,9 +12,18 @@ GUI版与CUI版共存。<br/>
 # 运行方法
 这个必须看哦！
 
+## GUI
+
 1. 安装jre8
 1. 找到release中的压缩文件，下载并解压
 1. 使用以下命令运行：``` java -jar gui.jar ``` 或者双击
+1. enjoy
+
+## CUI
+
+1. 同上
+1. 同上
+1. 使用以下命令运行： ```java -jar cui.jar```
 1. enjoy
 
 # 维护者
