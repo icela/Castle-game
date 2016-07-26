@@ -1,7 +1,7 @@
 package view;
 
-import castle.Game;
-import util.Echoer;
+import game.Game;
+import util.interfaces.Echoer;
 
 import javax.swing.*;
 import java.awt.*;

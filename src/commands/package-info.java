@@ -6,4 +6,4 @@
  * see it here.
  */
 
-package funcs;
+package commands;

@@ -1,17 +1,17 @@
-package castle;
+package game;
 
-import cells.Item;
-import cells.NPC;
-import cells.Player;
-import database.TextDatabase;
-import funcs.FuncSrc;
-import funcs.using.FuncMap;
-import funcs.using.FuncPick;
-import funcs.using.FuncSleep;
-import funcs.using.FuncUse;
-import map.GameMap;
-import util.Echoer;
-import util.MessageHandler;
+import game.cells.Item;
+import game.cells.NPC;
+import game.cells.Player;
+import data.database.TextDatabase;
+import commands.BaseCommand;
+import commands.implement.CommandMap;
+import commands.implement.CommandPick;
+import commands.implement.CommandSleep;
+import commands.implement.CommandUse;
+import game.map.GameMap;
+import util.interfaces.Echoer;
+import util.interfaces.MessageHandler;
 import util.NameGenerator;
 
 import javax.swing.*;
@@ -24,7 +24,7 @@ import java.util.HashMap;
 
 public abstract class Game
 		implements MessageHandler, Echoer {
-	private HashMap<String, FuncSrc> commands = new HashMap<>();
+	private HashMap<String, BaseCommand> commands = new HashMap<>();
 	private String[] commandNames;
 	private GameMap map;
 	private ArrayList<Item> items = new ArrayList<>();
@@ -45,7 +45,7 @@ public abstract class Game
 				"exit", "state", "fight",
 				"sleep", "save", "rename",
 				"talk", "pack", "home",
-				"map", "pick", "use"
+				"game/map", "pick", "use"
 		};
 
 		commands.put(commandNames[0], cmd -> {
@@ -62,7 +62,7 @@ public abstract class Game
 		});
 		commands.put(commandNames[4], cmd -> echoln(player.stateToString()));
 		commands.put(commandNames[5], cmd -> fight());
-		commands.put(commandNames[6], new FuncSleep(this));
+		commands.put(commandNames[6], new CommandSleep(this));
 		commands.put(commandNames[7], cmd -> saveData());
 		commands.put(commandNames[8], cmd -> {
 			if (!cmd.equals("")) {
@@ -88,9 +88,9 @@ public abstract class Game
 			map.currentRoom = map.getHome();
 			echoln(map.currentRoom.getPrompt());
 		});
-		commands.put(commandNames[12], new FuncMap(this));
-		commands.put(commandNames[13], new FuncPick(this));
-		commands.put(commandNames[14], new FuncUse(this));
+		commands.put(commandNames[12], new CommandMap(this));
+		commands.put(commandNames[13], new CommandPick(this));
+		commands.put(commandNames[14], new CommandUse(this));
 	}
 
 	protected void onStart() {
@@ -132,7 +132,7 @@ public abstract class Game
 	@Override
 	public boolean handleMessage(String line) {
 		String[] words = line.split(" ");
-		FuncSrc func = commands.get(words[0]);
+		BaseCommand func = commands.get(words[0]);
 		String value2 = "";
 
 		if (words.length > 1)

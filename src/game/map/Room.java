@@ -1,10 +1,10 @@
-package map;
+package game.map;
 
-import cells.Boss;
-import cells.NPC;
-import cells.Player;
+import game.cells.Boss;
+import game.cells.NPC;
+import game.cells.Player;
 import com.sun.istack.internal.Nullable;
-import util.Echoer;
+import util.interfaces.Echoer;
 
 import java.util.ArrayList;
 import java.util.HashMap;

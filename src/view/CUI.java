@@ -1,6 +1,6 @@
 package view;
 
-import castle.Game;
+import game.Game;
 
 import java.util.Scanner;
 

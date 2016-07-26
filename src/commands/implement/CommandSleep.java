@@ -1,13 +1,13 @@
-package funcs.using;
+package commands.implement;
 
-import castle.Game;
-import funcs.FuncSrc;
+import game.Game;
+import commands.BaseCommand;
 
-public class FuncSleep implements FuncSrc {
+public class CommandSleep implements BaseCommand {
 
 	private final Game game;
 
-	public FuncSleep(Game game) {
+	public CommandSleep(Game game) {
 		this.game = game;
 	}
 

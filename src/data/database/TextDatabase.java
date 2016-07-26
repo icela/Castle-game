@@ -1,7 +1,7 @@
-package database;
+package data.database;
 
-import cells.Player;
-import map.GameMap;
+import game.cells.Player;
+import game.map.GameMap;
 
 import java.io.*;
 

@@ -1,4 +1,4 @@
-package cells;
+package game.cells;
 
 public class Item {
 	private String name = "";

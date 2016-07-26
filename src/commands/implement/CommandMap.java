@@ -1,7 +1,7 @@
-package funcs.using;
+package commands.implement;
 
-import funcs.FuncSrc;
-import util.Echoer;
+import commands.BaseCommand;
+import util.interfaces.Echoer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,12 +11,12 @@ import java.io.File;
  * 显示地图
  * Created by ice1000 on 2016/2/1.
  */
-public class FuncMap implements FuncSrc {
+public class CommandMap implements BaseCommand {
 
 	private boolean haveMap = false;
 	private Echoer echoer;
 
-	public FuncMap(Echoer echoer) {
+	public CommandMap(Echoer echoer) {
 		this.echoer = echoer;
 	}
 	

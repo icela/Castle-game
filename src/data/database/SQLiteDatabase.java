@@ -1,7 +1,7 @@
-package database;
+package data.database;
 
-import map.Exits;
-import map.Room;
+import game.map.Exits;
+import game.map.Room;
 
 import java.sql.*;
 import java.util.ArrayList;

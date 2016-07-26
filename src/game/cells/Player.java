@@ -1,6 +1,6 @@
-package cells;
+package game.cells;
 
-import util.Echoer;
+import util.interfaces.Echoer;
 
 public class Player extends Cell {
 

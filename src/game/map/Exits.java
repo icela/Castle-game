@@ -1,4 +1,4 @@
-package map;
+package game.map;
 
 /**
  * 传输数据用

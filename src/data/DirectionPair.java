@@ -1,4 +1,4 @@
-package util;
+package data;
 
 /**
  * 一对方向

@@ -1,9 +1,9 @@
-package map;
+package game.map;
 
-import castle.Game;
-import database.SQLiteDatabase;
-import util.Direction;
-import util.DirectionPair;
+import game.Game;
+import data.database.SQLiteDatabase;
+import data.Direction;
+import data.DirectionPair;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

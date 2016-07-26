@@ -1,4 +1,4 @@
-package util;
+package util.interfaces;
 
 /**
  * 用于传递echo方法，控制反转

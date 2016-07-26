@@ -1,4 +1,4 @@
-package util;
+package data;
 
 /**
  * 字符串枚举

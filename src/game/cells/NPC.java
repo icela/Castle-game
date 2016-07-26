@@ -1,4 +1,4 @@
-package cells;
+package game.cells;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package util;
+package util.interfaces;
 
 /**
  * 消息处理器接口

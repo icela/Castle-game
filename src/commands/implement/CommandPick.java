@@ -1,7 +1,7 @@
-package funcs.using;
+package commands.implement;
 
-import castle.Game;
-import funcs.FuncSrc;
+import game.Game;
+import commands.BaseCommand;
 
 /**
  * Created by Eldath on 2016/7/24 0024.
@@ -10,11 +10,11 @@ import funcs.FuncSrc;
  *         本类作用即拾起周边的物体。
  *         //TODO 未完成
  */
-public class FuncPick implements FuncSrc {
+public class CommandPick implements BaseCommand {
 
 	private Game game;
 
-	public FuncPick(Game game) {
+	public CommandPick(Game game) {
 		this.game = game;
 	}
 
