@@ -34,7 +34,7 @@ public class Map {
 						pairs[exit.dir]
 				);
 			}
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 

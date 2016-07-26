@@ -1,6 +1,7 @@
 package view;
 
 import game.Game;
+import util.interfaces.Clearable;
 import util.interfaces.Echoer;
 
 import javax.swing.*;
@@ -15,17 +16,17 @@ import java.util.Stack;
  * Created by asus1 on 2016/1/31.
  */
 public class GUI extends Game
-		implements Echoer {
+		implements Echoer, Clearable {
 
-	private JTextField textField;
-	private JTextArea textArea;
-	public JFrame frame;
-	private JScrollPane scrollPane;
-	private JScrollBar scrollBar;
-	private Stack<String> inputList;
+	private final JTextField textField;
+	public final JTextArea textArea;
+	public final JFrame frame;
+	private final JScrollPane scrollPane;
+	private final JScrollBar scrollBar;
+	private final Stack<String> inputList;
 
-	private static int FRAME_WIDTH = 500;
-	private static int FRAME_HEIGHT = 500;
+	private static final int FRAME_WIDTH = 500;
+	private static final int FRAME_HEIGHT = 500;
 //	private static int INPUT_WIDTH = 500;
 
 	public GUI() {

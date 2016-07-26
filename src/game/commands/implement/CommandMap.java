@@ -14,7 +14,7 @@ import java.io.File;
 public class CommandMap implements BaseCommand {
 
 	private boolean haveMap = false;
-	private Echoer echoer;
+	private final Echoer echoer;
 
 	public CommandMap(Echoer echoer) {
 		this.echoer = echoer;

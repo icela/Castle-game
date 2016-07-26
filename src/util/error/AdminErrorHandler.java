@@ -11,11 +11,12 @@ import java.io.InputStream;
  * @author ice1000
  */
 public class AdminErrorHandler {
+	private static final Logger logger=Logger.getInstance();
 	public static void handleError() {
 		JOptionPane.showMessageDialog(
 				null,
-				"保存失败",
-				"请在随后弹出的对话框中选择 “是”！",
+				"请在随后弹出的对话框中选择 ‘是’！",
+				"错误提示",
 				JOptionPane.ERROR_MESSAGE
 		);
 		try {
@@ -55,7 +56,7 @@ public class AdminErrorHandler {
 			fileWriter.close();
 			file.delete();
 		} catch (Exception e1) {
-			//TODO 异常处理
+			logger.log(e1);
 		}
 	}
 }

@@ -41,7 +41,7 @@ public class SQLiteDatabase
 	 * disc TEXT, welc TEXT,boss TEXT,blood INTEGER,
 	 * strike INTEGER, defence INTEGER,exp INTEGER, die TEXT);
 	 */
-	public ArrayList<Room> getRooms() throws ClassNotFoundException, SQLException {
+	public ArrayList<Room> getRooms() throws SQLException {
 		ResultSet set = statement.executeQuery("SELECT * FROM ROOM ORDER BY id ASC");
 		ArrayList<Room> rooms = new ArrayList<>();
 		while (set.next()) {
@@ -63,7 +63,7 @@ public class SQLiteDatabase
 	/**
 	 * CREATE TABLE MAP( id INTEGER PRIMARY KEY AUTOINCREMENT, fromid INTEGER, toid INTEGER, dir INTEGER);
 	 */
-	public ArrayList<Exits> getExits() throws ClassNotFoundException, SQLException {
+	public ArrayList<Exits> getExits() throws SQLException {
 		// 与顺序无关
 		ResultSet set = statement.executeQuery("SELECT * FROM MAP");
 		ArrayList<Exits> exitses = new ArrayList<>();

@@ -2,6 +2,8 @@ package game.commands.implement;
 
 import game.Game;
 import game.commands.BaseCommand;
+import util.error.Logger;
+import view.GUI;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -13,8 +15,8 @@ import java.io.IOException;
  * @author Eldath
  */
 public class CommandReset implements BaseCommand {
-
-    private Game game;
+    private final Logger logger=Logger.getInstance();
+    private final Game game;
 
     public CommandReset(Game game) {
         this.game = game;
@@ -33,9 +35,8 @@ public class CommandReset implements BaseCommand {
                 fw.write("");
                 fw.close();
             } catch (IOException e) {
-                //TODO 异常处理。
+                logger.log(e);
             }
-            game.clearScreen();
         }
     }
 }

@@ -6,8 +6,8 @@ package data;
  */
 public class DirectionPair {
 
-	private Direction direction1;
-	private Direction direction2;
+	private final Direction direction1;
+	private final Direction direction2;
 
 	public DirectionPair(Direction direction1, Direction direction2) {
 		this.direction1 = direction1;

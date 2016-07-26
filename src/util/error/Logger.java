@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 public class Logger {
 
 	private static Logger logger;
-	private File file;
+	private final File file;
 
 	public Logger() throws IOException {
 		file = new File("error.log");

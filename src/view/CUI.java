@@ -1,9 +1,7 @@
 package view;
 
 import game.Game;
-import util.error.Logger;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -43,15 +41,6 @@ public class CUI extends Game {
 	@Override
 	public void closeScreen() {
 		System.exit(0);
-	}
-
-	@Override
-	public void clearScreen() {
-		try {
-			Runtime.getRuntime().exec("cls");
-		} catch (IOException e) {
-			Logger.getInstance().log(e);
-		}
 	}
 
 	/**
