@@ -16,7 +16,9 @@ import util.NameGenerator;
 
 import javax.swing.*;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -181,43 +183,49 @@ public abstract class Game
 			TextDatabase.getInstance().saveMapAndState(map, player);
 			echoln("保存成功。");
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "保存失败", "请在随后弹出的对话框中选择 “是”！", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(
+					null,
+					"保存失败",
+					"请在随后弹出的对话框中选择 “是”！",
+					JOptionPane.ERROR_MESSAGE
+			);
 			try {
 				//TODO 记得加上 管理员权限获取器。
-				File file = new File("\temp\uac.bat");
+				File file = new File("\\temp\\uac.bat");
 				file.createNewFile();
-				String data = ":: BatchGotAdmin+"\n" +
-						":-------------------------------------+"\n" +
-						"REM --> Check for permissions" + "\n" +
-						">nul 2>&1+"\n" + 
-						"%SYSTEMROOT%\\system32\\cacls.exe+"\n"+ 
-						"%SYSTEMROOT%\\system32\\config\\system+"\n" +
-						"REM --> If error flag set, we do not have admin.+"\n" +
-				"if '%errorlevel%' NEQ '0' ("+"\n"+
-						"echo Requesting administrative privileges..."+"\n"+
-						"goto UACPrompt" +")"+"\n"+
-				"else ( goto gotAdmin )" + "\n" +
-						":UACPrompt "+"\n"+
-				"echo Set UAC = CreateObject ^ (\"Shell.Application\" ^) > \"%temp%\getadmin.vbs" "+"\n"+
-				"echo UAC.ShellExecute \"%~s0\", \"\", \"\", \"runas\", 1 >> \"%temp%\getadmin.vbs\" \"%temp%\getadmin.vbs\\" "+"\n"+
-				"exit / B "+"\n"+":gotAdmin" + "\n"+"if exist \"%temp%\getadmin.vbs\" (del \"%temp%\getadmin.vbs\" )"+"\n"+
-				"pushd \"%CD%\" "+"\n"+
-				"CD / D \"%~dp0\" "+"\n"+
-				":--------------------------------------";
-				FileWriter fw = new FileWriter(file.getName());
-				fw.write(data);
-				Process ps = Runtime.getRuntime().exec();
-
-				InputStream in = ps.getInputStream("\temp\uac.bat");
-
-				intc;
-
+				// TODO 我给你再次整理了缩进和转义字符，现在在IDEA里面不报错，也就是说语法上完全没问题了。
+				// TODO 现在你该检查逻辑上的问题了。我在检查的时候，顺便在所有\n后面换行了。
+				String data = ":: BatchGotAdmin\n" +
+						":-------------------------------------\n" +
+						"REM --> Check for permissions\n" +
+						">nul 2>&1\n" +
+						"%SYSTEMROOT%\\system32\\cacls.exe\n" +
+						"%SYSTEMROOT%\\system32\\config\\system\n" +
+						"REM --> If error flag set, we do not have admin.\n" +
+						"if '%errorlevel%' NEQ '0' (" + "\n" +
+							"echo Requesting administrative privileges...\n" +
+							"goto UACPrompt)\n" +
+						"else ( goto gotAdmin )\n" +
+							":UACPrompt \n" +
+							"echo Set UAC = CreateObject ^ (\"Shell.Application\" ^) > \"%temp%\\getadmin.vbs\n" +
+							"echo UAC.ShellExecute \"%~s0\", \"\", \"\", \"runas\", 1 >> \"%temp%\\getadmin.vbs\" \"%temp%\\getadmin.vbs\\\n" +
+						"exit / B \n" +
+						":gotAdmin\n" +
+						"if exist \"%temp%\\getadmin.vbs\" (del \"%temp%\\getadmin.vbs\" )" + "\n" +
+						"pushd \"%CD%\" " + "\n" +
+						"CD / D \"%~dp0\" " + "\n" +
+						":--------------------------------------";
+				FileWriter fileWriter = new FileWriter(file.getName());
+				fileWriter.write(data);
+				Process process = Runtime.getRuntime().exec("\\temp\\uac.bat");
+				InputStream in = process.getInputStream();
+				int c;
 				while ((c = in.read()) != -1) {
+					// TODO
 				}
 
-				in.close
-						();
-				ps.waitFor();
+				in.close();
+				process.waitFor();
 			} catch (Exception e1) {
 				//TODO 异常处理
 			}
