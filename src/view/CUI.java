@@ -67,6 +67,6 @@ public class CUI extends Game {
 
 	@Override
 	public void clearScreen() {
-		System.out.flush();
+		// TODO 清屏 @lzh
 	}
 }
