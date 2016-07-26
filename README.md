@@ -1,5 +1,5 @@
 # 城堡游戏
-![icon](./drawable/ic_launcher.png)
+![icon](res/drawable/ic_launcher.png)
 
 
 # 内容介绍
@@ -7,7 +7,7 @@
 GUI版与CUI版共存。<br/>
 
 地图：<br/>
-![map](./drawable/map.png)
+![map](res/drawable/map.png)
 
 # 运行方法
 这个必须看哦！
