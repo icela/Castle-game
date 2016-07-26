@@ -31,7 +31,7 @@ public class GUI extends Game
 	public GUI() {
 		frame = new JFrame(GUIInfo.GUI_FORM_TITLE);
 		inputList = new Stack<>();
-		textField = new JTextField(GUIInfo.HINT);
+		textField = new JTextField();
 		textField.registerKeyboardAction(
 				e -> {
 					handleMessage(textField.getText());
@@ -56,17 +56,6 @@ public class GUI extends Game
 				KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0, true),
 				JComponent.WHEN_FOCUSED
 		);
-		textField.addFocusListener(new FocusListener() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				textField.setText("");
-			}
-
-			@Override
-			public void focusLost(FocusEvent e) {
-				textField.setText(GUIInfo.HINT);
-			}
-		});
 		textArea = new JTextArea();
 		Font font = loadFont(System.getProperty("user.dir") + "/lib/MSYHMONO.ttf",
 				GUIInfo.FONT_SIZE);
@@ -134,7 +123,6 @@ public class GUI extends Game
 			return dynamicFontPt;
 		} catch (Exception e) {
 			return new java.awt.Font("宋体", Font.PLAIN, 14);
-//			记得添加异常处理。 2016/7/26: already finished
 		}
 	}
 

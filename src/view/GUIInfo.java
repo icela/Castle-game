@@ -14,6 +14,6 @@ public class GUIInfo {
 
 	public static final boolean RESIZABLE = false;
 
-	public static final String HINT = "在这里输入指令";
+	//public static final String HINT = "在这里输入指令";
 
 }
