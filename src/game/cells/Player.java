@@ -46,7 +46,14 @@ public class Player extends Cell {
 			99999999,
 	};
 
-	//	在玩家中，经验表示拥有的经验，在怪物中表示打败后得到的经验。
+	/**
+	 * 在玩家中，经验表示拥有的经验，在怪物中表示打败后得到的经验。
+	 *
+	 * @param name    名字
+	 * @param blood   血量
+	 * @param defence 防御
+	 * @param strike  攻击
+	 */
 	public Player(String name, int blood, int strike, int defence) {
 		super(name);
 		this.blood = blood;
@@ -54,16 +61,16 @@ public class Player extends Cell {
 		this.defence = defence;
 	}
 
-//	public Player(){
-//		database = new TextDatabase();
-//		loadState();
-//	}
-
-	public void setValues(String name, int blood, int strike, int defence, int level, int experience) {
-		this.name = name;
-		this.blood = blood;
-		this.strike = strike;
-		this.defence = defence;
+	/**
+	 * @param name       {@link #name}
+	 * @param blood      {@link #blood}
+	 * @param strike     {@link #strike}
+	 * @param defence    {@link #defence}
+	 * @param level      {@link #level}
+	 * @param experience {@link #experience}
+	 */
+	public Player(String name, int blood, int strike, int defence, int level, int experience) {
+		this(name, blood, strike, defence);
 		this.level = level;
 		this.experience = experience;
 	}
@@ -132,8 +139,8 @@ public class Player extends Cell {
 		return defence;
 	}
 
-	//	public void saveState(){
-//		database.saveState(
+	//	public void savePlayer(){
+//		database.savePlayer(
 //				this.name + "\r\n" +
 //				this.blood + "\r\n" +
 //				this.strike + "\r\n" +

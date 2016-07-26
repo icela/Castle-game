@@ -2,11 +2,12 @@ package data.database;
 
 import game.cells.Player;
 import game.map.GameMap;
+import util.NameGenerator;
 
 import java.io.*;
 
 /**
- * 封装数据库操作
+ * 封装数据库操作，单例模式
  * Created by ice1000 on 2016/1/28.
  */
 public class TextDatabase {
@@ -25,24 +26,26 @@ public class TextDatabase {
 	private static TextDatabase instance;
 
 	private TextDatabase() {
-		File file = new File(savePath);
-		BufferedReader reader;
 		try {
-			reader = new BufferedReader(new FileReader(file));
-
-			roomName = reader.readLine();
-			roomsState = reader.readLine().toCharArray();
-			playerName = reader.readLine();
-			blood = Integer.parseInt(reader.readLine());
-			strike = Integer.parseInt(reader.readLine());
-			defence = Integer.parseInt(reader.readLine());
-			level = Integer.parseInt(reader.readLine());
-			experience = Integer.parseInt(reader.readLine());
-
-			reader.close();
-
+			readData();
 		} catch (Exception ignored) {
 		}
+	}
+
+	private void readData() throws IOException {
+		File file = new File(savePath);
+		BufferedReader reader = new BufferedReader(new FileReader(file));
+
+		roomName = reader.readLine();
+		roomsState = reader.readLine().toCharArray();
+		playerName = reader.readLine();
+		blood = Integer.parseInt(reader.readLine());
+		strike = Integer.parseInt(reader.readLine());
+		defence = Integer.parseInt(reader.readLine());
+		level = Integer.parseInt(reader.readLine());
+		experience = Integer.parseInt(reader.readLine());
+
+		reader.close();
 	}
 
 	public static TextDatabase getInstance() {
@@ -51,43 +54,31 @@ public class TextDatabase {
 		return instance;
 	}
 
-	public void loadMap(GameMap map, String defaultName) {
+	public GameMap loadMap(String defaultName) {
+		GameMap map = new GameMap();
+		if (!fileExists()) return map;
 		map.setRoomsState(roomsState);
 		if (roomName == null)
 			roomName = defaultName;
 		map.loadRoom(roomName);
+		return map;
 	}
 
-	public void saveMap(GameMap map) throws IOException {
-		File file = new File(savePath);
-		if (file.exists()) {
-			file.delete();
-		}
-		file.createNewFile();
-		BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+	private void saveMap(GameMap map) throws IOException {
 		this.roomName = map.currentRoom.toString();
 		this.roomsState = map.getRoomsState();
-		writer.write(this.getInformation());
-		writer.close();
 	}
 
-	public void saveMapAndState(GameMap map, Player player) throws IOException {
+	public void saveFile(GameMap map, Player player) throws IOException {
 		File file = openFile();
 		BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-		this.roomName = map.currentRoom.toString();
-		this.roomsState = map.getRoomsState();
-		this.playerName = player.toString();
-		this.blood = player.getBlood();
-		this.strike = player.getStrike();
-		this.defence = player.getDefence();
-		this.level = player.getLevel();
-		this.experience = player.getExperience();
-
+		saveMap(map);
+		savePlayer(player);
 		writer.write(this.getInformation());
 		writer.close();
 	}
 
-	public String getInformation() {
+	private String getInformation() {
 		return this.roomName + "\r\n" +
 				String.valueOf(this.roomsState) + "\r\n" +
 				this.playerName + "\r\n" +
@@ -99,39 +90,32 @@ public class TextDatabase {
 				;
 	}
 
-	/**
-	 * @param player 玩家指针
-	 *               读取数据
-	 */
-	public void loadState(Player player) {
-		player.setValues(
+	public Player loadPlayer() {
+		return fileExists() ? new Player(
 				playerName,
 				blood,
 				strike,
 				defence,
 				level,
 				experience
+		) : new Player(
+				NameGenerator.generate(),
+				200,
+				10,
+				5
 		);
 	}
 
-	public void saveState(Player player) throws IOException {
-//		System.out.println("正在保存数据。。");
-		File file = openFile();
-		BufferedWriter writer;
-		writer = new BufferedWriter(new FileWriter(file));
+	public void savePlayer(Player player) throws IOException {
 		this.playerName = player.toString();
 		this.blood = player.getBlood();
 		this.strike = player.getStrike();
 		this.defence = player.getDefence();
 		this.level = player.getLevel();
 		this.experience = player.getExperience();
-
-		writer.write(this.getInformation());
-
-		writer.close();
 	}
 
-	public static boolean isFileExists() {
+	public static boolean fileExists() {
 		return new File(savePath).exists();
 	}
 

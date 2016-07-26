@@ -19,15 +19,15 @@ public class CommandMap implements BaseCommand {
 	public CommandMap(Echoer echoer) {
 		this.echoer = echoer;
 	}
-	
-	public void setHaveMap(boolean flag){
-		this.haveMap=flag;
+
+	public void setHaveMap(boolean flag) {
+		this.haveMap = flag;
 	}
-	
-	public boolean isHaveMap(){
+
+	public boolean isHaveMap() {
 		return haveMap;
 	}
-	
+
 	@Override
 	public void runCommend(String cmd) {
 		if (!haveMap) {

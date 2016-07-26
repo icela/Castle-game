@@ -1,24 +1,20 @@
 package game;
 
+import data.database.TextDatabase;
 import game.cells.Item;
 import game.cells.NPC;
 import game.cells.Player;
-import data.database.TextDatabase;
 import game.commands.BaseCommand;
 import game.commands.implement.CommandMap;
 import game.commands.implement.CommandPick;
 import game.commands.implement.CommandSleep;
 import game.commands.implement.CommandUse;
 import game.map.GameMap;
+import util.AdminErrorHandler;
 import util.interfaces.Echoer;
 import util.interfaces.MessageHandler;
-import util.NameGenerator;
 
-import javax.swing.*;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -101,31 +97,17 @@ public abstract class Game
 		echoln("敬请期待OL版本https://github.com/ProgramLeague/Castle-Online");
 //		太羞耻了！！
 //		echoln("不过在经过了冰封的改造后，你会觉得这个很有意思。");
-		if (!TextDatabase.isFileExists()) {
+		player = TextDatabase.getInstance().loadPlayer();
+		map = TextDatabase.getInstance().loadMap("宾馆");
+		if (!TextDatabase.fileExists()) {
 			echoln("您可以稍后使用\"rename [新名字]\"命令来更改自己的名字。");
-			new NameGenerator();
-			player = new Player(
-					NameGenerator.generate(),
-					200,
-					10,
-					5
-			);
 			saveData();
 		} else {
-			player = new Player(
-					null,
-					-1,
-					-1,
-					-1
-			);
-			TextDatabase.getInstance().loadState(player);
-			TextDatabase.getInstance().loadMap(map, "宾馆");
 			echoln("检测到存档。");
 		}
 
 		echoln("您好，" + player);
 		echoln("如果您需要任何帮助，请键入 'help' 并回车。\n");
-		echo("您的位置：");
 		echoln(map.currentRoom.getPrompt());
 	}
 
@@ -180,55 +162,10 @@ public abstract class Game
 
 	public void saveData() {
 		try {
-			TextDatabase.getInstance().saveMapAndState(map, player);
+			TextDatabase.getInstance().saveFile(map, player);
 			echoln("保存成功。");
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(
-					null,
-					"保存失败",
-					"请在随后弹出的对话框中选择 “是”！",
-					JOptionPane.ERROR_MESSAGE
-			);
-			try {
-				//TODO 记得加上 管理员权限获取器。
-				File file = new File("\\temp\\uac.bat");
-				file.createNewFile();
-				// TODO 我给你再次整理了缩进和转义字符，现在在IDEA里面不报错，也就是说语法上完全没问题了。
-				// TODO 现在你该检查逻辑上的问题了。我在检查的时候，顺便在所有\n后面换行了。
-				String data = ":: BatchGotAdmin\n" +
-						":-------------------------------------\n" +
-						"REM --> Check for permissions\n" +
-						">nul 2>&1\n" +
-						"%SYSTEMROOT%\\system32\\cacls.exe\n" +
-						"%SYSTEMROOT%\\system32\\config\\system\n" +
-						"REM --> If error flag set, we do not have admin.\n" +
-						"if '%errorlevel%' NEQ '0' (" + "\n" +
-							"echo Requesting administrative privileges...\n" +
-							"goto UACPrompt)\n" +
-						"else ( goto gotAdmin )\n" +
-							":UACPrompt \n" +
-							"echo Set UAC = CreateObject ^ (\"Shell.Application\" ^) > \"%temp%\\getadmin.vbs\n" +
-							"echo UAC.ShellExecute \"%~s0\", \"\", \"\", \"runas\", 1 >> \"%temp%\\getadmin.vbs\" \"%temp%\\getadmin.vbs\\\n" +
-						"exit / B \n" +
-						":gotAdmin\n" +
-						"if exist \"%temp%\\getadmin.vbs\" (del \"%temp%\\getadmin.vbs\" )" + "\n" +
-						"pushd \"%CD%\" " + "\n" +
-						"CD / D \"%~dp0\" " + "\n" +
-						":--------------------------------------";
-				FileWriter fileWriter = new FileWriter(file.getName());
-				fileWriter.write(data);
-				Process process = Runtime.getRuntime().exec("\\temp\\uac.bat");
-				InputStream in = process.getInputStream();
-				int c;
-				while ((c = in.read()) != -1) {
-					// TODO
-				}
-
-				in.close();
-				process.waitFor();
-			} catch (Exception e1) {
-				//TODO 异常处理
-			}
+			AdminErrorHandler.handleError();
 		}
 	}
 

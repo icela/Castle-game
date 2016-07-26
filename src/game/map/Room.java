@@ -75,7 +75,7 @@ public class Room {
 		StringBuilder sb = new StringBuilder();
 		String ifaBoss = "这里安全。";
 		sb.append(welcomeWord).append('\n');
-		sb.append("你在").append(this.description).append('\n');
+		sb.append("您的位置：").append(this.description).append('\n');
 		sb.append("出口有: ");
 		for (String str : exits.keySet()) {
 			sb.append(str).append(' ');
