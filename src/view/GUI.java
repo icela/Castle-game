@@ -134,7 +134,7 @@ public class GUI extends Game
 			return dynamicFontPt;
 		} catch (Exception e) {
 			return new java.awt.Font("宋体", Font.PLAIN, 14);
-			//TODO 记得添加异常处理。
+//			记得添加异常处理。 2016/7/26: already finished
 		}
 	}
 

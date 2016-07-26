@@ -32,7 +32,7 @@ public class CommandMap implements BaseCommand {
 	public void runCommend(String cmd) {
 		if (!haveMap) {
 			echoer.echoln("您还没有得到地图呢，请继续游戏以得到地图吧！");
-			//TODO 记得处理掉
+//			TODO 记得处理掉
 			echoer.echoln("此功能依赖pick和use，而这些功能未实现。敬请期待更新！！");
 			return;
 		}
