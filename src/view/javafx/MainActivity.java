@@ -5,14 +5,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import view.GUIPublicData;
+import view.GUIInfo;
 
 
 public class MainActivity extends Application {
     @Override
 	public void start(Stage primaryStage) throws Exception {
 		Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-		primaryStage.setTitle(GUIPublicData.GUI_FORM_TITLE);
+		primaryStage.setTitle(GUIInfo.GUI_FORM_TITLE);
 		primaryStage.setScene(new Scene(
 				root,
 				640,
