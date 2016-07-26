@@ -45,50 +45,50 @@ public abstract class Game
 				"map", "pick", "use"
 		};
 
-		int index = 0;
-		commands.put(commandNames[index++], cmd -> {
+		int index = -1;
+		commands.put(commandNames[++index], cmd -> {
 			for (String s : commandNames)
 				echoln(s);
 			echoln("有些需要参数的命令请按如下格式输入：\n命令 [参数]\n如：go east");
 			echoln("如：rename 冰封");
 		});
-		commands.put(commandNames[index++], this::goRoom);
-		commands.put(commandNames[index++], cmd -> echoln(map.wildRoom()));
-		commands.put(commandNames[index++], cmd -> {
+		commands.put(commandNames[++index], this::goRoom);
+		commands.put(commandNames[++index], cmd -> echoln(map.wildRoom()));
+		commands.put(commandNames[++index], cmd -> {
 			saveData();
 			gameEnded = true;
 		});
-		commands.put(commandNames[index++], cmd -> echoln(player.stateToString()));
-		commands.put(commandNames[index++], cmd -> fight());
-		commands.put(commandNames[index++], new CommandSleep(this));
-		commands.put(commandNames[index++], cmd -> saveData());
-		commands.put(commandNames[index++], cmd -> {
+		commands.put(commandNames[++index], cmd -> echoln(player.stateToString()));
+		commands.put(commandNames[++index], cmd -> fight());
+		commands.put(commandNames[++index], new CommandSleep(this));
+		commands.put(commandNames[++index], cmd -> saveData());
+		commands.put(commandNames[++index], cmd -> {
 			if (!cmd.equals("")) {
 				player.rename(cmd);
 				echoln("重命名成功。新名字：" + cmd);
 			} else
 				echoln("格式错误。请按照\"rename [新名字]\"的格式重命名！");
 		});
-		commands.put(commandNames[index++], cmd -> {
+		commands.put(commandNames[++index], cmd -> {
 			NPC npc = map.currentRoom.isNPCExists(cmd);
 			if (npc != null) {
 				echoln(npc.getChat());
 			} else
 				echoln("指定的名字不存在。注：Boss要在被打败之后才能对话。");
 		});
-		commands.put(commandNames[index++], cmd -> {
+		commands.put(commandNames[++index], cmd -> {
 			echoln("背包中物品如下：");
 			for (Item item : items)
 				echoln(item.toString());
 		});
-		commands.put(commandNames[index++], cmd -> {
+		commands.put(commandNames[++index], cmd -> {
 			echoln("您发动了与女仆的契约，回到了旅馆。");
 			map.currentRoom = map.getHome();
 			echoln(map.currentRoom.getPrompt());
 		});
-		commands.put(commandNames[index++], new CommandMap(this));
-		commands.put(commandNames[index++], new CommandPick(this));
-		commands.put(commandNames[index++], new CommandUse(this));
+		commands.put(commandNames[++index], new CommandMap(this));
+		commands.put(commandNames[++index], new CommandPick(this));
+		commands.put(commandNames[++index], new CommandUse(this));
 	}
 
 	protected void onStart() {

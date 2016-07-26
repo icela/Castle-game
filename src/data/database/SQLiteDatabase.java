@@ -3,14 +3,20 @@ package data.database;
 import game.map.Exits;
 import game.map.Room;
 
-import java.sql.*;
+import java.io.Closeable;
+import java.io.IOException;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
  * @author ice1000
- * Created by asus1 on 2016/7/24.
+ *         Created by asus1 on 2016/7/24.
  */
-public class SQLiteDatabase {
+public class SQLiteDatabase
+		implements Closeable {
 
 	private static SQLiteDatabase instance = null;
 	private Statement statement;
@@ -72,5 +78,13 @@ public class SQLiteDatabase {
 		return exitses;
 	}
 
-
+	@Override
+	public void close() throws IOException{
+		try {
+			statement.close();
+		} catch (SQLException e) {
+			// 告诉你，这叫嫁祸于IOException #(滑稽)
+			throw new IOException(e.getSQLState());
+		}
+	}
 }
