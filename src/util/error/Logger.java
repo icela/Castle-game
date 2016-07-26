@@ -3,6 +3,7 @@ package util.error;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 /**
  * @author ice1000
@@ -29,18 +30,27 @@ public class Logger {
 		return logger;
 	}
 
-	public void log(String log) throws IOException {
-		FileWriter writer = new FileWriter(file);
-		writer.append(log);
-		writer.flush();
-		writer.close();
+	public void log(String log) {
+		try {
+			new FileWriter(file)
+					.append(LocalDateTime.now().toString())
+					.append('\n')
+					.append(log)
+					.append('\n')
+					.close();
+		} catch (IOException ignored) {
+		}
 	}
 
-	public void log(Exception e) throws IOException {
-		FileWriter writer = new FileWriter(file);
-		for (StackTraceElement element : e.getStackTrace())
-			writer.append(element.toString()).append('\n');
-		writer.flush();
-		writer.close();
+	public void log(Exception e) {
+		try {
+			FileWriter writer = new FileWriter(file);
+			writer.append(LocalDateTime.now().toString()).append('\n');
+			for (StackTraceElement element : e.getStackTrace())
+				writer.append(element.toString()).append('\n');
+			writer.flush();
+			writer.close();
+		} catch (IOException ignored) {
+		}
 	}
 }

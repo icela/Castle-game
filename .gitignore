@@ -6,3 +6,4 @@
 /bin
 .idea/workspace.xml
 /data.db
+/error.log
