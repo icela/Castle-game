@@ -110,7 +110,7 @@ public class Room {
 	}
 
 	//    检查Boss是否已经被挑战过
-	public boolean isBossGetItem() {
+	public boolean bossGetItem() {
 		try {
 			return boss.getOrNot();
 		} catch (NullPointerException e) {

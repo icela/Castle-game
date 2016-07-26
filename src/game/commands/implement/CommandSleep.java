@@ -14,8 +14,8 @@ public class CommandSleep implements BaseCommand {
 	@Override
 	public void runCommend(String cmd) {
 //		int bloodMore = Integer.parseInt(cmd);
-		if (game.getMap().currentRoom.toString().matches("宾馆|卧室")) {
-			if (!game.getMap().currentRoom.isBossGetItem()) {
+		if (game.getCurrentRoom().toString().matches("宾馆|卧室|旅馆")) {
+			if (!game.getCurrentRoom().bossGetItem()) {
 				game.echo("女仆顺从地送你进入梦乡。睡觉中");
 				for (int i = 0; i < 8; i++) {
 					try {

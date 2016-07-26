@@ -10,6 +10,7 @@ import game.commands.implement.CommandPick;
 import game.commands.implement.CommandSleep;
 import game.commands.implement.CommandUse;
 import game.map.GameMap;
+import game.map.Room;
 import util.AdminErrorHandler;
 import util.interfaces.Echoer;
 import util.interfaces.MessageHandler;
@@ -35,58 +36,59 @@ public abstract class Game
 
 	protected void onCreate() {
 		map = new GameMap();
-		createItems();
+		initItems();
 		commandNames = new String[]{
 				"help", "go", "wild",
 				"exit", "state", "fight",
 				"sleep", "save", "rename",
 				"talk", "pack", "home",
-				"game/map", "pick", "use"
+				"map", "pick", "use"
 		};
 
-		commands.put(commandNames[0], cmd -> {
+		int index = 0;
+		commands.put(commandNames[index++], cmd -> {
 			for (String s : commandNames)
 				echoln(s);
 			echoln("有些需要参数的命令请按如下格式输入：\n命令 [参数]\n如：go east");
 			echoln("如：rename 冰封");
 		});
-		commands.put(commandNames[1], this::goRoom);
-		commands.put(commandNames[2], cmd -> echoln(map.wildRoom()));
-		commands.put(commandNames[3], cmd -> {
+		commands.put(commandNames[index++], this::goRoom);
+		commands.put(commandNames[index++], cmd -> echoln(map.wildRoom()));
+		commands.put(commandNames[index++], cmd -> {
 			saveData();
 			gameEnded = true;
 		});
-		commands.put(commandNames[4], cmd -> echoln(player.stateToString()));
-		commands.put(commandNames[5], cmd -> fight());
-		commands.put(commandNames[6], new CommandSleep(this));
-		commands.put(commandNames[7], cmd -> saveData());
-		commands.put(commandNames[8], cmd -> {
+		commands.put(commandNames[index++], cmd -> echoln(player.stateToString()));
+		commands.put(commandNames[index++], cmd -> fight());
+		commands.put(commandNames[index++], new CommandSleep(this));
+		commands.put(commandNames[index++], cmd -> saveData());
+		commands.put(commandNames[index++], cmd -> {
 			if (!cmd.equals("")) {
 				player.rename(cmd);
 				echoln("重命名成功。新名字：" + cmd);
 			} else
 				echoln("格式错误。请按照\"rename [新名字]\"的格式重命名！");
 		});
-		commands.put(commandNames[9], cmd -> {
+		commands.put(commandNames[index++], cmd -> {
 			NPC npc = map.currentRoom.isNPCExists(cmd);
 			if (npc != null) {
 				echoln(npc.getChat());
 			} else
 				echoln("指定的名字不存在。注：Boss要在被打败之后才能对话。");
 		});
-		commands.put(commandNames[10], cmd -> {
+		commands.put(commandNames[index++], cmd -> {
 			echoln("背包中物品如下：");
 			for (Item item : items)
 				echoln(item.toString());
 		});
-		commands.put(commandNames[11], cmd -> {
+		commands.put(commandNames[index++], cmd -> {
 			echoln("您发动了与女仆的契约，回到了旅馆。");
 			map.currentRoom = map.getHome();
 			echoln(map.currentRoom.getPrompt());
 		});
-		commands.put(commandNames[12], new CommandMap(this));
-		commands.put(commandNames[13], new CommandPick(this));
-		commands.put(commandNames[14], new CommandUse(this));
+		commands.put(commandNames[index++], new CommandMap(this));
+		commands.put(commandNames[index++], new CommandPick(this));
+		commands.put(commandNames[index++], new CommandUse(this));
 	}
 
 	protected void onStart() {
@@ -99,11 +101,12 @@ public abstract class Game
 //		echoln("不过在经过了冰封的改造后，你会觉得这个很有意思。");
 		player = TextDatabase.getInstance().loadPlayer();
 		map = TextDatabase.getInstance().loadMap("宾馆");
-		if (!TextDatabase.fileExists()) {
+		if (TextDatabase.fileExists()) {
+			echoln("检测到存档。");
+		} else {
+			echoln("您是第一次开始游戏。");
 			echoln("您可以稍后使用\"rename [新名字]\"命令来更改自己的名字。");
 			saveData();
-		} else {
-			echoln("检测到存档。");
 		}
 
 		echoln("您好，" + player);
@@ -133,7 +136,7 @@ public abstract class Game
 		return true;
 	}
 
-	private void createItems() {
+	private void initItems() {
 		items.add(new Item("传送宝石"));
 		items.add(new Item("和女仆的契约"));
 	}
@@ -156,8 +159,8 @@ public abstract class Game
 		echoln(map.currentRoom.getPrompt());
 	}
 
-	public GameMap getMap() {
-		return map;
+	public Room getCurrentRoom() {
+		return map.currentRoom;
 	}
 
 	public void saveData() {

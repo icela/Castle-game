@@ -90,7 +90,7 @@ public class GameMap {
 	public char[] getRoomsState() {
 		char[] roomsState = new char[theRooms.size()];
 		for (int i = 0; i < theRooms.size(); i++)
-			roomsState[i] = theRooms.get(i).isBossGetItem() ? '1' : '0';
+			roomsState[i] = theRooms.get(i).bossGetItem() ? '1' : '0';
 		return roomsState;
 	}
 
