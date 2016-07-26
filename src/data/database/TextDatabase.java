@@ -1,7 +1,7 @@
 package data.database;
 
 import game.cells.Player;
-import game.map.GameMap;
+import game.map.Map;
 import util.NameGenerator;
 
 import java.io.*;
@@ -54,8 +54,8 @@ public class TextDatabase {
 		return instance;
 	}
 
-	public GameMap loadMap(String defaultName) {
-		GameMap map = new GameMap();
+	public Map loadMap(String defaultName) {
+		Map map = new Map();
 		if (!fileExists()) return map;
 		map.setRoomsState(roomsState);
 		if (roomName == null)
@@ -64,12 +64,12 @@ public class TextDatabase {
 		return map;
 	}
 
-	private void saveMap(GameMap map) throws IOException {
+	private void saveMap(Map map) throws IOException {
 		this.roomName = map.currentRoom.toString();
 		this.roomsState = map.getRoomsState();
 	}
 
-	public void saveFile(GameMap map, Player player) throws IOException {
+	public void saveFile(Map map, Player player) throws IOException {
 		File file = openFile();
 		BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 		saveMap(map);

@@ -1,4 +1,4 @@
-package util;
+package util.error;
 
 import javax.swing.*;
 import java.io.File;
