@@ -56,7 +56,6 @@ public class AdminErrorHandler {
 			file.delete();
 		} catch (Exception e) {
 			Logger.getInstance().log(e);
-			//TODO 异常处理
 		}
 	}
 }

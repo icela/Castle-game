@@ -32,6 +32,7 @@ public class CommandSleep implements BaseCommand {
 				game.echoln("睡觉需要女仆服侍，然而她看起来不大愿意啊。。。");
 		} else
 			game.echoln("只有宾馆或卧室能睡觉。");
+		game.echoln("");
 	}
 
 }

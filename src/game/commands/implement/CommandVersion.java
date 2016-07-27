@@ -17,9 +17,12 @@ public class CommandVersion implements BaseCommand {
 
 	@Override
 	public void runCommend(String cmd) {
+		game.echoln("Castle Game  城堡游戏");
 		game.echoln("VERSION: " + GUIConfig.VERSION);
-		game.echoln("MODEL:");
-		game.echoln("OPEN-SOURCE PROJECT BASED ON ProgramLeague OF Github");
-		game.echoln("Copyright(©) 2016 ProgramLeague");
+		game.echoln("MODEL:"+GUIConfig.MODEL);
+		game.echoln("DEVELOPER: ice1000, Eldath");
+		game.echoln("OPEN-SOURCE PROJECT BASED ON ProgramLeague OF Github.");
+		game.echoln("Copyright(©) 2016 ProgramLeague.");
+		game.echoln("");
 	}
 }

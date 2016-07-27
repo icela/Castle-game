@@ -33,12 +33,14 @@ public class CommandMap implements BaseCommand {
 	public void runCommend(String cmd) {
 		if (echoer instanceof CUI) {
 			echoer.echoln("该功能在CUI模式下暂时无法实现，请使用GUI模式。");
+			echoer.echoln("");
 			return;
 		}
 		if (!haveMap) {
 			echoer.echoln("您还没有得到地图呢，请继续游戏以得到地图吧！");
 //			TODO 记得处理掉
 			echoer.echoln("此功能依赖pick和use，而这些功能未实现。敬请期待更新！！");
+			echoer.echoln("");
 			return;
 		}
 		JFrame frame = new JFrame("地图");
@@ -53,5 +55,6 @@ public class CommandMap implements BaseCommand {
 		frame.setContentPane(panel);
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		frame.setVisible(true);
+		echoer.echoln("");
 	}
 }

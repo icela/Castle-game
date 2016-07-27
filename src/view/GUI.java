@@ -33,6 +33,8 @@ public class GUI extends Game
 	/**
 	 * 我知道你绝对不会想仔细研究这段极长的构造方法的，
 	 * 没错要的就是这种效果
+	 *
+	 * 嗯嗯对没错~ ~
 	 */
 	public GUI() {
 		frame = new JFrame(GUIConfig.GUI_FORM_TITLE);

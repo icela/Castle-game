@@ -17,6 +17,7 @@ import util.interfaces.Echoer;
 import util.interfaces.MessageHandler;
 import view.CUI;
 import view.GUI;
+import view.GUIConfig;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -51,7 +52,7 @@ public abstract class Game
 				"exit", "state", "fight",
 				"sleep", "save", "rename",
 				"talk", "pack", "home",
-				"map", "pick", "use", "reset"
+				"map", "pick", "use", "reset", "version"
 		};
 
 		int index = -1;
@@ -106,6 +107,7 @@ public abstract class Game
 		commands.put(commandNames[++index], new CommandPick(this));
 		commands.put(commandNames[++index], new CommandUse(this));
 		commands.put(commandNames[++index], new CommandReset(this));
+		commands.put(commandNames[++index], new CommandVersion(this));
 	}
 
 	protected void onStart() {
@@ -114,10 +116,13 @@ public abstract class Game
 		echoln("最新版本和源代码请见https://github.com/ProgramLeague/Castle-game");
 		echoln("Kotlin版本与旧版本请见https://github.com/ice1000/Castle-game");
 		echoln("敬请期待OL版本https://github.com/ProgramLeague/Castle-Online");
-
-		echoln(this instanceof CUI ? "您现在是以CUI模式开启游戏，极少数功能将不可用。" :
-				this instanceof GUI ? "您现在是以GUI模式进行游戏，所有功能可用。" :
-						"系统无法检测你用的什么模式，玩游戏也得遵守基本法啊！");
+		if (this instanceof CUI) {
+			echoln("您现在是以CUI模式开启游戏，极少数功能将不可用。");
+			GUIConfig.MODEL = "CUI";
+		} else if (this instanceof GUI) {
+			echoln("您现在是以GUI模式进行游戏，所有功能均可用。");
+			GUIConfig.MODEL = "GUI";
+		} else echoln("系统无法检测你用的什么模式，玩游戏也得遵守基本法啊！");
 
 //		太羞耻了！！
 //		echoln("不过在经过了冰封的改造后，你会觉得这个很有意思。");
@@ -130,10 +135,13 @@ public abstract class Game
 			echoln("您可以稍后使用\"rename [新名字]\"命令来更改自己的名字。");
 			saveData();
 		}
-
+		echoln("");
 		echoln("您好，" + player);
+		if (GUIConfig.DEBUG)
+			echoln("当前处于Debug模式，存档文件的Base64加密将不会启用。");
 		echoln("如果您需要任何帮助，请键入 'help' 并回车。\n");
 		echoln(map.currentRoom.getPrompt());
+		echoln("");
 	}
 
 	@Override
@@ -166,6 +174,7 @@ public abstract class Game
 			echoln(map.currentRoom.getPrompt());
 		else
 			echoln("命令格式错误或该出口不存在。");
+		echoln("");
 	}
 
 	/**
@@ -175,7 +184,7 @@ public abstract class Game
 	public void fight() {
 //		打之前是否持有物品（这尼玛都什么命名啊）
 		boolean a = map.currentRoom.bossGetItem();
-		System.out.println("开始打boss");
+		System.out.println("开始打Boss");
 		map.fightBoss(this);
 //		前面半句反正都要执行，保证一定会挑战，不会被短路干扰，但是要挑战成功才会触发这个
 		System.out.println("a before = " + a);
@@ -186,6 +195,7 @@ public abstract class Game
 			items.get(map.currentRoom.getBossItem()).num++;
 		}
 		echoln(map.currentRoom.getPrompt());
+		echoln("");
 	}
 
 	public Room getCurrentRoom() {
@@ -195,7 +205,7 @@ public abstract class Game
 	public void saveData() {
 		try {
 			TextDatabase.getInstance().saveFile(map, player);
-			echoln("保存成功。");
+			// TODO 反正也看不到 echoln("保存成功。");
 		} catch (IOException e) {
 			Logger.getInstance().log(e);
 			AdminErrorHandler.handleError();
