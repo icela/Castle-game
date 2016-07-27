@@ -1,6 +1,6 @@
 package data.database;
 
-import game.cells.Player;
+import game.cells.spirit.Player;
 import game.map.Map;
 import util.NameGenerator;
 import util.error.Logger;

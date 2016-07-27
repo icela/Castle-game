@@ -1,4 +1,4 @@
-package game.cells;
+package game.cells.spirit;
 
 public class Cell {
 

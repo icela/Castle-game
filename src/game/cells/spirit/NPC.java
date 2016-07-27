@@ -1,4 +1,6 @@
-package game.cells;
+package game.cells.spirit;
+
+import game.cells.item.Item;
 
 import java.util.ArrayList;
 
@@ -12,8 +14,8 @@ public class NPC extends Cell {
 		this.chat = chat;
 	}
 
-	public void itemGet(String name, int num) {
-		items.add(new Item(name, num));
+	public void itemGet(Item item) {
+		items.add(item);
 	}
 
 //	public void itemGive(int index,int num){

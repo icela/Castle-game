@@ -1,6 +1,8 @@
 package data.database;
 
-import game.map.Exits;
+import game.map.RoomItemPair;
+import game.cells.item.Item;
+import game.map.Exit;
 import game.map.Room;
 import util.error.Logger;
 
@@ -64,12 +66,12 @@ public class SQLiteDatabase
 	/**
 	 * CREATE TABLE MAP( id INTEGER PRIMARY KEY AUTOINCREMENT, fromid INTEGER, toid INTEGER, dir INTEGER);
 	 */
-	public ArrayList<Exits> getExits() throws SQLException {
+	public ArrayList<Exit> getExits() throws SQLException {
 		// 与顺序无关
 		ResultSet set = statement.executeQuery("SELECT * FROM MAP");
-		ArrayList<Exits> exitses = new ArrayList<>();
+		ArrayList<Exit> exitses = new ArrayList<>();
 		while (set.next()) {
-			exitses.add(new Exits(
+			exitses.add(new Exit(
 					set.getInt("fromid"),
 					set.getInt("toid"),
 					set.getInt("dir")
@@ -77,6 +79,43 @@ public class SQLiteDatabase
 		}
 		set.close();
 		return exitses;
+	}
+
+	/**
+	 * CREATE TABLE ITEM(id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT, event INTEGER, extra TEXT, desc TEXT);
+	 * @return items
+	 */
+	public ArrayList<Item> getItems() throws SQLException {
+		ResultSet set = statement.executeQuery("SELECT * FROM ITEM");
+		ArrayList<Item> items = new ArrayList<>();
+		while (set.next()) {
+			items.add(new Item(
+					set.getInt("id"),
+					set.getString("name"),
+					set.getInt("event"),
+					set.getString("extra"),
+					set.getString("desc")
+			));
+		}
+		set.close();
+		return items;
+	}
+
+	/**
+	 * CREATE TABLE BOSS_GET_ITEM (room INTEGER, item INTEGER);
+	 * @return pair
+	 */
+	public ArrayList<RoomItemPair> getRoomItemPairs() throws SQLException {
+		ResultSet set = statement.executeQuery("SELECT * FROM BOSS_GET_ITEM");
+		ArrayList<RoomItemPair> pairs = new ArrayList<>();
+		while (set.next()) {
+			pairs.add(new RoomItemPair(
+					set.getInt("room"),
+					set.getInt("item")
+			));
+		}
+		set.close();
+		return pairs;
 	}
 
 	@Override

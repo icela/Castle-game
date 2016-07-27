@@ -1,4 +1,4 @@
-package game.cells;
+package game.cells.spirit;
 
 import util.interfaces.Echoer;
 
@@ -9,6 +9,7 @@ public class Boss extends Player {
 	private String dieText = "";
 	private boolean survive = true;
 	private boolean getItem = true;
+	public int item;
 
 	public Boss(String name, int blood, int strike, int defence, int experience, String dieText) {
 		this(name, blood, strike, defence, experience);
@@ -22,20 +23,17 @@ public class Boss extends Player {
 	}
 
 	public Player fight(Player player, Echoer echoer) {
-
-		StringBuilder stringBuffer = new StringBuilder();
+		StringBuilder stringBuilder = new StringBuilder();
 		int bloodSave = this.blood;
 		int bloodSave2 = player.blood;
 		int beBeat = (this.strike - player.getDefence());
 		int Beat = (player.getStrike() - this.defence);
 
-		if (beBeat <= 0) {
-			beBeat = 0;
-		}
+		if (beBeat <= 0) beBeat = 0;
 //			打不过
 		if (Beat <= 0) {
 			player.blood -= 10;
-			stringBuffer
+			stringBuilder
 					.append("你的攻击力小于")
 					.append(this.name)
 					.append("的防御力！\n落荒而逃！损失10点体力值！\n");
@@ -51,28 +49,27 @@ public class Boss extends Player {
 					player.blood = bloodSave2;
 
 					this.blood = bloodSave;
-					stringBuffer.append("以你现有的体力值无法打倒").append(this.name).append("！\n落荒而逃！损失5点体力值！\n");
+					stringBuilder.append("以你现有的体力值无法打倒").append(this.name).append("！\n落荒而逃！损失5点体力值！\n");
 					break;
 				}
 				if (this.blood <= 0) {
 //						先把血补回去
 					this.blood = bloodSave;
-					stringBuffer
+					stringBuilder
 							.append(dieText)
 							.append("\n胜利而归！你还剩")
 							.append(player.blood)
-							.append("点体力值！\n")
-							.append("本次战斗获得了")
+							.append("点体力值！\n本次战斗获得了")
 							.append(player.win(getExperience(), echoer))
 							.append("点经验值！\n");
 					survive = false;
 					getItem = false;
-					stringBuffer.append("战斗结束");
-					stringBuffer.append("\n");
+					stringBuilder.append("战斗结束");
+					stringBuilder.append("\n");
 				}
 			}
 		}
-		echoer.echo(stringBuffer.toString());
+		echoer.echo(stringBuilder.toString());
 		survive = true;
 		return player;
 	}

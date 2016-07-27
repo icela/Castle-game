@@ -1,4 +1,4 @@
-package game.cells;
+package game.cells.spirit;
 
 import util.interfaces.Echoer;
 

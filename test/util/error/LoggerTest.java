@@ -1,6 +1,6 @@
 package util.error;
 
-import game.cells.Player;
+import game.cells.spirit.Player;
 import util.NameGenerator;
 
 import java.util.Arrays;

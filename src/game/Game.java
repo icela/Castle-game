@@ -1,9 +1,11 @@
 package game;
 
+import data.database.SQLiteDatabase;
 import data.database.TextDatabase;
-import game.cells.Item;
-import game.cells.NPC;
-import game.cells.Player;
+import game.cells.item.Item;
+import game.cells.item.ItemData;
+import game.cells.spirit.NPC;
+import game.cells.spirit.Player;
 import game.commands.BaseCommand;
 import game.commands.implement.*;
 import game.map.Map;
@@ -17,6 +19,7 @@ import view.CUI;
 import view.GUI;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -24,7 +27,7 @@ public abstract class Game
 		implements MessageHandler, Echoer, Clearable {
 
 	private final HashMap<String, BaseCommand> commands = new HashMap<>();
-	private final ArrayList<Item> items = new ArrayList<>();
+	private ArrayList<Item> items;
 	private String[] commandNames;
 	private Map map;
 	public Player player;
@@ -80,13 +83,18 @@ public abstract class Game
 		});
 		commands.put(commandNames[++index], cmd -> {
 			echoln("背包中物品如下：");
-			for (Item item : items)
-				echoln(item.toString());
+			items.stream().filter(item ->
+					item.get
+			).forEach(item ->
+					echoln(item.getName())
+			);
 		});
 		commands.put(commandNames[++index], cmd -> {
-			echoln("您发动了与女仆的契约，回到了旅馆。");
-			map.currentRoom = map.getHome();
-			echoln(map.currentRoom.getPrompt());
+			if (items.get(ItemData.MAID_RIGHT).get) {
+				echoln("您发动了与女仆的契约，回到了旅馆。");
+				map.currentRoom = map.getHome();
+				echoln(map.currentRoom.getPrompt());
+			}
 		});
 		commands.put(commandNames[++index], new CommandMap(this));
 		commands.put(commandNames[++index], new CommandPick(this));
@@ -145,8 +153,11 @@ public abstract class Game
 	}
 
 	private void initItems() {
-		items.add(new Item("传送宝石"));
-		items.add(new Item("和女仆的契约"));
+		try {
+			items = SQLiteDatabase.getInstance().getItems();
+		} catch (SQLException e) {
+			Logger.getInstance().log(e);
+		}
 	}
 
 	/**
@@ -163,7 +174,14 @@ public abstract class Game
 	 * 战斗函数
 	 */
 	public void fight() {
-		map.fightBoss(this);
+//		打之前是否持有物品（这尼玛都什么命名啊）
+		boolean a = map.currentRoom.bossGetItem();
+//		前面半句反正都要执行，保证一定会挑战，不会被短路干扰，但是要挑战成功才会触发这个
+		if (map.fightBoss(this) && a) {
+			items.get(map.currentRoom.getBossItem()).get = true;
+//			 之前是没有，但是打赢了之后就有了
+			items.get(map.currentRoom.getBossItem()).num++;
+		}
 		echoln(map.currentRoom.getPrompt());
 	}
 

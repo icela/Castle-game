@@ -111,11 +111,30 @@ INSERT INTO MAP(fromid, toid, dir) VALUES (17,14,3);
 INSERT INTO MAP(fromid, toid, dir) VALUES (18,13,3);
 INSERT INTO MAP(fromid, toid, dir) VALUES (19,18,3);
 
+CREATE TABLE ITEM(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT, event INTEGER, extra TEXT, desc TEXT
+);
+-- 事件只能硬编码指定了，这是没办法的事
+
+CREATE TABLE BOSS_GET_ITEM (
+  room INTEGER, item INTEGER
+);
+
+INSERT INTO BOSS_GET_ITEM(room, item) VALUES (4, 2);
+
+INSERT INTO ITEM(id, name, event) VALUES (0, '地图', 0, '神秘而古旧的地图。');               -- 0
+INSERT INTO ITEM(name, event) VALUES ('传送宝石', 1, '透明的紫色水晶，散发着魔力。');        -- 1
+INSERT INTO ITEM(name, event) VALUES ('和女仆的契约', 2, '象征着女仆对你的忠诚。');          -- 2
+
 CREATE TABLE NPC(
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  hello TEXT, item INTEGER
+  name TEXT, room INTEGER, hello TEXT,
+  item INTEGER
 );
 
 SELECT * FROM ROOM ORDER BY id ASC;
 SELECT * FROM DIR ORDER BY id ASC;
 SELECT * FROM MAP ORDER BY id ASC;
+SELECT * FROM ITEM ORDER BY id ASC;
+SELECT * FROM NPC ORDER BY id ASC;

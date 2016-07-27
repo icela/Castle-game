@@ -138,7 +138,10 @@ public class GUI extends Game
 		textField.requestFocus(true);
 	}
 
-	//第一个参数是外部字体名，第二个是字体大小
+	/**
+	 * @param fontFileName 外部字体名
+	 * @param fontSize     第二个是字体大小
+	 */
 	private static Font loadFont(String fontFileName, float fontSize) {
 		try {
 			File file = new File(fontFileName);
@@ -148,6 +151,7 @@ public class GUI extends Game
 			font.close();
 			return dynamicFontPt;
 		} catch (Exception e) {
+			Logger.getInstance().log(e);
 			return new java.awt.Font("宋体", Font.PLAIN, 14);
 		}
 	}
@@ -170,9 +174,8 @@ public class GUI extends Game
 		// 滚动到最底下
 		scrollBar.setValue(scrollBar.getMaximum() - 20);
 		int height = 10;
-		Point p = new Point();
-		p.setLocation(0, this.textArea.getLineCount() * height);
-		this.scrollPane.getViewport().setViewPosition(p);
+		this.scrollPane.getViewport().setViewPosition(
+				new Point(0, this.textArea.getLineCount() * height));
 	}
 
 	@Override

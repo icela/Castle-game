@@ -1,18 +1,18 @@
 package game.map;
 
-import game.cells.Boss;
-import game.cells.NPC;
-import game.cells.Player;
 import com.sun.istack.internal.Nullable;
+import game.Game;
+import game.cells.spirit.Boss;
+import game.cells.spirit.NPC;
+import game.cells.spirit.Player;
 import util.error.Logger;
-import util.interfaces.Echoer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Room {
 
-	private Boss boss = null;
+	private Boss boss;
 	private final String description;
 	private String welcomeWord;
 	private HashMap<String, Integer> exits;
@@ -106,8 +106,8 @@ public class Room {
 	}
 
 	//   战斗函数
-	Player fightBoss(Player player, Echoer echoer) {
-		return boss.fight(player, echoer);
+	Player fightBoss(Player player, Game game) {
+		return boss.fight(player, game);
 	}
 
 	//    检查Boss是否已经被挑战过
@@ -120,9 +120,17 @@ public class Room {
 		}
 	}
 
-	void setBossGetItem(boolean isGet) {
+	public void setBossItem(int itemId) {
+		boss.item = itemId;
+	}
+
+	public int getBossItem() {
+		return boss.item;
+	}
+
+	void setBossGetItem(boolean get) {
 		if (boss != null) {
-			boss.setGotItem(isGet);
+			boss.setGotItem(get);
 		}
 	}
 

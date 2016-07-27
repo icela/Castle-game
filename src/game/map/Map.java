@@ -29,22 +29,21 @@ public class Map {
 //			构造地图结构
 		try {
 			rooms = SQLiteDatabase.getInstance().getRooms();
-			for (Exits exit : SQLiteDatabase.getInstance().getExits()) {
-				setExit(
-						exit.from, exit.to,
-						pairs[exit.dir]
-				);
-			}
+			SQLiteDatabase.getInstance().getExits().forEach(exit -> setExit(
+					exit.from, exit.to,
+					pairs[exit.dir]
+			));
+			SQLiteDatabase.getInstance().getRoomItemPairs().forEach(pair ->
+					rooms.get(pair.room).setBossItem(pair.item));
 		} catch (SQLException e) {
 			Logger.getInstance().log(e);
 		}
-
 		currentRoom = rooms.get(4);
 	}
 
 	private void setExit(int index_a, int index_b, DirectionPair pair) {
-		rooms.get(index_a).setExit(String.valueOf(pair.getDirection1()), index_b);
-		rooms.get(index_b).setExit(String.valueOf(pair.getDirection2()), index_a);
+		rooms.get(index_a).setExit(String.valueOf(pair.direction1), index_b);
+		rooms.get(index_b).setExit(String.valueOf(pair.direction2), index_a);
 	}
 
 	public boolean goRoom(String direction) {
@@ -102,8 +101,9 @@ public class Map {
 		return currentRoom.getPrompt();
 	}
 
-	public void fightBoss(Game game) {
+	public boolean fightBoss(Game game) {
 		game.player = currentRoom.fightBoss(game.player, game);
+		return currentRoom.bossGetItem();
 	}
 
 }
