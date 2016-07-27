@@ -98,6 +98,8 @@ public abstract class Game
 				echoln("您发动了与女仆的契约，回到了旅馆。");
 				map.currentRoom = map.getHome();
 				echoln(map.currentRoom.getPrompt());
+			} else {
+				echoln("然而你并没有女仆的契约，不能传送。");
 			}
 		});
 		commands.put(commandNames[++index], new CommandMap(this));
