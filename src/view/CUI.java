@@ -40,6 +40,7 @@ public class CUI extends Game {
 	 */
 	@Override
 	public void closeScreen() {
+		System.gc();
 		System.exit(0);
 	}
 
@@ -70,6 +71,7 @@ public class CUI extends Game {
 
 	@Override
 	public void clearScreen() {
+		System.gc();
 //		TODO lzh你懂的
 	}
 }

@@ -28,10 +28,16 @@ public class GUI extends Game
 	private JScrollPane scrollPane;
 	private JScrollBar scrollBar;
 	private Stack<String> inputList;
+	private Stack<String> anotherInputList;
 
+	/**
+	 * 我知道你绝对不会想仔细研究这段极长的构造方法的，
+	 * 没错要的就是这种效果
+	 */
 	public GUI() {
 		frame = new JFrame(GUIConfig.GUI_FORM_TITLE);
 		inputList = new Stack<>();
+		anotherInputList = new Stack<>();
 		textField = new JTextField();
 		textField.registerKeyboardAction(
 				e -> {
@@ -45,6 +51,7 @@ public class GUI extends Game
 		textField.registerKeyboardAction(
 				e -> {
 					if (!inputList.empty()) {
+						anotherInputList.push(inputList.peek());
 						textField.setText(inputList.peek());
 						inputList.pop();
 					}
@@ -53,7 +60,15 @@ public class GUI extends Game
 				JComponent.WHEN_FOCUSED
 		);
 		textField.registerKeyboardAction(
-				e -> textField.setText(""),
+				e -> {
+					if (!anotherInputList.empty()) {
+						textField.setText(anotherInputList.peek());
+						inputList.push(anotherInputList.peek());
+						anotherInputList.pop();
+					} else {
+						textField.setText("");
+					}
+				},
 				KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0, true),
 				JComponent.WHEN_FOCUSED
 		);
@@ -167,11 +182,14 @@ public class GUI extends Game
 
 	@Override
 	public void closeScreen() {
+		System.gc();
 		frame.dispose();
+		System.exit(0);
 	}
 
 	@Override
 	public void clearScreen() {
+		System.gc();
 		textArea.setText("");
 		echoln("屏幕已清空。");
 	}

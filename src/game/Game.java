@@ -13,6 +13,8 @@ import util.error.Logger;
 import util.interfaces.Clearable;
 import util.interfaces.Echoer;
 import util.interfaces.MessageHandler;
+import view.CUI;
+import view.GUI;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -98,6 +100,11 @@ public abstract class Game
 		echoln("最新版本和源代码请见https://github.com/ProgramLeague/Castle-game");
 		echoln("Kotlin版本与旧版本请见https://github.com/ice1000/Castle-game");
 		echoln("敬请期待OL版本https://github.com/ProgramLeague/Castle-Online");
+
+		echoln(this instanceof CUI ? "您现在是以CUI模式开启游戏，极少数功能将不可用。" :
+				this instanceof GUI ? "您现在是以GUI模式进行游戏，所有功能可用。" :
+						"系统无法检测你用的什么模式，玩游戏也得遵守基本法啊！");
+
 //		太羞耻了！！
 //		echoln("不过在经过了冰封的改造后，你会觉得这个很有意思。");
 		player = TextDatabase.getInstance().loadPlayer();
