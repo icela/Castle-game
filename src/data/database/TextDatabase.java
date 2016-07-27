@@ -1,11 +1,14 @@
 package data.database;
 
 import game.cells.Player;
+import game.commands.implement.CommandReset;
 import game.map.Map;
 import util.NameGenerator;
 import util.error.Logger;
+import view.GUIConfig;
 
 import java.io.*;
+import java.util.Base64;
 
 /**
  * 封装数据库操作，单例模式
@@ -35,17 +38,18 @@ public class TextDatabase {
 	}
 
 	private void readData() throws IOException {
+		Base64.Encoder encoder = Base64.getEncoder();
 		File file = new File(savePath);
+		//TODO 觉得效率低了点。。。但似乎只能这样了
 		BufferedReader reader = new BufferedReader(new FileReader(file));
-
-		roomName = reader.readLine();
-		roomsState = reader.readLine().toCharArray();
-		playerName = reader.readLine();
-		blood = Integer.parseInt(reader.readLine());
-		strike = Integer.parseInt(reader.readLine());
-		defence = Integer.parseInt(reader.readLine());
-		level = Integer.parseInt(reader.readLine());
-		experience = Integer.parseInt(reader.readLine());
+		roomName = new String(encoder.encode(reader.readLine().getBytes()));
+		roomsState = (new String(encoder.encode(reader.readLine().getBytes()))).toCharArray();
+		playerName = new String(encoder.encode(reader.readLine().getBytes()));
+		blood = Integer.parseInt(new String(encoder.encode(reader.readLine().getBytes())));
+		strike = Integer.parseInt(new String(encoder.encode(reader.readLine().getBytes())));
+		defence = Integer.parseInt(new String(encoder.encode(reader.readLine().getBytes())));
+		level = Integer.parseInt(new String(encoder.encode(reader.readLine().getBytes())));
+		experience = Integer.parseInt(new String(encoder.encode(reader.readLine().getBytes())));
 
 		reader.close();
 	}
@@ -58,7 +62,7 @@ public class TextDatabase {
 
 	public Map loadMap(String defaultName) {
 		Map map = new Map();
-		if (!fileExists()) return map;
+		if (!isFileExists()) return map;
 		map.setRoomsState(roomsState);
 		if (roomName == null)
 			roomName = defaultName;
@@ -73,10 +77,13 @@ public class TextDatabase {
 
 	public void saveFile(Map map, Player player) throws IOException {
 		File file = openFile();
-		BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+		FileWriter writer = new FileWriter(file);
 		saveMap(map);
 		savePlayer(player);
-		writer.write(this.getInformation());
+		if (GUIConfig.DEBUG)
+			writer.write(this.getInformation());
+		else
+			writer.write(new String(Base64.getEncoder().encode(this.getInformation().getBytes())));
 		writer.close();
 	}
 
@@ -93,7 +100,7 @@ public class TextDatabase {
 	}
 
 	public Player loadPlayer() {
-		return fileExists() ? new Player(
+		return isFileExists() ? new Player(
 				playerName,
 				blood,
 				strike,
@@ -117,15 +124,14 @@ public class TextDatabase {
 		this.experience = player.getExperience();
 	}
 
-	public static boolean fileExists() {
+	public static boolean isFileExists() {
 		return new File(savePath).exists();
 	}
 
 	private File openFile() throws IOException {
 		File file = new File(savePath);
-		if (file.exists()) {
+		if (file.exists())
 			file.delete();
-		}
 		file.createNewFile();
 		return file;
 	}

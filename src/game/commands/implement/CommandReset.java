@@ -2,12 +2,8 @@ package game.commands.implement;
 
 import game.Game;
 import game.commands.BaseCommand;
-import util.error.Logger;
-import view.GUI;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 
 /**
  * Created by Eldath on 2016/7/26 0026.
