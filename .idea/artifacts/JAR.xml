@@ -17,7 +17,9 @@
         <element id="module-output" name="城堡游戏" />
       </element>
       <element id="file-copy" path="$PROJECT_DIR$/res/cui.bat" />
-      <element id="dir-copy" path="$PROJECT_DIR$/res" />
+      <element id="directory" name="res">
+        <element id="dir-copy" path="$PROJECT_DIR$/res" />
+      </element>
     </root>
   </artifact>
 </component>

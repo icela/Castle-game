@@ -67,4 +67,9 @@ public class CUI extends Game {
 		game.onStart();
 		game.onResume();
 	}
+
+	@Override
+	public void clearScreen() {
+//		TODO lzh你懂的
+	}
 }
