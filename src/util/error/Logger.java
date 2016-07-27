@@ -12,26 +12,22 @@ import java.time.LocalDateTime;
 public class Logger {
 
 	private static Logger logger;
+	private static final String template = "log" + File.separator + "error%d.log";
+
 	private File file;
 
-	public Logger() throws IOException {
-		file = new File("error.log");
-		if (!file.exists()) {
-			file.createNewFile();
-		}
+	public Logger() {
 	}
 
 	public static Logger getInstance() {
-		if (logger == null) try {
+		if (logger == null)
 			logger = new Logger();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		return logger;
 	}
 
 	public void log(String log) {
 		try {
+			init();
 			new FileWriter(file)
 					.append(LocalDateTime.now().toString())
 					.append('\n')
@@ -44,6 +40,7 @@ public class Logger {
 
 	public void log(Exception e) {
 		try {
+			init();
 			FileWriter writer = new FileWriter(file);
 			writer.append(LocalDateTime.now().toString()).append('\n');
 			for (StackTraceElement element : e.getStackTrace())
@@ -51,6 +48,18 @@ public class Logger {
 			writer.flush();
 			writer.close();
 		} catch (IOException ignored) {
+		}
+	}
+
+	private void init() throws IOException {
+		String fileName;
+		for (int i = 0; ; i++) {
+			fileName = String.format(template, i);
+			file = new File(fileName);
+			if (!file.exists()) {
+				file.createNewFile();
+				break;
+			}
 		}
 	}
 }

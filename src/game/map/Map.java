@@ -4,6 +4,7 @@ import game.Game;
 import data.database.SQLiteDatabase;
 import data.Direction;
 import data.DirectionPair;
+import util.error.Logger;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class Map {
 				);
 			}
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
+			Logger.getInstance().log(e);
 		}
 
 		currentRoom = rooms.get(4);
@@ -71,6 +72,7 @@ public class Map {
 			try {
 				c = state[i];
 			} catch (Exception e) {
+				Logger.getInstance().log(e);
 				c = 1;
 			}
 			rooms.get(i).setBossGetItem(c == '1');

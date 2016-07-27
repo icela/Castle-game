@@ -1,13 +1,16 @@
 package view;
 
 import game.Game;
+import util.error.Logger;
 import util.interfaces.Echoer;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Stack;
 
 /**
@@ -95,9 +98,13 @@ public class GUI extends Game
 		textArea.setForeground(new Color(169, 183, 198));
 		textArea.setEditable(false);
 
-		frame.setIconImage(Toolkit.getDefaultToolkit().createImage(
-				"." + File.separator + "src" + File.separator + "drawable" + File.separator + "ic_launcher.png"
-		));
+		try {
+			frame.setIconImage(ImageIO.read(new File(
+					"res" + File.separator + "drawable" + File.separator + "ic_launcher.png"
+			)));
+		} catch (IOException e) {
+			Logger.getInstance().log(e);
+		}
 		frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 //		绝对布局
 //		frame.setLayout(null);
@@ -122,6 +129,7 @@ public class GUI extends Game
 			font.close();
 			return dynamicFontPt;
 		} catch (Exception e) {
+			Logger.getInstance().log(e);
 			return new java.awt.Font("宋体", Font.PLAIN, 14);
 		}
 	}

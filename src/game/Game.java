@@ -12,6 +12,7 @@ import game.commands.implement.CommandUse;
 import game.map.Map;
 import game.map.Room;
 import util.error.AdminErrorHandler;
+import util.error.Logger;
 import util.interfaces.Clearable;
 import util.interfaces.Echoer;
 import util.interfaces.MessageHandler;
@@ -170,6 +171,7 @@ public abstract class Game
 			TextDatabase.getInstance().saveFile(map, player);
 			echoln("保存成功。");
 		} catch (IOException e) {
+			Logger.getInstance().log(e);
 			AdminErrorHandler.handleError();
 		}
 	}

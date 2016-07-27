@@ -4,6 +4,7 @@ import game.cells.Boss;
 import game.cells.NPC;
 import game.cells.Player;
 import com.sun.istack.internal.Nullable;
+import util.error.Logger;
 import util.interfaces.Echoer;
 
 import java.util.ArrayList;
@@ -114,6 +115,7 @@ public class Room {
 		try {
 			return boss.getOrNot();
 		} catch (NullPointerException e) {
+			Logger.getInstance().log(e);
 			return true;
 		}
 	}

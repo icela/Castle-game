@@ -54,7 +54,8 @@ public class AdminErrorHandler {
 			process.waitFor();
 			fileWriter.close();
 			file.delete();
-		} catch (Exception e1) {
+		} catch (Exception e) {
+			Logger.getInstance().log(e);
 			//TODO 异常处理
 		}
 	}

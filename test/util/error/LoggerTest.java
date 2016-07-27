@@ -1,5 +1,8 @@
 package util.error;
 
+import game.cells.Player;
+import util.NameGenerator;
+
 import java.util.Arrays;
 
 /**
@@ -7,6 +10,8 @@ import java.util.Arrays;
  *         Created by ice1000 on 2016/7/26.
  */
 public class LoggerTest {
+
+	private static Player player;
 
 	public static void test1() {
 		try {
@@ -18,12 +23,22 @@ public class LoggerTest {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
+	public static void test3() {
+		try {
+			player.rename(NameGenerator.generate());
+		} catch (Exception e) {
+			Logger.getInstance().log(e);
+		}
+	}
+
 	public static void test2() {
 		Logger.getInstance().log("错误信息：这是一个测试错误信息");
 	}
 
 	public static void main(String[] args) {
-		test2();
 		test1();
+		test2();
+		test3();
 	}
 }

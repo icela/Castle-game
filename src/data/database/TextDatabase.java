@@ -3,6 +3,7 @@ package data.database;
 import game.cells.Player;
 import game.map.Map;
 import util.NameGenerator;
+import util.error.Logger;
 
 import java.io.*;
 
@@ -28,7 +29,8 @@ public class TextDatabase {
 	private TextDatabase() {
 		try {
 			readData();
-		} catch (Exception ignored) {
+		} catch (Exception e) {
+			Logger.getInstance().log(e);
 		}
 	}
 

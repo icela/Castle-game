@@ -2,6 +2,7 @@ package data.database;
 
 import game.map.Exits;
 import game.map.Room;
+import util.error.Logger;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 public class SQLiteDatabase
 		implements Closeable {
 
-	private static SQLiteDatabase instance = null;
+	private static SQLiteDatabase instance;
 	private Statement statement;
 
 	private SQLiteDatabase() {
@@ -26,7 +27,7 @@ public class SQLiteDatabase
 			Class.forName("org.sqlite.JDBC");
 			statement = DriverManager.getConnection("jdbc:sqlite:data.db").createStatement();
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getInstance().log(e);
 		}
 	}
 
