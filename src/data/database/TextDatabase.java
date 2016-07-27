@@ -1,7 +1,6 @@
 package data.database;
 
-import game.cells.Player;
-import game.commands.implement.CommandReset;
+import game.cells.spirit.Player;
 import game.map.Map;
 import util.NameGenerator;
 import util.error.Logger;
@@ -62,7 +61,7 @@ public class TextDatabase {
 
 	public Map loadMap(String defaultName) {
 		Map map = new Map();
-		if (!isFileExists()) return map;
+		if (!fileExists()) return map;
 		map.setRoomsState(roomsState);
 		if (roomName == null)
 			roomName = defaultName;
@@ -100,7 +99,7 @@ public class TextDatabase {
 	}
 
 	public Player loadPlayer() {
-		return isFileExists() ? new Player(
+		return fileExists() ? new Player(
 				playerName,
 				blood,
 				strike,
@@ -124,7 +123,7 @@ public class TextDatabase {
 		this.experience = player.getExperience();
 	}
 
-	public static boolean isFileExists() {
+	public static boolean fileExists() {
 		return new File(savePath).exists();
 	}
 
