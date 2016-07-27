@@ -29,12 +29,8 @@ public class GUI extends Game
 	private JScrollBar scrollBar;
 	private Stack<String> inputList;
 
-	private static final int FRAME_WIDTH = 500;
-	private static final int FRAME_HEIGHT = 500;
-//	private static int INPUT_WIDTH = 500;
-
 	public GUI() {
-		frame = new JFrame(GUIInfo.GUI_FORM_TITLE);
+		frame = new JFrame(GUIConfig.GUI_FORM_TITLE);
 		inputList = new Stack<>();
 		textField = new JTextField();
 		textField.registerKeyboardAction(
@@ -63,7 +59,7 @@ public class GUI extends Game
 		);
 		textArea = new JTextArea();
 		Font font = loadFont(System.getProperty("user.dir") + "/lib/MSYHMONO.ttf",
-				GUIInfo.FONT_SIZE);
+				GUIConfig.FONT_SIZE);
 		textArea.setFont(font);
 		textField.setFont(font);
 		textArea.addMouseListener(new MouseListener() {
@@ -107,7 +103,10 @@ public class GUI extends Game
 		} catch (IOException e) {
 			Logger.getInstance().log(e);
 		}
-		frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+		frame.setSize(
+				GUIConfig.FRAME_WIDTH,
+				GUIConfig.FRAME_HEIGHT
+		);
 //		绝对布局
 //		frame.setLayout(null);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -115,8 +114,11 @@ public class GUI extends Game
 		scrollPane = new JScrollPane(textArea);
 		scrollBar = scrollPane.getVerticalScrollBar();
 		frame.add(scrollPane, BorderLayout.CENTER);
-		frame.setResizable(GUIInfo.RESIZABLE);
-		frame.setLocation(FRAME_WIDTH / 8, FRAME_HEIGHT / 8);
+		frame.setResizable(GUIConfig.RESIZABLE);
+		frame.setLocation(
+				GUIConfig.FRAME_WIDTH / 8,
+				GUIConfig.FRAME_HEIGHT / 8
+		);
 		frame.setVisible(true);
 		textField.requestFocus(true);
 	}

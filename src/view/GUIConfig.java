@@ -4,7 +4,7 @@ package view;
  * @author ice1000
  *         Created by ice1000 on 2016/7/24.
  */
-public class GUIInfo {
+public class GUIConfig {
 
 	public static final String VERSION = "V0.0.1 Alpha";
 
@@ -13,6 +13,10 @@ public class GUIInfo {
 	public static final float FONT_SIZE = 13f;
 
 	public static final boolean RESIZABLE = false;
+
+	public static final int FRAME_WIDTH = 640;
+	public static final int FRAME_HEIGHT = 640;
+	public static final int INPUT_WIDTH = 640;
 
 	//public static final String HINT = "在这里输入指令";
 
