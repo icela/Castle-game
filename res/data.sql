@@ -123,9 +123,9 @@ CREATE TABLE BOSS_GET_ITEM (
 
 INSERT INTO BOSS_GET_ITEM(room, item) VALUES (4, 2);
 
-INSERT INTO ITEM(id, name, event) VALUES (0, '地图', 0, '神秘而古旧的地图。');               -- 0
-INSERT INTO ITEM(name, event) VALUES ('传送宝石', 1, '透明的紫色水晶，散发着魔力。');        -- 1
-INSERT INTO ITEM(name, event) VALUES ('和女仆的契约', 2, '象征着女仆对你的忠诚。');          -- 2
+INSERT INTO ITEM(id, name, event, desc) VALUES (0, '地图', 0, '神秘而古旧的地图。');               -- 0
+INSERT INTO ITEM(name, event, desc) VALUES ('传送宝石', 1, '透明的紫色水晶，散发着魔力。');        -- 1
+INSERT INTO ITEM(name, event, desc) VALUES ('和女仆的契约', 2, '象征着女仆对你的忠诚。');          -- 2
 
 CREATE TABLE NPC(
   id INTEGER PRIMARY KEY AUTOINCREMENT,

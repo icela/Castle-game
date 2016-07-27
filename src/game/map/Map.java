@@ -101,9 +101,8 @@ public class Map {
 		return currentRoom.getPrompt();
 	}
 
-	public boolean fightBoss(Game game) {
+	public void fightBoss(Game game) {
 		game.player = currentRoom.fightBoss(game.player, game);
-		return currentRoom.bossGetItem();
 	}
 
 }

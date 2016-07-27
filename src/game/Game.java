@@ -41,7 +41,11 @@ public abstract class Game
 
 	protected void onCreate() {
 		map = new Map();
-		initItems();
+		try {
+			items = SQLiteDatabase.getInstance().getItems();
+		} catch (SQLException e) {
+			Logger.getInstance().log(e);
+		}
 		commandNames = new String[]{
 				"help", "go", "wild",
 				"exit", "state", "fight",
@@ -86,7 +90,7 @@ public abstract class Game
 			items.stream().filter(item ->
 					item.get
 			).forEach(item ->
-					echoln(item.getName())
+					echoln('[' + item.num + ']' + ' ' + item.getName())
 			);
 		});
 		commands.put(commandNames[++index], cmd -> {
@@ -152,14 +156,6 @@ public abstract class Game
 		return true;
 	}
 
-	private void initItems() {
-		try {
-			items = SQLiteDatabase.getInstance().getItems();
-		} catch (SQLException e) {
-			Logger.getInstance().log(e);
-		}
-	}
-
 	/**
 	 * 去一个房间
 	 */
@@ -172,12 +168,17 @@ public abstract class Game
 
 	/**
 	 * 战斗函数
+	 * now bugless
 	 */
 	public void fight() {
 //		打之前是否持有物品（这尼玛都什么命名啊）
 		boolean a = map.currentRoom.bossGetItem();
+		System.out.println("开始打boss");
+		map.fightBoss(this);
 //		前面半句反正都要执行，保证一定会挑战，不会被短路干扰，但是要挑战成功才会触发这个
-		if (map.fightBoss(this) && a) {
+		System.out.println("a before = " + a);
+		if (!map.currentRoom.bossGetItem() && a) {
+			System.out.println("开始获取物品, id = " + items.get(map.currentRoom.getBossItem()).getName());
 			items.get(map.currentRoom.getBossItem()).get = true;
 //			 之前是没有，但是打赢了之后就有了
 			items.get(map.currentRoom.getBossItem()).num++;
