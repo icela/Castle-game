@@ -1,6 +1,7 @@
 package view;
 
 import game.Game;
+import util.error.Logger;
 import util.interfaces.Clearable;
 import util.interfaces.Echoer;
 
@@ -163,6 +164,6 @@ public class GUI extends Game
 	@Override
 	public void clearScreen() {
 		textArea.setText("");
-		echoln("屏幕已清空。");
+		echoln("屏幕已清空。");//TODO 这个方法完全没有*用。。因为无法调用啊
 	}
 }

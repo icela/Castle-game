@@ -14,7 +14,7 @@ INSERT INTO ROOM(disc, welc, boss, blood, strike, defence, exp, die) VALUES (
   '一楼大堂','欢迎来到城堡！','礼貌的大堂经理',100,15,12,8,'大堂经理的帐算错了！'              -- 1
 );
 INSERT INTO ROOM(disc, welc, boss, blood, strike, defence, exp, die) VALUES (
-  '小酒吧','一大股酒香飘来。','潇洒的酒吧流氓', 150,10,5,5,'酒吧流氓喝醉了！'                  -- 2
+  '小酒吧','一大股酒香飘来。','酒吧老板', 150,10,5,5,'酒吧流氓喝醉了！'                  -- 2
 );
 INSERT INTO ROOM(disc, welc, boss, blood, strike, defence, exp, die) VALUES (
   '书房','读书的气氛很浓厚。' , '优雅的读书人',100,7,5,3,'读书人的书掉出来了！'                -- 3
