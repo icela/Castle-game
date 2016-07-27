@@ -1,7 +1,6 @@
 package view;
 
 import game.Game;
-import util.error.Logger;
 import util.interfaces.Echoer;
 
 import javax.imageio.ImageIO;
@@ -27,8 +26,8 @@ public class GUI extends Game
 	private JScrollBar scrollBar;
 	private Stack<String> inputList;
 
-	private static int FRAME_WIDTH = 500;
-	private static int FRAME_HEIGHT = 500;
+	private static final int FRAME_WIDTH = 500;
+	private static final int FRAME_HEIGHT = 500;
 //	private static int INPUT_WIDTH = 500;
 
 	public GUI() {
@@ -129,7 +128,6 @@ public class GUI extends Game
 			font.close();
 			return dynamicFontPt;
 		} catch (Exception e) {
-			Logger.getInstance().log(e);
 			return new java.awt.Font("宋体", Font.PLAIN, 14);
 		}
 	}

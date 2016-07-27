@@ -6,7 +6,7 @@ package util;
  */
 public class NameGenerator {
 
-	private static String[] names = {
+	private static final String[] names = {
 			"千里冰封",
 			"奶茶未凉",
 			"周明凯",

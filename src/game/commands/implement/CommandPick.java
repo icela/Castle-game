@@ -12,7 +12,7 @@ import game.commands.BaseCommand;
  */
 public class CommandPick implements BaseCommand {
 
-	private Game game;
+	private final Game game;
 
 	public CommandPick(Game game) {
 		this.game = game;

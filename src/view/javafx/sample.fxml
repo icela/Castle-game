@@ -1,45 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.BorderPane?>
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#inputMouseClicked" prefHeight="480.0" prefWidth="640.0" scaleShape="false" scaleZ="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.javafx.Controller">
 	<top>
 		<MenuBar BorderPane.alignment="CENTER">
-			<menus>
-				<Menu mnemonicParsing="false" text="File">
-					<items>
-						<MenuItem mnemonicParsing="false" text="Close" />
-					</items>
-				</Menu>
-				<Menu mnemonicParsing="false" text="Edit">
-					<items>
-						<MenuItem mnemonicParsing="false" text="Delete" />
-					</items>
-				</Menu>
-				<Menu mnemonicParsing="false" text="Help">
-					<items>
-						<MenuItem mnemonicParsing="false" text="About" />
-					</items>
-				</Menu>
-			</menus>
+			<Menu mnemonicParsing="false" text="File">
+					<MenuItem mnemonicParsing="false" text="Close"/>
+			</Menu>
+			<Menu mnemonicParsing="false" text="Edit">
+					<MenuItem mnemonicParsing="false" text="Delete"/>
+			</Menu>
+			<Menu mnemonicParsing="false" text="Help">
+					<MenuItem mnemonicParsing="false" text="About"/>
+			</Menu>
 		</MenuBar>
 	</top>
 	<bottom>
-		<SplitPane dividerPositions="0.8411371237458194" prefHeight="31.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-			<items>
-				<TextField fx:id="inputBox" onAction="#inputAction" onKeyPressed="#inputKeyAction" onMouseClicked="#inputMouseClicked" prefHeight="30.0" prefWidth="507.0" promptText="请输入指令" SplitPane.resizableWithParent="false" />
-				<Button fx:id="sendButton" mnemonicParsing="false" onAction="#sendClicked" prefHeight="30.0" prefWidth="92.0" text="发送" SplitPane.resizableWithParent="false" />
-			</items>
+		<SplitPane dividerPositions="0.8411371237458194" prefHeight="31.0" prefWidth="600.0"
+				   BorderPane.alignment="CENTER">
+			<TextField fx:id="inputBox" onAction="#inputAction" onKeyPressed="#inputKeyAction"
+					   onMouseClicked="#inputMouseClicked" prefHeight="30.0" prefWidth="507.0" promptText="请输入指令"
+					   SplitPane.resizableWithParent="false"/>
+			<Button fx:id="sendButton" mnemonicParsing="false" onAction="#sendClicked" prefHeight="30.0"
+					prefWidth="92.0" text="发送" SplitPane.resizableWithParent="false"/>
 		</SplitPane>
 	</bottom>
    <center>
       <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <content>
             <TextArea fx:id="textArea" onMouseEntered="#inputMouseClicked" prefHeight="415.0" prefWidth="638.0" />
-         </content>
       </ScrollPane>
    </center>
 </BorderPane>

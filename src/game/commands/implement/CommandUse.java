@@ -12,7 +12,7 @@ import game.commands.BaseCommand;
  */
 public class CommandUse implements BaseCommand {
 
-	private Game game;
+	private final Game game;
 
 	public CommandUse(Game game) {
 		this.game = game;

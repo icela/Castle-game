@@ -66,7 +66,7 @@ public class TextDatabase {
 		return map;
 	}
 
-	private void saveMap(Map map) throws IOException {
+	private void saveMap(Map map) {
 		this.roomName = map.currentRoom.toString();
 		this.roomsState = map.getRoomsState();
 	}
@@ -108,7 +108,7 @@ public class TextDatabase {
 		);
 	}
 
-	public void savePlayer(Player player) throws IOException {
+	public void savePlayer(Player player) {
 		this.playerName = player.toString();
 		this.blood = player.getBlood();
 		this.strike = player.getStrike();

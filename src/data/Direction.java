@@ -13,7 +13,7 @@ public enum Direction {
 	NORTH("north"),
 	SOUTH("south");
 
-	String s;
+	final String s;
 
 	Direction(String s) {
 		this.s = s;

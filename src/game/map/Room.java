@@ -13,7 +13,7 @@ import java.util.HashMap;
 public class Room {
 
 	private Boss boss = null;
-	private String description;
+	private final String description;
 	private String welcomeWord;
 	private HashMap<String, Integer> exits;
 	private ArrayList<NPC> NPCs;

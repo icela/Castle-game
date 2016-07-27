@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class NPC extends Cell {
 
 	private String chat = "";
-	private ArrayList<Item> items = new ArrayList<>();
+	private final ArrayList<Item> items = new ArrayList<>();
 
 	public NPC(String name, String chat) {
 		super(name);

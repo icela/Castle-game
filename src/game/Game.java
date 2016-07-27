@@ -5,10 +5,7 @@ import game.cells.Item;
 import game.cells.NPC;
 import game.cells.Player;
 import game.commands.BaseCommand;
-import game.commands.implement.CommandMap;
-import game.commands.implement.CommandPick;
-import game.commands.implement.CommandSleep;
-import game.commands.implement.CommandUse;
+import game.commands.implement.*;
 import game.map.Map;
 import game.map.Room;
 import util.error.AdminErrorHandler;
@@ -24,10 +21,10 @@ import java.util.HashMap;
 public abstract class Game
 		implements MessageHandler, Echoer, Clearable {
 
-	private HashMap<String, BaseCommand> commands = new HashMap<>();
+	private final HashMap<String, BaseCommand> commands = new HashMap<>();
+	private final ArrayList<Item> items = new ArrayList<>();
 	private String[] commandNames;
 	private Map map;
-	private ArrayList<Item> items = new ArrayList<>();
 	public Player player;
 
 	private boolean gameEnded = false;
@@ -45,7 +42,7 @@ public abstract class Game
 				"exit", "state", "fight",
 				"sleep", "save", "rename",
 				"talk", "pack", "home",
-				"map", "pick", "use"
+				"map", "pick", "use", "reset"
 		};
 
 		int index = -1;
@@ -92,6 +89,7 @@ public abstract class Game
 		commands.put(commandNames[++index], new CommandMap(this));
 		commands.put(commandNames[++index], new CommandPick(this));
 		commands.put(commandNames[++index], new CommandUse(this));
+		commands.put(commandNames[++index], new CommandReset(this));
 	}
 
 	protected void onStart() {
@@ -175,5 +173,4 @@ public abstract class Game
 			AdminErrorHandler.handleError();
 		}
 	}
-
 }

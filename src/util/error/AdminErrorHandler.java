@@ -14,8 +14,8 @@ public class AdminErrorHandler {
 	public static void handleError() {
 		JOptionPane.showMessageDialog(
 				null,
-				"保存失败",
-				"请在随后弹出的对话框中选择 “是”！",
+				"请在随后弹出的对话框中选择 ‘是’！",
+				"错误提示",
 				JOptionPane.ERROR_MESSAGE
 		);
 		try {
