@@ -2,6 +2,7 @@ package game.commands.implement;
 
 import game.commands.BaseCommand;
 import util.interfaces.Echoer;
+import view.CUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,6 +31,10 @@ public class CommandMap implements BaseCommand {
 
 	@Override
 	public void runCommend(String cmd) {
+		if (echoer instanceof CUI) {
+			echoer.echoln("该功能在CUI模式下暂时无法实现，请使用GUI模式。");
+			return;
+		}
 		if (!haveMap) {
 			echoer.echoln("您还没有得到地图呢，请继续游戏以得到地图吧！");
 //			TODO 记得处理掉
@@ -39,10 +44,9 @@ public class CommandMap implements BaseCommand {
 		JFrame frame = new JFrame("地图");
 		JPanel panel = new JPanel();
 		JLabel label = new JLabel();
-		Image image = Toolkit.getDefaultToolkit().getImage(
-				"." + File.separator + "drawable" + File.separator + "map.png"
-		);
-		ImageIcon icon = new ImageIcon(image);
+		ImageIcon icon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(
+				"res" + File.separator + "drawable" + File.separator + "map.png"
+		));
 		label.setIcon(icon);
 		frame.setSize(icon.getIconWidth(), icon.getIconHeight());
 		panel.add(label);
