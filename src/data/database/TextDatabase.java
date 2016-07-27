@@ -37,19 +37,29 @@ public class TextDatabase {
 	}
 
 	private void readData() throws IOException {
-		Base64.Encoder encoder = Base64.getEncoder();
 		File file = new File(savePath);
 		//TODO 觉得效率低了点。。。但似乎只能这样了
 		BufferedReader reader = new BufferedReader(new FileReader(file));
-		roomName = new String(encoder.encode(reader.readLine().getBytes()));
-		roomsState = (new String(encoder.encode(reader.readLine().getBytes()))).toCharArray();
-		playerName = new String(encoder.encode(reader.readLine().getBytes()));
-		blood = Integer.parseInt(new String(encoder.encode(reader.readLine().getBytes())));
-		strike = Integer.parseInt(new String(encoder.encode(reader.readLine().getBytes())));
-		defence = Integer.parseInt(new String(encoder.encode(reader.readLine().getBytes())));
-		level = Integer.parseInt(new String(encoder.encode(reader.readLine().getBytes())));
-		experience = Integer.parseInt(new String(encoder.encode(reader.readLine().getBytes())));
-
+		if (GUIConfig.DEBUG) {
+			roomName = reader.readLine();
+			roomsState = reader.readLine().toCharArray();
+			playerName = reader.readLine();
+			blood = Integer.parseInt(reader.readLine());
+			strike = Integer.parseInt(reader.readLine());
+			defence = Integer.parseInt(reader.readLine());
+			level = Integer.parseInt(reader.readLine());
+			experience = Integer.parseInt(reader.readLine());
+		} else {
+			Base64.Encoder encoder = Base64.getEncoder();
+			roomName = new String(encoder.encode(reader.readLine().getBytes()));
+			roomsState = (new String(encoder.encode(reader.readLine().getBytes()))).toCharArray();
+			playerName = new String(encoder.encode(reader.readLine().getBytes()));
+			blood = Integer.parseInt(new String(encoder.encode(reader.readLine().getBytes())));
+			strike = Integer.parseInt(new String(encoder.encode(reader.readLine().getBytes())));
+			defence = Integer.parseInt(new String(encoder.encode(reader.readLine().getBytes())));
+			level = Integer.parseInt(new String(encoder.encode(reader.readLine().getBytes())));
+			experience = Integer.parseInt(new String(encoder.encode(reader.readLine().getBytes())));
+		}
 		reader.close();
 	}
 
