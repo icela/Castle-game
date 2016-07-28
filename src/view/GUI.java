@@ -80,7 +80,8 @@ public class GUI extends Game
 				JComponent.WHEN_FOCUSED
 		);
 		textArea = new JTextArea();
-		Font font = loadFont(System.getProperty("user.dir") + File.separator + "lib" + File.separator + "MSYHMONO.ttf",
+		Font font = loadFont(System.getProperty("user.dir") + File.separator +
+						"lib" + File.separator + "MSYHMONO.ttf",
 				GUIConfig.FONT_SIZE);
 		textArea.setFont(font);
 		textField.setFont(font);

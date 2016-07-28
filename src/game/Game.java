@@ -23,7 +23,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.function.Predicate;
 
 public abstract class Game
 		implements MessageHandler, Echoer, Clearable {
@@ -92,7 +91,7 @@ public abstract class Game
 			//TODO 不太理解。为什么items总不为空？
 			if (!items.isEmpty()) {
 				Game.this.echoln("背包中物品如下：");
-				items.stream().filter(item -> item.get
+				items.stream().filter(item -> item.num > 0
 				).forEach(item ->
 						Game.this.echoln('[' + item.num + ']' + ' ' + item.getName())
 				);
@@ -101,7 +100,7 @@ public abstract class Game
 			Game.this.echoln("");
 		});
 		commands.put(commandNames[++index], cmd -> {
-			if (items.get(ItemData.MAID_RIGHT).get) {
+			if (items.get(ItemData.MAID_RIGHT).num > 0) {
 				echoln("您发动了与女仆的契约，回到了旅馆。");
 				map.currentRoom = map.getHome();
 				echoln(map.currentRoom.getPrompt());
@@ -196,7 +195,7 @@ public abstract class Game
 //		System.out.println("a before = " + a);
 		if (!map.currentRoom.bossGetItem() && a) {
 //			System.out.println("开始获取物品, id = " + items.get(map.currentRoom.getBossItem()).getName());
-			items.get(map.currentRoom.getBossItem()).get = true;
+//			items.get(map.currentRoom.getBossItem()).get = true;
 //			 之前是没有，但是打赢了之后就有了
 			items.get(map.currentRoom.getBossItem()).num++;
 		}

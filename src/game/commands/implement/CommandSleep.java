@@ -19,7 +19,7 @@ public class CommandSleep implements BaseCommand {
 				game.echo("女仆顺从地送你进入梦乡。睡觉中");
 				for (int i = 0; i < 8; i++) {
 					try {
-						Thread.sleep(50);
+						Thread.sleep(100);
 					} catch (InterruptedException ignored) {
 					}
 				}

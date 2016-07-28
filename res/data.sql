@@ -116,7 +116,6 @@ CREATE TABLE ITEM(
   name TEXT, event INTEGER, extra TEXT, desc TEXT
 );
 -- 事件只能硬编码指定了，这是没办法的事
--- TODO 那事件编码对应着啥呢。。
 
 CREATE TABLE BOSS_GET_ITEM (
   room INTEGER, item INTEGER
@@ -124,9 +123,13 @@ CREATE TABLE BOSS_GET_ITEM (
 
 INSERT INTO BOSS_GET_ITEM(room, item) VALUES (4, 2);
 
-INSERT INTO ITEM(id, name, event, desc) VALUES (0, '地图', 0, '神秘而古旧的地图。');               -- 0
-INSERT INTO ITEM(name, event, desc) VALUES ('传送宝石', 1, '透明的紫色水晶，散发着魔力。');        -- 1
-INSERT INTO ITEM(name, event, desc) VALUES ('和女仆的契约', 2, '象征着女仆对你的忠诚。');          -- 2
+INSERT INTO ITEM(id, name, event, desc) VALUES (0, '地图', 0, '神秘而古旧的地图。');                             -- 0
+INSERT INTO ITEM(name, event, desc) VALUES ('传送宝石', 1, '透明的紫色水晶，散发着魔力。');                       -- 1
+INSERT INTO ITEM(name, event, extra, desc) VALUES ('和女仆的契约', 2, '象征着女仆对你的忠诚。');                   -- 2
+INSERT INTO ITEM(name, event, extra, desc) VALUES ('小恢复剂',  3, '20', '可以恢复体力的药剂');                  -- 3
+INSERT INTO ITEM(name, event, extra, desc) VALUES ('中恢复剂',  3, '60', '可以恢复体力的药剂');                  -- 4
+INSERT INTO ITEM(name, event, extra, desc) VALUES ('大恢复剂',  3, '120', '可以恢复体力的药剂');                  -- 5
+INSERT INTO ITEM(name, event, extra, desc) VALUES ('超大恢复剂', 3, '250', '可以恢复体力的药剂');                -- 6
 
 CREATE TABLE NPC(
   id INTEGER PRIMARY KEY AUTOINCREMENT,

@@ -22,6 +22,12 @@ public class Boss extends Player {
 		dieText = name + "跪着向你哀求，不过你残忍地！";
 	}
 
+	/**
+	 * 有种你就看，有种你就给我研究透彻！ ~\(≧▽≦)/~
+	 * @param player 玩家（主要是获取信息
+	 * @param echoer 肯定得有输出啊
+	 * @return 返回战斗之后的玩家状态
+	 */
 	public Player fight(Player player, Echoer echoer) {
 		StringBuilder stringBuilder = new StringBuilder();
 		int bloodSave = this.blood;
