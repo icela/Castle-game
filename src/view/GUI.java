@@ -1,15 +1,15 @@
 package view;
 
+import data.database.TextDatabase;
 import game.Game;
 import util.error.Logger;
+import util.interfaces.Clearable;
 import util.interfaces.Echoer;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -20,7 +20,7 @@ import java.util.Stack;
  * Created by asus1 on 2016/1/31.
  */
 public class GUI extends Game
-		implements Echoer {
+		implements Echoer, Clearable {
 
 	private JTextField textField;
 	private JTextArea textArea;
@@ -34,13 +34,20 @@ public class GUI extends Game
 	 * 我知道你绝对不会想仔细研究这段极长的构造方法的，
 	 * 没错要的就是这种效果
 	 *
-	 * 嗯嗯对没错~ ~
+	 * 嗯嗯对没错~ ~ ——Eldath
 	 */
 	public GUI() {
 		frame = new JFrame(GUIConfig.GUI_FORM_TITLE);
 		inputList = new Stack<>();
 		anotherInputList = new Stack<>();
 		textField = new JTextField();
+		frame.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				super.windowClosing(e);
+				saveData();
+			}
+		});
+
 		textField.registerKeyboardAction(
 				e -> {
 					handleMessage(textField.getText());

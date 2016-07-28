@@ -8,6 +8,7 @@ public class GUIConfig {
 
 	public static final String VERSION = "V0.0.2 Alpha";
 
+	//TODO 发布前记得改DEBUG常量！！
 	public static final boolean DEBUG = false;
 
 	public static final String GUI_FORM_TITLE = "城堡游戏   by 冰封 and Eldath" + " " + VERSION;
