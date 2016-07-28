@@ -73,5 +73,6 @@ public class CUI extends Game {
 	public void clearScreen() {
 		System.gc();
 //		TODO lzh你懂的
+		//... ...
 	}
 }

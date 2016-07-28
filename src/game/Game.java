@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.function.Predicate;
 
 public abstract class Game
 		implements MessageHandler, Echoer, Clearable {
@@ -53,7 +54,7 @@ public abstract class Game
 				"sleep", "save", "rename",
 				"talk", "pack", "home",
 				"map", "pick", "use",
-				"reset", "version"
+				"reset", "version", "pack"
 		};
 
 		int index = -1;
@@ -62,6 +63,7 @@ public abstract class Game
 				echoln(s);
 			echoln("有些需要参数的命令请按如下格式输入：\n命令 [参数]\n如：go east");
 			echoln("如：rename 冰封");
+			echoln("hhe");
 		});
 		commands.put(commandNames[++index], this::goRoom);
 		commands.put(commandNames[++index], cmd -> echoln(map.wildRoom()));
@@ -85,15 +87,19 @@ public abstract class Game
 			if (npc != null) {
 				echoln(npc.getChat());
 			} else
-				echoln("指定的名字不存在。注：Boss要在被打败之后才能对话。");
+				echoln("指定的名称不存在。注：Boss要在被打败之后才能对话。");
 		});
 		commands.put(commandNames[++index], cmd -> {
-			echoln("背包中物品如下：");
-			items.stream().filter(item ->
-					item.get
-			).forEach(item ->
-					echoln('[' + item.num + ']' + ' ' + item.getName())
-			);
+			//TODO 不太理解。为什么items总不为空？
+			if (!items.isEmpty()) {
+				Game.this.echoln("背包中物品如下：");
+				items.stream().filter(item -> item.get
+				).forEach(item ->
+						Game.this.echoln('[' + item.num + ']' + ' ' + item.getName())
+				);
+			}else
+				Game.this.echoln("背包中没有物品。");
+			Game.this.echoln("");
 		});
 		commands.put(commandNames[++index], cmd -> {
 			if (items.get(ItemData.MAID_RIGHT).get) {
@@ -184,13 +190,13 @@ public abstract class Game
 	 */
 	public void fight() {
 //		打之前是否持有物品（这尼玛都什么命名啊）
-		boolean a = map.currentRoom.bossGetItem();
-		System.out.println("开始打Boss");
+		boolean haveItem = map.currentRoom.bossGetItem();
+		//System.out.println("开始打Boss");
 		map.fightBoss(this);
 //		前面半句反正都要执行，保证一定会挑战，不会被短路干扰，但是要挑战成功才会触发这个
-		System.out.println("a before = " + a);
-		if (!map.currentRoom.bossGetItem() && a) {
-			System.out.println("开始获取物品, id = " + items.get(map.currentRoom.getBossItem()).getName());
+		//System.out.println("a before = " + a);
+		if (!map.currentRoom.bossGetItem() && haveItem) {
+			//System.out.println("开始获取物品, id = " + items.get(map.currentRoom.getBossItem()).getName());
 			items.get(map.currentRoom.getBossItem()).get = true;
 //			 之前是没有，但是打赢了之后就有了
 			items.get(map.currentRoom.getBossItem()).num++;
@@ -206,7 +212,8 @@ public abstract class Game
 	public void saveData() {
 		try {
 			TextDatabase.getInstance().saveFile(map, player);
-			// TODO 反正也看不到 echoln("保存成功。");
+			// TODO 反正也看不到
+			// echoln("保存成功。");
 		} catch (IOException e) {
 			Logger.getInstance().log(e);
 			AdminErrorHandler.handleError();

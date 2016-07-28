@@ -1,6 +1,5 @@
 package view;
 
-import data.database.TextDatabase;
 import game.Game;
 import util.error.Logger;
 import util.interfaces.Clearable;
@@ -33,7 +32,7 @@ public class GUI extends Game
 	/**
 	 * 我知道你绝对不会想仔细研究这段极长的构造方法的，
 	 * 没错要的就是这种效果
-	 *
+	 * <p>
 	 * 嗯嗯对没错~ ~ ——Eldath
 	 */
 	public GUI() {
@@ -47,7 +46,6 @@ public class GUI extends Game
 				saveData();
 			}
 		});
-
 		textField.registerKeyboardAction(
 				e -> {
 					handleMessage(textField.getText());
@@ -82,7 +80,7 @@ public class GUI extends Game
 				JComponent.WHEN_FOCUSED
 		);
 		textArea = new JTextArea();
-		Font font = loadFont(System.getProperty("user.dir") + "/lib/MSYHMONO.ttf",
+		Font font = loadFont(System.getProperty("user.dir") + File.separator + "lib" + File.separator + "MSYHMONO.ttf",
 				GUIConfig.FONT_SIZE);
 		textArea.setFont(font);
 		textField.setFont(font);
