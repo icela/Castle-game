@@ -116,6 +116,7 @@ CREATE TABLE ITEM(
   name TEXT, event INTEGER, extra TEXT, desc TEXT
 );
 -- 事件只能硬编码指定了，这是没办法的事
+-- TODO 那事件编码对应着啥呢。。
 
 CREATE TABLE BOSS_GET_ITEM (
   room INTEGER, item INTEGER

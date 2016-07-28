@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.function.Predicate;
 
 public abstract class Game
 		implements MessageHandler, Echoer, Clearable {
@@ -85,15 +86,19 @@ public abstract class Game
 			if (npc != null) {
 				echoln(npc.getChat());
 			} else
-				echoln("指定的名字不存在。注：Boss要在被打败之后才能对话。");
+				echoln("指定的名称不存在。注：Boss要在被打败之后才能对话。");
 		});
 		commands.put(commandNames[++index], cmd -> {
-			echoln("背包中物品如下：");
-			items.stream().filter(item ->
-					item.get
-			).forEach(item ->
-					echoln('[' + item.num + ']' + ' ' + item.getName())
-			);
+			//TODO 不太理解。为什么items总不为空？
+			if (!items.isEmpty()) {
+				Game.this.echoln("背包中物品如下：");
+				items.stream().filter(item -> item.get
+				).forEach(item ->
+						Game.this.echoln('[' + item.num + ']' + ' ' + item.getName())
+				);
+			}else
+				Game.this.echoln("背包中没有物品。");
+			Game.this.echoln("");
 		});
 		commands.put(commandNames[++index], cmd -> {
 			if (items.get(ItemData.MAID_RIGHT).get) {
@@ -206,7 +211,8 @@ public abstract class Game
 	public void saveData() {
 		try {
 			TextDatabase.getInstance().saveFile(map, player);
-			// TODO 反正也看不到 echoln("保存成功。");
+			// TODO 反正也看不到
+			// echoln("保存成功。");
 		} catch (IOException e) {
 			Logger.getInstance().log(e);
 			AdminErrorHandler.handleError();

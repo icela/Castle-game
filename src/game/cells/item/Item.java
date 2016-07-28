@@ -14,6 +14,7 @@ public class Item {
 		this(id, name, eventId, eventExtraData, desc, 0);
 	}
 
+	//TODO 嗯。。能写个JavaDoc么
 	public Item(int id, String name, int eventId, String eventExtraData, String desc, int num) {
 		this.name = name;
 		this.num = num;
