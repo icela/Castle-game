@@ -185,12 +185,12 @@ public abstract class Game
 	public void fight() {
 //		打之前是否持有物品（这尼玛都什么命名啊）
 		boolean a = map.currentRoom.bossGetItem();
-		System.out.println("开始打Boss");
+//		System.out.println("开始打Boss");
 		map.fightBoss(this);
 //		前面半句反正都要执行，保证一定会挑战，不会被短路干扰，但是要挑战成功才会触发这个
-		System.out.println("a before = " + a);
+//		System.out.println("a before = " + a);
 		if (!map.currentRoom.bossGetItem() && a) {
-			System.out.println("开始获取物品, id = " + items.get(map.currentRoom.getBossItem()).getName());
+//			System.out.println("开始获取物品, id = " + items.get(map.currentRoom.getBossItem()).getName());
 			items.get(map.currentRoom.getBossItem()).get = true;
 //			 之前是没有，但是打赢了之后就有了
 			items.get(map.currentRoom.getBossItem()).num++;
