@@ -15,7 +15,7 @@ import java.util.Base64;
  */
 public class TextDatabase {
 
-	private static final String savePath = "." + File.separator + "save.ice";
+	private static final String savePath = "save.ice";
 
 	private String playerName = "";
 	private char[] roomsState;
@@ -38,7 +38,6 @@ public class TextDatabase {
 
 	private void readData() throws IOException {
 		File file = new File(savePath);
-		//TODO 觉得效率低了点。。。但似乎只能这样了
 		BufferedReader reader = new BufferedReader(new FileReader(file));
 		if (GUIConfig.DEBUG) {
 			roomName = reader.readLine();
@@ -50,15 +49,15 @@ public class TextDatabase {
 			level = Integer.parseInt(reader.readLine());
 			experience = Integer.parseInt(reader.readLine());
 		} else {
-			Base64.Encoder encoder = Base64.getEncoder();
-			roomName = new String(encoder.encode(reader.readLine().getBytes()));
-			roomsState = (new String(encoder.encode(reader.readLine().getBytes()))).toCharArray();
-			playerName = new String(encoder.encode(reader.readLine().getBytes()));
-			blood = Integer.parseInt(new String(encoder.encode(reader.readLine().getBytes())));
-			strike = Integer.parseInt(new String(encoder.encode(reader.readLine().getBytes())));
-			defence = Integer.parseInt(new String(encoder.encode(reader.readLine().getBytes())));
-			level = Integer.parseInt(new String(encoder.encode(reader.readLine().getBytes())));
-			experience = Integer.parseInt(new String(encoder.encode(reader.readLine().getBytes())));
+			String[] text = new String(Base64.getDecoder().decode(reader.readLine().getBytes())).split("\\r\\n");
+			roomName = text[0];
+			roomsState = text[1].toCharArray();
+			playerName = text[2];
+			blood = Integer.parseInt(text[3]);
+			strike = Integer.parseInt(text[4]);
+			defence = Integer.parseInt(text[5]);
+			level = Integer.parseInt(text[6]);
+			experience = Integer.parseInt(text[7]);
 		}
 		reader.close();
 	}
@@ -139,7 +138,7 @@ public class TextDatabase {
 
 	private File openFile() throws IOException {
 		File file = new File(savePath);
-		if (file.exists())
+		if (fileExists())
 			file.delete();
 		file.createNewFile();
 		return file;

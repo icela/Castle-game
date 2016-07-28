@@ -6,6 +6,7 @@ import view.GUIConfig;
 
 /**
  * Created by Eldath on 2016/7/27 0027.
+ *
  * @author Eldath
  */
 public class CommandVersion implements BaseCommand {
@@ -19,7 +20,7 @@ public class CommandVersion implements BaseCommand {
 	public void runCommend(String cmd) {
 		game.echoln("Castle Game  城堡游戏");
 		game.echoln("VERSION: " + GUIConfig.VERSION);
-		game.echoln("MODEL:"+GUIConfig.MODEL);
+		game.echoln("MODEL: " + GUIConfig.MODEL);
 		game.echoln("DEVELOPER: ice1000, Eldath");
 		game.echoln("OPEN-SOURCE PROJECT BASED ON ProgramLeague OF Github.");
 		game.echoln("Copyright(©) 2016 ProgramLeague.");

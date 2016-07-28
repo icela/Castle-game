@@ -13,7 +13,6 @@ public class Item {
 	public Item(int id, String name, int eventId, String eventExtraData, String desc) {
 		this(id, name, eventId, eventExtraData, desc, 0);
 	}
-
 	public Item(int id, String name, int eventId, String eventExtraData, String desc, int num) {
 		this.name = name;
 		this.num = num;

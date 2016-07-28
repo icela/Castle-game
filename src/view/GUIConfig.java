@@ -8,13 +8,13 @@ public class GUIConfig {
 
 	public static final String VERSION = "V0.0.2 Alpha";
 
-	public static final boolean DEBUG = true;
+	public static final boolean DEBUG = false;
 
 	public static final String GUI_FORM_TITLE = "城堡游戏   by 冰封 and Eldath" + " " + VERSION;
 
 	public static final float FONT_SIZE = 13f;
 
-	public static final boolean RESIZABLE = false;
+	public static final boolean RESIZABLE = true;
 
 	public static String MODEL="";
 
