@@ -17,7 +17,13 @@ public class GUIConfig {
 
 	public static final boolean RESIZABLE = true;
 
-	public static String MODEL="";
+	public static int MODEL = MODEL_VALUE.UNKNOWN;
+
+	public static class MODEL_VALUE {
+		public static final int UNKNOWN = 0x00;
+		public static final int GUI = 0x01;
+		public static final int CUI = 0x02;
+	}
 
 	public static final int FRAME_WIDTH = 640;
 	public static final int FRAME_HEIGHT = 640;

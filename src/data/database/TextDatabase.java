@@ -11,6 +11,7 @@ import java.util.Base64;
 
 /**
  * 封装数据库操作，单例模式
+ * @author ice1000
  * Created by ice1000 on 2016/1/28.
  */
 public class TextDatabase {
@@ -123,7 +124,7 @@ public class TextDatabase {
 		);
 	}
 
-	public void savePlayer(Player player) {
+	private void savePlayer(Player player) {
 		this.playerName = player.toString();
 		this.blood = player.getBlood();
 		this.strike = player.getStrike();

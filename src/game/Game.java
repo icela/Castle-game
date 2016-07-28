@@ -52,7 +52,8 @@ public abstract class Game
 				"exit", "state", "fight",
 				"sleep", "save", "rename",
 				"talk", "pack", "home",
-				"map", "pick", "use", "reset", "version"
+				"map", "pick", "use",
+				"reset", "version"
 		};
 
 		int index = -1;
@@ -118,10 +119,10 @@ public abstract class Game
 		echoln("敬请期待OL版本https://github.com/ProgramLeague/Castle-Online");
 		if (this instanceof CUI) {
 			echoln("您现在是以CUI模式开启游戏，极少数功能将不可用。");
-			GUIConfig.MODEL = "CUI";
+			GUIConfig.MODEL = GUIConfig.MODEL_VALUE.CUI;
 		} else if (this instanceof GUI) {
 			echoln("您现在是以GUI模式进行游戏，所有功能均可用。");
-			GUIConfig.MODEL = "GUI";
+			GUIConfig.MODEL = GUIConfig.MODEL_VALUE.GUI;
 		} else echoln("系统无法检测你用的什么模式，玩游戏也得遵守基本法啊！");
 
 //		太羞耻了！！

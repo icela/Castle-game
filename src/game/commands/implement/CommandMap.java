@@ -32,6 +32,7 @@ public class CommandMap implements BaseCommand {
 	@Override
 	public void runCommend(String cmd) {
 		if (echoer instanceof CUI) {
+//			TODO 字符画
 			echoer.echoln("该功能在CUI模式下暂时无法实现，请使用GUI模式。");
 			echoer.echoln("");
 			return;

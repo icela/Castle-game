@@ -5,6 +5,6 @@
 !/lib/README.md
 /bin
 .idea/workspace.xml
-/data.db
+/*.db
 /res/data.db
 /error.log
