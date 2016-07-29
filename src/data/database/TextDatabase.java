@@ -1,5 +1,6 @@
 package data.database;
 
+import game.cells.item.Item;
 import game.cells.spirit.Player;
 import game.map.Map;
 import util.NameGenerator;
@@ -82,6 +83,10 @@ public class TextDatabase {
 	private void saveMap(Map map) {
 		this.roomName = map.currentRoom.toString();
 		this.roomsState = map.getRoomsState();
+	}
+
+	private void saveItem(Item[] items){
+
 	}
 
 	public void saveFile(Map map, Player player) throws IOException {

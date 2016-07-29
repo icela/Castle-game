@@ -131,6 +131,32 @@ INSERT INTO ITEM(name, event, extra, desc) VALUES ('中恢复剂',  3, '60', '�
 INSERT INTO ITEM(name, event, extra, desc) VALUES ('大恢复剂',  3, '120', '可以恢复体力的药剂');                  -- 5
 INSERT INTO ITEM(name, event, extra, desc) VALUES ('超大恢复剂', 3, '250', '可以恢复体力的药剂');                -- 6
 
+-- ↓剧情需要物件↓
+
+-- 4: 房间切换用途    5: 自由用途     6: 带损耗体力值副作用的自由用途   7: 化学反应用途   8: 带损耗体力值副作用的化学反应用途
+-- 9: 背包扩容用途，但同时会损耗体力值
+
+INSERT INTO ITEM(name, event, desc) VALUES ('看似古老的钥匙', 4, '可以用来... ...呃... ...开门？');                -- 7
+INSERT INTO ITEM(name, event, desc) VALUES ('奶茶的口令牌', 4, '呃呃呃... ...');                                  -- 8
+INSERT INTO ITEM(name, event, desc) VALUES ('奇怪的硬币', 4, '用途未知。');                                       -- 9
+INSERT INTO ITEM(name, event, desc) VALUES ('一把小刀', 5, '任何用途。');                                        -- 10
+INSERT INTO ITEM(name, event, desc) VALUES ('一组齿轮', 5, '看上去是什么机械的冗余部件。');                         -- 11
+INSERT INTO ITEM(name, event, desc) VALUES ('一块电池', 5, '储存着电能。');                                       -- 12
+
+-- 制取王水： NaCl+H2SO4（浓）=微热=NaHSO4+HCl↑       NHO3(1份)+HCL(3份)=王水
+INSERT INTO ITEM(name, event, desc) VALUES ('聚四氟乙烯试管', 5, '可以用来盛放具有超强腐蚀性的试剂。');                -- 13
+INSERT INTO ITEM(name, event, desc) VALUES ('盐', 7, '就是盐啊... ...咸咸的盐。');                                 -- 14
+INSERT INTO ITEM(name, event, extra, desc) VALUES ('硝酸', 8,'7', '重要的化工原料，有强腐蚀性。小心！');             -- 15
+INSERT INTO ITEM(name, event, desc) VALUES ('电炉', 7, '用来加热试剂。');                                         -- 16
+INSERT INTO ITEM(name, event, extra, desc) VALUES ('浓硫酸', 8,'3', '重要的化工原料，有腐蚀性。小心！');            -- 17
+INSERT INTO ITEM(name, event, extra, desc) VALUES ('王水', 8 '15', '具有极强腐蚀性的化学试剂。小心！')              -- 18
+INSERT INTO ITEM(name, event, desc) VALUES ('未知化学试剂', 5, '未知用途。'); -- 制备错误的结果                      -- 19
+
+INSERT INTO ITEM(name, event, desc) VALUES ('特殊的SD卡', 5, '存储资料... ...吧。');                                -- 20
+INSERT INTO ITEM(name, event, desc) VALUES ('艾尔希娅', 5, '一块紫色的钻石，镶嵌在银质的环中。用途未知。');              -- 21
+
+
+
 CREATE TABLE NPC(
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   name TEXT, room INTEGER, hello TEXT,
