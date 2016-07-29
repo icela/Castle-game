@@ -2,6 +2,7 @@
 
 int main(int argc, char* argv[]) {
 	system("@echo off");
-	system("jre\\bin\\java -jar cui.jar");
+	system("echo Loading Castle-game.....\n");
+	system("java -jar gui.jar");
 	return 0;
 }
