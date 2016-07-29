@@ -23,7 +23,8 @@ public class Boss extends Player {
 	}
 
 	/**
-	 * 有种你就看，有种你就给我研究透彻！ ~\(≧▽≦)/~
+	 * **你就看，**你就给我研究透彻！ ~\(≧▽≦)/~
+	 *
 	 * @param player 玩家（主要是获取信息
 	 * @param echoer 肯定得有输出啊
 	 * @return 返回战斗之后的玩家状态
@@ -55,7 +56,10 @@ public class Boss extends Player {
 					player.blood = bloodSave2;
 
 					this.blood = bloodSave;
-					stringBuilder.append("以你现有的体力值无法打倒").append(this.name).append("！\n落荒而逃！损失5点体力值！\n");
+					stringBuilder
+							.append("以你现有的体力值无法打倒")
+							.append(this.name)
+							.append("！\n落荒而逃！损失5点体力值！\n");//TODO 自己都过线了。。。
 					break;
 				}
 				if (this.blood <= 0) {

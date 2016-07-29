@@ -210,7 +210,7 @@ public abstract class Game
 	public void saveData() {
 		try {
 			TextDatabase.getInstance().saveFile(map, player);
-			// TODO 反正也看不到
+			// 反正也看不到
 			// echoln("保存成功。");
 		} catch (IOException e) {
 			Logger.getInstance().log(e);
