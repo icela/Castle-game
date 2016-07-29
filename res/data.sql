@@ -142,7 +142,8 @@ INSERT INTO ITEM(name, event, extra, desc) VALUES ('超大恢复剂', 3, '250', 
 
 -- 注意：每分钟损耗体力值是指第一次接触物品扣除体力值后的每分钟扣除体力值。
 -- 4: 房间切换用途    5: 自由用途     6: 带损耗体力值副作用的自由用途：每分钟损耗体力值   7: 化学反应用途
--- 8: 带损耗体力值副作用的化学反应用途：每分钟损耗体力值   9: 背包扩容用途，但同时会损耗体力值：扩容大小^每分钟体力值
+-- 8: 带损耗体力值副作用的化学反应用途：每分钟损耗体力值 
+-- 9: 背包扩容用途，但同时会损耗体力值：扩容大小^每分钟体力值
 
 INSERT INTO ITEM(name, event, desc) VALUES ('看似古老的钥匙', 4, '可以用来... ...呃... ...开门？');                -- 7
 INSERT INTO ITEM(name, event, desc) VALUES ('奶茶的口令牌', 4, '呃... ...');                                    -- 8
@@ -156,7 +157,7 @@ INSERT INTO ITEM(name, event, desc) VALUES ('一块电池', 5, '储存着电能�
 INSERT INTO ITEM(name, event, desc) VALUES ('聚四氟乙烯试管', 5, '可以用来盛放具有超强腐蚀性的试剂。');                -- 13
 INSERT INTO ITEM(name, event, desc) VALUES ('盐', 7, '就是盐啊... ...咸咸的盐。');                                 -- 14
 INSERT INTO ITEM(name, event, extra, desc) VALUES ('硝酸', 8,'7', '重要的化工原料，有强腐蚀性。小心！');             -- 15
-INSERT INTO ITEM(name, event, desc) VALUES ('电炉', 7, '用来加热试剂。');                                         -- 16
+INSERT INTO ITEM(name, event, desc) VALUES ('电炉', 7, '用来加热试剂，也可以用来把沙子烧成玻璃。');                                         -- 16
 INSERT INTO ITEM(name, event, extra, desc) VALUES ('浓硫酸', 8,'3', '重要的化工原料，有腐蚀性。小心！');            -- 17
 INSERT INTO ITEM(name, event, extra, desc) VALUES ('王水', 8 '15', '具有极强腐蚀性的化学试剂。小心！')              -- 18
 INSERT INTO ITEM(name, event, desc) VALUES ('未知化学试剂', 5, '未知用途。'); -- 制备错误的结果                      -- 19
@@ -165,19 +166,20 @@ INSERT INTO ITEM(name, event, desc) VALUES ('特殊的SD卡', 5, '存储资料..
 INSERT INTO ITEM(name, event, desc) VALUES ('艾尔希娅', 5, '一块紫色的钻石，镶嵌在银质的环中。用途未知。');              -- 21
 
 INSERT INTO ITEM(name, event, extra, desc) VALUES (
-'8GB金士顿[滑稽]', 9, '8^5' '可以给背包扩充8个位置,但同时每分钟体力值损耗加5。'
+'8GB KINSTON', 9, '8^5' '可以给背包扩充8个位置,但同时每分钟体力值损耗加5。'
 );         -- 22
 INSERT INTO ITEM(name, event, extra, desc) VALUES (
-'16GB金士顿[滑稽]', 9, '16^10' '可以给背包扩充16个位置,但同时每分钟体力值损耗加10。'
+'16GB KINSTON', 9, '16^10' '可以给背包扩充16个位置,但同时每分钟体力值损耗加10。'
 );         -- 23
 INSERT INTO ITEM(name, event, extra, desc) VALUES (
-'32GB金士顿[滑稽]', 9, '32^20' '可以给背包扩充32个位置,但同时每分钟体力值损耗加20。'
+'32GB KINSTON', 9, '32^20' '可以给背包扩充32个位置,但同时每分钟体力值损耗加20。'
 );         -- 22
 
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
 -- id: NPC编号     name: 名字      room: 所处房间编号         item: 死亡掉落物品编号
 --TODO 不行这几个表把我搞的越来越乱。。。
+-- TODO 2333 我没怎么搞懂你的思路，不过选项那里我还是可以给你点建议，另外在pack的时候显示物品id，到时候就use id这样使用物品，然后把home和wild去掉，重新封装（因为这两个指令都是基于物品的，那就换成物品调用，简化指令
 CREATE TABLE NPC(
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   name TEXT, room INTEGER, item INTEGER
@@ -187,43 +189,42 @@ INSERT INTO NPC(id, name, room) VALUES (0, '酒吧老板', 2);         -- 0
 
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
--- id: 对话编号     npcID: 对应NPC编号     text: 对话文本      isPlayer: 对话是否由玩家说出：0为不是，1为是。
+-- id: 对话编号     npcid: 对应NPC编号     text: 对话文本      isp: 对话是否由玩家说出：0为不是，1为是。cid: 选择id
 CREATE TABLE TALK(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    npcID INTEGER,
-    text TEXT, isPlayer BIT,
-    chooseID INTEGER
+    npcid INTEGER,
+    text TEXT, isp BIT,
+    cid INTEGER
 );
 
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
--- 最多支持五个选项，id: 对应对话编号, choose*: 选项内容      sequel*: 对应事件：事件类别编号^对应事件详细编号
--- 事件类别编号：
--- 0: 结局    1: 跳至对话     2: 跳至房间
+-- 最多支持五个选项，id: 对应对话编号, choice: 选项文字, cid: 选项id 
 CREATE TABLE CHOOSE(
     id INTEGER PRIMARY KEY,
-    chooseA TEXT, sequelA TEXT,
-    chooseB TEXT, sequelB TEXT,
-    chooseC TEXT, sequelC TEXT,
-    chooseD TEXT, sequelD TEXT,
-    chooseE TEXT, sequelE TEXT,
+    choice TEXT, cid INTEGER
 );
 
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
--- id: 结局ID: 目前暂定四个结局，即0~3     sequel: 对应后果编号      describe: 描述
+-- id: 结局ID: 目前暂定四个结局，即0~3     sequel: 对应后果编号      desc: 描述
 -- 对应后果编号:
 -- 0: 游戏结束     1: 死亡
 CREATE TABLE ENDING(
-    id INTEGER PRIMARY KEY AUTOINCREMENT,,
-    sequel INTEGER
-    describe TEXT
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    sequel INTEGER，
+    desc TEXT
 );
 
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
+
 SELECT * FROM ROOM ORDER BY id ASC;
 SELECT * FROM DIR ORDER BY id ASC;
 SELECT * FROM MAP ORDER BY id ASC;
 SELECT * FROM ITEM ORDER BY id ASC;
+SELECT * FROM BOSS_GET_ITEM ORDER BY id ASC;
 SELECT * FROM NPC ORDER BY id ASC;
+SELECT * FROM TALK ORDER BY id ASC;
+SELECT * FROM CHOOSE ORDER BY id ASC;
+SELECT * FROM ENDING ORDER BY id ASC;
