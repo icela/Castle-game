@@ -45,7 +45,7 @@ public abstract class Game
 		try {
 			items = SQLiteDatabase.getInstance().getItems();
 		} catch (SQLException e) {
-			Logger.getInstance().log(e);
+			Logger.log(e);
 		}
 		commandNames = new String[]{
 				"help", "go", "wild",
@@ -213,7 +213,7 @@ public abstract class Game
 			// 反正也看不到
 			// echoln("保存成功。");
 		} catch (IOException e) {
-			Logger.getInstance().log(e);
+			Logger.log(e);
 			AdminErrorHandler.handleError();
 		}
 	}

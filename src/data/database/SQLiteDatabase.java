@@ -29,7 +29,7 @@ public class SQLiteDatabase
 			Class.forName("org.sqlite.JDBC");
 			statement = DriverManager.getConnection("jdbc:sqlite:data.db").createStatement();
 		} catch (Exception e) {
-			Logger.getInstance().log(e);
+			Logger.log(e);
 		}
 	}
 

@@ -36,7 +36,7 @@ public class Map {
 			SQLiteDatabase.getInstance().getRoomItemPairs().forEach(pair ->
 					rooms.get(pair.room).setBossItem(pair.item));
 		} catch (SQLException e) {
-			Logger.getInstance().log(e);
+			Logger.log(e);
 		}
 		currentRoom = rooms.get(4);
 	}
@@ -71,7 +71,7 @@ public class Map {
 			try {
 				c = state[i];
 			} catch (Exception e) {
-				Logger.getInstance().log(e);
+				Logger.log(e);
 				c = 1;
 			}
 			rooms.get(i).setBossGetItem(c == '1');

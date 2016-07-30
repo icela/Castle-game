@@ -55,7 +55,7 @@ public class AdminErrorHandler {
 			fileWriter.close();
 			file.delete();
 		} catch (Exception e) {
-			Logger.getInstance().log(e);
+			Logger.log(e);
 		}
 	}
 }

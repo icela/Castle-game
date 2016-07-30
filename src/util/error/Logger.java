@@ -15,7 +15,7 @@ public class Logger {
     private static FileWriter writer;
     private static File file;
 
-    private Logger() {}} //防止类实例化。
+    private Logger() {} //防止类实例化。
 
     public static void log(String log) {
         init();
@@ -27,7 +27,7 @@ public class Logger {
                     .append('\n')
                     .close();
         } catch (IOException ignored) {
-            ignored.printStackTrace();
+            Logger.log(ignored);
         }
     }
 
@@ -40,7 +40,7 @@ public class Logger {
             writer.flush();
             writer.close();
         } catch (IOException ignored) {
-            ignored.printStackTrace();
+            Logger.log(ignored);
         }
     }
 

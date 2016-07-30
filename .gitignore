@@ -10,3 +10,5 @@
 /error.log
 /test/*.db
 /lib/jre-cui
+/log
+/log/*.log

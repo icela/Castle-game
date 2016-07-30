@@ -19,7 +19,7 @@ public class LoggerTest {
 			System.out.println(Arrays.toString(chars));
 			chars[100] = '@';
 		} catch (IndexOutOfBoundsException e) {
-			Logger.getInstance().log(e);
+			Logger.log(e);
 		}
 	}
 
@@ -28,12 +28,12 @@ public class LoggerTest {
 		try {
 			player.rename(NameGenerator.generate());
 		} catch (Exception e) {
-			Logger.getInstance().log(e);
+			Logger.log(e);
 		}
 	}
 
 	public static void test2() {
-		Logger.getInstance().log("错误信息：这是一个测试错误信息");
+		Logger.log("错误信息：这是一个测试错误信息");
 	}
 
 	public static void main(String[] args) {

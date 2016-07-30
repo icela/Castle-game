@@ -115,7 +115,7 @@ public class Room {
 		try {
 			return boss.getOrNot();
 		} catch (NullPointerException e) {
-			Logger.getInstance().log(e);
+			Logger.log(e);
 			return true;
 		}
 	}

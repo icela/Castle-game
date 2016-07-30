@@ -124,7 +124,7 @@ public class GUI extends Game
 					"res" + File.separator + "drawable" + File.separator + "ic_launcher.png"
 			)));
 		} catch (IOException e) {
-			Logger.getInstance().log(e);
+			Logger.log(e);
 		}
 		frame.setSize(
 				GUIConfig.FRAME_WIDTH,
@@ -159,7 +159,7 @@ public class GUI extends Game
 			font.close();
 			return dynamicFontPt;
 		} catch (Exception e) {
-			Logger.getInstance().log(e);
+			Logger.log(e);
 			return new java.awt.Font("宋体", Font.PLAIN, 14);
 		}
 	}

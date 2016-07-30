@@ -34,7 +34,7 @@ public class TextDatabase {
 		try {
 			readData();
 		} catch (Exception e) {
-			Logger.getInstance().log(e);
+			Logger.log(e);
 		}
 	}
 
