@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 
 /**
- * @author ice1000
+ * @author ice1000 Eldath
  *         Created by ice1000 on 2016/7/26.
  */
 public class Logger {
@@ -15,18 +15,7 @@ public class Logger {
     private static FileWriter writer;
     private static File file;
 
-    private Logger() {
-    } //防止类实例化。
-
-    private static class LoggerLoader {
-        private static final Logger instance = new Logger();
-    }
-
-    public static Logger getInstance() {
-        return LoggerLoader.instance;
-    }
-
-    //不知道为啥，Sun说这是单例的标准写法。。。
+    private Logger() {}} //防止类实例化。
 
     public static void log(String log) {
         init();
