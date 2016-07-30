@@ -13,17 +13,21 @@ public class Logger {
 
 	private static Logger logger;
 	private static final String template = "log" + File.separator + "error%d.log";
-
 	private File file;
-
+	
+	//TODO 不太懂你啥意图。。难道直接这么写不行??
 	public Logger() {
+		if (logger == null)
+			 logger = new logger();
+		return logger;
 	}
 
-	public static Logger getInstance() {
+	/* public static Logger getInstance() {
 		if (logger == null)
 			logger = new Logger();
 		return logger;
 	}
+	*/
 
 	public void log(String log) {
 		try {
