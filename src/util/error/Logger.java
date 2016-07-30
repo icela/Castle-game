@@ -15,8 +15,6 @@ public class Logger {
     private static FileWriter writer;
     private static File file;
 
-    private Logger() {} //防止类实例化。
-
     public static void log(String log) {
         init();
         try {
@@ -27,7 +25,6 @@ public class Logger {
                     .append('\n')
                     .close();
         } catch (IOException ignored) {
-            Logger.log(ignored);
         }
     }
 
@@ -40,13 +37,12 @@ public class Logger {
             writer.flush();
             writer.close();
         } catch (IOException ignored) {
-            Logger.log(ignored);
         }
     }
 
     private static void init() {
         try {
-            File path=new File("log");
+            File path = new File("log");
             if (!path.exists())
                 path.mkdir();
             //历史遗留问题。。【滑稽滑稽滑稽】
@@ -58,8 +54,7 @@ public class Logger {
                 }
             }
             writer = new FileWriter(file);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {
         }
     }
 }
