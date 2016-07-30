@@ -11,27 +11,12 @@ import java.time.LocalDateTime;
  */
 public class Logger {
 
-    private static final Logger logger=new Logger();
     private static final String template = "log" + File.separator + "error%d.log";
-    private static File file;
     private static FileWriter writer;
-    //TODO 待我吃完饭回来解决这个bug... ...
+    private static File file;
 
-    public Logger() {
-        try {
-            for (int i = 0; ; i++) {
-                file = new File(String.format(template, i));
-                if (!file.exists()) {
-                    file.createNewFile();
-                    break;
-                }
-                writer = new FileWriter(file);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
+    private Logger() {
+    } //防止类实例化。
 
     private static class LoggerLoader {
         private static final Logger instance = new Logger();
@@ -44,6 +29,7 @@ public class Logger {
     //不知道为啥，Sun说这是单例的标准写法。。。
 
     public static void log(String log) {
+        init();
         try {
             writer
                     .append(LocalDateTime.now().toString())
@@ -52,10 +38,12 @@ public class Logger {
                     .append('\n')
                     .close();
         } catch (IOException ignored) {
+            ignored.printStackTrace();
         }
     }
 
     public static void log(Exception e) {
+        init();
         try {
             writer.append(LocalDateTime.now().toString()).append('\n');
             for (StackTraceElement element : e.getStackTrace())
@@ -63,6 +51,26 @@ public class Logger {
             writer.flush();
             writer.close();
         } catch (IOException ignored) {
+            ignored.printStackTrace();
+        }
+    }
+
+    private static void init() {
+        try {
+            File path=new File("log");
+            if (!path.exists())
+                path.mkdir();
+            //历史遗留问题。。【滑稽滑稽滑稽】
+            for (int i = 0; ; i++) {
+                file = new File(String.format(template, i));
+                if (!file.exists()) {
+                    file.createNewFile();
+                    break;
+                }
+            }
+            writer = new FileWriter(file);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

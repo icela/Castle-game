@@ -1,10 +1,12 @@
 import util.error.Logger;
 
 /**
- * Created by Administrator on 16-7-30.
+ * @author Eldath
+ * Created by Eldath on 16-7-30.
  */
 public class LogSystem {
     public static void main(String[] args) {
-        Logger.log("lalala");
+        //Logger.log("lalala");
+        Logger.log(new Exception());
     }
 }
