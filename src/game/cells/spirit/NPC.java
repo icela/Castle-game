@@ -9,6 +9,7 @@ public class NPC extends Cell {
 	private String chat = "";
 	private final ArrayList<Item> items = new ArrayList<>();
 
+
 	public NPC(String name, String chat) {
 		super(name);
 		this.chat = chat;

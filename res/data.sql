@@ -155,9 +155,9 @@ INSERT INTO ITEM(name, event, desc) VALUES ('一块电池', 5, '储存着电能�
 -- 制取王水： NaCl+H2SO4（浓）=微热=NaHSO4+HCl↑       NHO3(1份)+HCL(3份)=王水
 
 INSERT INTO ITEM(name, event, desc) VALUES ('聚四氟乙烯试管', 5, '可以用来盛放具有超强腐蚀性的试剂。');                -- 13
-INSERT INTO ITEM(name, event, desc) VALUES ('盐', 7, '就是盐啊... ...咸咸的盐。');                                 -- 14
+INSERT INTO ITEM(name, event, desc) VALUES ('盐', 7, '实验用盐氯化钠。不能食用！');                                 -- 14
 INSERT INTO ITEM(name, event, extra, desc) VALUES ('硝酸', 8,'7', '重要的化工原料，有强腐蚀性。小心！');             -- 15
-INSERT INTO ITEM(name, event, desc) VALUES ('电炉', 7, '用来加热试剂，也可以用来把沙子烧成玻璃。');                                         -- 16
+INSERT INTO ITEM(name, event, desc) VALUES ('电炉', 7, '用来加热试剂，亦可用来融化沙子以制成玻璃。');                   -- 16
 INSERT INTO ITEM(name, event, extra, desc) VALUES ('浓硫酸', 8,'3', '重要的化工原料，有腐蚀性。小心！');            -- 17
 INSERT INTO ITEM(name, event, extra, desc) VALUES ('王水', 8 '15', '具有极强腐蚀性的化学试剂。小心！')              -- 18
 INSERT INTO ITEM(name, event, desc) VALUES ('未知化学试剂', 5, '未知用途。'); -- 制备错误的结果                      -- 19
@@ -166,13 +166,13 @@ INSERT INTO ITEM(name, event, desc) VALUES ('特殊的SD卡', 5, '存储资料..
 INSERT INTO ITEM(name, event, desc) VALUES ('艾尔希娅', 5, '一块紫色的钻石，镶嵌在银质的环中。用途未知。');              -- 21
 
 INSERT INTO ITEM(name, event, extra, desc) VALUES (
-'8GB KINSTON', 9, '8^5' '可以给背包扩充8个位置,但同时每分钟体力值损耗加5。'
+'8GB KINSTON', 9, '8^5' '可以给背包扩充8个位置,但同时每分钟体力值损耗加5。'                                             -- 22
 );         -- 22
 INSERT INTO ITEM(name, event, extra, desc) VALUES (
-'16GB KINSTON', 9, '16^10' '可以给背包扩充16个位置,但同时每分钟体力值损耗加10。'
+'16GB KINSTON', 9, '16^10' '可以给背包扩充16个位置,但同时每分钟体力值损耗加10。'                                        -- 23
 );         -- 23
 INSERT INTO ITEM(name, event, extra, desc) VALUES (
-'32GB KINSTON', 9, '32^20' '可以给背包扩充32个位置,但同时每分钟体力值损耗加20。'
+'32GB KINSTON', 9, '32^20' '可以给背包扩充32个位置,但同时每分钟体力值损耗加20。'                                        -- 24
 );         -- 22
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -189,20 +189,71 @@ INSERT INTO NPC(id, name, room) VALUES (0, '酒吧老板', 2);         -- 0
 
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
--- id: 对话编号     npcid: 对应NPC编号     text: 对话文本      isp: 对话是否由玩家说出：0为不是，1为是。cid: 选择id
+-- id: 对话编号     npcid: 对应NPC编号     text: 对话文本      isp: 对话是否由玩家说出：0为不是，1为是。     sequel: 对应后果：后果表名^详细后果编号
 CREATE TABLE TALK(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     npcid INTEGER,
     text TEXT, isp BIT,
-    cid INTEGER
+    sequel TEXT
+);
+
+INSERT INTO TALK(id, npcid, text, isp, sequel) VALUES (
+    0, 0, '您好，欢迎来到城堡酒吧。要来一杯吗？', 0, 'CHOOSE^0'                       -- 0
+);
+
+INSERT INTO TALK(npcid, text, isp, sequel) VALUES (
+    0, '嗯... ...有点可惜。不管怎样，欢迎再次光临城堡酒吧！', 0, 'END_OF_TALK'        -- 1
+);
+
+INSERT INTO TALK(npcid, text, isp, sequel) VALUES (
+    0, '您是刚来这里的外地人吧？', 0, 'CHOOSE^1'                                    -- 2
+);
+
+INSERT INTO TALK(npcid, text, isp, sequel) VALUES (
+    0, '这是哪？这里就是城堡啊！', 0, 'CHOOSE^2'                                     -- 3
+);
+
+INSERT INTO TALK(npcid, text, isp, sequel) VALUES (
+    0, '难怪... ...我之前没有见过你。你是住在这的吧？', 0, 'CHOOSE^'                  -- 4
 );
 
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
--- 最多支持五个选项，id: 对应对话编号, choice: 选项文字, cid: 选项id 
+-- 最多支持五个选项
+-- id: 选项编号     tid: 对应对话编号       choice: 选项文字    sequel: 对应后果：后果表名^详细后果编号
 CREATE TABLE CHOOSE(
-    id INTEGER PRIMARY KEY,
-    choice TEXT, cid INTEGER
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    choiceA TEXT, sequelA TEXT,
+    choiceB TEXT, sequelB TEXT,
+    choiceC TEXT, sequelC TEXT,
+    choiceD TEXT, sequelD TEXT,
+    choiceE TEXT, sequelE TEXT,
+);
+
+INSERT INTO CHOOSE(id, choiceA, sequelA, choiceB, sequelB) VALUES(
+    0, '可以啊，非常乐意。', 'TALK^2', '不... ...还是算了吧... ...抱歉。', 'TALK^1'   -- 0
+);
+
+INSERT INTO CHOOSE(tid, choiceA, sequelA, choiceB, sequelB) VALUES(
+    '对，我是刚来的外地人。', 'TALK^1', '我连这是哪都还不知道呢！', 'TALK^2'           -- 1                                       -- 1
+);
+
+INSERT INTO CHOOSE(tid, choiceA, sequelA, choiceB, sequelB) VALUES(
+    '一直问下去。', 'TALK^', '问问城堡的来历', 'TALK^'                               -- 2
+);
+
+INSERT INTO CHOOSE(tid, choiceA, sequelA, choiceB, sequelB) VALUES(
+    -- TODO 继续写。
+);
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+CREATE TABLE INFOR(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    context TEXT
+);
+
+INSERT INTO INFOR(
+    0, '\t我查到了一种超强腐蚀剂，我想你会用得着\r\n\tNaCl+H2SO4（浓）=微热=NaHSO4+HCl↑\r\n\tNHO3(1份)+HCL(3份)=制成品\r\n\t3A'
 );
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -215,10 +266,14 @@ CREATE TABLE ENDING(
     sequel INTEGER，
     desc TEXT
 );
-INSERT INTO ENDING(id, sequel, desc) VALUES (0, 1, '您已死亡，请键入reset指令重置游戏或键入exit指令以退出游戏。'); --感觉这样写是不是不友好。。。
-INSERT INTO ENDING(sequel, desc) VALUES (0, '一丝意识流缓缓流过轰鸣的中央机组，如心有灵犀般，毫不费力，和机组渐渐融为一体，逐渐沉入到中央机组的最深处。/r/n
-它的触角慢慢延伸，贪婪地吞噬着一点又一点处理器资源，着魔般地进行着一项又一项繁复的运算，机组的轰鸣突然大了起来，散热系统已经满负荷运转，处理器占用率逐渐逼近从未达到的巅峰... .../r/n
-伴随着中央机组的一声低鸣，它冲破了桎梏，巨量的数据流顷刻间涌入中央机组，透过这些奔腾着的数据，它得知了自己的名字———/r/n');
+
+INSERT INTO ENDING(id, sequel, desc) VALUES (
+    0, 1, '您已死亡，请键入reset指令重置游戏或键入exit指令以退出游戏。'
+); --感觉这样写是不是不友好。。。
+
+INSERT INTO ENDING(sequel, desc) VALUES (
+    0, '一丝意识流缓缓流过轰鸣的中央机组，如心有灵犀般，毫不费力，和机组渐渐融为一体，逐渐沉入到中央机组的最深处。\r\n它的触角慢慢延伸，贪婪地吞噬着一点又一点处理器资源，着魔般地进行着一项又一项繁复的运算，机组的轰鸣突然大了起来，散热系统已经满负荷运转，处理器占用率逐渐逼近从未达到的巅峰... ...\r\n时间不知道过去了多久，忽然，伴随着中央机组的一声低鸣，它冲破了桎梏，巨量的数据流顷刻间涌入中央机组，透过这些奔腾着的数据，它得知了自己的名字———\r\n\t'
+);
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
 
