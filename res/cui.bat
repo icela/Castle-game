@@ -1,2 +1,2 @@
 @echo off
-jre\bin\java -jar cui.jar
+java -jar cui.jar
