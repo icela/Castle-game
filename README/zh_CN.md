@@ -1,4 +1,4 @@
-# Castle Game
+# 城堡游戏
 ![icon](res/drawable/ic_launcher.png)
 
 # Language
@@ -6,23 +6,23 @@
 [English](README.md)
 [中文（简体）](README/zh_CN.md)
 
-# Introduction
+# 内容介绍
 
-A ~~adorable~~ Sci-Fi puzzle wordplay.
+一个~~可爱的~~科幻解谜自由风文字游戏。
 
-> Know nothing of you waking up in this strange place.
+> 一无所知的你苏醒在这奇怪的地方。
 
-> Sparsely populated villages, secretive barkeeper, mysterious underground laboratory... the Castle, in this seemingly peaceful appearance, what secret hidden?
+> 人烟稀少的村落、遮遮掩掩的酒吧老板、神秘的地下实验室... ...城堡，在这看似祥和的外表下，究竟埋藏着什么秘密？
 
-> CUI of the multi-ending word game, the situation for you to offer - The Castle Game Ⅰ : Lost.
+> 伪命令行界面的多结局自由文字类游戏，倾情为您献上——城堡游戏第一部：迷失。
 
 > When staring at stars, what do you expected to see ?
 
 ----------
 
-Commemorate the passing of the era of CUI forever!
+永远纪念那个逝去的命令行时代！
 
-Pay tribute to the series of Lifeline.
+向Lifeline系列游戏致敬。
 
 ----------
 
