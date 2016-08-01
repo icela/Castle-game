@@ -174,13 +174,13 @@ public class GUI extends Game
 		textArea.append(words);
 		int i = textArea.getText().length();
 		int MAX_LENGTH = 10000;
-		if (i > MAX_LENGTH) {
+		while (i > MAX_LENGTH) {
 			textArea.setText(textArea.getText().substring(
 					i - MAX_LENGTH, i
 			));
 		}
-		// 滚动到最底下
-		scrollBar.setValue(scrollBar.getMaximum() - 20);
+		// 滚动到最底下，不知道行不行
+		scrollBar.setValue(scrollBar.getMaximum());
 		int height = 10;
 		this.scrollPane.getViewport().setViewPosition(
 				new Point(0, this.textArea.getLineCount() * height));
