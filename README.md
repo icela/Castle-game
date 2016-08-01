@@ -58,6 +58,7 @@ Map: <br/>
 + [ice1000](https://github.com/ice1000) must be noticed before refacing.
 
 # Development schedule
+
 - [X]  (Finished) An icon.
 - [X]  (Finished) Fight system.
 - [X]  (Finished) Level system
