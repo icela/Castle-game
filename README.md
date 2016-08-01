@@ -13,7 +13,7 @@ A ~~adorable~~ Sci-Fi puzzle wordplay.
 
 > Know nothing of you waking up in this strange place.
 
-> Sparsely populated villages, secretive barkeeper, mysterious underground laboratory... the Castle, in this seemingly peaceful appearance, what secret hidden?
+> Sparsely populated villages, secretive barkeeper, mysterious underground laboratory... the Castle, under this seemingly peaceful appearance, what secret hidden?
 
 > CUI of the multi-ending word game, the situation for you to offer - The Castle Game Ⅰ : Lost.
 
@@ -27,47 +27,47 @@ Pay tribute to the series of Lifeline.
 
 ----------
 
-GUI版与CUI版共存。<br/>
+GUI version and CUI version coexist.<br/>
 
-地图：<br/>
+Map: <br/>
 ![map](res/drawable/map.png)
 
-# 运行方法
-这个必须看哦！
+# How to run ?
+ **It's important!**
 
 ## GUI
 
-1. 安装jre8
-1. 找到release中的压缩文件，下载并解压
-1. 双击 gui.jar
-1. enjoy！
+1. Install JRE8.
+1. Download and extract the files in release.
+1. Open gui.jar.
+1. enjoy!
 
 ## CUI
 
-1. 同上
-1. 同上
-1. 打开终端，输入： ```java -jar cui.jar``` 或者双击 cui.bat
-1. enjoy！
+1. Ditto.
+1. Ditto, either.
+1. Open a terminal, type:  ```java -jar cui.jar``` or open cui.bat
+1. enjoy!
 
-# 维护者
+# Developer
 + [ice1000](https://github.com/ice1000)
 + [Eldath](https://github.com/lizhaohan001)
 
-# 维护须知
-+ 严禁大括号换行，本项目遵从Java语言的传统
-+ 重构必须通知[ice1000](https://github.com/ice1000)
+# Notice
++ Enter before brace is strictly prohibited，because this project follows the tradition of Java.
++ [ice1000](https://github.com/ice1000) must be noticed before refacing.
 
-# 实现情况
-- [X] （早已完成）一个图标
-- [X] （早已完成）战斗系统
-- [X] （早已完成）等级系统
-- [X] （早已完成）~~GUI~~封装的CUI
-- [X] （早已完成）GUI、CUI双版本共存
-- [X] （早已完成）地图存储在SQLite中
-- [X] （填充数据）BOSS系统
-- [X] （填充数据）地图系统
-- [X] （填充数据）NPC系统
-- [X] （正在更新）存档系统
-- [ ] （即将完成）物品、背包系统
-- [ ] （正在实现）商店系统
-- [ ] （仅为设想）与服务器端的通讯
+# Development schedule
+- [X] (Finished) A icon.
+- [X] (Finished) Fight system.
+- [X] (Finished) Level system
+- [X] (Finished) CUI packaged ~~by GUI~~
+- [X] (Finished) GUI version and CUI version coexist.
+- [X] (Finished) Map saved in SQLite.
+- [X] (Padding)  BOSS system.
+- [X] (Padding)  Map system.
+- [X] (Padding)  NPC system
+- [X] (Updating) Archive system.
+- [ ] (Working)  Odds, backpack system.
+- [ ] (Working)  Shopping system.
+- [ ] (Thinking) Communication to server-side.
