@@ -1,11 +1,12 @@
 # 城堡游戏
-![icon](res/drawable/ic_launcher.png)
+
+![icon](/res/drawable/ic_launcher.png)
 
 # Language
 
 - [English](/README.md)
 
-- [中文（简体）](README/zh_CN.md)
+- [中文（简体）](/README/zh_CN.md)
 
 # 内容介绍
 
@@ -30,7 +31,8 @@
 GUI版与CUI版共存。<br/>
 
 地图：<br/>
-![map](res/drawable/map.png)
+
+![map](/res/drawable/map.png)
 
 # 运行方法
 这个必须看哦！

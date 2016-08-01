@@ -1,11 +1,11 @@
 # Castle Game
-![icon](res/drawable/ic_launcher.png)
+![icon](/res/drawable/ic_launcher.png)
 
 # Language
 
 - [English](/README.md)
 
-- [中文（简体）](README/zh_CN.md)
+- [中文（简体）](/README/zh_CN.md)
 
 # Introduction
 
@@ -30,7 +30,7 @@ Pay tribute to the series of Lifeline.
 GUI version and CUI version coexist.<br/>
 
 Map: <br/>
-![map](res/drawable/map.png)
+![map](/res/drawable/map.png)
 
 # How to run ?
  **It's important!**
