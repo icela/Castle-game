@@ -29,7 +29,7 @@ Pay tribute to the series of Lifeline.
 
 GUI version and CUI version coexist.<br/>
 
-Map: <br/>
+Map: (May need update)<br/>
 ![map](/res/drawable/map.png)
 
 # How to run ?

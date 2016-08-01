@@ -13,6 +13,8 @@ public class GUIConfig {
 	//TODO 发布前记得改DEBUG常量！！
 	public static final boolean DEBUG = false;
 
+	public static final String motto="When staring at stars, what do you expected to see ?";
+
 	public static final String GUI_FORM_TITLE = "城堡游戏   by 冰封 and Eldath" + " " + VERSION;
 
 	public static final float FONT_SIZE = 13f;

@@ -30,7 +30,7 @@
 
 GUI版与CUI版共存。<br/>
 
-地图：<br/>
+地图：（可能不是最新）<br/>
 
 ![map](/res/drawable/map.png)
 
