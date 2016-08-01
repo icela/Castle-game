@@ -51,7 +51,7 @@ public class SQLiteDatabase
 		ArrayList<Room> rooms = new ArrayList<>();
 		while (set.next()) {
 			rooms.add(new Room(
-					set.getString("disc"),
+					set.getString("name"),
 					set.getString("welc"),
 					set.getString("boss"),
 					set.getInt("blood"),
