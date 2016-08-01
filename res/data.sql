@@ -41,11 +41,11 @@ INSERT INTO ROOM(name, welc, boss, blood, strike, defence, exp, die) VALUES (
   '旅馆', '周围干净整洁。', '可爱的女仆', 10,6,3,2,'女仆被你推倒了！'                     -- 5
 );
 
-INSERT INTO ROOM(name, boss, blood, strike, defence, exp, die) VALUES (
+INSERT INTO ROOM(name) VALUES (
   '二楼睡房'                                                                         -- 6
 );
 
-INSERT INTO ROOM(name, boss, blood, strike, defence, exp, die) VALUES (
+INSERT INTO ROOM(name, welc) VALUES (
   '负一楼','传来食物的阵阵香味。'                                                       -- 7
 );
 
@@ -53,11 +53,11 @@ INSERT INTO ROOM(name, boss, blood, strike, defence, exp, die) VALUES (
   '负二楼','奇怪的男人',200,50,25,25,'男人身边站出来一名浑身是伤的女孩。。'                 -- 8
 );
 
-INSERT INTO ROOM(name, boss, blood, strike, defence, exp, die) VALUES (
+INSERT INTO ROOM(name) VALUES (
   '负三楼'                                                                            -- 9
 );
 
-INSERT INTO ROOM(name, boss, blood, strike, defence, exp, die) VALUES (
+INSERT INTO ROOM(name, welc) VALUES (
   '负四楼','穿着白衣服的奇怪男人倒在地上'                                                 -- 10
 );
 
@@ -78,7 +78,7 @@ INSERT INTO ROOM(name, welc) VALUES(
 );
 
 INSERT INTO ROOM(name, welc) VALUES(
-    '废弃的实验室大门', '布满锈迹'
+    '废弃的实验室大门', '大门上布满锈迹'
 );
 
 INSERT INTO ROOM(name, welc) VALUES(
@@ -98,12 +98,10 @@ INSERT INTO ROOM(name, boss, blood, strike, defence, exp) VALUES (
   '羊肠小道', '街边小混混',100,30,1,20                                                   -- 13
 );
 
-INSERT INTO ROOM(name, welc, boss, blood, strike, defence, exp, die) VALUES (
+INSERT INTO ROOM(name) VALUES (
   '日出之村大门'                                                                         -- 14
 );
 
-INSERT INTO ROOM(name, welc) VALUES (
-);
 -- 整个游戏的大boss！！所以要在前面放一些药剂什么之类的对吧~~~~
 INSERT INTO ROOM(name, boss, blood, strike, defence, exp, die) VALUES (
   '神秘空间','戴着面具的男人',1000,160,120,200,'男人摘下了面具... ...'                      -- 15
@@ -130,7 +128,7 @@ INSERT INTO ROOM(name, boss, blood, strike, defence, exp, die) VALUES (
   '神秘的井', '打水的熊孩子',50, 10, 1, 5, '熊孩子掉头就跑。'                                 -- 20
 );
 
-INSERT INTO ROOM(name, welc, boss, blood, strike, defence, exp, die) VALUES (
+INSERT INTO ROOM(name, welc) VALUES (
   '井底', '这里很潮湿，阴森恐怖。'                                                          -- 21
 );
 
