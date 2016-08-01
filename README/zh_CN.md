@@ -3,8 +3,9 @@
 
 # Language
 
-[English](/README.md)
-[中文（简体）](README/zh_CN.md)
+- [English](/README.md)
+
+- [中文（简体）](README/zh_CN.md)
 
 # 内容介绍
 
@@ -16,7 +17,7 @@
 
 > 伪命令行界面的多结局自由文字类游戏，倾情为您献上——城堡游戏第一部：迷失。
 
-> When staring at stars, what do you expected to see ?
+>     When staring at stars, what do you expected to see ?
 
 ----------
 

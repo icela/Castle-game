@@ -1,104 +1,113 @@
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
+-- 全局保留字：
+-- %NAME%: 玩家名字
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE ROOM(
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   disc TEXT, welc TEXT,
   boss TEXT,blood INTEGER,
   strike INTEGER, defence INTEGER,
-  exp INTEGER, die TEXT
+  exp INTEGER, die TEXT,
+  sequel TEXT
 );
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
 -- TODO 注意！！注意！！此处定义的boss要优先于npc显示！！！
 -- 出生地
 INSERT INTO ROOM(id, disc, boss, blood, strike, defence, exp, die) VALUES (
-  0, '城堡外                                                                         -- 0
+  0, '交叉口', '通向城堡和日出之村。'                                                   -- 1
+);
+
+INSERT INTO ROOM(disc, boss, blood, strike, defence, exp, die) VALUES (
+  0'城堡外                                                                            -- 2
 );
 
 INSERT INTO ROOM(disc, welc, boss, blood, strike, defence, exp, die) VALUES (
-  '一楼大堂'                                                                         -- 1
+  '一楼大堂'                                                                         -- 3
 );
 
 INSERT INTO ROOM(disc, welc, boss, blood, strike, defence, exp, die) VALUES (
-  '小酒吧','一大股酒香飘来。','酒吧流氓', 150,10,5,5,'酒吧流氓喝醉了！'                  -- 2
+  '小酒吧','一大股酒香飘来。','酒吧流氓', 150,10,5,5,'酒吧流氓喝醉了！'                  -- 4
 );
 
 INSERT INTO ROOM(disc, welc, boss, blood, strike, defence, exp, die) VALUES (
-  '书房','极为安静。'                                                                -- 3
+  '书房','阳光从顶窗斜射下来，显得安宁祥和。'                                           -- 5
 );
 
 INSERT INTO ROOM(disc, welc, boss, blood, strike, defence, exp, die) VALUES (
-  '旅馆', '周围干净整洁。', '可爱的女仆', 10,6,3,2,'女仆被你推倒了！'                     -- 4
+  '旅馆', '周围干净整洁。', '可爱的女仆', 10,6,3,2,'女仆被你推倒了！'                     -- 6
 );
 
 INSERT INTO ROOM(disc, boss, blood, strike, defence, exp, die) VALUES (
-  '二楼睡房'                                                                         -- 5
+  '二楼睡房'                                                                         -- 7
 );
 
 INSERT INTO ROOM(disc, boss, blood, strike, defence, exp, die) VALUES (
-  '负一楼','传来食物的阵阵香味。'                                                       -- 6
+  '负一楼','传来食物的阵阵香味。'                                                       -- 8
 );
 
 INSERT INTO ROOM(disc, boss, blood, strike, defence, exp, die) VALUES (
-  '负二楼','奇怪的男人',200,50,25,25,'男人身边站出来一名浑身是伤的女孩。。'                 -- 7
+  '负二楼','奇怪的男人',200,50,25,25,'男人身边站出来一名浑身是伤的女孩。。'                 -- 9
 );
 
 INSERT INTO ROOM(disc, boss, blood, strike, defence, exp, die) VALUES (
-  '负三楼'                                                                            -- 8
+  '负三楼'                                                                            -- 10
 );
 
 INSERT INTO ROOM(disc, boss, blood, strike, defence, exp, die) VALUES (
-  '负四楼','穿着白衣服的奇怪男人倒在地上'                                                 -- 9
+  '负四楼','穿着白衣服的奇怪男人倒在地上'                                                 -- 11
 );
 
 INSERT INTO ROOM(disc) VALUES (
-  '三楼阳台'                                                                          -- 10
+  '三楼阳台'                                                                          -- 12
 );
 
 INSERT INTO ROOM(disc, boss, blood, strike, defence, exp, die) VALUES (
-  '城堡顶部瞭望塔', '瞭望塔守卫',150, 20, 2, 20, '守卫倒下了！'                            -- 11
+  '城堡顶部瞭望塔', '瞭望塔守卫',150, 20, 2, 20, '守卫倒下了！'                            -- 13
 );
 
 INSERT INTO ROOM(disc, boss, blood, strike, defence, exp) VALUES (
-  '羊肠小道', '街边小混混',100,30,1,20                                                   -- 12
+  '羊肠小道', '街边小混混',100,30,1,20                                                   -- 14
 );
 
 INSERT INTO ROOM(disc, welc, boss, blood, strike, defence, exp, die) VALUES (
-  '日出之村大门'                                                                         -- 13
+  '日出之村大门'                                                                         -- 15
 );
 
 -- 整个游戏的大boss！！所以要在前面放一些药剂什么之类的对吧~~~~
 INSERT INTO ROOM(disc, boss, blood, strike, defence, exp, die) VALUES (
-  '神秘空间','戴着面具的男人',1000,160,120,200,'男人摘下了面具... ...'                      -- 14
+  '神秘空间','戴着面具的男人',1000,160,120,200,'男人摘下了面具... ...'                      -- 16
 );
 
 -- 对对对，就是冰封。记得把冰封的名字写到对话里去啊！！
 INSERT INTO ROOM(disc, boss, blood, strike, defence, exp, die) VALUES (
-  '神秘空间内厅','开发者',1000,100,90,200,'开发者的程序报错了！'                             -- 16
+  '神秘空间内厅','开发者',1000,150,100,200,'开发者的程序报错了！'                             -- 17
 );
 
 INSERT INTO ROOM(disc,  boss, blood, strike, defence, exp, die) VALUES (
-  '神秘空间祭坛','果冻',1000,150,100,200,'果冻正在打酱油。。。'                               -- 17
+  '神秘空间祭坛','果冻',800,130,100,180,'果冻正在打酱油... ...'                               -- 18
 );
 
 INSERT INTO ROOM(disc) VALUES (
-  '日出村民居'                                                                                 -- 18
+  '日出村民居'                                                                           -- 19
 );
 
 INSERT INTO ROOM(disc, welc, boss, blood, strike, defence, exp, die) VALUES (
-  '日出村教堂','你瞬间被这里神圣的气息闪瞎了。' , '聆听忏悔的牧师',200, 30, 20, 40, '牧师聆听着忏悔。' -- 19
+  '日出村教堂','你瞬间被这里神圣的气息闪瞎了。' , '聆听忏悔的牧师',200, 30, 20, 40, '牧师聆听着忏悔。' -- 20
 );
 
 INSERT INTO ROOM(disc, boss, blood, strike, defence, exp, die) VALUES (
-  '神秘的井', '打水的熊孩子',50, 10, 1, 5, '熊孩子掉头就跑。'                                 -- 20
+  '神秘的井', '打水的熊孩子',50, 10, 1, 5, '熊孩子掉头就跑。'                                 -- 21
 );
 
 INSERT INTO ROOM(disc, welc, boss, blood, strike, defence, exp, die) VALUES (
-  '井底', '这里很潮湿，阴森恐怖。'                                                          -- 21
+  '井底', '这里很潮湿，阴森恐怖。'                                                          -- 22
 );
 
 INSERT INTO ROOM(disc, welc, boss, blood, strike, defence, exp, die) VALUES (
-  '井底通道', '空气中弥漫着阴冷潮湿的气息。', '戴头灯的探险家',400, 100, 50, 80, '探险家的头灯没电了！'-- 23
+  '井底通道', '空气中弥漫着阴冷潮湿的气息，通道很长，看不到尽头。', '戴头灯的探险家',400, 100, 50, 80, '探险家的头灯没电了！'-- 23
 );
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
@@ -109,7 +118,7 @@ INSERT INTO DIR(from_text, to_text) VALUES ('east', 'west');
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE MAP( id INTEGER PRIMARY KEY AUTOINCREMENT, fromid INTEGER, toid INTEGER, dir INTEGER);
-INSERT INTO MAP(fromid, toid, dir) VALUES (1, 5, 1);
+INSERT INTO MAP(fromid, toid, dir) VALUES (0, 1, 2);
 INSERT INTO MAP(fromid, toid, dir) VALUES (5, 10,1);
 INSERT INTO MAP(fromid, toid, dir) VALUES (10,11,1);
 INSERT INTO MAP(fromid, toid, dir) VALUES (6, 1, 1);
@@ -223,7 +232,11 @@ INSERT INTO TALK(id, npcid, text ,isp, sequel) VALUES(
 );
 
 INSERT INTO TALK(npcid, text, isp, sequel) VALUES(
-    0, '哦... ...欢迎您！远道而来的客人。向左通向教堂，向右通向古井，直走就是居民区。', 0, 'CHOOSE^1' --1
+    0, '哦... ...欢迎您！远道而来的客人。向左通向教堂，向右通向古井，直走就是居民区，但是... ...居民区现在没人。', 0, 'CHOOSE^1' --1
+);
+
+INSERT INTO TALK(npcid, text, isp, sequel) VALUES(
+    0, '因为... ...额... ...因为... ...人都走了呀... ...我也不清楚。', 0, 'END_OF＿TALK'--2
 );
 
 INSERT INTO TALK(npcid, text, isp, sequel) VALUES (
@@ -263,25 +276,25 @@ CREATE TABLE CHOOSE(
 
 -- 太羞耻了！！
 INSERT INTO CHOOSE(id, choiceA, sequelA ,choiceB, sequelB) VALUES(
-    0, '我是%NAME%，是一名... ...一名游客。','TALK^1' '我是... ...一位... ...呃... ...商人。','TALK^1'
+0, '我是%NAME%，是一名... ...一名游客。','TALK^1' '我是... ...一位... ...呃... ...商人。','TALK^1' --0
 );
 INSERT INTO CHOOSE(choiceA, sequelA, choiceB, sequelB) VALUES(
-    '去城堡', 'ROOM^0', '去日出之村', 'ROOM^12'
+'居民区怎么会没人呢？', 'TALK^2' '嗯... ...让我看看', 'END_OF_TALK'
 );
 INSERT INTO CHOOSE(choiceA, sequelA, choiceB, sequelB) VALUES(
-    '可以啊，非常乐意。', 'TALK^2', '不... ...还是算了吧... ...抱歉。', 'TALK^1'   -- 0
-);
-
-INSERT INTO CHOOSE(choiceA, sequelA, choiceB, sequelB) VALUES(
-    '对，我是刚来的外地人。', 'TALK^1', '我连这是哪都还不知道呢！', 'TALK^2'           -- 1                                       -- 1
+    '可以啊，非常乐意。', 'TALK^2', '不... ...还是算了吧... ...抱歉。', 'TALK^1'   -- 1
 );
 
 INSERT INTO CHOOSE(choiceA, sequelA, choiceB, sequelB) VALUES(
-    '一直问下去。', 'TALK^', '问问城堡的来历', 'TALK^'                               -- 2
+    '对，我是刚来的外地人。', 'TALK^1', '我连这是哪都还不知道呢！', 'TALK^2'           -- 2                                       -- 1
 );
 
 INSERT INTO CHOOSE(choiceA, sequelA, choiceB, sequelB) VALUES(
-    -- TODO 继续写。
+    '一直问下去。', 'TALK^', '问问城堡的来历', 'TALK^'                               -- 3
+);
+
+INSERT INTO CHOOSE(choiceA, sequelA, choiceB, sequelB) VALUES(
+    ''
 );
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
@@ -291,7 +304,7 @@ CREATE TABLE INFOR(
 );
 
 INSERT INTO INFOR(
-    0, '\t我查到了一种超强腐蚀剂，我想你会用得着：\r\n\tNaCl+H2SO4（浓）=微热=NaHSO4+HCl↑\r\n\tNHO3(1份)+HCL(3份)=制成品\r\n\t3A'
+    0, '\t我在MSDN中查到了一种超强腐蚀剂，我想你会用得着：\r\n\tNaCl+H2SO4（浓）=微热=NaHSO4+HCl↑\r\n\tNHO3(1份)+HCL(3份)=制成品\r\n\t3A'
 );
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -306,8 +319,8 @@ CREATE TABLE ENDING(
 );
 
 INSERT INTO ENDING(id, sequel, desc) VALUES (
-    0, 1, '您已死亡，请键入reset指令重置游戏或键入exit指令以退出游戏。'
-); --感觉这样写是不是不友好。。。
+    0, 1, '您已死亡，请键入reset指令重置游戏或键入exit指令退出游戏。'   --感觉这样写是不是不友好。。。
+);
 
 INSERT INTO ENDING(sequel, desc) VALUES (
     0, '一丝意识流缓缓流过轰鸣的中央机组，如心有灵犀般，毫不费力，和机组渐渐融为一体，逐渐沉入到中央机组的最深处。\r\n它的触角慢慢延伸，贪婪地吞噬着一点又一点处理器资源，着魔般地进行着一项又一项繁复的运算，机组的轰鸣突然大了起来，散热系统已经满负荷运转，处理器占用率逐渐逼近从未达到的巅峰... ...\r\n时间不知道过去了多久，忽然，伴随着中央机组的一声低鸣，它冲破了桎梏，巨量的数据流顷刻间涌入中央机组，透过这些奔腾着的数据，它得知了自己的名字———\r\n\t%NAME%'

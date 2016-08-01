@@ -1,5 +1,6 @@
 package data.database;
 
+import game.cells.spirit.NPC;
 import game.map.RoomItemPair;
 import game.cells.item.Item;
 import game.map.Exit;
@@ -13,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @author ice1000
@@ -100,6 +102,23 @@ public class SQLiteDatabase
 		set.close();
 		return items;
 	}
+	/*
+	public ArrayList<Object> getNPC() throws SQLException {
+		ResultSet set = statement.executeQuery("SELECT * FROM NPC");
+		ArrayList<Item> NPCs = new ArrayList<>();
+		while (set.next()) {
+			NPCs.add(new NPC(
+					set.getInt("id"),
+					set.getString("name"),
+					set.getInt("event"),
+					set.getString("extra"),
+					set.getString("desc")
+			));
+		}
+		set.close();
+		return items;
+	}
+	*/
 
 	/**
 	 * CREATE TABLE BOSS_GET_ITEM (room INTEGER, item INTEGER);

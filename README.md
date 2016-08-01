@@ -3,9 +3,9 @@
 
 # Language
 
-[English](/README.md)
+- [English](/README.md)
 
-[中文（简体）](README/zh_CN.md)
+- [中文（简体）](README/zh_CN.md)
 
 # Introduction
 
@@ -17,7 +17,7 @@ A ~~adorable~~ Sci-Fi puzzle wordplay.
 
 > CUI of the multi-ending word game, the situation for you to offer - The Castle Game Ⅰ : Lost.
 
-> When staring at stars, what do you expected to see ?
+>     When staring at stars, what do you expected to see ?
 
 ----------
 

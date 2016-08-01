@@ -8,6 +8,8 @@ public class GUIConfig {
 
 	public static final String VERSION = "V0.0.2 Alpha";
 
+	public static final String BUILD="0001";
+
 	//TODO 发布前记得改DEBUG常量！！
 	public static final boolean DEBUG = false;
 
