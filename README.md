@@ -40,14 +40,14 @@ Map: (May need update)<br/>
 1. Install JRE8.
 1. Download and extract the files in release.
 1. Open gui.jar.
-1. enjoy!
+1. Enjoy!
 
 ## CUI
 
 1. Ditto.
 1. Ditto, either.
 1. Open a terminal, type:  ```java -jar cui.jar``` or open cui.bat
-1. enjoy!
+1. Enjoy!
 
 # Developer
 + [ice1000](https://github.com/ice1000)
@@ -59,16 +59,29 @@ Map: (May need update)<br/>
 
 # Development schedule
 
--[X] (Finished) An icon.
--[X] (Finished) Fight system.
--[X] (Finished) Level system
--[X] (Finished) CUI packaged ~~by GUI~~
--[X] (Finished) GUI version and CUI version coexist.
--[X] (Finished) Map saved in SQLite.
--[X] (Padding)  BOSS system.
--[X] (Padding)  Map system.
--[X] (Padding)  NPC system
--[X] (Updating) Archive system.
--[ ] (Working)  Odds, backpack system.
--[ ] (Working)  Shopping system.
--[ ] (Thinking) Communication to server-side.
+- [X] (Finished) An icon.
+
+- [X] (Finished) Fight system.
+
+- [X] (Finished) Level system
+
+- [X] (Finished) CUI packaged ~~by GUI~~
+
+- [X] (Finished) GUI version and CUI version coexist.
+
+- [X] (Finished) Map saved in SQLite.
+
+- [X] (Padding)  BOSS system.
+
+- [X] (Padding)  Map system.
+
+- [X] (Padding)  NPC system
+
+- [X] (Updating) Archive system.
+
+- [ ] (Working)  Odds, backpack system.
+
+- [ ] (Working)  Shopping system.
+
+- [ ] (Thinking) Communication to server-side.
+
