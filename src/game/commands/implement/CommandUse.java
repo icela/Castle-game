@@ -19,6 +19,6 @@ public class CommandUse implements BaseCommand {
 	}
 
 	@Override
-	public void runCommend(String cmd) {
+	public void runCommand(String cmd) {
 	}
 }

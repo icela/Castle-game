@@ -19,7 +19,7 @@ public class CommandPick implements BaseCommand {
 	}
 
 	@Override
-	public void runCommend(String cmd) {
+	public void runCommand(String cmd) {
 
 	}
 }

@@ -17,7 +17,7 @@ public class CommandVersion implements BaseCommand {
     }
 
     @Override
-    public void runCommend(String cmd) {
+    public void runCommand(String cmd) {
         game.echoln("Castle Game  城堡游戏");
         game.echoln("VERSION: " + GUIConfig.VERSION);
         game.echoln("BUILD: " + GUIConfig.BUILD);

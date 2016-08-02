@@ -160,7 +160,7 @@ public abstract class Game
 
 //			如果找到了该指令
 		if (func != null) {
-			func.runCommend(value2);
+			func.runCommand(value2);
 			if (gameEnded) {
 				saveData();
 				closeScreen();

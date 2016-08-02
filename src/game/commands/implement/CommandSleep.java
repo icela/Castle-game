@@ -12,7 +12,7 @@ public class CommandSleep implements BaseCommand {
 	}
 
 	@Override
-	public void runCommend(String cmd) {
+	public void runCommand(String cmd) {
 //		int bloodMore = Integer.parseInt(cmd);
 		if (game.getCurrentRoom().toString().matches("宾馆|卧室|旅馆")) {
 			if (!game.getCurrentRoom().bossGetItem()) {
