@@ -59,29 +59,16 @@ Map: (May need update)<br/>
 
 # Development schedule
 
-- [X] (Finished) An icon.
-
-- [X] (Finished) Fight system.
-
-- [X] (Finished) Level system
-
-- [X] (Finished) CUI packaged ~~by GUI~~
-
-- [X] (Finished) GUI version and CUI version coexist.
-
-- [X] (Finished) Map saved in SQLite.
-
-- [X] (Padding)  BOSS system.
-
-- [X] (Padding)  Map system.
-
-- [X] (Padding)  NPC system
-
-- [X] (Updating) Archive system.
-
-- [ ] (Working)  Odds, backpack system.
-
-- [ ] (Working)  Shopping system.
-
-- [ ] (Thinking) Communication to server-side.
++ [X] -> (Finished) Fight system.<br/>
++ [X] -> (Finished) Level system.<br/>
++ [X] -> (Finished) CUI ~~packaged by GUI~~.<br/>
++ [X] -> (Finished) GUI version and CUI version coexist.<br/>
++ [X] -> (Finished) Map saved in SQLite.<br/>
++ [X] -> (Padding)  BOSS system.<br/>
++ [X] -> (Padding)  Map system.<br/>
++ [X] -> (Padding)  NPC system.<br/>
++ [X] -> (Working) Archive system.<br/>
++ [ ] -> (Working)  Odds, backpack system.<br/>
++ [ ] -> (Working)  Shopping system.<br/>
++ [ ] -> (Thinking) Communication to server-side.<br/>
 
