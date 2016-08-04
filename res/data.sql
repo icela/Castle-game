@@ -158,10 +158,12 @@ CREATE TABLE BOSS_GET_ITEM (
 INSERT INTO BOSS_GET_ITEM(room, item， "CHOOSE^0") VALUES (18, 2);
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
+-- TODO 洗澡的时候突然想到一个巨大的问题。。。。。。等我有了电脑再来修复
 CREATE TABLE ITEM(
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   name TEXT, event INTEGER,
   extra TEXT, desc TEXT
+  reaction TEXT
 );
 
 INSERT INTO ITEM(id, name, event, desc) VALUES (0, '地图', 0, '神秘而古旧的地图。');                            -- 0
@@ -181,8 +183,8 @@ INSERT INTO ITEM(name, event, extra, desc) VALUES ('超大恢复剂', 3, '250', 
 -- 8: 带损耗体力值副作用的化学反应用途：每分钟损耗体力值 
 -- 9: 背包扩容用途，但同时会损耗体力值：扩容大小^每分钟体力值
 
-INSERT INTO ITEM(name, event, desc) VALUES ('看似古老的钥匙', 4, '可以用来... ...呃... ...开门？');                -- 7
-INSERT INTO ITEM(name, event, desc) VALUES ('奶茶的口令牌', 4, '呃... ...');                                    -- 8
+INSERT INTO ITEM(name, event, desc, reaction) VALUES ('看似古老的钥匙', 4, '可以用来... ...呃... ...开门？', 'ROOM^');                -- 7
+INSERT INTO ITEM(name, event, desc, reaction) VALUES ('奶茶的口令牌', 4, '呃... ...', 'ROOM^');                                    -- 8
 INSERT INTO ITEM(name, event, desc) VALUES ('奇怪的硬币', 4, '用途未知。');                                       -- 9
 INSERT INTO ITEM(name, event, desc) VALUES ('一把小刀', 5, '任何用途。');                                        -- 10
 INSERT INTO ITEM(name, event, desc) VALUES ('一组齿轮', 5, '看上去是什么机械的冗余部件。');                         -- 11
@@ -195,20 +197,21 @@ INSERT INTO ITEM(name, event, desc) VALUES ('盐', 7, '实验用盐氯化钠。�
 INSERT INTO ITEM(name, event, extra, desc) VALUES ('硝酸', 8,'7', '重要的化工原料，有强腐蚀性。小心！');             -- 15
 INSERT INTO ITEM(name, event, desc) VALUES ('电炉', 7, '用来加热试剂，亦可用来融化沙子以制成玻璃。');                   -- 16
 INSERT INTO ITEM(name, event, extra, desc) VALUES ('浓硫酸', 8,'3', '重要的化工原料，有腐蚀性。小心！');            -- 17
-INSERT INTO ITEM(name, event, extra, desc) VALUES ('王水', 8 '15', '具有极强腐蚀性的化学试剂。小心！')              -- 18
-INSERT INTO ITEM(name, event, desc) VALUES ('未知化学试剂', 5, '未知用途。'); -- 制备错误的结果                      -- 19
+INSERT INTO ITEM(name, event, extra, desc, reaction) VALUES('盐酸'， 8， '1', '化学反应的中间物。', 'ITEM^3*15')  -- 18
+INSERT INTO ITEM(name, event, extra, desc) VALUES ('王水', 8 '15', '具有极强腐蚀性的化学试剂。小心！')              -- 19
+INSERT INTO ITEM(name, event, desc) VALUES ('未知化学试剂', 5, '未知用途。'); -- 制备错误的结果                      -- 20
 
-INSERT INTO ITEM(name, event, desc) VALUES ('特殊的SD卡', 5, '存储资料... ...吧。');                                -- 20
-INSERT INTO ITEM(name, event, desc) VALUES ('艾尔希娅', 5, '一块紫色的钻石，镶嵌在银质的环中。用途未知。');              -- 21
+INSERT INTO ITEM(name, event, desc) VALUES ('特殊的SD卡', 5, '存储资料... ...吧。');                                -- 21
+INSERT INTO ITEM(name, event, desc) VALUES ('艾尔希娅', 5, '一块紫色的钻石，镶嵌在银质的环中。用途未知。');              -- 22
 
 INSERT INTO ITEM(name, event, extra, desc) VALUES (
-'8GB KINSTON', 9, '8^5' '可以给背包扩充8个位置,但同时每分钟体力值损耗加5。'                                             -- 22
+'8GB KINSTON', 9, '8^5' '可以给背包扩充8个位置,但同时每分钟体力值损耗加5。'                                             -- 23
 );         -- 22
 INSERT INTO ITEM(name, event, extra, desc) VALUES (
-'16GB KINSTON', 9, '16^10' '可以给背包扩充16个位置,但同时每分钟体力值损耗加10。'                                        -- 23
+'16GB KINSTON', 9, '16^10' '可以给背包扩充16个位置,但同时每分钟体力值损耗加10。'                                        -- 24
 );         -- 23
 INSERT INTO ITEM(name, event, extra, desc) VALUES (
-'32GB KINSTON', 9, '32^20' '可以给背包扩充32个位置,但同时每分钟体力值损耗加20。'                                        -- 24
+'32GB KINSTON', 9, '32^20' '可以给背包扩充32个位置,但同时每分钟体力值损耗加20。'                                        -- 25
 );         -- 22
 
 ------------------------------------------------------------------------------------------------------------------------
