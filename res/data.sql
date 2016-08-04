@@ -147,7 +147,8 @@ INSERT INTO DIR(from_text, to_text) VALUES ('east', 'west');        --3
 CREATE TABLE MAP( id INTEGER PRIMARY KEY AUTOINCREMENT, fromid INTEGER, toid INTEGER, dir INTEGER);
 
 INSERT INTO MAP(fromid, toid, dir) VALUES (0, 1, 3);
--- TODO 不行我先把房间艹好先。。。留个例子
+-- TODO 不行我先把房间艹好先。。。留个例子.
+
 
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
@@ -191,6 +192,7 @@ INSERT INTO ITEM(name, event, desc) VALUES ('一组齿轮', 5, '看上去是什�
 INSERT INTO ITEM(name, event, desc) VALUES ('一块电池', 5, '储存着电能。');                                       -- 12
 
 -- 制取王水： NaCl+H2SO4（浓）=微热=NaHSO4+HCl↑       NHO3(1份)+HCL(3份)=王水
+-- 我靠你写这个干嘛  ——冰封
 
 INSERT INTO ITEM(name, event, desc) VALUES ('聚四氟乙烯试管', 5, '可以用来盛放具有超强腐蚀性的试剂。');                -- 13
 INSERT INTO ITEM(name, event, desc) VALUES ('盐', 7, '实验用盐氯化钠。不能食用！');                                 -- 14
@@ -284,7 +286,7 @@ CREATE TABLE CHOOSE(
 
 -- 太羞耻了！！
 INSERT INTO CHOOSE(id, choiceA, sequelA, choiceB, sequelB, choiceC, sequelC) VALUES(
-0, '看那张纸', 'ITEM^0', '看那本本子', 'INFOR^1', '带走特殊的SD卡'， 'ITEM^20'
+0, '看那张纸', 'ITEM^0', '看那本本子', 'INFO^1', '带走特殊的SD卡'， 'ITEM^20'
 );
 INSERT INTO CHOOSE(choiceA, sequelA ,choiceB, sequelB) VALUES(
 '我是%NAME%，是一名... ...一名游客。','TALK^1' '我是... ...一位... ...呃... ...商人。','TALK^1' --0
@@ -309,16 +311,16 @@ INSERT INTO CHOOSE(choiceA, sequelA, choiceB, sequelB) VALUES(
 );
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
-CREATE TABLE INFOR(
+CREATE TABLE INFO(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     context TEXT
 );
 
-INSERT INTO INFOR(id, context) VALUES(
+INSERT INTO INFO(id, context) VALUES(
     0, '\t我在MSDN中查到了一种超强腐蚀剂，我想你会用得着：\r\n\tNaCl+H2SO4（浓）=微热=NaHSO4+HCl↑\r\n\tNHO3(1份)+HCL(3份)=制成品\r\n\t3A'
 );
 
-INSERT INTO INFOR(context) VALUES(
+INSERT INTO INFO(context) VALUES(
     '（封面）奶茶\r\n\r\n0001\r\n\t感谢上帝！\r\n\t我终于进入埃弗顿独立研究计划了！这里应该足够安全让我能做我想做的事！\r\n\r\n\r\n\t但... ...真的足够安全吗... ...\r\n1215\r\n\tGA-17（被划掉，看不清楚）了！整个基地都沉浸在喜（被划掉，看不清楚）可贺！！\r\n2071\r\n\t泄露更加严重了... ...\r\n\t希望足够安全。\r\n2094\r\n\t（被撕掉）'
 );
 
@@ -352,3 +354,4 @@ SELECT * FROM NPC ORDER BY id ASC;
 SELECT * FROM TALK ORDER BY id ASC;
 SELECT * FROM CHOOSE ORDER BY id ASC;
 SELECT * FROM ENDING ORDER BY id ASC;
+SELECT * FROM INFO ORDER BY id ASC;
