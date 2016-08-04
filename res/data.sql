@@ -38,102 +38,102 @@ INSERT INTO ROOM(name, welc, boss, blood, strike, defence, exp, die) VALUES (
 );
 
 INSERT INTO ROOM(name, welc, boss, blood, strike, defence, exp, die) VALUES (
-  '旅馆', '周围干净整洁。', '可爱的女仆', 10,6,3,2,'女仆被你推倒了！'                     -- 5
+  '旅馆', '周围干净整洁。', '可爱的女仆', 10,6,3,2,'女仆被你推倒了！'                     		-- 5
 );
 
 INSERT INTO ROOM(name) VALUES (
-  '二楼睡房'                                                                         -- 6
+  '二楼睡房'                                                                         				-- 6
 );
 
 INSERT INTO ROOM(name, welc) VALUES (
-  '负一楼','传来食物的阵阵香味。'                                                       -- 7
+  '负一楼','传来食物的阵阵香味。'                                                       			-- 7
 );
 
 INSERT INTO ROOM(name, boss, blood, strike, defence, exp, die) VALUES (
-  '负二楼','奇怪的男人',200,50,25,25,'男人身边站出来一名浑身是伤的女孩。。'                 -- 8
+  '负二楼','奇怪的男人',200,50,25,25,'男人身边站出来一名浑身是伤的女孩。。'          		-- 8
 );
 
 INSERT INTO ROOM(name) VALUES (
-  '负三楼'                                                                            -- 9
+  '负三楼'                                                                        				-- 9
 );
 
 INSERT INTO ROOM(name, welc) VALUES (
-  '负四楼','穿着白衣服的奇怪男人倒在地上'                                                 -- 10
+  '负四楼','穿着白衣服的奇怪男人倒在地上'                                                 			-- 10
 );
 
 INSERT INTO ROOM(name) VALUES (
-  '三楼阳台'                                                                          -- 11
+  '三楼阳台'                                                                          				-- 11
 );
 
 INSERT INTO ROOM(name, boss, blood, strike, defence, exp, die) VALUES (
-  '城堡顶部瞭望塔', '瞭望塔守卫',150, 20, 2, 20, '守卫倒下了！'                            -- 12
+  '城堡顶部瞭望塔', '瞭望塔守卫',150, 20, 2, 20, '守卫倒下了！'                            		-- 12
 );
 
 INSERT INTO ROOM(name, boss, blood, strike, defence, exp, die) VALUES (
-    '观星台', '戴着眼镜的科学家', 100, 10, 5, 10, '科学家的眼镜摔碎了！'
+    '观星台', '戴着眼镜的科学家', 100, 10, 5, 10, '科学家的眼镜摔碎了！'			--13
 );
 
 INSERT INTO ROOM(name, welc) VALUES(
-    '观星台北', '一道若隐若现的流星划过'
+    '观星台北', '一道若隐若现的流星划过'						--14
 );
 
 INSERT INTO ROOM(name, welc) VALUES(
-    '废弃的实验室大门', '大门上布满锈迹'
+    '废弃的实验室大门', '大门上布满锈迹'						--15
 );
 
 INSERT INTO ROOM(name, welc) VALUES(
-    '废弃的实验室', '积满灰尘的门牌上0713的数字若隐若现'
+    '废弃的实验室', '积满灰尘的门牌上0713的数字若隐若现'				--16
 );
 
 INSERT INTO ROOM(name, welc) VALUES(
-    '计算机终端间', '核能电池仍在发出嗡嗡的响声'
+    '计算机终端间', '核能电池仍在发出嗡嗡的响声'					--17
 );
 
 -- 暂且先这样凑合。。。。。。
 INSERT INTO ROOM(name, welc, sequel ) VALUES(
-    '计算机旁的书架', '有一本小本子，一张纸还有一个特殊的SD卡。', 'CHOOSE^0'
+    '计算机旁的书架', '有一本小本子，一张纸还有一个特殊的SD卡。', 'CHOOSE^0'		-18
 );
 
 INSERT INTO ROOM(name, boss, blood, strike, defence, exp) VALUES (
-  '羊肠小道', '街边小混混',100,30,1,20                                                   -- 13
+  '羊肠小道', '街边小混混',100,30,1,20                                                   -- 19
 );
 
 INSERT INTO ROOM(name) VALUES (
-  '日出之村大门'                                                                         -- 14
+  '日出之村大门'                                                                         -- 20
 );
 
 -- 整个游戏的大boss！！所以要在前面放一些药剂什么之类的对吧~~~~
 INSERT INTO ROOM(name, boss, blood, strike, defence, exp, die) VALUES (
-  '神秘空间','戴着面具的男人',1000,160,120,200,'男人摘下了面具... ...'                      -- 15
+  '神秘空间','戴着面具的男人',1000,160,120,200,'男人摘下了面具... ...'                      -- 21
 );
 
 -- 对对对，就是冰封。记得把冰封的名字写到对话里去啊！！
 INSERT INTO ROOM(name, boss, blood, strike, defence, exp, die) VALUES (
-  '神秘空间内厅','开发者',1000,150,100,200,'开发者的程序报错了！'                             -- 16
+  '神秘空间内厅','开发者',1000,150,100,200,'开发者的程序报错了！'                             -- 22
 );
 
 INSERT INTO ROOM(name,  boss, blood, strike, defence, exp, die) VALUES (
-  '神秘空间祭坛','果冻',800,130,100,180,'果冻正在打酱油... ...'                               -- 17
+  '神秘空间祭坛','果冻',800,130,100,180,'果冻正在打酱油... ...'                               -- 23
 );
 
 INSERT INTO ROOM(name) VALUES (
-  '日出村民居'                                                                           -- 18
+  '日出村民居'                                                                           -- 24
 );
 
 INSERT INTO ROOM(name, welc, boss, blood, strike, defence, exp, die) VALUES (
-  '日出村教堂','你瞬间被这里神圣的气息闪瞎了。' , '聆听忏悔的牧师',200, 30, 20, 40, '牧师聆听着忏悔。' -- 19
+  '日出村教堂','你瞬间被这里神圣的气息闪瞎了。' , '聆听忏悔的牧师',200, 30, 20, 40, '牧师聆听着忏悔。' -- 25
 );
 
 INSERT INTO ROOM(name, boss, blood, strike, defence, exp, die) VALUES (
-  '神秘的井', '打水的熊孩子',50, 10, 1, 5, '熊孩子掉头就跑。'                                 -- 20
+  '神秘的井', '打水的熊孩子',50, 10, 1, 5, '熊孩子掉头就跑。'                                 -- 26
 );
 
 INSERT INTO ROOM(name, welc) VALUES (
-  '井底', '这里很潮湿，阴森恐怖。'                                                          -- 21
+  '井底', '这里很潮湿，阴森恐怖。'                                                          -- 27
 );
 
 INSERT INTO ROOM(name, welc, boss, blood, strike, defence, exp, die) VALUES (
-  '井底通道', '空气中弥漫着阴冷潮湿的气息，通道很长，看不到尽头。', '戴头灯的探险家',400, 100, 50, 80, '探险家的头灯没电了！'-- 22
+  '井底通道', '空气中弥漫着阴冷潮湿的气息，通道很长，看不到尽头。', '戴头灯的探险家',400, 100, 50, 80, '探险家的头灯没电了！'-- 28
 );
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
