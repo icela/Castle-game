@@ -336,7 +336,7 @@ CREATE TABLE ENDING(
 );
 
 INSERT INTO ENDING(id, sequel, desc) VALUES (
-    0, 1, '您已死亡，请键入reset指令重置游戏或键入exit指令退出游戏。'   --感觉这样写是不是不友好。。。
+    0, 1, '您已死亡，请键入reset指令重置游戏或键入exit指令退出游戏。'   --感觉这样写是不是不友好。。。 TODO 当然不友好！
 );
 
 INSERT INTO ENDING(sequel, desc) VALUES (
@@ -344,6 +344,8 @@ INSERT INTO ENDING(sequel, desc) VALUES (
 );
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
+
+-- TODO 这么多表你真的应付的过来吗
 
 SELECT * FROM ROOM ORDER BY id ASC;
 SELECT * FROM DIR ORDER BY id ASC;

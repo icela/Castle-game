@@ -1,4 +1,4 @@
-package game;
+﻿package game;
 
 import data.database.SQLiteDatabase;
 import data.database.TextDatabase;
