@@ -33,7 +33,7 @@ INSERT INTO ROOM(name, welc, boss, blood, strike, defence, exp, die) VALUES (
   '小酒吧','一大股酒香飘来。','酒吧流氓', 150,10,5,5,'酒吧流氓喝醉了！'                  -- 3
 );
 
-INSERT INTO ROOM(name, welc, boss, blood, strike, defence, exp, die) VALUES (
+INSERT INTO ROOM(name, welc) VALUES (
   '书房','阳光从顶窗斜射下来，显得安宁祥和。'                                           -- 4
 );
 
@@ -138,7 +138,7 @@ INSERT INTO ROOM(name, welc, boss, blood, strike, defence, exp, die) VALUES (
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE DIR(id INTEGER PRIMARY KEY AUTOINCREMENT, from_text TEXT, to_text TEXT);
-
+-- TODO 其实我觉着直接用房间名称。。。就是执行map的时候就显示<id> <可用房间名字>，然后就go <id>，但是感觉关联的时候会是个问题。。。要不就map的时候显示<south/...啥的> <房间名字>然后还是go <south...啥的>？？
 INSERT INTO DIR(from_text, to_text) VALUES ('up', 'down');          --1
 INSERT INTO DIR(from_text, to_text) VALUES ('north', 'south');      --2
 INSERT INTO DIR(from_text, to_text) VALUES ('east', 'west');        --3
@@ -193,6 +193,7 @@ INSERT INTO ITEM(name, event, desc) VALUES ('一块电池', 5, '储存着电能�
 
 -- 制取王水： NaCl+H2SO4（浓）=微热=NaHSO4+HCl↑       NHO3(1份)+HCL(3份)=王水
 -- 我靠你写这个干嘛  ——冰封
+-- 剧情需要。到时候要有条故事线要配制王水腐蚀门锁的[滑稽][滑稽]
 
 INSERT INTO ITEM(name, event, desc) VALUES ('聚四氟乙烯试管', 5, '可以用来盛放具有超强腐蚀性的试剂。');                -- 13
 INSERT INTO ITEM(name, event, desc) VALUES ('盐', 7, '实验用盐氯化钠。不能食用！');                                 -- 14
@@ -321,7 +322,7 @@ INSERT INTO INFO(id, context) VALUES(
 );
 
 INSERT INTO INFO(context) VALUES(
-    '（封面）奶茶\r\n\r\n0001\r\n\t感谢上帝！\r\n\t我终于进入埃弗顿独立研究计划了！这里应该足够安全让我能做我想做的事！\r\n\r\n\r\n\t但... ...真的足够安全吗... ...\r\n1215\r\n\tGA-17（被划掉，看不清楚）了！整个基地都沉浸在喜（被划掉，看不清楚）可贺！！\r\n2071\r\n\t泄露更加严重了... ...\r\n\t希望足够安全。\r\n2094\r\n\t（被撕掉）'
+    '（封面题字）MilkTea's\r\n\r\n0001\r\n\t感谢上帝！\r\n\t我终于进入埃弗顿独立研究计划了！这里应该足够安全让我能做我想做的事！\r\n\r\n\r\n\t但... ...真的足够安全吗... ...\r\n1215\r\n\tGA-17（被划掉，看不清楚）了！整个基地都沉浸在喜（被划掉，看不清楚）可贺！！\r\n2071\r\n\t泄露更加严重了... ...\r\n\t希望足够安全。\r\n2094\r\n\t（被撕掉）'
 );
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -336,7 +337,7 @@ CREATE TABLE ENDING(
 );
 
 INSERT INTO ENDING(id, sequel, desc) VALUES (
-    0, 1, '您已死亡，请键入reset指令重置游戏或键入exit指令退出游戏。'   --感觉这样写是不是不友好。。。 TODO 当然不友好！
+    0, 1, '===============\r\n\t很抱歉，您已死亡\r\n===============\r\n请键入reset指令重置游戏或键入exit指令退出游戏。'
 );
 
 INSERT INTO ENDING(sequel, desc) VALUES (
