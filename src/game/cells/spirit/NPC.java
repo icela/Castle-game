@@ -9,20 +9,8 @@ public class NPC extends Cell {
 	private int item;
 	private String hello;
 
-	public NPC(int id, String name, int room, int item, String hello, ArrayList<Chat> chat) {
-		super(name);
-		this.id = id;
-		this.chat = chat;
-		this.item = item;
-		this.room = room;
-		this.hello = hello;
-	}
-
 	public NPC(int id, String name, int room, String hello, ArrayList<Chat> chat) {
-		super(name);
-		this.id = id;
-		this.chat = chat;
-		this.room = room;
+		this(id, name, room, chat);
 		this.hello = hello;
 	}
 
@@ -39,6 +27,11 @@ public class NPC extends Cell {
 		this.item = item;
 		this.chat = chat;
 		this.room = room;
+	}
+
+	public NPC(int id, String name, int room, int item, String hello, ArrayList<Chat> chat) {
+		this(id, name, room, item, chat);
+		this.hello = hello;
 	}
 
 // TODO 这是干啥的呢。。。

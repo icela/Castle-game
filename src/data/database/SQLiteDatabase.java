@@ -59,9 +59,8 @@ public class SQLiteDatabase
 					set.getInt("strike"),
 					set.getInt("defence"),
 					set.getInt("exp"),
-					set.getString("die"）,
-							set.getString("sequel")
-					));
+					set.getString("die")
+			));
 		}
 		set.close();
 		return rooms;
@@ -111,6 +110,15 @@ public class SQLiteDatabase
 		int npcid = set.getInt("id");
 		ResultSet chatSet = statement.executeQuery("SELECT * FROM CHAT WHERE npcid=" + npcid);
 		ArrayList<NPC> NPCs = new ArrayList<>();
+		ArrayList<Chat> Chats = new ArrayList<>();
+		while (chatSet.next()) {
+			Chats.add(new Chat(
+					chatSet.getInt("id"),
+					chatSet.getString("text"),
+					chatSet.getBoolean("isp"),
+					chatSet.getString("sequel")
+			));
+		}
 		while (set.next()) {
 			NPCs.add(new NPC(
 					npcid,
@@ -118,16 +126,11 @@ public class SQLiteDatabase
 					set.getInt("room"),
 					set.getInt("item"),
 					set.getString("hello"),
-					new Chat(
-							chatSet.getInt("id"),
-							chatSet.getString("text"),
-							chatSet.getBoolean("isp"),
-							chatSet.getString("sequel")
-					)
+					Chats
 			));
 		}
 		set.close();
-		return items;
+		return NPCs;
 	}
 
 	/**
