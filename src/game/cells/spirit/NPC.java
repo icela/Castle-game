@@ -1,17 +1,18 @@
 package game.cells.spirit;
 
 import game.cells.item.Item;
+import game.cells.spirit.Chat;
 
 import java.util.ArrayList;
 
 public class NPC extends Cell {
 
-	private ArrayList<String> chat;
+	private ArrayList<Chat> chat;
 	private int id, item, room;
-	private final ArrayList<Item> items = new ArrayList<>();
+	private final int item;
 
 
-	public NPC(int id, int name, int room, ArrayList<String> chat, int item) {
+	public NPC(int id, int name, int room, ArrayList<Chat> chat, int item) {
 		super(name);
 		this.id = id;
 		this.chat = chat;
@@ -19,16 +20,17 @@ public class NPC extends Cell {
 		this.room = room;
 	}
 	
-	public NPC(int id, int name, int room, ArrayList<String> chat) {
+	public NPC(int id, int name, int room, ArrayList<Chat> chat) {
 		super(name);
 		this.id = id;
 		this.chat=chat;
 		this.room=room;
 	}
 
-	public void itemGet(Item item) {
-		items.add(item);
-	}
+// TODO ???????????
+//	public void itemGet(Item item) {
+//		items.add(item);
+//	}
 
 //	public void itemGive(int index,int num){
 //		items.get(index).getNumOf(num);
