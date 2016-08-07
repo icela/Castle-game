@@ -90,7 +90,7 @@ INSERT INTO ROOM(name, welc) VALUES(
 );
 
 -- 暂且先这样凑合。。。。。。
-INSERT INTO ROOM(name, welc, sequel ) VALUES(
+INSERT INTO ROOM(name, welc, sequel) VALUES(
     '计算机旁的书架', '有一本小本子，一张纸还有一个特殊的SD卡。', 'CHOOSE^0'		-18
 );
 
@@ -322,7 +322,7 @@ INSERT INTO INFO(id, context) VALUES(
 );
 
 INSERT INTO INFO(context) VALUES(
-    '（封面题字）MilkTea's\r\n\r\n0001\r\n\t感谢上帝！\r\n\t我终于进入埃弗顿独立研究计划了！这里应该足够安全让我能做我想做的事！\r\n\r\n\r\n\t但... ...真的足够安全吗... ...\r\n1215\r\n\tGA-17（被划掉，看不清楚）了！整个基地都沉浸在喜（被划掉，看不清楚）可贺！！\r\n2071\r\n\t泄露更加严重了... ...\r\n\t希望足够安全。\r\n2094\r\n\t（被撕掉）'
+    '（封面题字）MilkTea\'s\r\n\r\n0001\r\n\t感谢上帝！\r\n\t我终于进入埃弗顿独立研究计划了！这里应该足够安全让我能做我想做的事！\r\n\r\n\r\n\t但... ...真的足够安全吗... ...\r\n1215\r\n\tGA-17（被划掉，看不清楚）了！整个基地都沉浸在喜（被划掉，看不清楚）可贺！！\r\n2071\r\n\t泄露更加严重了... ...\r\n\t希望足够安全。\r\n2094\r\n\t（被撕掉）'
 );
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -330,6 +330,7 @@ INSERT INTO INFO(context) VALUES(
 -- id: 结局ID: 目前暂定四个结局，即0~3     sequel: 对应后果编号      desc: 描述
 -- 对应后果编号:
 -- 0: 游戏结束     1: 死亡
+
 CREATE TABLE ENDING(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     sequel INTEGER，

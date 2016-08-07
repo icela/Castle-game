@@ -58,7 +58,8 @@ public class SQLiteDatabase
 					set.getInt("strike"),
 					set.getInt("defence"),
 					set.getInt("exp"),
-					set.getString("die")
+					set.getString("die"）,
+					set.getString("sequel")
 			));
 		}
 		set.close();
@@ -96,29 +97,28 @@ public class SQLiteDatabase
 					set.getString("name"),
 					set.getInt("event"),
 					set.getString("extra"),
-					set.getString("desc")
+					set.getString("desc"),
+					set.getString("reaction")
 			));
 		}
 		set.close();
 		return items;
 	}
-	/*
-	public ArrayList<Object> getNPC() throws SQLException {
+	public ArrayList<NPC> getNPC() throws SQLException {
 		ResultSet set = statement.executeQuery("SELECT * FROM NPC");
-		ArrayList<Item> NPCs = new ArrayList<>();
+		ResultSet chatSet = statement.executeQuery("SELECT * FROM CHAT SHOT"+""); // TODO 将这个SQL语句写成搜索talk表中npcid字段与npc编号相等的字段。
+		ArrayList<NPC> NPCs = new ArrayList<>();
 		while (set.next()) {
 			NPCs.add(new NPC(
 					set.getInt("id"),
 					set.getString("name"),
-					set.getInt("event"),
-					set.getString("extra"),
-					set.getString("desc")
+					set.getInt("room"),
+					set.getInt("item")
 			));
 		}
 		set.close();
 		return items;
 	}
-	*/
 
 	/**
 	 * CREATE TABLE BOSS_GET_ITEM (room INTEGER, item INTEGER);

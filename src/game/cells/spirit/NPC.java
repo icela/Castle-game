@@ -6,13 +6,24 @@ import java.util.ArrayList;
 
 public class NPC extends Cell {
 
-	private String chat = "";
+	private ArrayList<String> chat;
+	private int id, item, room;
 	private final ArrayList<Item> items = new ArrayList<>();
 
 
-	public NPC(String name, String chat) {
+	public NPC(int id, int name, int room, ArrayList<String> chat, int item) {
 		super(name);
+		this.id = id;
 		this.chat = chat;
+		this.item = item;
+		this.room = room;
+	}
+	
+	public NPC(int id, int name, int room, ArrayList<String> chat) {
+		super(name);
+		this.id = id;
+		this.chat=chat;
+		this.room=room;
 	}
 
 	public void itemGet(Item item) {
