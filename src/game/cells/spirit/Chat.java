@@ -1,22 +1,34 @@
-package game.cells.spirit
+package game.cells.spirit;
 
-import java.utils.HashMap;
 
-public Chat {
-	
+
+/**
+ * Created by Eldath on 2016/8/7 0007.
+ */
+
+public class Chat {
 	private int id;
 	private String text, sequelTable, sequelValue;
-	private boolean isp;
-	
+	private boolean isp, spilt = false;
+
 	public Chat(int id, String text, boolean isp, String sequel) {
 		this.id = id;
 		this.text = text;
 		this.isp = isp;
-		if (text.contains("^")) { //TODO 我的意思是 包含，或许写错了？
-			String[] spilt = sequel.spilt("^");
+		if (text.contains("^")) {
+			spilt = true;
+			String[] spilt = sequel.split("^");
 			this.sequelTable = spilt[0];
 			this.sequelValue = spilt[1];
-		}else
+		} else
 			this.sequelValue = sequel;
+	}
+
+	public String getSequel() {
+		if (spilt)
+			return sequelTable + "^" + sequelValue;
+		else
+			return sequelValue;
+	}
 }
-	
+

@@ -1,5 +1,6 @@
 package data.database;
 
+import game.cells.spirit.Chat;
 import game.cells.spirit.NPC;
 import game.map.RoomItemPair;
 import game.cells.item.Item;
@@ -59,8 +60,8 @@ public class SQLiteDatabase
 					set.getInt("defence"),
 					set.getInt("exp"),
 					set.getString("die"）,
-					set.getString("sequel")
-			));
+							set.getString("sequel")
+					));
 		}
 		set.close();
 		return rooms;
@@ -86,6 +87,7 @@ public class SQLiteDatabase
 
 	/**
 	 * CREATE TABLE ITEM(id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT, event INTEGER, extra TEXT, desc TEXT);
+	 *
 	 * @return items
 	 */
 	public ArrayList<Item> getItems() throws SQLException {
@@ -103,23 +105,25 @@ public class SQLiteDatabase
 		set.close();
 		return items;
 	}
+
 	public ArrayList<NPC> getNPC() throws SQLException {
 		ResultSet set = statement.executeQuery("SELECT * FROM NPC");
 		int npcid = set.getInt("id");
-		ResultSet chatSet = statement.executeQuery("SELECT * FROM CHAT WHERE npcid="+npcid);
+		ResultSet chatSet = statement.executeQuery("SELECT * FROM CHAT WHERE npcid=" + npcid);
 		ArrayList<NPC> NPCs = new ArrayList<>();
 		while (set.next()) {
 			NPCs.add(new NPC(
 					npcid,
 					set.getString("name"),
 					set.getInt("room"),
+					set.getInt("item"),
+					set.getString("hello"),
 					new Chat(
-						chatset.getInt("id"),
-						chatset.getString("text"),
-						chatset.getBit("isp"), // TODO 不知道是不是bit自动转为bool呢。。。
-						chatset.getString("sequel")
+							chatSet.getInt("id"),
+							chatSet.getString("text"),
+							chatSet.getBoolean("isp"),
+							chatSet.getString("sequel")
 					)
-					set.getInt("item")
 			));
 		}
 		set.close();
@@ -128,6 +132,7 @@ public class SQLiteDatabase
 
 	/**
 	 * CREATE TABLE BOSS_GET_ITEM (room INTEGER, item INTEGER);
+	 *
 	 * @return pair
 	 */
 	public ArrayList<RoomItemPair> getRoomItemPairs() throws SQLException {
@@ -144,7 +149,7 @@ public class SQLiteDatabase
 	}
 
 	@Override
-	public void close() throws IOException{
+	public void close() throws IOException {
 		try {
 			statement.close();
 		} catch (SQLException e) {

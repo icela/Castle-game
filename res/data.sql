@@ -243,6 +243,7 @@ INSERT INTO REACTION(a, b, result) VALUES('ITEM^14', 'ITEM^17', 'ITEM^18');
 CREATE TABLE NPC(
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   name TEXT, room INTEGER, item INTEGER
+  hello TEXT
 );
 
 INSERT INTO NPC(id, name, room) VALUES (0, '门卫', 2);         -- 0
@@ -253,8 +254,7 @@ INSERT INTO NPC(name, room) VALUES ('酒吧老板', 2);         -- 1
 -- id: 对话编号     npcid: 对应NPC编号     text: 对话文本      isp: 对话是否由玩家说出：0为不是，1为是。     sequel: 对应后果：后果表名^详细后果编号
 CREATE TABLE CHAT(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    npcid INTEGER,
-    text TEXT, isp BIT,
+    npcid INTEGER,text TEXT, isp BIT,
     sequel TEXT
 );
 
@@ -305,13 +305,13 @@ CREATE TABLE CHOOSE(
 
 -- 太羞耻了！！
 INSERT INTO CHOOSE(id, choiceA, sequelA, choiceB, sequelB, choiceC, sequelC) VALUES(
-0, '看那张纸', 'ITEM^0', '看那本本子', 'INFO^1', '带走特殊的SD卡'， 'ITEM^20'
+    0, '看那张纸', 'ITEM^0', '看那本本子', 'INFO^1', '带走特殊的SD卡'， 'ITEM^20'
 );
 INSERT INTO CHOOSE(choiceA, sequelA ,choiceB, sequelB) VALUES(
-'我是%NAME%，是一名... ...一名游客。','CHAT^1' '我是... ...一位... ...呃... ...商人。','CHAT^1' --0
+    '我是%NAME%，是一名... ...一名游客。','CHAT^1' '我是... ...一位... ...呃... ...商人。','CHAT^1' --0
 );
 INSERT INTO CHOOSE(choiceA, sequelA, choiceB, sequelB) VALUES(
-'居民区怎么会没人呢？', 'CHAT^2' '嗯... ...让我看看', 'END_OF_CHAT'
+    '居民区怎么会没人呢？', 'CHAT^2' '嗯... ...让我看看', 'END_OF_CHAT'
 );
 INSERT INTO CHOOSE(choiceA, sequelA, choiceB, sequelB) VALUES(
     '可以啊，非常乐意。', 'CHAT^2', '不... ...还是算了吧... ...抱歉。', 'CHAT^1'   -- 1

@@ -83,7 +83,7 @@ public abstract class Game
 		commands.put(commandNames[++index], cmd -> {
 			NPC npc = map.currentRoom.isNPCExists(cmd);
 			if (npc != null) {
-				echoln(npc.getChat());
+				echoln(npc.getHello());
 			} else
 				echoln("指定的名称不存在。注：Boss要在被打败之后才能对话。");
 		});
