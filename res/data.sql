@@ -90,7 +90,7 @@ INSERT INTO ROOM(name, welc) VALUES(
 );
 
 -- 暂且先这样凑合。。。。。。
-INSERT INTO ROOM(name, welc, sequel ) VALUES(
+INSERT INTO ROOM(name, welc, sequel) VALUES(
     '计算机旁的书架', '有一本小本子，一张纸还有一个特殊的SD卡。', 'CHOOSE^0'		-18
 );
 
@@ -233,42 +233,42 @@ INSERT INTO NPC(name, room) VALUES ('酒吧老板', 2);         -- 1
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
 -- id: 对话编号     npcid: 对应NPC编号     text: 对话文本      isp: 对话是否由玩家说出：0为不是，1为是。     sequel: 对应后果：后果表名^详细后果编号
-CREATE TABLE TALK(
+CREATE TABLE CHAT(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     npcid INTEGER,
     text TEXT, isp BIT,
     sequel TEXT
 );
 
-INSERT INTO TALK(id, npcid, text ,isp, sequel) VALUES(
+INSERT INTO CHAT(id, npcid, text ,isp, sequel) VALUES(
     0, 0, '很高兴见到你。请问你是谁？', 0, 'CHOOSE^0'                            --0
 );
 
-INSERT INTO TALK(npcid, text, isp, sequel) VALUES(
+INSERT INTO CHAT(npcid, text, isp, sequel) VALUES(
     0, '哦... ...欢迎您！远道而来的客人。向左通向教堂，向右通向古井，直走就是居民区，但是... ...居民区现在没人。', 0, 'CHOOSE^1' --1
 );
 
-INSERT INTO TALK(npcid, text, isp, sequel) VALUES(
-    0, '因为... ...额... ...因为... ...人都走了呀... ...我也不清楚。', 0, 'END_OF＿TALK'--2
+INSERT INTO CHAT(npcid, text, isp, sequel) VALUES(
+    0, '因为... ...额... ...因为... ...人都走了呀... ...我也不清楚。', 0, 'END_OF＿CHAT'--2
 );
 
-INSERT INTO TALK(npcid, text, isp, sequel) VALUES (
+INSERT INTO CHAT(npcid, text, isp, sequel) VALUES (
     1, '您好，欢迎来到城堡酒吧。要来一杯吗？', 0, 'CHOOSE^1'                       -- 2
 );
 
-INSERT INTO TALK(npcid, text, isp, sequel) VALUES (
-    1, '嗯... ...有点可惜。不管怎样，欢迎再次光临城堡酒吧！', 0, 'END_OF_TALK'        -- 3
+INSERT INTO CHAT(npcid, text, isp, sequel) VALUES (
+    1, '嗯... ...有点可惜。不管怎样，欢迎再次光临城堡酒吧！', 0, 'END_OF_CHAT'        -- 3
 );
 
-INSERT INTO TALK(npcid, text, isp, sequel) VALUES (
+INSERT INTO CHAT(npcid, text, isp, sequel) VALUES (
     1, '您是刚来这里的外地人吧？', 0, 'CHOOSE^1'                                    -- 4
 );
 
-INSERT INTO TALK(npcid, text, isp, sequel) VALUES (
+INSERT INTO CHAT(npcid, text, isp, sequel) VALUES (
     1, '这是哪？这里就是城堡啊！', 0, 'CHOOSE^2'                                     -- 5
 );
 
-INSERT INTO TALK(npcid, text, isp, sequel) VALUES (
+INSERT INTO CHAT(npcid, text, isp, sequel) VALUES (
     1, '难怪我从没有见过你... ...你是住在这的吧？', 0, 'CHOOSE^'                      -- 6
 );
 
@@ -290,21 +290,21 @@ INSERT INTO CHOOSE(id, choiceA, sequelA, choiceB, sequelB, choiceC, sequelC) VAL
 0, '看那张纸', 'ITEM^0', '看那本本子', 'INFO^1', '带走特殊的SD卡'， 'ITEM^20'
 );
 INSERT INTO CHOOSE(choiceA, sequelA ,choiceB, sequelB) VALUES(
-'我是%NAME%，是一名... ...一名游客。','TALK^1' '我是... ...一位... ...呃... ...商人。','TALK^1' --0
+'我是%NAME%，是一名... ...一名游客。','CHAT^1' '我是... ...一位... ...呃... ...商人。','CHAT^1' --0
 );
 INSERT INTO CHOOSE(choiceA, sequelA, choiceB, sequelB) VALUES(
-'居民区怎么会没人呢？', 'TALK^2' '嗯... ...让我看看', 'END_OF_TALK'
+'居民区怎么会没人呢？', 'CHAT^2' '嗯... ...让我看看', 'END_OF_CHAT'
 );
 INSERT INTO CHOOSE(choiceA, sequelA, choiceB, sequelB) VALUES(
-    '可以啊，非常乐意。', 'TALK^2', '不... ...还是算了吧... ...抱歉。', 'TALK^1'   -- 1
-);
-
-INSERT INTO CHOOSE(choiceA, sequelA, choiceB, sequelB) VALUES(
-    '对，我是刚来的外地人。', 'TALK^1', '我连这是哪都还不知道呢！', 'TALK^2'           -- 2                                       -- 1
+    '可以啊，非常乐意。', 'CHAT^2', '不... ...还是算了吧... ...抱歉。', 'CHAT^1'   -- 1
 );
 
 INSERT INTO CHOOSE(choiceA, sequelA, choiceB, sequelB) VALUES(
-    '一直问下去。', 'TALK^', '问问城堡的来历', 'TALK^'
+    '对，我是刚来的外地人。', 'CHAT^1', '我连这是哪都还不知道呢！', 'CHAT^2'           -- 2                                       -- 1
+);
+
+INSERT INTO CHOOSE(choiceA, sequelA, choiceB, sequelB) VALUES(
+    '一直问下去。', 'CHAT^', '问问城堡的来历', 'CHAT^'
 );
 
 INSERT INTO CHOOSE(choiceA, sequelA, choiceB, sequelB) VALUES(
@@ -322,7 +322,7 @@ INSERT INTO INFO(id, context) VALUES(
 );
 
 INSERT INTO INFO(context) VALUES(
-    '（封面题字）MilkTea's\r\n\r\n0001\r\n\t感谢上帝！\r\n\t我终于进入埃弗顿独立研究计划了！这里应该足够安全让我能做我想做的事！\r\n\r\n\r\n\t但... ...真的足够安全吗... ...\r\n1215\r\n\tGA-17（被划掉，看不清楚）了！整个基地都沉浸在喜（被划掉，看不清楚）可贺！！\r\n2071\r\n\t泄露更加严重了... ...\r\n\t希望足够安全。\r\n2094\r\n\t（被撕掉）'
+    '（封面题字）MilkTea\'s\r\n\r\n0001\r\n\t感谢上帝！\r\n\t我终于进入埃弗顿独立研究计划了！这里应该足够安全让我能做我想做的事！\r\n\r\n\r\n\t但... ...真的足够安全吗... ...\r\n1215\r\n\tGA-17（被划掉，看不清楚）了！整个基地都沉浸在喜（被划掉，看不清楚）可贺！！\r\n2071\r\n\t泄露更加严重了... ...\r\n\t希望足够安全。\r\n2094\r\n\t（被撕掉）'
 );
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -330,6 +330,7 @@ INSERT INTO INFO(context) VALUES(
 -- id: 结局ID: 目前暂定四个结局，即0~3     sequel: 对应后果编号      desc: 描述
 -- 对应后果编号:
 -- 0: 游戏结束     1: 死亡
+
 CREATE TABLE ENDING(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     sequel INTEGER，
@@ -354,7 +355,7 @@ SELECT * FROM MAP ORDER BY id ASC;
 SELECT * FROM ITEM ORDER BY id ASC;
 SELECT * FROM BOSS_GET_ITEM ORDER BY id ASC;
 SELECT * FROM NPC ORDER BY id ASC;
-SELECT * FROM TALK ORDER BY id ASC;
+SELECT * FROM CHAT ORDER BY id ASC;
 SELECT * FROM CHOOSE ORDER BY id ASC;
 SELECT * FROM ENDING ORDER BY id ASC;
 SELECT * FROM INFO ORDER BY id ASC;

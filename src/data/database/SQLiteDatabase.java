@@ -58,7 +58,8 @@ public class SQLiteDatabase
 					set.getInt("strike"),
 					set.getInt("defence"),
 					set.getInt("exp"),
-					set.getString("die")
+					set.getString("die"）,
+					set.getString("sequel")
 			));
 		}
 		set.close();
@@ -96,29 +97,35 @@ public class SQLiteDatabase
 					set.getString("name"),
 					set.getInt("event"),
 					set.getString("extra"),
-					set.getString("desc")
+					set.getString("desc"),
+					set.getString("reaction")
 			));
 		}
 		set.close();
 		return items;
 	}
-	/*
-	public ArrayList<Object> getNPC() throws SQLException {
+	public ArrayList<NPC> getNPC() throws SQLException {
 		ResultSet set = statement.executeQuery("SELECT * FROM NPC");
-		ArrayList<Item> NPCs = new ArrayList<>();
+		int npcid = set.getInt("id");
+		ResultSet chatSet = statement.executeQuery("SELECT * FROM CHAT WHERE npcid="+npcid);
+		ArrayList<NPC> NPCs = new ArrayList<>();
 		while (set.next()) {
 			NPCs.add(new NPC(
-					set.getInt("id"),
+					npcid,
 					set.getString("name"),
-					set.getInt("event"),
-					set.getString("extra"),
-					set.getString("desc")
+					set.getInt("room"),
+					new Chat(
+						chatset.getInt("id"),
+						chatset.getString("text"),
+						chatset.getBit("isp"), // TODO 不知道是不是bit自动转为bool呢。。。
+						chatset.getString("sequel")
+					)
+					set.getInt("item")
 			));
 		}
 		set.close();
 		return items;
 	}
-	*/
 
 	/**
 	 * CREATE TABLE BOSS_GET_ITEM (room INTEGER, item INTEGER);
@@ -143,6 +150,7 @@ public class SQLiteDatabase
 			statement.close();
 		} catch (SQLException e) {
 			// 告诉你，这叫嫁祸于IOException #(滑稽)
+			// 这样真的好嘛... ...#(滑稽）
 			throw new IOException(e.getSQLState());
 		}
 	}
