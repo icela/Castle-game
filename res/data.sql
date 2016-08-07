@@ -91,50 +91,58 @@ INSERT INTO ROOM(name, welc) VALUES(
 
 -- 暂且先这样凑合。。。。。。
 INSERT INTO ROOM(name, welc, sequel) VALUES(
-    '计算机旁的书架', '有一本小本子，一张纸还有一个特殊的SD卡。', 'CHOOSE^0'		-18
+    '计算机旁的书架', '有一本小本子，一张纸还有一个特殊的SD卡。', 'CHOOSE^0'		--18
 );
 
+INSERT INTO ROOM(name, welc) VALUES(
+	'计算机旁的一扇门', '门被金黄色的铁链锁住，打不开。'							--19
+
 INSERT INTO ROOM(name, boss, blood, strike, defence, exp) VALUES (
-  '羊肠小道', '街边小混混',100,30,1,20                                                   -- 19
+  '羊肠小道', '街边小混混',100,30,1,20                                                   -- 20
 );
 
 INSERT INTO ROOM(name) VALUES (
-  '日出之村大门'                                                                         -- 20
+  '日出之村大门'                                                                         -- 21
 );
 
 -- 整个游戏的大boss！！所以要在前面放一些药剂什么之类的对吧~~~~
 INSERT INTO ROOM(name, boss, blood, strike, defence, exp, die) VALUES (
-  '神秘空间','戴着面具的男人',1000,160,120,200,'男人摘下了面具... ...'                      -- 21
+  '神秘空间','戴着面具的男人',1000,160,120,200,'男人摘下了面具... ...'                      -- 22
 );
 
 -- 对对对，就是冰封。记得把冰封的名字写到对话里去啊！！
 INSERT INTO ROOM(name, boss, blood, strike, defence, exp, die) VALUES (
-  '神秘空间内厅','开发者',1000,150,100,200,'开发者的程序报错了！'                             -- 22
+  '神秘空间内厅','开发者',1000,150,100,200,'开发者的程序报错了！'                             -- 23
 );
 
 INSERT INTO ROOM(name,  boss, blood, strike, defence, exp, die) VALUES (
-  '神秘空间祭坛','果冻',800,130,100,180,'果冻正在打酱油... ...'                               -- 23
+  '神秘空间祭坛','果冻',800,130,100,180,'果冻正在打酱油... ...'                               -- 24
 );
 
 INSERT INTO ROOM(name) VALUES (
-  '日出村民居'                                                                           -- 24
+  '日出村民居'                                                                           -- 25
 );
 
 INSERT INTO ROOM(name, welc, boss, blood, strike, defence, exp, die) VALUES (
-  '日出村教堂','你瞬间被这里神圣的气息闪瞎了。' , '聆听忏悔的牧师',200, 30, 20, 40, '牧师聆听着忏悔。' -- 25
+  '日出村教堂','你瞬间被这里神圣的气息闪瞎了。' , '聆听忏悔的牧师',200, 30, 20, 40, '牧师聆听着忏悔。' -- 26
 );
 
 INSERT INTO ROOM(name, boss, blood, strike, defence, exp, die) VALUES (
-  '神秘的井', '打水的熊孩子',50, 10, 1, 5, '熊孩子掉头就跑。'                                 -- 26
+  '神秘的井', '打水的熊孩子',50, 10, 1, 5, '熊孩子掉头就跑。'                                 -- 27
 );
 
 INSERT INTO ROOM(name, welc) VALUES (
-  '井底', '这里很潮湿，阴森恐怖。'                                                          -- 27
+  '井底', '这里很潮湿，阴森恐怖。'                                                          -- 28
 );
 
 INSERT INTO ROOM(name, welc, boss, blood, strike, defence, exp, die) VALUES (
-  '井底通道', '空气中弥漫着阴冷潮湿的气息，通道很长，看不到尽头。', '戴头灯的探险家',400, 100, 50, 80, '探险家的头灯没电了！'-- 28
+  '井底通道', '空气中弥漫着阴冷潮湿的气息，通道很长，看不到尽头。', '戴头灯的探险家',400, 100, 50, 80, '探险家的头灯没电了！'-- 29
 );
+
+-- TODO 看了剧本再填完。。。
+INSERT INTO ROOM(name, welc) VALUES (
+	'通道尽头的一扇门',''
+)
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE DIR(id INTEGER PRIMARY KEY AUTOINCREMENT, from_text TEXT, to_text TEXT);
@@ -164,7 +172,6 @@ CREATE TABLE ITEM(
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   name TEXT, event INTEGER,
   extra TEXT, desc TEXT
-  reaction TEXT
 );
 
 INSERT INTO ITEM(id, name, event, desc) VALUES (0, '地图', 0, '神秘而古旧的地图。');                            -- 0
@@ -184,8 +191,8 @@ INSERT INTO ITEM(name, event, extra, desc) VALUES ('超大恢复剂', 3, '250', 
 -- 8: 带损耗体力值副作用的化学反应用途：每分钟损耗体力值 
 -- 9: 背包扩容用途，但同时会损耗体力值：扩容大小^每分钟体力值
 
-INSERT INTO ITEM(name, event, desc, reaction) VALUES ('看似古老的钥匙', 4, '可以用来... ...呃... ...开门？', 'ROOM^');                -- 7
-INSERT INTO ITEM(name, event, desc, reaction) VALUES ('奶茶的口令牌', 4, '呃... ...', 'ROOM^');                                    -- 8
+INSERT INTO ITEM(name, event, desc) VALUES ('看似古老的钥匙', 4, '可以用来... ...呃... ...开门？');                -- 7
+INSERT INTO ITEM(name, event, desc) VALUES ('奶茶的口令牌', 4, '呃... ...');                                    -- 8
 INSERT INTO ITEM(name, event, desc) VALUES ('奇怪的硬币', 4, '用途未知。');                                       -- 9
 INSERT INTO ITEM(name, event, desc) VALUES ('一把小刀', 5, '任何用途。');                                        -- 10
 INSERT INTO ITEM(name, event, desc) VALUES ('一组齿轮', 5, '看上去是什么机械的冗余部件。');                         -- 11
@@ -199,9 +206,9 @@ INSERT INTO ITEM(name, event, desc) VALUES ('聚四氟乙烯试管', 5, '可以�
 INSERT INTO ITEM(name, event, desc) VALUES ('盐', 7, '实验用盐氯化钠。不能食用！');                                 -- 14
 INSERT INTO ITEM(name, event, extra, desc) VALUES ('硝酸', 8,'7', '重要的化工原料，有强腐蚀性。小心！');             -- 15
 INSERT INTO ITEM(name, event, desc) VALUES ('电炉', 7, '用来加热试剂，亦可用来融化沙子以制成玻璃。');                   -- 16
-INSERT INTO ITEM(name, event, extra, desc) VALUES ('浓硫酸', 8,'3', '重要的化工原料，有腐蚀性。小心！');            -- 17
-INSERT INTO ITEM(name, event, extra, desc, reaction) VALUES('盐酸'， 8， '1', '化学反应的中间物。', 'ITEM^3*15')  -- 18
-INSERT INTO ITEM(name, event, extra, desc) VALUES ('王水', 8 '15', '具有极强腐蚀性的化学试剂。小心！')              -- 19
+INSERT INTO ITEM(name, event, extra, desc) VALUES ('浓硫酸', 8,'3', '重要的化工原料，有腐蚀性。小心！');           	 -- 17
+INSERT INTO ITEM(name, event, extra, desc) VALUES('盐酸'， 8， '1', '浓硫酸与氯化钠在微热条件下反应的制成品。');		 -- 18
+INSERT INTO ITEM(name, event, extra, desc) VALUES ('王水', 8 '15', '具有极强腐蚀性的化学试剂。小心！');         	  -- 19
 INSERT INTO ITEM(name, event, desc) VALUES ('未知化学试剂', 5, '未知用途。'); -- 制备错误的结果                      -- 20
 
 INSERT INTO ITEM(name, event, desc) VALUES ('特殊的SD卡', 5, '存储资料... ...吧。');                                -- 21
@@ -217,6 +224,17 @@ INSERT INTO ITEM(name, event, extra, desc) VALUES (
 '32GB KINSTON', 9, '32^20' '可以给背包扩充32个位置,但同时每分钟体力值损耗加20。'                                        -- 25
 );         -- 22
 
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+-- a: 反应物A编号 b: 反应物B编号 bNum: 反应物B数量（默认为1） reault: 产物编号
+-- 本表不仅仅可用来表示物品之间的反应。
+
+CREATE TABLE REACTION(
+	a TEXT, b TEXT
+	bNum INTEGER, result TEXT
+);
+
+INSERT INTO REACTION(a, b, result) VALUES('ITEM^14', 'ITEM^17', 'ITEM^18');
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
 -- id: NPC编号     name: 名字      room: 所处房间编号         item: 死亡掉落物品编号

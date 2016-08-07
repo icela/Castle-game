@@ -27,7 +27,7 @@ public class NPC extends Cell {
 		this.room=room;
 	}
 
-// TODO ???????????
+// TODO 
 //	public void itemGet(Item item) {
 //		items.add(item);
 //	}

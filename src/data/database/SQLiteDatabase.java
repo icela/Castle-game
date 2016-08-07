@@ -97,8 +97,7 @@ public class SQLiteDatabase
 					set.getString("name"),
 					set.getInt("event"),
 					set.getString("extra"),
-					set.getString("desc"),
-					set.getString("reaction")
+					set.getString("desc")
 			));
 		}
 		set.close();
