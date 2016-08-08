@@ -3,7 +3,8 @@ package game.cells.spirit;
 import java.util.HashMap;
 
 /**
- * Created by Eldath on 2016/8/8 0008.
+ * @author Eldath
+ *         Created by Eldath on 2016/8/8 0008.
  */
 public class Reaction {
 	private String a, b, result;
@@ -14,5 +15,23 @@ public class Reaction {
 		this.result = result;
 	}
 
-	public String getReaction(){return null;}//TODO 算了等我明天再写。。。
+	public String getA() {
+		return a;
+	}
+
+	public String getB() {
+		return b;
+	}
+
+	public String getResult() {
+		return result;
+	}
+
+	public HashMap<String, String> getReaction() {
+		HashMap<String, String> result1 = new HashMap<>(3, 1);
+		result1.put("A", a);
+		result1.put("B", b);
+		result1.put("RESULT", result);
+		return result1;
+	}
 }

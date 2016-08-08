@@ -2,6 +2,7 @@ package data.database;
 
 import game.cells.spirit.Chat;
 import game.cells.spirit.NPC;
+import game.cells.spirit.Reaction;
 import game.map.RoomItemPair;
 import game.cells.item.Item;
 import game.map.Exit;
@@ -91,14 +92,24 @@ public class SQLiteDatabase
 	 */
 	public ArrayList<Item> getItems() throws SQLException {
 		ResultSet set = statement.executeQuery("SELECT * FROM ITEM");
+		int itemID=set.getInt("id");
+		ResultSet reactionSet=statement.executeQuery("SELECT * FROM REACTION WHERE a=ITEM^"+itemID);
+		ArrayList<Reaction> Reactions = new ArrayList<>();
+		while (reactionSet.next())
+			Reactions.add(new Reaction(
+					reactionSet.getString("a"),
+					reactionSet.getString("b"),
+					reactionSet.getString("result")
+			));
 		ArrayList<Item> items = new ArrayList<>();
 		while (set.next()) {
 			items.add(new Item(
-					set.getInt("id"),
+					itemID,
 					set.getString("name"),
 					set.getInt("event"),
 					set.getString("extra"),
-					set.getString("desc")
+					set.getString("desc"),
+					Reactions
 			));
 		}
 		set.close();

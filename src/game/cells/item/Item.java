@@ -1,9 +1,14 @@
 package game.cells.item;
 
+import game.cells.spirit.Reaction;
+
+import java.util.ArrayList;
+
 public class Item {
 	private String name = "";
 	private String desc = "";
 	private int id;
+	private ArrayList<Reaction> reaction = new ArrayList<>();
 
 	//	public boolean get = false;
 	public int num;
@@ -21,8 +26,8 @@ public class Item {
 	 *                       这样避免小血瓶中血瓶每一个都写一个差不多的方法，看着难受
 	 * @param desc           物品介绍，仅用于查看物品信息
 	 */
-	public Item(int id, String name, int eventId, String eventExtraData, String desc) {
-		this(id, name, eventId, eventExtraData, desc, 0);
+	public Item(int id, String name, int eventId, String eventExtraData, String desc, ArrayList<Reaction> reaction) {
+		this(id, name, eventId, eventExtraData, desc, 0, reaction);
 	}
 
 	/**
@@ -35,13 +40,14 @@ public class Item {
 	 * @param desc           {@link #desc}
 	 * @param num            物品数量
 	 */
-	public Item(int id, String name, int eventId, String eventExtraData, String desc, int num) {
+	public Item(int id, String name, int eventId, String eventExtraData, String desc, int num, ArrayList<Reaction> reaction) {
 		this.name = name;
 		this.num = num;
 		this.eventId = eventId;
 		this.eventExtraData = eventExtraData;
 		this.id = id;
 		this.desc = desc;
+		this.reaction = reaction;
 	}
 
 	public String getName() {

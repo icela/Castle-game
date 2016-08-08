@@ -230,11 +230,12 @@ INSERT INTO ITEM(name, event, extra, desc) VALUES (
 -- 本表不仅仅可用来表示物品之间的反应。
 
 CREATE TABLE REACTION(
-	a TEXT, b TEXT
-	bNum INTEGER, result TEXT
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+	a TEXT, b TEXT, bNum INTEGER,
+	result TEXT
 );
 
-INSERT INTO REACTION(a, b, result) VALUES('ITEM^14', 'ITEM^17', 'ITEM^18');
+INSERT INTO REACTION(id, a, b, result) VALUES(0, 'ITEM^14', 'ITEM^17', 'ITEM^18');
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
 -- id: NPC编号     name: 名字      room: 所处房间编号         item: 死亡掉落物品编号
