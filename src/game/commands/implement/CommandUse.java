@@ -32,6 +32,7 @@ public class CommandUse implements BaseCommand {
 	private void onReady() {
 		try {
 			items = SQLiteDatabase.getInstance().getItems();
+			//TODO 一样，记得改成TextDatabase
 		} catch (SQLException e) {
 			Logger.log(e);
 		}
@@ -46,10 +47,23 @@ public class CommandUse implements BaseCommand {
 		onReady();
 		// 这个写的我要死要死的... ...
 		// 新建一个用户背包中物品的迭代器
-		for (Item item : items) {
-			if (item.getId() != Integer.getInteger(this.A)) { // 如果背包中没有这个物品=
-				game.echoln("您的背包中还没有此物品呢~~ 快去得到吧！");
+		Iterator<Item> playerIter = items.iterator();
+		while (playerIter.hasNext()) {
+			int itemInt = playerIter.next().getId(); // 玩家所持某个物品的编号
+			if (Integer.getInteger(this.A) != itemInt) {
+				// 如果命令中给出的物品A的编号与玩家所持所有物品的编号的编号均不相等（未持有这个物品）
+				game.echoln("您未持有此物品！");
 				return;
+			} else {
+				Iterator<Reaction> reactionIter = playerIter.next().getReaction().iterator();
+				if (!reactionIter.hasNext()) {
+					game.echoln("此物品不能参与任何反应！");
+					return;
+				}
+				// 新建一个内容为玩家所持某个物品中反应的迭代器
+				while (reactionIter.hasNext())
+					if(reactionIter.next().getA().contains(this.A))
+						// 如果反应物A的编号与命令中给出的物品A的编号相等
 			}
 		}
 	}
