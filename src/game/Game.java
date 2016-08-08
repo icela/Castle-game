@@ -28,7 +28,7 @@ public abstract class Game
 		implements MessageHandler, Echoer, Clearable {
 
 	private final HashMap<String, BaseCommand> commands = new HashMap<>();
-	private ArrayList<Item> items;
+	public ArrayList<Item> items;
 	private String[] commandNames;
 	private Map map;
 	public Player player;
@@ -44,6 +44,7 @@ public abstract class Game
 		map = new Map();
 		try {
 			items = SQLiteDatabase.getInstance().getItems();
+			//TODO　记得改成TextDatabase!!
 		} catch (SQLException e) {
 			Logger.log(e);
 		}

@@ -92,8 +92,10 @@ public class SQLiteDatabase
 	 */
 	public ArrayList<Item> getItems() throws SQLException {
 		ResultSet set = statement.executeQuery("SELECT * FROM ITEM");
-		int itemID=set.getInt("id");
-		ResultSet reactionSet=statement.executeQuery("SELECT * FROM REACTION WHERE a=ITEM^"+itemID);
+		int itemID = set.getInt("id");
+		ResultSet reactionSet = statement.executeQuery(
+				"SELECT * FROM REACTION WHERE a=\'ITEM^" + itemID + "\' OR b=\'ITEM^" + itemID
+		);
 		ArrayList<Reaction> Reactions = new ArrayList<>();
 		while (reactionSet.next())
 			Reactions.add(new Reaction(
@@ -119,7 +121,7 @@ public class SQLiteDatabase
 	public ArrayList<NPC> getNPC() throws SQLException {
 		ResultSet set = statement.executeQuery("SELECT * FROM NPC");
 		int npcid = set.getInt("id");
-		ResultSet chatSet = statement.executeQuery("SELECT * FROM CHAT WHERE npcid=" + npcid);
+		ResultSet chatSet = statement.executeQuery("SELECT * FROM CHAT WHERE npcid=\'" + npcid + '\'');
 		ArrayList<NPC> NPCs = new ArrayList<>();
 		ArrayList<Chat> Chats = new ArrayList<>();
 		while (chatSet.next()) {
