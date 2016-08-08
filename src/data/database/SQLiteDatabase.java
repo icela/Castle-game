@@ -121,7 +121,7 @@ public class SQLiteDatabase
 	public ArrayList<NPC> getNPC() throws SQLException {
 		ResultSet set = statement.executeQuery("SELECT * FROM NPC");
 		int npcid = set.getInt("id");
-		ResultSet chatSet = statement.executeQuery("SELECT * FROM CHAT WHERE npcid=\'" + npcid + '\'');
+		ResultSet chatSet = statement.executeQuery("SELECT * FROM CHAT WHERE npcid=" + npcid);
 		ArrayList<NPC> NPCs = new ArrayList<>();
 		ArrayList<Chat> Chats = new ArrayList<>();
 		while (chatSet.next()) {

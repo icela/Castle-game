@@ -167,7 +167,6 @@ CREATE TABLE BOSS_GET_ITEM (
 INSERT INTO BOSS_GET_ITEM(room, item， "CHOOSE^0") VALUES (18, 2);
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
--- TODO 洗澡的时候突然想到一个巨大的问题。。。。。。等我有了电脑再来修复
 CREATE TABLE ITEM(
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   name TEXT, event INTEGER,
@@ -232,7 +231,7 @@ INSERT INTO ITEM(name, event, extra, desc) VALUES (
 CREATE TABLE REACTION(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
 	a TEXT, b TEXT, bNum INTEGER,
-	result TEXT
+	result TEXT, sequel TEXT
 );
 
 INSERT INTO REACTION(id, a, b, result) VALUES(0, 'ITEM^14', 'ITEM^17', 'ITEM^18');
@@ -372,6 +371,7 @@ SELECT * FROM ROOM ORDER BY id ASC;
 SELECT * FROM DIR ORDER BY id ASC;
 SELECT * FROM MAP ORDER BY id ASC;
 SELECT * FROM ITEM ORDER BY id ASC;
+SELECT * FROM REACTION ORDER BY id ASC;
 SELECT * FROM BOSS_GET_ITEM ORDER BY id ASC;
 SELECT * FROM NPC ORDER BY id ASC;
 SELECT * FROM CHAT ORDER BY id ASC;
