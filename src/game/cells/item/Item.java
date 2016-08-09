@@ -61,4 +61,5 @@ public class Item {
 	public ArrayList<Reaction> getReaction() {
 		return reaction;
 	}
+
 }

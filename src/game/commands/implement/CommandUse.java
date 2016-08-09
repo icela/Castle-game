@@ -46,6 +46,19 @@ public class CommandUse implements BaseCommand {
 		this.B = tmp[2];
 	}
 
+	private boolean isArrayAllEqual(ArrayList A, Object B) {
+		boolean isEqual = false;
+		Iterator aIter = A.iterator();
+		if (!aIter.hasNext())
+			return false;
+		while (aIter.hasNext()) {
+			isEqual = aIter.next().equals(B);
+			if (!aIter.next().equals(B))
+				return false;
+		}
+		return isEqual;
+	}
+
 	@Override
 	public void runCommand(String cmd) {
 		this.cmd = cmd;
@@ -54,15 +67,15 @@ public class CommandUse implements BaseCommand {
 		// 新建一个用户背包中物品的迭代器
 		Iterator<Item> playerIter = userItems.iterator();
 		Iterator<RoomItemPair> pairIter = pairs.iterator();
+		if (!isArrayAllEqual(userItems, Integer.getInteger(this.A))) {
+			// 如果命令中给出的物品A的编号与玩家所持所有物品的编号的编号均不相等（未持有这个物品）
+			game.echoln("您未持有此反应物！");
+			return;
+		}
 		while (playerIter.hasNext()) {
 			int itemInt = playerIter.next().getId(); // 玩家所持某个物品的编号
-			if (Integer.getInteger(this.A) != itemInt) {
-				// 如果命令中给出的物品A的编号与玩家所持所有物品的编号的编号均不相等（未持有这个物品）
-				game.echoln("您未持有此反应物！");
-				return;
-			}
 			Iterator<Reaction> reactionIter = playerIter.next().getReaction().iterator();
-			if (!reactionIter.hasNext()) {
+			if (!playerIter.next().getReaction().iterator().hasNext()) {
 				game.echoln("此物品不是反应物！");
 				return;
 			}
