@@ -13,25 +13,28 @@ import java.util.HashMap;
 public class Room {
 
 	private Boss boss;
+	private int id;
 	private final String description;
 	private String welcomeWord;
 	private HashMap<String, Integer> exits;
 	private ArrayList<NPC> NPCs;
 
 	//构造方法
-	public Room(String description) {
+	public Room(int id, String description) {
+		this.id = id;
 		this.description = description;
 		exits = new HashMap<>();
 		boss = null;
 	}
 
 	//构造方法
-	Room(String description, String welcomeWord) {
-		this(description);
+	Room(int id, String description, String welcomeWord) {
+		this(id, description);
 		this.welcomeWord = welcomeWord;
 	}
 
 	public Room(
+			int id,
 			String description,
 			@Nullable String welcomeWord,
 			@Nullable String BossName,
@@ -40,7 +43,7 @@ public class Room {
 			int defence,
 			int experience,
 			@Nullable String dieText) {
-		this(description, welcomeWord == null ? "欢迎来到这里。" : welcomeWord);
+		this(id, description, welcomeWord == null ? "欢迎来到这里。" : welcomeWord);
 		if (BossName != null) {
 			if (dieText != null)
 				boss = new Boss(BossName, blood, strike, defence, experience, dieText);
@@ -98,6 +101,10 @@ public class Room {
 			}
 		}
 		return sb.toString();
+	}
+
+	public int getId() {
+		return id;
 	}
 
 	//   使用此类的返回值，赋给原本的Room。

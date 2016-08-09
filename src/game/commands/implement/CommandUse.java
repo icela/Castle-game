@@ -11,6 +11,7 @@ import util.error.Logger;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Objects;
 
@@ -25,7 +26,7 @@ public class CommandUse implements BaseCommand {
 
 	private final Game game;
 	private ArrayList<Item> userItems, allItems;
-	private ArrayList<RoomItemPair> roomPairs;
+	private HashMap<Integer, Integer> roomPairs;
 	private String cmd;
 	int A, B;
 
@@ -54,7 +55,6 @@ public class CommandUse implements BaseCommand {
 		// 这个写的我要死要死的... ...
 		// 新建一个用户背包中物品的迭代器
 		Iterator<Item> playerIter = userItems.iterator();
-		Iterator<RoomItemPair> pairIter = roomPairs.iterator();
 		if (!playerIter.hasNext()) {
 			game.echoln("您的背包为空！");
 			return;
@@ -79,8 +79,8 @@ public class CommandUse implements BaseCommand {
 				}
 				if (reactionIter.next().getAID() == this.A) {
 					// 如果反应物A的编号与命令中给出的物品A的编号相等
-					while (pairIter.hasNext()) {
-						if (pairIter.next().item != reactionIter.next().getBID()) {
+					for (int i = 0; i <= roomPairs.size(); i++) {
+						if (roomPairs.get(game.getCurrentRoom().getId()) != reactionIter.next().getBID()) {
 							// 如果房间中所有物品编号与命令中给出的物品B的编号均不相等（房间中没有这个物品）
 							game.echoln("房间中没有指定的反应物！");
 							return;

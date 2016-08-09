@@ -53,6 +53,7 @@ public class SQLiteDatabase
 		ArrayList<Room> rooms = new ArrayList<>();
 		while (set.next()) {
 			rooms.add(new Room(
+					set.getInt("id"),
 					set.getString("name"),
 					set.getString("welc"),
 					set.getString("boss"),
@@ -151,14 +152,13 @@ public class SQLiteDatabase
 	 *
 	 * @return pair
 	 */
-	public ArrayList<RoomItemPair> getRoomItemPairs() throws SQLException {
+	public HashMap<Integer, Integer> getRoomItemPairs() throws SQLException {
 		ResultSet set = statement.executeQuery("SELECT * FROM BOSS_GET_ITEM");
-		ArrayList<RoomItemPair> pairs = new ArrayList<>();
+		HashMap<Integer, Integer> pairs = new HashMap<>();
 		while (set.next()) {
-			pairs.add(new RoomItemPair(
-					set.getInt("room"),
+			pairs.put(set.getInt("room"),
 					set.getInt("item")
-			));
+			);
 		}
 		set.close();
 		return pairs;

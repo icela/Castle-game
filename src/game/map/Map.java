@@ -8,6 +8,9 @@ import util.error.Logger;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.function.BiConsumer;
 
 /**
  * 地图类
@@ -16,6 +19,7 @@ import java.util.ArrayList;
 public class Map {
 
 	private ArrayList<Room> rooms;
+	private HashMap<Integer, Integer> itemPair;
 	public Room currentRoom;
 	private static final DirectionPair[] pairs = {
 			null,
@@ -26,15 +30,18 @@ public class Map {
 
 	public Map() {
 		rooms = new ArrayList<>();
+		itemPair = new HashMap<>();
 //			构造地图结构
 		try {
+			itemPair = SQLiteDatabase.getInstance().getRoomItemPairs();
 			rooms = SQLiteDatabase.getInstance().getRooms();
 			SQLiteDatabase.getInstance().getExits().forEach(exit -> setExit(
 					exit.from, exit.to,
 					pairs[exit.dir]
 			));
-			SQLiteDatabase.getInstance().getRoomItemPairs().forEach(pair ->
-					rooms.get(pair.room).setBossItem(pair.item));
+			for (int i = 0; i <= itemPair.size(); i++)
+				rooms.get(itemPair.get(i)).
+						setBossItem(itemPair.get(i));
 		} catch (SQLException e) {
 			Logger.log(e);
 		}
