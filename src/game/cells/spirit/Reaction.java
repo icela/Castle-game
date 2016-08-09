@@ -23,6 +23,14 @@ public class Reaction {
 		return b;
 	}
 
+	public int getAID() {
+		return Integer.parseInt(a.split("^")[1]);
+	}
+
+	public int getBID() {
+		return Integer.parseInt(b.split("^")[1]);
+	}
+
 	public String getResult() {
 		return result;
 	}

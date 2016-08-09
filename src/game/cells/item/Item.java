@@ -4,7 +4,7 @@ import game.cells.spirit.Reaction;
 
 import java.util.ArrayList;
 
-public class Item {
+public class Item{
 	private String name = "";
 	private String desc = "";
 	private int id;
@@ -61,5 +61,4 @@ public class Item {
 	public ArrayList<Reaction> getReaction() {
 		return reaction;
 	}
-
 }
