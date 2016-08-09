@@ -1,6 +1,7 @@
 package game.commands.implement;
 
 import data.database.SQLiteDatabase;
+import data.database.TempDatabase;
 import game.Game;
 import game.cells.item.Item;
 import game.commands.BaseCommand;
@@ -23,26 +24,30 @@ public class CommandPick implements BaseCommand {
 	private final Game game;
 	private ArrayList<Item> userItems, allItems;
 	private HashMap<Integer, Integer> roomPairs;
-	int cmd;
+	private int needID;
 
 	public CommandPick(Game game) {
 		this.game = game;
 	}
 
 	private void onReady(String cmd) {
-		try {
-			allItems = SQLiteDatabase.getInstance().getItems();
-			roomPairs = SQLiteDatabase.getInstance().getRoomItemPairs();
-			userItems = SQLiteDatabase.getInstance().getItems();
-			//TODO 一样，记得改成TextDatabase
-		} catch (SQLException e) {
-			Logger.log(e);
-		}
-		this.cmd = Integer.parseInt(cmd.split("pick ")[1]);
+		allItems = TempDatabase.getInstance().getAllItems();
+		roomPairs = TempDatabase.getInstance().getRoomPairs();
+		userItems = TempDatabase.getInstance().getUserItems();
+		this.needID = Integer.parseInt(cmd.split("pick ")[1]);
 	}
 
 	@Override
 	public void runCommand(String cmd) {
-
+		onReady(cmd);
+		for (int i = 0; i <= roomPairs.size(); i++) {
+			if (roomPairs.get(game.getCurrentRoom().getId()) != this.needID) {
+				// 如果房间中所有物品编号与命令中给出的物品B的编号均不相等（房间中没有这个物品）
+				game.echoln("您所在的房间中没有指定的物品！");
+				return;
+			}
+		}
+		roomPairs.remove(needID);
+		userItems.add(allItems.get(this.needID));
 	}
 }

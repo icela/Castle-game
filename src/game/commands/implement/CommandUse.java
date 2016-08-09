@@ -82,7 +82,7 @@ public class CommandUse implements BaseCommand {
 					for (int i = 0; i <= roomPairs.size(); i++) {
 						if (roomPairs.get(game.getCurrentRoom().getId()) != reactionIter.next().getBID()) {
 							// 如果房间中所有物品编号与命令中给出的物品B的编号均不相等（房间中没有这个物品）
-							game.echoln("房间中没有指定的反应物！");
+							game.echoln("您所在的房间中没有指定的反应物！");
 							return;
 						}
 					}
