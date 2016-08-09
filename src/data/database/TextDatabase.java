@@ -55,7 +55,8 @@ public class TextDatabase {
 			defence = Integer.parseInt(reader.readLine());
 			level = Integer.parseInt(reader.readLine());
 			experience = Integer.parseInt(reader.readLine());
-			stringToArray(reader.readLine());
+			//TODO 未完成
+			// stringToArray(reader.readLine());
 		} else {
 			String[] text = new String(Base64.getDecoder().decode(reader.readLine().getBytes())).split("\\r\\n");
 			roomName = text[0];
@@ -154,9 +155,11 @@ public class TextDatabase {
 				this.strike + "\r\n" +
 				this.defence + "\r\n" +
 				this.level + "\r\n" +
-				this.experience + "\r\n" +
-				arrayToString(userItems) + "\r\n" +
-				mapToString(roomPairs)
+				this.experience + "\r\n"//
+				// +
+				//TODO 搞完那个未完成后删掉注释标记
+				// arrayToString(userItems) + "\r\n" +
+				// mapToString(roomPairs)
 				;
 	}
 
