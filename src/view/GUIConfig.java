@@ -8,12 +8,15 @@ public class GUIConfig {
 
 	public static final String VERSION = "V0.0.2 Alpha";
 
-	public static final String BUILD="0001";
+	public static final String BUILD="MjAxNjA4MTAwMDE=";
+	//TODO Build号=Base63.getEncoder.encode(最后一次成功构建日期 (yyyymmdd) +当日构建次数 (0001) )
+
+	public static final String ARCHIVE_V="0000";
 
 	//TODO 发布前记得改DEBUG常量！！
 	public static final boolean DEBUG = false;
 
-	public static final String motto="When staring at stars, what do you expected to see ?";
+	public static final String MOTTO="When staring at stars, what do you expected to see ?";
 
 	public static final String GUI_FORM_TITLE = "城堡游戏   by 冰封 and Eldath" + " " + VERSION;
 

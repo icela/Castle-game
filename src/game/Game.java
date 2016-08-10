@@ -96,7 +96,7 @@ public abstract class Game
 				).forEach(item ->
 						Game.this.echoln('[' + item.num + ']' + ' ' + item.getName())
 				);
-			}else
+			} else
 				Game.this.echoln("背包中没有物品。");
 			Game.this.echoln("");
 		});

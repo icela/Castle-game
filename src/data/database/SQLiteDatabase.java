@@ -3,7 +3,6 @@ package data.database;
 import game.cells.spirit.Chat;
 import game.cells.spirit.NPC;
 import game.cells.spirit.Reaction;
-import game.map.RoomItemPair;
 import game.cells.item.Item;
 import game.map.Exit;
 import game.map.Room;

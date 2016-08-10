@@ -35,10 +35,15 @@ public class TextDatabase {
 
 	private static TextDatabase instance;
 
-	private TextDatabase() {
+	private TextDatabase() throws IOException {
 		try {
 			readData();
 		} catch (Exception e) {
+			if (e.getMessage().contains("Archive file is too old!")) {
+				throw new IOException(
+						"Archive file is too old!"
+				);
+			}
 			Logger.log(e);
 		}
 	}
@@ -55,11 +60,15 @@ public class TextDatabase {
 			defence = Integer.parseInt(reader.readLine());
 			level = Integer.parseInt(reader.readLine());
 			experience = Integer.parseInt(reader.readLine());
-			//TODO 未完成
-			// stringToArray(reader.readLine());
+			userItems = stringToArray(reader.readLine());
+			roomPairs = stringToMap(reader.readLine());
 		} else {
 			String[] text = new String(Base64.getDecoder().decode(reader.readLine().getBytes())).split("\\r\\n");
-			roomName = text[0];
+			if (text[1].compareTo(GUIConfig.ARCHIVE_V) < 0) {
+				//TODO 记得处理 throw new IOException("Archive file is too old!");
+			} else if (text[1].compareTo(GUIConfig.ARCHIVE_V) > 0)
+				//TODO 记得处理 throw new IOException("Archive file version is too high to supported!");
+				roomName = text[0];
 			roomsState = text[1].toCharArray();
 			playerName = text[2];
 			blood = Integer.parseInt(text[3]);
@@ -73,7 +82,11 @@ public class TextDatabase {
 
 	public static TextDatabase getInstance() {
 		if (instance == null)
-			instance = new TextDatabase();
+			try {
+				instance = new TextDatabase();
+			} catch (IOException e) {
+				Logger.log(e);
+			}
 		return instance;
 	}
 
@@ -94,7 +107,7 @@ public class TextDatabase {
 
 	public void saveFile(Map map, Player player) throws IOException {
 		File file = openFile();
-		FileWriter writer = new FileWriter(file);
+		FileWriter writer = new FileWriter(file, true);
 		saveMap(map);
 		savePlayer(player);
 		if (GUIConfig.DEBUG)
@@ -114,20 +127,16 @@ public class TextDatabase {
 		return temp;
 	}
 
-	private ArrayList<Item> stringToArray(String str) {
-		ArrayList<Item> array = new ArrayList<>();
+	private HashMap<Integer, Integer> stringToMap(String str) {
+		HashMap<Integer, Integer> result = new HashMap<>();
 		if (str.isEmpty())
 			return null;
-		String[] temp = str.split(",");
-		for (int i = 0; i <= temp.length; i++)
-			array.add(i, getAllItems().get(i));
-		return array;
-	}
-
-	private String arrayToString(ArrayList array) {
-		if (array.isEmpty())
-			return null;
-		return String.join(",", (CharSequence[]) array.toArray());
+		String[] splitEnter = str.split("\r\n");
+		for (int i = 0; i <= splitEnter.length; i++) {
+			String[] splitSepar = splitEnter[i].split(":");
+			result.put(Integer.parseInt(splitSepar[0]), Integer.parseInt(splitEnter[1]));
+		}
+		return result;
 	}
 
 	private String mapToString(HashMap map) {
@@ -145,21 +154,36 @@ public class TextDatabase {
 		return result;
 	}
 
+	private ArrayList<Item> stringToArray(String str) {
+		ArrayList<Item> array = new ArrayList<>();
+		if (str.isEmpty())
+			return null;
+		String[] temp = str.split(",");
+		for (int i = 0; i <= temp.length; i++)
+			array.add(i, getAllItems().get(i));
+		return array;
+	}
+
+	private String arrayToString(ArrayList array) {
+		if (array.isEmpty())
+			return null;
+		return String.join(",", (CharSequence[]) array.toArray());
+	}
+
 	private String getInformation() {
 		roomPairs = TempDatabase.getInstance().getRoomPairs();
 		userItems = TempDatabase.getInstance().getUserItems();
-		return this.roomName + "\r\n" +
+		return GUIConfig.ARCHIVE_V + "\r\n" +
+				this.roomName + "\r\n" +
 				String.valueOf(this.roomsState) + "\r\n" +
 				this.playerName + "\r\n" +
 				this.blood + "\r\n" +
 				this.strike + "\r\n" +
 				this.defence + "\r\n" +
 				this.level + "\r\n" +
-				this.experience + "\r\n"//
-				// +
-				//TODO 搞完那个未完成后删掉注释标记
-				// arrayToString(userItems) + "\r\n" +
-				// mapToString(roomPairs)
+				this.experience + "\r\n" +
+				arrayToString(userItems) + "\r\n" +
+				mapToString(roomPairs)
 				;
 	}
 

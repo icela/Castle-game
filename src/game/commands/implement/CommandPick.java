@@ -1,14 +1,12 @@
 package game.commands.implement;
 
-import data.database.SQLiteDatabase;
 import data.database.TempDatabase;
 import game.Game;
 import game.cells.item.Item;
 import game.commands.BaseCommand;
-import game.map.RoomItemPair;
 import util.error.Logger;
 
-import java.sql.SQLException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
