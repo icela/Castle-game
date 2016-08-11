@@ -1,10 +1,8 @@
 package data.database;
 
-import game.Game;
 import game.cells.item.Item;
 import util.error.Logger;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,8 +27,7 @@ public class TempDatabase {
 	}
 
 	public static TempDatabase getInstance() {
-		if (instance == null)
-			instance = new TempDatabase();
+		if (instance == null) instance = new TempDatabase();
 		return instance;
 	}
 

@@ -40,7 +40,8 @@ public class Item{
 	 * @param desc           {@link #desc}
 	 * @param num            物品数量
 	 */
-	public Item(int id, String name, int eventId, String eventExtraData, String desc, int num, ArrayList<Reaction> reaction) {
+	public Item(int id, String name, int eventId, String eventExtraData, String desc, int num,
+	            ArrayList<Reaction> reaction) {
 		this.name = name;
 		this.num = num;
 		this.eventId = eventId;
@@ -58,7 +59,7 @@ public class Item{
 		return id;
 	}
 
-	public ArrayList<Reaction> getReaction() {
+	public ArrayList<Reaction> getReactions() {
 		return reaction;
 	}
 }

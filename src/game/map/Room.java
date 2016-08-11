@@ -81,24 +81,16 @@ public class Room {
 		sb.append(welcomeWord).append('\n');
 		sb.append("您的位置：").append(this.description).append('\n');
 		sb.append("出口有: ");
-		for (String str : exits.keySet()) {
-			sb.append(str).append(' ');
-		}
+		for (String str : exits.keySet()) sb.append(str).append(' ');
 		sb.append('\n');
-		if (boss != null) {
-			if (boss.getOrNot())
-				ifaBoss = "冰封".equals(boss.toString()) ?
-						"你来到了神秘空间。这里只能通过\\wild传送离开。冰封正坐在这写码呢。"
-						: "这里的Boss是" + boss + ",正准备接受你的挑战呢！";
-			else
-				ifaBoss = "这里的Boss是" + boss + ",已经被你打败过啦O(∩_∩)O哈哈~";
-		}
+		if (boss != null) if (boss.getOrNot()) ifaBoss = "冰封".equals(boss.toString()) ?
+				"你来到了神秘空间。这里只能通过\\wild传送离开。冰封正坐在这写码呢。"
+				: "这里的Boss是" + boss + ",正准备接受你的挑战呢！";
+		else ifaBoss = "这里的Boss是" + boss + ",已经被你打败过啦O(∩_∩)O哈哈~";
 		sb.append(ifaBoss);
 		if (NPCs != null && NPCs.size() > 0) {
 			sb.append("这里还有：\n");
-			for (NPC npc : NPCs) {
-				sb.append(npc.getName());
-			}
+			for (NPC npc : NPCs) sb.append(npc.getName());
 		}
 		return sb.toString();
 	}
@@ -136,16 +128,11 @@ public class Room {
 	}
 
 	void setBossGetItem(boolean get) {
-		if (boss != null) {
-			boss.setGotItem(get);
-		}
+		if (boss != null) boss.setGotItem(get);
 	}
 
 	public NPC isNPCExists(String name) {
-		for (NPC npc : NPCs) {
-			if (name.equals(npc.getName()))
-				return npc;
-		}
+		for (NPC npc : NPCs) if (name.equals(npc.getName())) return npc;
 		return null;
 	}
 

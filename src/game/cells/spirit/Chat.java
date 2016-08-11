@@ -20,15 +20,12 @@ public class Chat {
 			String[] spilt = sequel.split("^");
 			this.sequelTable = spilt[0];
 			this.sequelValue = spilt[1];
-		} else
-			this.sequelValue = sequel;
+		} else this.sequelValue = sequel;
 	}
 
 	public String getSequel() {
-		if (spilt)
-			return sequelTable + "^" + sequelValue;
-		else
-			return sequelValue;
+		if (spilt) return sequelTable + "^" + sequelValue;
+		else return sequelValue;
 	}
 }
 

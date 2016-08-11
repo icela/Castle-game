@@ -104,8 +104,4 @@ public class Boss extends Player {
 		} else
 			return this.experience;
 	}
-
-	public NPC toNPC(String chat) {
-		return new NPC(name, chat);
-	}
 }

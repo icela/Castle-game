@@ -44,7 +44,7 @@ public abstract class Game
 		map = new Map();
 		try {
 			items = SQLiteDatabase.getInstance().getItems();
-			//TODO　记得改成TextDatabase!!
+			//TODO 记得改成TextDatabase!!
 		} catch (SQLException e) {
 			Logger.log(e);
 		}
@@ -78,36 +78,28 @@ public abstract class Game
 			if (!cmd.equals("")) {
 				player.rename(cmd);
 				echoln("重命名成功。新名字：" + cmd);
-			} else
-				echoln("格式错误。请按照\"rename [新名字]\"的格式重命名！");
+			} else echoln("格式错误。请按照\"rename [新名字]\"的格式重命名！");
 		});
 		commands.put(commandNames[++index], cmd -> {
 			NPC npc = map.currentRoom.isNPCExists(cmd);
-			if (npc != null) {
-				echoln(npc.getHello());
-			} else
-				echoln("指定的名称不存在。注：Boss要在被打败之后才能对话。");
+			if (npc != null) echoln(npc.getHello());
+			else echoln("指定的名称不存在。注：Boss要在被打败之后才能对话。");
 		});
 		commands.put(commandNames[++index], cmd -> {
-			//TODO 不太理解。为什么items总不为空？
 			if (!items.isEmpty()) {
-				Game.this.echoln("背包中物品如下：");
-				items.stream().filter(item -> item.num > 0
-				).forEach(item ->
-						Game.this.echoln('[' + item.num + ']' + ' ' + item.getName())
+				echoln("背包中物品如下：");
+				items.stream().filter(item -> item.num > 0).forEach(item ->
+						echoln('[' + item.num + ']' + ' ' + item.getName())
 				);
-			} else
-				Game.this.echoln("背包中没有物品。");
-			Game.this.echoln("");
+			} else echoln("背包中没有物品。");
+			echoln("");
 		});
 		commands.put(commandNames[++index], cmd -> {
 			if (items.get(ItemData.MAID_RIGHT).num > 0) {
 				echoln("您发动了与女仆的契约，回到了旅馆。");
 				map.currentRoom = map.getHome();
 				echoln(map.currentRoom.getPrompt());
-			} else {
-				echoln("然而你并没有女仆的契约，不能传送。");
-			}
+			} else echoln("然而你并没有女仆的契约，不能传送。");
 		});
 		commands.put(commandNames[++index], new CommandMap(this));
 		commands.put(commandNames[++index], new CommandPick(this));
@@ -134,17 +126,15 @@ public abstract class Game
 //		echoln("不过在经过了冰封的改造后，你会觉得这个很有意思。");
 		player = TextDatabase.getInstance().loadPlayer();
 		map = TextDatabase.getInstance().loadMap("宾馆");
-		if (TextDatabase.fileExists()) {
-			echoln("检测到存档。");
-		} else {
+		if (TextDatabase.fileExists()) echoln("检测到存档。");
+		else {
 			echoln("您是第一次开始游戏。");
 			echoln("您可以稍后使用\"rename [新名字]\"命令来更改自己的名字。");
 			saveData();
 		}
 		echoln("");
 		echoln("您好，" + player);
-		if (GUIConfig.DEBUG)
-			echoln("当前处于Debug模式，存档文件的Base64加密将不会启用。");
+		if (GUIConfig.DEBUG) echoln("当前处于Debug模式，存档文件的Base64加密将不会启用。");
 		echoln("如果您需要任何帮助，请键入 'help' 并回车。\n");
 		echoln(map.currentRoom.getPrompt());
 		echoln("");
@@ -156,8 +146,7 @@ public abstract class Game
 		BaseCommand func = commands.get(words[0]);
 		String value2 = "";
 
-		if (words.length > 1)
-			value2 = words[1];
+		if (words.length > 1) value2 = words[1];
 
 //			如果找到了该指令
 		if (func != null) {
@@ -167,8 +156,7 @@ public abstract class Game
 				closeScreen();
 				return false;
 			}
-		} else
-			echoln("对不起，输入指令有误！");
+		} else echoln("对不起，输入指令有误！");
 		return true;
 	}
 
@@ -176,10 +164,8 @@ public abstract class Game
 	 * 去一个房间
 	 */
 	public void goRoom(String direction) {
-		if (map.goRoom(direction))
-			echoln(map.currentRoom.getPrompt());
-		else
-			echoln("命令格式错误或该出口不存在。");
+		if (map.goRoom(direction)) echoln(map.currentRoom.getPrompt());
+		else echoln("命令格式错误或该出口不存在。");
 		echoln("");
 	}
 
@@ -190,16 +176,10 @@ public abstract class Game
 	public void fight() {
 //		打之前是否持有物品（这尼玛都什么命名啊）
 		boolean a = map.currentRoom.bossGetItem();
-//		System.out.println("开始打Boss");
 		map.fightBoss(this);
 //		前面半句反正都要执行，保证一定会挑战，不会被短路干扰，但是要挑战成功才会触发这个
-//		System.out.println("a before = " + a);
-		if (!map.currentRoom.bossGetItem() && a) {
-//			System.out.println("开始获取物品, id = " + items.get(map.currentRoom.getBossItem()).getName());
-//			items.get(map.currentRoom.getBossItem()).get = true;
-//			 之前是没有，但是打赢了之后就有了
-			items.get(map.currentRoom.getBossItem()).num++;
-		}
+//		之前是没有，但是打赢了之后就有了
+		if (!map.currentRoom.bossGetItem() && a) items.get(map.currentRoom.getBossItem()).num++;
 		echoln(map.currentRoom.getPrompt());
 		echoln("");
 	}
@@ -211,8 +191,6 @@ public abstract class Game
 	public void saveData() {
 		try {
 			TextDatabase.getInstance().saveFile(map, player);
-			// 反正也看不到
-			// echoln("保存成功。");
 		} catch (IOException e) {
 			Logger.log(e);
 			AdminErrorHandler.handleError();

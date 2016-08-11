@@ -2,8 +2,6 @@ package view;
 
 import game.Game;
 import util.error.Logger;
-import util.interfaces.Clearable;
-import util.interfaces.Echoer;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -18,8 +16,7 @@ import java.util.Stack;
  * 视图
  * Created by asus1 on 2016/1/31.
  */
-public class GUI extends Game
-		implements Echoer, Clearable {
+public class GUI extends Game {
 
 	private JTextField textField;
 	private JTextArea textArea;

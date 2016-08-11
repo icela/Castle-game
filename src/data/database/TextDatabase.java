@@ -39,11 +39,7 @@ public class TextDatabase {
 		try {
 			readData();
 		} catch (Exception e) {
-			if (e.getMessage().contains("Archive file is too old!")) {
-				throw new IOException(
-						"Archive file is too old!"
-				);
-			}
+			if (e.getMessage().contains("Archive file is too old!")) throw new IOException("Archive file is too old!");
 			Logger.log(e);
 		}
 	}
@@ -81,12 +77,11 @@ public class TextDatabase {
 	}
 
 	public static TextDatabase getInstance() {
-		if (instance == null)
-			try {
-				instance = new TextDatabase();
-			} catch (IOException e) {
-				Logger.log(e);
-			}
+		if (instance == null) try {
+			instance = new TextDatabase();
+		} catch (IOException e) {
+			Logger.log(e);
+		}
 		return instance;
 	}
 
@@ -94,8 +89,7 @@ public class TextDatabase {
 		Map map = new Map();
 		if (!fileExists()) return map;
 		map.setRoomsState(roomsState);
-		if (roomName == null)
-			roomName = defaultName;
+		if (roomName == null) roomName = defaultName;
 		map.loadRoom(roomName);
 		return map;
 	}
@@ -110,10 +104,8 @@ public class TextDatabase {
 		FileWriter writer = new FileWriter(file, true);
 		saveMap(map);
 		savePlayer(player);
-		if (GUIConfig.DEBUG)
-			writer.write(this.getInformation());
-		else
-			writer.write(new String(Base64.getEncoder().encode(this.getInformation().getBytes())));
+		if (GUIConfig.DEBUG) writer.write(this.getInformation());
+		else writer.write(new String(Base64.getEncoder().encode(this.getInformation().getBytes())));
 		writer.close();
 	}
 
@@ -129,8 +121,7 @@ public class TextDatabase {
 
 	private HashMap<Integer, Integer> stringToMap(String str) {
 		HashMap<Integer, Integer> result = new HashMap<>();
-		if (str.isEmpty())
-			return null;
+		if (str.isEmpty()) return null;
 		String[] splitEnter = str.split("\r\n");
 		for (int i = 0; i <= splitEnter.length; i++) {
 			String[] splitSepar = splitEnter[i].split(":");
@@ -140,33 +131,22 @@ public class TextDatabase {
 	}
 
 	private String mapToString(HashMap map) {
-		String result = null;
-		if (map.isEmpty())
-			return null;
-		for (int i = 0; i <= map.size(); i++) {
-			Set set = map.keySet();
-			Iterator iter = set.iterator();
-			while (iter.hasNext()) {
-				String index = iter.next().toString();
-				result += iter.next() + ":" + map.get(index) + "\r\n";
-			}
-		}
-		return result;
+		StringBuffer result = new StringBuffer();
+		if (map.isEmpty()) return null;
+		map.forEach((key, value) -> result.append(key).append(":").append(value).append("\r\n"));
+		return result.toString();
 	}
 
 	private ArrayList<Item> stringToArray(String str) {
 		ArrayList<Item> array = new ArrayList<>();
-		if (str.isEmpty())
-			return null;
+		if (str.isEmpty()) return null;
 		String[] temp = str.split(",");
-		for (int i = 0; i <= temp.length; i++)
-			array.add(i, getAllItems().get(i));
+		for (int i = 0; i <= temp.length; i++) array.add(i, getAllItems().get(i));
 		return array;
 	}
 
 	private String arrayToString(ArrayList array) {
-		if (array.isEmpty())
-			return null;
+		if (array.isEmpty()) return null;
 		return String.join(",", (CharSequence[]) array.toArray());
 	}
 
@@ -183,8 +163,7 @@ public class TextDatabase {
 				this.level + "\r\n" +
 				this.experience + "\r\n" +
 				arrayToString(userItems) + "\r\n" +
-				mapToString(roomPairs)
-				;
+				mapToString(roomPairs);
 	}
 
 	public HashMap<Integer, Integer> getRoomPairs() {
@@ -196,19 +175,9 @@ public class TextDatabase {
 	}
 
 	public Player loadPlayer() {
-		return fileExists() ? new Player(
-				playerName,
-				blood,
-				strike,
-				defence,
-				level,
-				experience
-		) : new Player(
-				NameGenerator.generate(),
-				200,
-				10,
-				5
-		);
+		return fileExists() ?
+				new Player(playerName, blood, strike, defence, level, experience) :
+				new Player(NameGenerator.generate(), 200, 10, 3);
 	}
 
 	private void savePlayer(Player player) {
@@ -226,8 +195,7 @@ public class TextDatabase {
 
 	private File openFile() throws IOException {
 		File file = new File(savePath);
-		if (fileExists())
-			file.delete();
+		if (fileExists()) file.delete();
 		file.createNewFile();
 		return file;
 	}

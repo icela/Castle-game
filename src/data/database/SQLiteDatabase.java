@@ -37,8 +37,7 @@ public class SQLiteDatabase
 	}
 
 	public static SQLiteDatabase getInstance() {
-		if (instance == null)
-			instance = new SQLiteDatabase();
+		if (instance == null) instance = new SQLiteDatabase();
 		return instance;
 	}
 
@@ -154,11 +153,7 @@ public class SQLiteDatabase
 	public HashMap<Integer, Integer> getRoomItemPairs() throws SQLException {
 		ResultSet set = statement.executeQuery("SELECT * FROM BOSS_GET_ITEM");
 		HashMap<Integer, Integer> pairs = new HashMap<>();
-		while (set.next()) {
-			pairs.put(set.getInt("room"),
-					set.getInt("item")
-			);
-		}
+		while (set.next()) pairs.put(set.getInt("room"), set.getInt("item"));
 		set.close();
 		return pairs;
 	}
@@ -168,8 +163,9 @@ public class SQLiteDatabase
 		try {
 			statement.close();
 		} catch (SQLException e) {
-			// 告诉你，这叫嫁祸于IOException #(滑稽)
-			// 这样真的好嘛... ...#(滑稽）
+//			告诉你，这叫嫁祸于IOException #(滑稽)
+//			这样真的好嘛... ...#(滑稽）
+//			大丈夫，萌大奶！#(认真)
 			throw new IOException(e.getSQLState());
 		}
 	}
