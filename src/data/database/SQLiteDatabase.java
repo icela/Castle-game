@@ -93,7 +93,7 @@ public class SQLiteDatabase
 		ResultSet set = statement.executeQuery("SELECT * FROM ITEM");
 		int itemID = set.getInt("id");
 		ResultSet reactionSet = statement.executeQuery(
-				"SELECT * FROM REACTION WHERE a=\'ITEM^" + itemID + "\' OR b=\'ITEM^" + itemID
+				"SELECT * FROM REACTION WHERE a=\'ITEM^" + itemID + "\' OR b=\'ITEM^" + itemID + "\'"
 		);
 		ArrayList<Reaction> Reactions = new ArrayList<>();
 		while (reactionSet.next())

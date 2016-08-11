@@ -10,7 +10,9 @@ import game.commands.BaseCommand;
 import game.commands.implement.*;
 import game.map.Map;
 import game.map.Room;
+import sun.rmi.runtime.Log;
 import util.error.AdminErrorHandler;
+import util.error.ArchiveFileUnsupportedException;
 import util.error.Logger;
 import util.interfaces.Clearable;
 import util.interfaces.Echoer;
@@ -122,32 +124,25 @@ public abstract class Game
 		try {
 			player = TextDatabase.getInstance().loadPlayer();
 			map = TextDatabase.getInstance().loadMap("宾馆");
-		} catch (IOException e) {
-			Logger.log(e);
-			if(e.getMessage().contains("Archive file is too old!")) {
-				Object[] options = { "覆写存档", "退出程序" };
-				int choose = JOptionPane.showOptionDialog(
-						GUI.getMainFrame(),
-						"不受支持的存档文件版本！将覆写存档，您的游戏进度将被重置！",
-						"警告",
-						JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
-						null,
-						options,
-						options[0]
-				);
-				if (choose==1) {
-					System.gc();
-					System.exit(0);
-				}
-			}else if(e.getMessage().contains("Archive file version is too high to supported!")){
+		} catch (ArchiveFileUnsupportedException e) {
+			Logger.log(e.getMessage());
+			if(e.getLevel().contains("警告"))
 				JOptionPane.showMessageDialog(GUI.getMainFrame(),
-						"存档文件超出支持范围！请尝试更新程序！",
-						"致命错误",
+						e.getMessage(),
+						e.getLevel(),
+						JOptionPane.WARNING_MESSAGE
+				);
+			else if(e.getLevel().contains("致命错误")) {
+				JOptionPane.showMessageDialog(GUI.getMainFrame(),
+						e.getMessage(),
+						e.getLevel(),
 						JOptionPane.ERROR_MESSAGE
 				);
 				System.gc();
 				System.exit(0);
 			}
+		}catch (IOException e){
+			Logger.log(e);
 		}
 		if (TextDatabase.fileExists()) echoln("检测到存档。");
 		else {
@@ -217,6 +212,8 @@ public abstract class Game
 		} catch (IOException e) {
 			Logger.log(e);
 			AdminErrorHandler.handleError();
+		} catch (ArchiveFileUnsupportedException e) {
+			e.printStackTrace();
 		}
 	}
 }

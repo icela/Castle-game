@@ -1,5 +1,7 @@
 package util.error;
 
+import view.GUI;
+
 import javax.swing.*;
 import java.io.File;
 import java.io.FileWriter;
@@ -13,7 +15,7 @@ import java.io.InputStream;
 public class AdminErrorHandler {
 	public static void handleError() {
 		JOptionPane.showMessageDialog(
-				null,
+				GUI.getMainFrame(),
 				"请在随后弹出的对话框中选择 ‘是’！",
 				"错误提示",
 				JOptionPane.ERROR_MESSAGE

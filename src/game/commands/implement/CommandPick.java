@@ -15,7 +15,6 @@ import java.util.HashMap;
  *
  * @author Eldath
  *         本类作用即拾起周边的物体。
- *         //TODO 未完成
  */
 public class CommandPick implements BaseCommand {
 
@@ -38,13 +37,12 @@ public class CommandPick implements BaseCommand {
 	@Override
 	public void runCommand(String cmd) {
 		onReady(cmd);
-		for (int i = 0; i <= roomPairs.size(); i++) {
+		for (int i = 0; i <= roomPairs.size(); i++)
 			if (roomPairs.get(game.getCurrentRoom().getId()) != this.needID) {
 				// 如果房间中所有物品编号与命令中给出的物品B的编号均不相等（房间中没有这个物品）
-				game.echoln("您所在的房间中没有指定的物品！");
+				game.echoln("您所在的房间中没有指定的可拾起物品！");
 				return;
 			}
-		}
 		roomPairs.remove(needID);
 		userItems.add(allItems.get(this.needID));
 	}

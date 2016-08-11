@@ -4,6 +4,7 @@ import game.cells.item.Item;
 import game.cells.spirit.Player;
 import game.map.Map;
 import util.NameGenerator;
+import util.error.ArchiveFileUnsupportedException;
 import util.error.Logger;
 import view.GUIConfig;
 
@@ -23,7 +24,7 @@ public class TextDatabase {
 
 	private String playerName = "";
 	private char[] roomsState;
-	private String roomName;
+	private String roomName, inputVersion;
 	private int blood = 0;
 	private int strike = 0;
 	private int defence = 0;
@@ -44,10 +45,11 @@ public class TextDatabase {
 		}
 	}
 
-	private void readData() throws IOException {
+	private void readData() throws ArchiveFileUnsupportedException, IOException {
 		File file = new File(savePath);
 		BufferedReader reader = new BufferedReader(new FileReader(file));
 		if (GUIConfig.DEBUG) {
+			inputVersion = reader.readLine();
 			roomName = reader.readLine();
 			roomsState = reader.readLine().toCharArray();
 			playerName = reader.readLine();
@@ -60,23 +62,22 @@ public class TextDatabase {
 			roomPairs = stringToMap(reader.readLine());
 		} else {
 			String[] text = new String(Base64.getDecoder().decode(reader.readLine().getBytes())).split("\\r\\n");
-			if (text[1].compareTo(GUIConfig.ARCHIVE_V) < 0) {
-				throw new IOException("Archive file is too old!");
-			} else if (text[1].compareTo(GUIConfig.ARCHIVE_V) > 0)
-				throw new IOException("Archive file version is too high to supported!");
-			roomName = text[0];
-			roomsState = text[1].toCharArray();
-			playerName = text[2];
-			blood = Integer.parseInt(text[3]);
-			strike = Integer.parseInt(text[4]);
-			defence = Integer.parseInt(text[5]);
-			level = Integer.parseInt(text[6]);
-			experience = Integer.parseInt(text[7]);
+			inputVersion = text[0];
+			roomName = text[1];
+			roomsState = text[2].toCharArray();
+			playerName = text[3];
+			blood = Integer.parseInt(text[4]);
+			strike = Integer.parseInt(text[5]);
+			defence = Integer.parseInt(text[6]);
+			level = Integer.parseInt(text[7]);
+			experience = Integer.parseInt(text[8]);
 		}
+		if (inputVersion.compareTo(GUIConfig.ARCHIVE_V) < 0 || inputVersion.compareTo(GUIConfig.ARCHIVE_V) > 0)
+			throw new ArchiveFileUnsupportedException(inputVersion);
 		reader.close();
 	}
 
-	public static TextDatabase getInstance() throws IOException {
+	public static TextDatabase getInstance() throws ArchiveFileUnsupportedException, IOException {
 		instance = new TextDatabase();
 		return instance;
 	}
