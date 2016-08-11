@@ -64,7 +64,7 @@ public class TextDatabase {
 				throw new IOException("Archive file is too old!");
 			} else if (text[1].compareTo(GUIConfig.ARCHIVE_V) > 0)
 				throw new IOException("Archive file version is too high to supported!");
-				roomName = text[0];
+			roomName = text[0];
 			roomsState = text[1].toCharArray();
 			playerName = text[2];
 			blood = Integer.parseInt(text[3]);
@@ -76,12 +76,8 @@ public class TextDatabase {
 		reader.close();
 	}
 
-	public static TextDatabase getInstance() {
-		if (instance == null) try {
-			instance = new TextDatabase();
-		} catch (IOException e) {
-			Logger.log(e);
-		}
+	public static TextDatabase getInstance() throws IOException {
+		instance = new TextDatabase();
 		return instance;
 	}
 

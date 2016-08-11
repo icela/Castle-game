@@ -19,6 +19,7 @@ import view.CUI;
 import view.GUI;
 import view.GUIConfig;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -118,8 +119,36 @@ public abstract class Game
 
 //		太羞耻了！！
 //		echoln("不过在经过了冰封的改造后，你会觉得这个很有意思。");
-		player = TextDatabase.getInstance().loadPlayer();
-		map = TextDatabase.getInstance().loadMap("宾馆");
+		try {
+			player = TextDatabase.getInstance().loadPlayer();
+			map = TextDatabase.getInstance().loadMap("宾馆");
+		} catch (IOException e) {
+			Logger.log(e);
+			if(e.getMessage().contains("Archive file is too old!")) {
+				Object[] options = { "覆写存档", "退出程序" };
+				int choose = JOptionPane.showOptionDialog(
+						GUI.getMainFrame(),
+						"不受支持的存档文件版本！将覆写存档，您的游戏进度将被重置！",
+						"警告",
+						JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+						null,
+						options,
+						options[0]
+				);
+				if (choose==1) {
+					System.gc();
+					System.exit(0);
+				}
+			}else if(e.getMessage().contains("Archive file version is too high to supported!")){
+				JOptionPane.showMessageDialog(GUI.getMainFrame(),
+						"存档文件超出支持范围！请尝试更新程序！",
+						"致命错误",
+						JOptionPane.ERROR_MESSAGE
+				);
+				System.gc();
+				System.exit(0);
+			}
+		}
 		if (TextDatabase.fileExists()) echoln("检测到存档。");
 		else {
 			echoln("您是第一次开始游戏。");
