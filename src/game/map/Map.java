@@ -1,16 +1,14 @@
 package game.map;
 
-import game.Game;
-import data.database.SQLiteDatabase;
 import data.Direction;
 import data.DirectionPair;
+import data.database.SQLiteDatabase;
+import game.Game;
 import util.error.Logger;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.function.BiConsumer;
 
 /**
  * 地图类
@@ -39,9 +37,7 @@ public class Map {
 					exit.from, exit.to,
 					pairs[exit.dir]
 			));
-			for (int i = 0; i <= itemPair.size(); i++)
-				rooms.get(itemPair.get(i)).
-						setBossItem(itemPair.get(i));
+			itemPair.forEach((room, item) -> rooms.get(room).setBossItem(item));
 		} catch (SQLException e) {
 			Logger.log(e);
 		}
@@ -54,17 +50,12 @@ public class Map {
 	}
 
 	public boolean goRoom(String direction) {
-		if (currentRoom.checkExit(direction)) {
-			currentRoom = rooms.get(currentRoom.showRoomId(direction));
-			return true;
-		} else
-			return false;
+		if (currentRoom.checkExit(direction)) currentRoom = rooms.get(currentRoom.showRoomId(direction));
+		return currentRoom.checkExit(direction);
 	}
 
 	public boolean roomExists(String roomName) {
-		for (Room room : rooms)
-			if (room.equals(roomName))
-				return true;
+		for (Room room : rooms) if (room.matchName(roomName)) return true;
 		return false;
 	}
 
@@ -86,12 +77,12 @@ public class Map {
 	}
 
 	public void loadRoom(String room_) {
-		for (Room room : rooms) {
-			if (room.equals(room_)) {
+		rooms.forEach(room -> {
+			if (room.matchName(room_)) {
 				currentRoom = room;
-				break;
+				return;
 			}
-		}
+		});
 	}
 
 	public char[] getRoomsState() {

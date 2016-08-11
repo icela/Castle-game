@@ -45,10 +45,8 @@ public class Room {
 			@Nullable String dieText) {
 		this(id, description, welcomeWord == null ? "欢迎来到这里。" : welcomeWord);
 		if (BossName != null) {
-			if (dieText != null)
-				boss = new Boss(BossName, blood, strike, defence, experience, dieText);
-			else
-				boss = new Boss(BossName, blood, strike, defence, experience);
+			if (dieText != null) boss = new Boss(BossName, blood, strike, defence, experience, dieText);
+			else boss = new Boss(BossName, blood, strike, defence, experience);
 		} else
 			boss = null;
 
@@ -64,9 +62,8 @@ public class Room {
 	}
 
 	//检查房间名
-	@Override
-	public boolean equals(Object anotherOne) {
-		return description.equals(anotherOne);
+	public boolean matchName(String name) {
+		return description.equals(name);
 	}
 
 	//    设置一个出口。
