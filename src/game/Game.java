@@ -1,6 +1,6 @@
 ﻿package game;
 
-import data.database.SQLiteDatabase;
+import data.database.TempDatabase;
 import data.database.TextDatabase;
 import game.cells.item.Item;
 import game.cells.item.ItemData;
@@ -20,7 +20,6 @@ import view.GUI;
 import view.GUIConfig;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -42,12 +41,7 @@ public abstract class Game
 
 	protected void onCreate() {
 		map = new Map();
-		try {
-			items = SQLiteDatabase.getInstance().getItems();
-			//TODO 记得改成TextDatabase!!
-		} catch (SQLException e) {
-			Logger.log(e);
-		}
+		items = TempDatabase.getInstance().getUserItems();
 		commandNames = new String[]{
 				"help", "go", "wild",
 				"exit", "state", "fight",

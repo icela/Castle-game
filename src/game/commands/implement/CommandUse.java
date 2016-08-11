@@ -48,7 +48,6 @@ public class CommandUse implements BaseCommand {
 		this.cmd = cmd;
 		init();
 		// 这个写的我要死要死的... ...
-		// 新建一个用户背包中物品的迭代器
 		if (userItems.isEmpty()) {
 			game.echoln("您的背包为空！");
 			return;
@@ -58,27 +57,20 @@ public class CommandUse implements BaseCommand {
 			if (item.getId() != A) {
 //				如果命令中给出的物品A的编号与玩家所持所有物品的编号的编号均不相等（未持有这个物品）
 				game.echoln("您未持有此反应物！");
-				return;
-			}
-			if (item.getReactions().isEmpty()) {
+			}else if (item.getReactions().isEmpty()) {
 				game.echoln("此物品不参与任何反应！");
-				return;
-			}
-			item.getReactions().forEach(reaction -> {
+			}else item.getReactions().forEach(reaction -> {
 				if (reaction.getBID() != B) {
 					game.echoln("指定的反应物无法与另一反应物反应！");
-					return;
-				}
-//				如果反应物A的编号与命令中给出的物品A的编号相等
-				if (reaction.getAID() == A) roomPairs.forEach((from, to) -> {
+				}else if (reaction.getAID() == A) roomPairs.forEach((from, to) -> {
+					//				如果反应物A的编号与命令中给出的物品A的编号相等
 					if (roomPairs.get(game.getCurrentRoom().getId()) != reaction.getBID()) {
 						// 如果房间中所有物品编号与命令中给出的物品B的编号均不相等（房间中没有这个物品）
 						game.echoln("您所在的房间中没有指定的反应物！");
-						return;
-					}
+					} else
+						// 好了！！满足所有条件，（终于）可以开始反应了... ...
+						userItems.add(allItems.get(Integer.parseInt(reaction.getResult())));
 				});
-//				好了！！满足所有条件，（终于）可以开始反应了... ...
-				userItems.add(allItems.get(Integer.parseInt(reaction.getResult())));
 			});
 		});
 	}

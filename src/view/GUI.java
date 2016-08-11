@@ -188,6 +188,21 @@ public class GUI extends Game {
 		echo(words + "\n");
 	}
 
+	public static class frameType {
+		public static final int MESSAGE = 0x01;
+		public static final int WARNING = 0x02;
+		public static final int ERROR = 0x03;
+	}
+
+	public void newMessageFrame(int type, String title, String message) {
+		if (type == frameType.MESSAGE)
+			JOptionPane.showMessageDialog(frame, message, title, JOptionPane.INFORMATION_MESSAGE);
+		else if (type == frameType.WARNING)
+			JOptionPane.showMessageDialog(frame, message, title, JOptionPane.WARNING_MESSAGE);
+		else if (type == frameType.ERROR)
+			JOptionPane.showMessageDialog(frame, message, title, JOptionPane.ERROR_MESSAGE);
+	}
+
 	@Override
 	public void closeScreen() {
 		System.gc();

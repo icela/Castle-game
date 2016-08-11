@@ -61,9 +61,9 @@ public class TextDatabase {
 		} else {
 			String[] text = new String(Base64.getDecoder().decode(reader.readLine().getBytes())).split("\\r\\n");
 			if (text[1].compareTo(GUIConfig.ARCHIVE_V) < 0) {
-				//TODO 记得处理 throw new IOException("Archive file is too old!");
+				throw new IOException("Archive file is too old!");
 			} else if (text[1].compareTo(GUIConfig.ARCHIVE_V) > 0)
-				//TODO 记得处理 throw new IOException("Archive file version is too high to supported!");
+				throw new IOException("Archive file version is too high to supported!");
 				roomName = text[0];
 			roomsState = text[1].toCharArray();
 			playerName = text[2];
