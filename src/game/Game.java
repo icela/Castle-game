@@ -13,6 +13,7 @@ import game.map.Room;
 import sun.rmi.runtime.Log;
 import util.error.AdminErrorHandler;
 import util.error.ArchiveFileUnsupportedException;
+import util.error.ArchiveFileUnsupportedHandler;
 import util.error.Logger;
 import util.interfaces.Clearable;
 import util.interfaces.Echoer;
@@ -125,26 +126,12 @@ public abstract class Game
 			player = TextDatabase.getInstance().loadPlayer();
 			map = TextDatabase.getInstance().loadMap("宾馆");
 		} catch (ArchiveFileUnsupportedException e) {
-			Logger.log(e.getMessage());
-			if(e.getLevel().contains("警告"))
-				JOptionPane.showMessageDialog(GUI.getMainFrame(),
-						e.getMessage(),
-						e.getLevel(),
-						JOptionPane.WARNING_MESSAGE
-				);
-			else if(e.getLevel().contains("致命错误")) {
-				JOptionPane.showMessageDialog(GUI.getMainFrame(),
-						e.getMessage(),
-						e.getLevel(),
-						JOptionPane.ERROR_MESSAGE
-				);
-				System.gc();
-				System.exit(0);
-			}
-		}catch (IOException e){
-			Logger.log(e);
+			ArchiveFileUnsupportedHandler.handleError(e);
+		} catch (IOException e1) {
+			Logger.log(e1);
 		}
-		if (TextDatabase.fileExists()) echoln("检测到存档。");
+		if (TextDatabase.fileExists())
+			echoln("检测到存档。");
 		else {
 			echoln("您是第一次开始游戏。");
 			echoln("您可以稍后使用\"rename [新名字]\"命令来更改自己的名字。");
@@ -152,7 +139,8 @@ public abstract class Game
 		}
 		echoln("");
 		echoln("您好，" + player);
-		if (GUIConfig.DEBUG) echoln("当前处于Debug模式，存档文件的Base64加密将不会启用。");
+		if (GUIConfig.DEBUG)
+			echoln("当前处于Debug模式，存档文件的Base64加密将不会启用。");
 		echoln("如果您需要任何帮助，请键入 'help' 并回车。\n");
 		echoln(map.currentRoom.getPrompt());
 		echoln("");
