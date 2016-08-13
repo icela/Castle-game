@@ -2,6 +2,7 @@ package view;
 
 import game.Game;
 
+import javax.swing.*;
 import java.util.Scanner;
 
 /**

@@ -4,7 +4,8 @@ import game.cells.item.Item;
 import game.cells.spirit.Player;
 import game.map.Map;
 import util.NameGenerator;
-import util.error.ArchiveFileUnsupportedException;
+import util.error.ArchiveFileUnsupportedHandler;
+import util.error.exception.ArchiveFileUnsupportedException;
 import util.error.Logger;
 import view.GUIConfig;
 
@@ -40,12 +41,11 @@ public class TextDatabase {
 		try {
 			readData();
 		} catch (Exception e) {
-			if (e.getMessage().contains("Archive file is too old!")) throw new IOException("Archive file is too old!");
 			Logger.log(e);
 		}
 	}
 
-	private void readData() throws ArchiveFileUnsupportedException, IOException {
+	private void readData() throws IOException {
 		File file = new File(savePath);
 		BufferedReader reader = new BufferedReader(new FileReader(file));
 		if (GUIConfig.DEBUG) {
@@ -73,11 +73,11 @@ public class TextDatabase {
 			experience = Integer.parseInt(text[8]);
 		}
 		if (inputVersion.compareTo(GUIConfig.ARCHIVE_V) < 0 || inputVersion.compareTo(GUIConfig.ARCHIVE_V) > 0)
-			throw new ArchiveFileUnsupportedException(inputVersion);
+			ArchiveFileUnsupportedHandler.handleError(new ArchiveFileUnsupportedException(inputVersion));
 		reader.close();
 	}
 
-	public static TextDatabase getInstance() throws ArchiveFileUnsupportedException, IOException {
+	public static TextDatabase getInstance() throws IOException {
 		instance = new TextDatabase();
 		return instance;
 	}

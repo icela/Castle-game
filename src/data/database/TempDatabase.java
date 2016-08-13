@@ -3,6 +3,7 @@ package data.database;
 import game.cells.item.Item;
 import util.error.Logger;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,7 +22,7 @@ public class TempDatabase {
 			allItems = SQLiteDatabase.getInstance().getItems();
 			roomPairs = TextDatabase.getInstance().getRoomPairs();
 			userItems = TextDatabase.getInstance().getUserItems();
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			Logger.log(e);
 		}
 	}

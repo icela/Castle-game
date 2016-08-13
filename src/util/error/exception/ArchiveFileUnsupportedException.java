@@ -1,4 +1,4 @@
-package util.error;
+package util.error.exception;
 
 import view.GUIConfig;
 

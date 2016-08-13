@@ -21,7 +21,7 @@ public class CommandReset implements BaseCommand {
 	@Override
 	public void runCommand(String cmd) {
 		File archive = new File("save.ice");
-		if (archive.delete() || !archive.exists()) game.echoln("存档删除成功。\n请重新启动程序。");
+		if (archive.delete() || !archive.exists()) game.echoln("存档删除成功。\r\n请重新启动程序。");
 		else game.echoln("存档删除失败。");
 		game.echoln("");
 	}

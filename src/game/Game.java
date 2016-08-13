@@ -10,9 +10,8 @@ import game.commands.BaseCommand;
 import game.commands.implement.*;
 import game.map.Map;
 import game.map.Room;
-import sun.rmi.runtime.Log;
 import util.error.AdminErrorHandler;
-import util.error.ArchiveFileUnsupportedException;
+import util.error.exception.ArchiveFileUnsupportedException;
 import util.error.ArchiveFileUnsupportedHandler;
 import util.error.Logger;
 import util.interfaces.Clearable;
@@ -22,7 +21,6 @@ import view.CUI;
 import view.GUI;
 import view.GUIConfig;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -118,15 +116,13 @@ public abstract class Game
 		} else if (this instanceof GUI) {
 			echoln("您现在是以GUI模式进行游戏，所有功能均可用。");
 			GUIConfig.MODEL = GUIConfig.MODEL_VALUE.GUI;
-		} else echoln("系统无法检测你用的什么模式，玩游戏也得遵守基本法啊！");
+		} else echoln("系统无法检测您用的什么模式，玩游戏也得遵守基本法啊！");
 
 //		太羞耻了！！
 //		echoln("不过在经过了冰封的改造后，你会觉得这个很有意思。");
 		try {
 			player = TextDatabase.getInstance().loadPlayer();
 			map = TextDatabase.getInstance().loadMap("宾馆");
-		} catch (ArchiveFileUnsupportedException e) {
-			ArchiveFileUnsupportedHandler.handleError(e);
 		} catch (IOException e1) {
 			Logger.log(e1);
 		}
@@ -200,8 +196,6 @@ public abstract class Game
 		} catch (IOException e) {
 			Logger.log(e);
 			AdminErrorHandler.handleError();
-		} catch (ArchiveFileUnsupportedException e) {
-			e.printStackTrace();
 		}
 	}
 }

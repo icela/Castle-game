@@ -4,6 +4,7 @@ package game.cells.spirit;
 
 /**
  * Created by Eldath on 2016/8/7 0007.
+ * @author Eldath
  */
 
 public class Chat {

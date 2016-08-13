@@ -1,5 +1,6 @@
 package util.error;
 
+import util.error.exception.ArchiveFileUnsupportedException;
 import view.GUI;
 
 import javax.swing.*;
