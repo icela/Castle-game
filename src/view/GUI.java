@@ -10,6 +10,7 @@ import java.awt.event.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Stack;
 
 /**
@@ -33,6 +34,13 @@ public class GUI extends Game {
 	 * 嗯嗯对没错~ ~ ——Eldath
 	 */
 	public GUI() {
+		Locale locale = Locale.getDefault();
+		String country = locale.getCountry();
+		if (country.contains("TW") || country.contains("HK"))
+			GUIConfig.setLanguage("zh_TW");
+		else if (locale.getLanguage().contains("zh") && country.contains("CN"))
+			GUIConfig.setLanguage("zh_CN");
+		else GUIConfig.setLanguage(locale.getLanguage());
 		frame = new JFrame(GUIConfig.GUI_FORM_TITLE);
 		inputList = new Stack<>();
 		anotherInputList = new Stack<>();

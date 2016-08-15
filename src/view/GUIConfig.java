@@ -37,5 +37,13 @@ public class GUIConfig {
 	//public static final int INPUT_WIDTH = 640;
 
 	//public static final String HINT = "在这里输入指令";
+	public static String Language;
 
+	public static String getLanguage(){
+		return Language;
+	}
+
+	public static void setLanguage(String language) {
+		Language = language;
+	}
 }
