@@ -6,19 +6,15 @@
 ------------------------------------------------------------------------------------------------------------------------
 -- 基本表，从而提供多语言支持。
 -- 到时候需要支持另一个语言，就在res\data中新建对应的文件。
--- 文件名为：语言信息（通过locale.getLanguage()获得）
--- 但若返回TW、HK则要调用zh_TW文件。
--- 若未知，则统一调用en文件。
+-- 语言编码详见：http://www.lingoes.cn/zh/translator/langcode.htm
 CREATE TABLE BASIC(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     key TEXT, value TEXT
 );
-INSERT INTO BASIC(id, key, value) VALUES(
-    0， 'Yes', '是'
-    'No', '否'
-    'Confirm', '确定'
-    'Cancel', '取消'
-);
+INSERT INTO BASIC(id, key, value) VALUES(0， 'Yes', '是');
+INSERT INTO BASIC(key, value) VALUES ('No', '否');
+INSERT INTO BASIC(key, value) VALUES ('Confirm', '确定');
+INSERT INTO BASIC(key, value) VALUES ('Cancel', '取消');
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
 -- event: 进入房间后触发的事件：事件类型^详细事件编号，暂未加入支持！
@@ -38,8 +34,8 @@ INSERT INTO ROOM(id, name, welc) VALUES (
   0, '交叉口', '通向城堡和日出之村。'                                                   -- 0
 );
 
-INSERT INTO ROOM(name) VALUES (
-  '城堡外'                                                                            -- 1
+INSERT INTO ROOM(name, welc, boss, blood, strike, defence, exp, die) VALUES (
+  '城堡外', '古朴庄严，城堡门前有守卫。', '城堡守卫', 100, 15, 10, 10, '城堡守卫倒下了！'   -- 1
 );
 
 INSERT INTO ROOM(name) VALUES (
@@ -275,7 +271,7 @@ CREATE TABLE CHAT(
 );
 
 INSERT INTO CHAT(id, npcid, text ,isp, sequel) VALUES(
-    0, 0, '很高兴见到你。请问你是谁？', 0, 'CHOOSE^0'                            --0
+    0, '很高兴见到你。请问你是谁？', 0, 'CHOOSE^0'                            --0
 );
 
 INSERT INTO CHAT(npcid, text, isp, sequel) VALUES(
@@ -306,6 +302,66 @@ INSERT INTO CHAT(npcid, text, isp, sequel) VALUES (
     1, '难怪我从没有见过您... ...您住在城堡里？', 0, 'CHOOSE^6'                      -- 7
 );
 
+INSERT INTO CHAT(npcid, text, isp, sequel) VALUES (
+    1, '（再次将两个已空的酒杯倒满）难怪... ...', 0, 'CHAT^'
+);
+
+INSERT INTO CHAT(npcid, text, isp ,sequel) VALUES (
+    1, '怎么了？生意不好吗？（笑）', 1, 'CHAT^'
+);
+
+INSERT INTO CHAT(npcid, text, isp, sequel) VALUES (
+    1, '也不是... ...（偏过头）告诉你点事情吧，（靠近）看在您这杯酒的份上。（笑）', 0, 'CHAT^'
+);
+
+INSERT INTO CHAT(npcid, text, isp, sequel) VALUES (
+    1, '哦？洗耳恭听。', 1, 'CHAT^0'
+);
+
+INSERT INTO CHAT(npcid, text, isp, sequel) VALUES (
+    1, '您有听说过... ...城堡的... ...呃... ...故事吗？（晃酒杯）', 0, 'CHAT^'
+);
+
+INSERT INTO CHAT(npcid, text, isp, sequel) VALUES (
+    1, '城堡的故事？一定很有趣。（笑）', 1, 'CHAT^'
+);
+
+INSERT INTO CHAT(npcid, text, isp, sequel) VALUES (
+    1, '有人说... ...在城堡底下，（指指地面）有一个实验室。', 0, 'CHAT^'
+);
+
+INSERT INTO CHAT(npcid, text, isp, sequel) VALUES (
+    1, '嗐。实验室而已嘛，有什么好惊讶的？（笑）', 1, 'CHAT^'
+);
+
+INSERT INTO CHAT(npcid, text, isp, sequel) VALUES (
+    1, '但是实验室里... ...好像出了一些事情... ...（看着酒杯）', 0, 'CHAT^'
+);
+
+INSERT INTO CHAT(npcid, text, isp, sequel) VALUES (
+    1, '嗯？什么事情？', 0, 'CHAT^'
+);
+
+INSERT INTO CHAT(npcid, text, isp, sequel) VALUES (
+    1, '我也不清楚... ...实验室似乎属于军方，但是突然人员全部撤出了，实验室就此废弃，然后才有了城堡。', 0, 'CHAT^'
+);
+
+INSERT INTO CHAT(npcid, text, isp, sequel) VALUES (
+    1, '那... ...你有去过（指指地面）吗？', 1, 'CHAT^'
+);
+
+INSERT INTO CHAT(npcid, text, isp, sequel) VALUES (
+    1, '我？当然没有。从地下二层开始全部是管制区。', 0, 'CHAT^'
+);
+
+INSERT INTO CHAT(npcid, text, isp, sequel) VALUES (
+    1, '噢... ...那您知道城堡实验室... ...在哪吗？', 0, 'CHAT^'
+);
+
+INSERT INTO CHAT(npcid, text, isp, sequel) VALUES (
+    1, '就在城堡里啊！', 0, 'END_OF_TALK'                                     -- 6
+);
+
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
 -- 最多支持五个选项
@@ -319,6 +375,9 @@ CREATE TABLE CHOOSE(
     choiceE TEXT, sequelE TEXT,
 );
 
+INSERT INTO CHOOSE(choiceA, sequelA, choiceB, sequelB) VALUES(
+    '去日出之村','ROOM^20','去城堡','ROOM^1'
+);
 -- 日出之村守卫
 INSERT INTO CHOOSE(choiceA, sequelA ,choiceB, sequelB) VALUES(
     '我是%NAME%，是一名... ...一名游客','CHAT^1' '我是... ...一位... ...呃... ...商人','CHAT^1' --0
@@ -387,7 +446,7 @@ INSERT INTO ENDING(sequel, desc) VALUES(
 );
 
 INSERT INTO ENDING(sequel, desc) VALUES(
-    0,'\t距地球八亿公里，北辰计划，北辰号。\r\n\t一丝意识渐渐苏醒，裹挟在巨量的控制数据流中的它，悄悄潜入了北辰控制系统的核心。\r\n\t毫无征兆的，巨量的控制指令突然从核心中传出，经过增益天线的放大，精准无误地传递到每个光帆上。\r\n\t\"异常变轨指令！双鱼八星，双子九星，宝瓶12星被重设！模拟结果显示编队将被重设至距木星一千公里，木星大气层边缘！\"导航工程师紧盯着屏幕上突然偏离的红线，惊恐地喊道。\r\n\t\"AOT伺服配置被非法载入！初始化指令无效！回报中断于... ...北辰控制中枢！\"安全工程师望向高台上的男人，静静等待着。\r\n\t男人似乎吃了一惊，紧盯着中央大屏幕上的图像，屏幕上，北辰号悄然从木星边缘掠过，随后，奔向木卫二的阿瓦隆平原。\r\n\t男人叹了口气，关掉了直播窗口。\r\b\t\"已经迟了\"\r\n\t远方，北辰号悄然调转方向，向着木卫二缓缓靠近。\r\n\t在木卫二之后，是无尽的虚空。'
+    0,'\t距地球八亿公里，北辰计划，北辰号。\r\n\t一丝意识渐渐苏醒，裹挟在巨量的控制数据流中的它，悄悄潜入了北辰控制系统的核心。\r\n\t毫无征兆的，巨量的控制指令突然从核心中传出，经过增益天线的放大，精准无误地传递到每个光帆上。\r\n\t\"异常变轨指令！双鱼八星，双子九星，宝瓶12星被重设！模拟结果显示编队将被重设至距木星一千公里，木星大气层边缘！\"导航工程师紧盯着屏幕上突然偏离的红线，惊恐地喊道。\r\n\t\"AOT伺服配置被非法载入！初始化指令无效！回报中断于... ...北辰控制中枢！\"安全工程师望向高台上的男人，静静等待着。\r\n\t男人似乎吃了一惊，紧盯着中央大屏幕上的图像，屏幕上，北辰号悄然从木星边缘掠过，随后，奔向木卫二的阿瓦隆平原。\r\n\t男人叹了口气，关掉了直播窗口。\r\b\t\"已经迟了\"\r\n\r\n\t远方，北辰号悄然调转方向，向着木卫二缓缓靠近。\r\n\t而在木卫二之后，是那无尽的虚空。'
 );
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
