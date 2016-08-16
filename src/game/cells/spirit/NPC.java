@@ -34,7 +34,6 @@ public class NPC extends Cell {
 		this.hello = hello;
 	}
 
-// TODO 这是干啥的呢。。。
 //	public void itemGet(Item item) {
 //		items.add(item);
 //	}

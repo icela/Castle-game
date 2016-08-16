@@ -59,7 +59,7 @@ public class Boss extends Player {
 					stringBuilder
 							.append("以你现有的体力值无法打倒")
 							.append(this.name)
-							.append("！\n落荒而逃！损失5点体力值！\n");//TODO 自己都过线了。。。
+							.append("！\n落荒而逃！损失5点体力值！\n");
 					break;
 				}
 				if (this.blood <= 0) {

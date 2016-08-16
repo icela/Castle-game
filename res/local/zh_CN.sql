@@ -163,7 +163,6 @@ INSERT INTO ROOM(name, welc) VALUES (
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE DIR(id INTEGER PRIMARY KEY AUTOINCREMENT, from_text TEXT, to_text TEXT);
--- TODO 其实我觉着直接用房间名称。。。就是执行map的时候就显示<id> <可用房间名字>，然后就go <id>，但是感觉关联的时候会是个问题。。。要不就map的时候显示<south/...啥的> <房间名字>然后还是go <south...啥的>？？
 INSERT INTO DIR(from_text, to_text) VALUES ('up', 'down');          --1
 INSERT INTO DIR(from_text, to_text) VALUES ('north', 'south');      --2
 INSERT INTO DIR(from_text, to_text) VALUES ('east', 'west');        --3
