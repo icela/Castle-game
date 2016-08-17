@@ -7,7 +7,6 @@ import game.cells.item.Item;
 import game.map.Exit;
 import game.map.Room;
 import util.error.Logger;
-import view.GUIConfig;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -31,7 +30,7 @@ public class SQLiteDatabase
 	private SQLiteDatabase() {
 		try {
 			Class.forName("org.sqlite.JDBC");
-			statement = DriverManager.getConnection("jdbc:sqlite:" + GUIConfig.getLanguage() + ".db").createStatement();
+			statement = DriverManager.getConnection("jdbc:sqlite:data.db").createStatement();
 		} catch (Exception e) {
 			Logger.log(e);
 		}

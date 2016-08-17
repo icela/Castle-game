@@ -8,7 +8,6 @@
         </element>
         <element id="module-output" name="城堡游戏" />
       </element>
-      <element id="library" level="project" name="org.xerial:sqlite-jdbc:3.8.11.1" />
       <element id="file-copy" path="$PROJECT_DIR$/res/data.db" />
       <element id="archive" name="gui.jar">
         <element id="directory" name="META-INF">

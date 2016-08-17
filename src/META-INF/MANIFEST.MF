@@ -1,4 +1,4 @@
 Manifest-Version: 1.0
-Class-Path: sqlite-jdbc-3.8.11.1.jar
+Class-Path: sqlite-jdbc-3.8.11.2.jar
 Main-Class: view.GUI
 

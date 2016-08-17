@@ -1,7 +1,7 @@
 /*.ice
 /out
 /lib/*.ttf
-/lib/*.jar
+/lib/
 !/lib/README.md
 /bin
 .idea/workspace.xml
@@ -11,4 +11,5 @@
 /test/*.db
 /lib/jre-cui
 /log
-/log/*.log
+.idea/libraries/
+lib/

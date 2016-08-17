@@ -10,7 +10,7 @@
 CREATE TABLE BASIC (
   id    INTEGER PRIMARY KEY AUTOINCREMENT,
   key   TEXT,
-  value TEXT
+  value "TEXT"
 );
 INSERT INTO BASIC (id, key, value) VALUES (0, 'Yes', '是');
 INSERT INTO BASIC (key, value) VALUES ('No', '否');
@@ -170,7 +170,7 @@ CREATE TABLE DIR (
   from_text TEXT,
   to_text   TEXT
 );
-INSERT INTO DIR (from_text, to_text) VALUES ('up', 'down'); --1
+INSERT INTO DIR (id, from_text, to_text) VALUES (0, 'up', 'down'); --1
 INSERT INTO DIR (from_text, to_text) VALUES ('north', 'south'); --2
 INSERT INTO DIR (from_text, to_text) VALUES ('east', 'west'); --3
 ------------------------------------------------------------------------------------------------------------------------
@@ -182,18 +182,19 @@ CREATE TABLE MAP (
   dir    INTEGER
 );
 
-INSERT INTO MAP (fromid, toid, dir) VALUES (0, 1, 3);
+INSERT INTO MAP (id, fromid, toid, dir) VALUES (0, 0, 1, 3);
 -- TODO 不行我先把房间艹好先。。。留个例子.
 
 
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE BOSS_GET_ITEM (
+  id   INTEGER PRIMARY KEY AUTOINCREMENT,
   room INTEGER,
   item INTEGER
 );
 
-INSERT INTO BOSS_GET_ITEM (room, item) VALUES (18, 2);
+INSERT INTO BOSS_GET_ITEM (id, room, item) VALUES (0, 18, 2);
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE ITEM (
@@ -401,8 +402,8 @@ CREATE TABLE CHOOSE (
   sequelE TEXT
 );
 
-INSERT INTO CHOOSE (choiceA, sequelA, choiceB, sequelB) VALUES (
-  '去日出之村', 'ROOM^20', '去城堡', 'ROOM^1'
+INSERT INTO CHOOSE (id, choiceA, sequelA, choiceB, sequelB) VALUES (
+  0, '去日出之村', 'ROOM^20', '去城堡', 'ROOM^1'
 );
 -- 日出之村守卫
 INSERT INTO CHOOSE (choiceA, sequelA, choiceB, sequelB) VALUES (
