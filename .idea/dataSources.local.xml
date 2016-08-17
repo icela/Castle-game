@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="Sqlite (Xerial) - .Data" uuid="bcb1a326-7c6f-4430-8d92-26e22f59d4e0">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <secret-storage>memory</secret-storage>
+    </data-source>
+    <data-source name="Sqlite (Xerial) - data.db" uuid="fb52b906-6235-480b-b078-ddc8b2c84061">
+      <database-info product="SQLite" version="3.8.9" jdbc-version="2.1" driver-name="SQLiteJDBC" driver-version="native" />
+      <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
+      <secret-storage>memory</secret-storage>
+    </data-source>
+  </component>
+</project>
