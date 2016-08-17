@@ -1,4 +1,4 @@
-﻿package game;
+package game;
 
 import data.database.TempDatabase;
 import data.database.TextDatabase;
@@ -11,8 +11,6 @@ import game.commands.implement.*;
 import game.map.Map;
 import game.map.Room;
 import util.error.AdminErrorHandler;
-import util.error.exception.ArchiveFileUnsupportedException;
-import util.error.ArchiveFileUnsupportedHandler;
 import util.error.Logger;
 import util.interfaces.Clearable;
 import util.interfaces.Echoer;
@@ -25,8 +23,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public abstract class Game
-		implements MessageHandler, Echoer, Clearable {
+public abstract class Game implements MessageHandler, Echoer, Clearable {
 
 	private final HashMap<String, BaseCommand> commands = new HashMap<>();
 	public ArrayList<Item> items;
