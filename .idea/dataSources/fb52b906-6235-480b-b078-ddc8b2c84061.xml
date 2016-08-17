@@ -1,0 +1,7 @@
+<dataSource name="Sqlite (Xerial) - data.db">
+  <database-model serializer="dbm" rdbms="SQLITE" format-version="2.6">
+    <schema id="1">
+      <visible>1</visible>
+    </schema>
+  </database-model>
+</dataSource>
