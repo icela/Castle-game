@@ -1,9 +1,9 @@
 package data.database;
 
+import game.cells.item.Item;
 import game.cells.spirit.Chat;
 import game.cells.spirit.NPC;
 import game.cells.spirit.Reaction;
-import game.cells.item.Item;
 import game.map.Exit;
 import game.map.Room;
 import util.error.Logger;
@@ -30,7 +30,13 @@ public class SQLiteDatabase
 	private SQLiteDatabase() {
 		try {
 			Class.forName("org.sqlite.JDBC");
-			statement = DriverManager.getConnection("jdbc:sqlite:data.db").createStatement();
+			statement = DriverManager.getConnection(
+//					"jdbc:sqlite:" +
+//					"res" + File.separator +
+//					"locale" + File.separator +
+//					"zh_CN.db"
+					"jdbc:sqlite:D:/git-repos/城堡游戏/res/locale/zh_CN.db"
+			).createStatement();
 		} catch (Exception e) {
 			Logger.log(e);
 		}
@@ -46,7 +52,7 @@ public class SQLiteDatabase
 	 * disc TEXT, welc TEXT,boss TEXT,blood INTEGER,
 	 * strike INTEGER, defence INTEGER,exp INTEGER, die TEXT);
 	 */
-	public ArrayList<Room> getRooms() throws SQLException {
+	public synchronized ArrayList<Room> getRooms() throws SQLException {
 		ResultSet set = statement.executeQuery("SELECT * FROM ROOM ORDER BY id ASC");
 		ArrayList<Room> rooms = new ArrayList<>();
 		while (set.next()) {
@@ -69,7 +75,7 @@ public class SQLiteDatabase
 	/**
 	 * CREATE TABLE MAP( id INTEGER PRIMARY KEY AUTOINCREMENT, fromid INTEGER, toid INTEGER, dir INTEGER);
 	 */
-	public ArrayList<Exit> getExits() throws SQLException {
+	public synchronized ArrayList<Exit> getExits() throws SQLException {
 		// 与顺序无关
 		ResultSet set = statement.executeQuery("SELECT * FROM MAP");
 		ArrayList<Exit> exitses = new ArrayList<>();
@@ -89,7 +95,7 @@ public class SQLiteDatabase
 	 *
 	 * @return items
 	 */
-	public ArrayList<Item> getItems() throws SQLException {
+	public synchronized ArrayList<Item> getItems() throws SQLException {
 		ResultSet set = statement.executeQuery("SELECT * FROM ITEM");
 		int itemID = set.getInt("id");
 		ResultSet reactionSet = statement.executeQuery(
@@ -117,7 +123,7 @@ public class SQLiteDatabase
 		return items;
 	}
 
-	public ArrayList<NPC> getNPC() throws SQLException {
+	public synchronized ArrayList<NPC> getNPC() throws SQLException {
 		ResultSet set = statement.executeQuery("SELECT * FROM NPC");
 		int npcid = set.getInt("id");
 		ResultSet chatSet = statement.executeQuery("SELECT * FROM CHAT WHERE npcid=" + npcid);
@@ -150,7 +156,7 @@ public class SQLiteDatabase
 	 *
 	 * @return pair
 	 */
-	public HashMap<Integer, Integer> getRoomItemPairs() throws SQLException {
+	public synchronized HashMap<Integer, Integer> getRoomItemPairs() throws SQLException {
 		ResultSet set = statement.executeQuery("SELECT * FROM BOSS_GET_ITEM");
 		HashMap<Integer, Integer> pairs = new HashMap<>();
 		while (set.next()) pairs.put(set.getInt("room"), set.getInt("item"));

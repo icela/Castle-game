@@ -41,7 +41,7 @@ public class Map {
 		} catch (SQLException e) {
 			Logger.log(e);
 		}
-		currentRoom = rooms.get(4);
+		currentRoom = rooms.get(0);
 	}
 
 	private void setExit(int index_a, int index_b, DirectionPair pair) {
