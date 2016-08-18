@@ -41,7 +41,7 @@ public class Map {
 		} catch (SQLException e) {
 			Logger.log(e);
 		}
-		currentRoom = rooms.get(0);
+		currentRoom = rooms.get(4);
 	}
 
 	private void setExit(int index_a, int index_b, DirectionPair pair) {
@@ -80,7 +80,6 @@ public class Map {
 		rooms.forEach(room -> {
 			if (room.matchName(room_)) {
 				currentRoom = room;
-				return;
 			}
 		});
 	}

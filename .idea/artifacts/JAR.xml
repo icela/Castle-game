@@ -8,7 +8,6 @@
         </element>
         <element id="module-output" name="城堡游戏" />
       </element>
-      <element id="file-copy" path="$PROJECT_DIR$/res/data.db" />
       <element id="archive" name="gui.jar">
         <element id="directory" name="META-INF">
           <element id="file-copy" path="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
@@ -20,7 +19,9 @@
         <element id="directory" name="drawable">
           <element id="dir-copy" path="$PROJECT_DIR$/res/drawable" />
         </element>
+        <element id="dir-copy" path="$USER_HOME$" />
       </element>
+      <element id="library" level="project" name="sqlite-jdbc-3.8.11.2" />
     </root>
   </artifact>
 </component>

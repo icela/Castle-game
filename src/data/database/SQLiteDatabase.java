@@ -20,6 +20,7 @@ import java.util.HashMap;
 /**
  * @author ice1000
  *         Created by asus1 on 2016/7/24.
+ * @link https://github.com/xerial/sqlite-jdbc
  */
 public class SQLiteDatabase
 		implements Closeable {
@@ -30,13 +31,7 @@ public class SQLiteDatabase
 	private SQLiteDatabase() {
 		try {
 			Class.forName("org.sqlite.JDBC");
-			statement = DriverManager.getConnection(
-//					"jdbc:sqlite:" +
-//					"res" + File.separator +
-//					"locale" + File.separator +
-//					"zh_CN.db"
-					"jdbc:sqlite:D:/git-repos/城堡游戏/res/locale/zh_CN.db"
-			).createStatement();
+			statement = DriverManager.getConnection("jdbc:sqlite:zh_CN.db").createStatement();
 		} catch (Exception e) {
 			Logger.log(e);
 		}
