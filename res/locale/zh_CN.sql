@@ -10,14 +10,22 @@
 CREATE TABLE BASIC (
   id    INTEGER PRIMARY KEY AUTOINCREMENT,
   key   TEXT,
-  value "TEXT"
+  value TEXT
 );
 INSERT INTO BASIC (id, key, value) VALUES (0, 'Yes', '是');
 INSERT INTO BASIC (key, value) VALUES ('No', '否');
 INSERT INTO BASIC (key, value) VALUES ('Confirm', '确定');
 INSERT INTO BASIC (key, value) VALUES ('Cancel', '取消');
 
+INSERT INTO BASIC (key, value) VALUES ('MAP', '地图');
+
+INSERT INTO BASIC (key, value) VALUES ('RENAME_SUCCESS','重命名成功。新名字：')
+
+INSERT INTO BASIC (key, value) VALUES ('PRESS_BELOW','别点这里，点下面。')
+INSERT INTO BASIC (key, value) VALUES ('FORMAT_EXPLAIN','有些需要参数的命令请按如下格式输入：\r\n命令 [参数]\r\n如：go east')
 INSERT INTO BASIC (key, value) VALUES ('MODEL_UNSUPPORTED','该功能无法在CUI模式下实现，请进入GUI模式。');
+INSERT INTO BASIC (key, value) VALUES ('NO_MAP','您还没有得到地图呢，请继续游戏以得到地图吧！');
+INSERT INTO BASIC (key, value) VALUES ('NO_CORRECT_ITEM','您还没有得到地图呢，请继续游戏以得到地图吧！');
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE DESCRIBE(

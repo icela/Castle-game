@@ -1,5 +1,6 @@
 package game.commands.implement;
 
+import data.database.TempDatabase;
 import game.commands.BaseCommand;
 import util.interfaces.Echoer;
 import view.CUI;
@@ -33,18 +34,16 @@ public class CommandMap implements BaseCommand {
 	public void runCommand(String cmd) {
 		if (echoer instanceof CUI) {
 //			TODO 字符画
-			echoer.echoln("该功能在CUI模式下暂时无法实现，请使用GUI模式。");
+			echoer.echoln(TempDatabase.getInstance().getBasic("MODEL_UNSUPPORTED"));
 			echoer.echoln("");
 			return;
 		}
 		if (!haveMap) {
-			echoer.echoln("您还没有得到地图呢，请继续游戏以得到地图吧！");
-//			TODO 记得处理掉
-			echoer.echoln("此功能依赖pick和use，而这些功能未实现。敬请期待更新！！");
+			echoer.echoln(TempDatabase.getInstance().getBasic("NO_MAP"));
 			echoer.echoln("");
 			return;
 		}
-		JFrame frame = new JFrame("地图");
+		JFrame frame = new JFrame(TempDatabase.getInstance().getBasic("MAP"));
 		JPanel panel = new JPanel();
 		JLabel label = new JLabel();
 		ImageIcon icon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(

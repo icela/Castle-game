@@ -40,7 +40,7 @@ public class CommandPick implements BaseCommand {
 		for (int i = 0; i <= roomPairs.size(); i++)
 			if (roomPairs.get(game.getCurrentRoom().getId()) != this.needID) {
 				// 如果房间中所有物品编号与命令中给出的物品B的编号均不相等（房间中没有这个物品）
-				game.echoln(TempDatabase.getInstance().getBasic("MODEL_UNSUPPORTED"));
+				game.echoln(TempDatabase.getInstance().getBasic("NO_CORRECT_ITEM"));
 				return;
 			}
 		roomPairs.remove(needID);

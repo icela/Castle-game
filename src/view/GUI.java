@@ -1,5 +1,6 @@
 package view;
 
+import data.database.TempDatabase;
 import game.Game;
 import util.error.Logger;
 
@@ -93,7 +94,7 @@ public class GUI extends Game {
 		textArea.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				echoln("别点这里，点下面。");
+				echoln(TempDatabase.getInstance().getBasic("PRESS_BELOW"));
 				textField.requestFocus(true);
 			}
 
@@ -210,7 +211,7 @@ public class GUI extends Game {
 	@Override
 	public void clearScreen() {
 		System.gc();
+		// TODO 这行写的好有趣味。。。（为什么我会笑【滑稽.jpg】）
 		textArea.setText("");
-		echoln("屏幕已清空。");
 	}
 }

@@ -54,8 +54,7 @@ public abstract class Game implements MessageHandler, Echoer, Clearable {
 		commands.put(commandNames[++index], cmd -> {
 			for (String s : commandNames)
 				echoln(s);
-			echoln("有些需要参数的命令请按如下格式输入：\n命令 [参数]\n如：go east");
-			echoln("如：rename 冰封");
+			echoln(TempDatabase.getInstance().getBasic("FORMAT_EXPLAIN"));
 		});
 		commands.put(commandNames[++index], this::goRoom);
 		commands.put(commandNames[++index], cmd -> echoln(map.wildRoom()));
@@ -70,7 +69,7 @@ public abstract class Game implements MessageHandler, Echoer, Clearable {
 		commands.put(commandNames[++index], cmd -> {
 			if (!cmd.equals("")) {
 				player.rename(cmd);
-				echoln("重命名成功。新名字：" + cmd);
+				echoln(TempDatabase.getInstance().getBasic("RENAME_SUCCESS") + cmd);
 			} else echoln("格式错误。请按照\"rename [新名字]\"的格式重命名！");
 		});
 		commands.put(commandNames[++index], cmd -> {
