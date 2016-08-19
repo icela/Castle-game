@@ -21,7 +21,6 @@
         </element>
         <element id="dir-copy" path="$USER_HOME$" />
       </element>
-      <element id="library" level="project" name="sqlite-jdbc-3.8.11.2" />
     </root>
   </artifact>
 </component>
