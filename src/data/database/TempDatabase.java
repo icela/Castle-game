@@ -13,8 +13,9 @@ import java.util.HashMap;
  *         Created by Eldath on 2016/8/9 0009.
  */
 public class TempDatabase {
-	private ArrayList<Item> userItems, allItems;
-	private HashMap<Integer, Integer> roomPairs;
+	private static ArrayList<Item> userItems, allItems;
+	private static HashMap<Integer, Integer> roomPairs;
+	private static HashMap<String, String> basic;
 	private static TempDatabase instance;
 
 	public TempDatabase() {
@@ -22,6 +23,7 @@ public class TempDatabase {
 			allItems = SQLiteDatabase.getInstance().getItems();
 			roomPairs = TextDatabase.getInstance().getRoomPairs();
 			userItems = TextDatabase.getInstance().getUserItems();
+			basic = SQLiteDatabase.getInstance().getBasic();
 		} catch (Exception e) {
 			Logger.log(e);
 		}
@@ -30,6 +32,10 @@ public class TempDatabase {
 	public static TempDatabase getInstance() {
 		if (instance == null) instance = new TempDatabase();
 		return instance;
+	}
+
+	public String getBasic(String key) {
+		return basic.get(key);
 	}
 
 	public ArrayList<Item> getAllItems() {
@@ -45,14 +51,14 @@ public class TempDatabase {
 	}
 
 	public void setAllItems(ArrayList<Item> allItems) {
-		this.allItems = allItems;
+		TempDatabase.allItems = allItems;
 	}
 
-	public void setRoomPairs(HashMap<Integer, Integer> roomPairs) {
-		this.roomPairs = roomPairs;
+	public static void setRoomPairs(HashMap<Integer, Integer> roomPairs) {
+		TempDatabase.roomPairs = roomPairs;
 	}
 
-	public void setUserItems(ArrayList<Item> userItems) {
-		this.userItems = userItems;
+	public static void setUserItems(ArrayList<Item> userItems) {
+		TempDatabase.userItems = userItems;
 	}
 }

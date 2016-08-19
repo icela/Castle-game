@@ -15,7 +15,6 @@ import java.util.HashMap;
  *
  * @author Eldath, ice1000
  *         本类作用即使用背包中的物品。
- *         //TODO 未完成。
  */
 public class CommandUse implements BaseCommand {
 
