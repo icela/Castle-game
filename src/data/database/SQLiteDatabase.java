@@ -42,6 +42,17 @@ public class SQLiteDatabase
 		return instance;
 	}
 
+	public synchronized HashMap<String,String> getBasic() throws SQLException {
+		ResultSet set=statement.executeQuery("SELECT * FROM BASIC ORDER BY id ASC");
+		HashMap<String,String> basic = new HashMap<>(25,10);
+		while (set.next()){
+			basic.put(
+					set.getString("key"),
+					set.getString("value")
+					);
+		}
+		return basic;
+	}
 	/**
 	 * CREATE TABLE ROOM(id INTEGER PRIMARY KEY AUTOINCREMENT,
 	 * disc TEXT, welc TEXT,boss TEXT,blood INTEGER,
