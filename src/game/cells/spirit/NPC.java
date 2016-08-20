@@ -46,6 +46,14 @@ public class NPC extends Cell {
 		return chat;
 	}
 
+	public int getRoomID() {
+		return room;
+	}
+
+	public int getNpcID() {
+		return id;
+	}
+
 	public String getHello() {
 		return hello;
 	}

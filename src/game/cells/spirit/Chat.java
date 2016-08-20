@@ -1,9 +1,9 @@
 package game.cells.spirit;
 
 
-
 /**
  * Created by Eldath on 2016/8/7 0007.
+ *
  * @author Eldath
  */
 
@@ -22,6 +22,15 @@ public class Chat {
 			this.sequelTable = spilt[0];
 			this.sequelValue = spilt[1];
 		} else this.sequelValue = sequel;
+	}
+
+	@Override
+	public String toString() {
+		return text;
+	}
+
+	public String getText() {
+		return text;
 	}
 
 	public String getSequel() {

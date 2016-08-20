@@ -42,17 +42,18 @@ public class SQLiteDatabase
 		return instance;
 	}
 
-	public synchronized HashMap<String,String> getBasic() throws SQLException {
-		ResultSet set=statement.executeQuery("SELECT * FROM BASIC ORDER BY id ASC");
-		HashMap<String,String> basic = new HashMap<>(25,10);
-		while (set.next()){
+	public synchronized HashMap<String, String> getBasic() throws SQLException {
+		ResultSet set = statement.executeQuery("SELECT * FROM BASIC ORDER BY id ASC");
+		HashMap<String, String> basic = new HashMap<>(25, 10);
+		while (set.next()) {
 			basic.put(
 					set.getString("key"),
 					set.getString("value")
-					);
+			);
 		}
 		return basic;
 	}
+
 	/**
 	 * CREATE TABLE ROOM(id INTEGER PRIMARY KEY AUTOINCREMENT,
 	 * disc TEXT, welc TEXT,boss TEXT,blood INTEGER,
@@ -129,31 +130,53 @@ public class SQLiteDatabase
 		return items;
 	}
 
-	public synchronized ArrayList<NPC> getNPC() throws SQLException {
-		ResultSet set = statement.executeQuery("SELECT * FROM NPC");
-		int npcid = set.getInt("id");
-		ResultSet chatSet = statement.executeQuery("SELECT * FROM CHAT WHERE npcid=" + npcid);
-		ArrayList<NPC> NPCs = new ArrayList<>();
-		ArrayList<Chat> Chats = new ArrayList<>();
+	public synchronized ArrayList<Chat> getAllChats() throws SQLException{
+		ArrayList<Chat> chats=new ArrayList<>();
+		ResultSet chatSet=statement.executeQuery("SELECT * FROM CHAT ORDER BY id");
 		while (chatSet.next()) {
-			Chats.add(new Chat(
+			chats.add(new Chat(
 					chatSet.getInt("id"),
 					chatSet.getString("text"),
 					chatSet.getBoolean("isp"),
 					chatSet.getString("sequel")
 			));
 		}
+		return chats;
+	}
+	public synchronized ArrayList<NPC> getCurrentNPC(int roomID) throws SQLException {
+		return getNPCSuper(statement.executeQuery("SELECT * FROM NPC WHERE room=" + roomID));
+	}
+
+	public synchronized ArrayList<NPC> getAllNPC() throws SQLException {
+		return getNPCSuper(statement.executeQuery("SELECT * FROM NPC"));
+	}
+
+	private synchronized ArrayList<NPC> getNPCSuper(ResultSet set) throws SQLException {
+		ArrayList<NPC> NPCs = new ArrayList<>();
 		while (set.next()) {
-			NPCs.add(new NPC(
-					npcid,
-					set.getString("name"),
-					set.getInt("room"),
-					set.getInt("item"),
-					set.getString("hello"),
-					Chats
-			));
+			int npcid = set.getInt("id");
+			ResultSet chatSet = statement.executeQuery("SELECT * FROM CHAT WHERE npcid=" + npcid + "ORDER BY id");
+			ArrayList<Chat> Chats = new ArrayList<>();
+			while (chatSet.next()) {
+				Chats.add(new Chat(
+						chatSet.getInt("id"),
+						chatSet.getString("text"),
+						chatSet.getBoolean("isp"),
+						chatSet.getString("sequel")
+				));
+			}
+			while (set.next()) {
+				NPCs.add(new NPC(
+						npcid,
+						set.getString("name"),
+						set.getInt("room"),
+						set.getInt("item"),
+						set.getString("hello"),
+						Chats
+				));
+			}
+			set.close();
 		}
-		set.close();
 		return NPCs;
 	}
 

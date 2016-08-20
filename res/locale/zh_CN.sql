@@ -201,6 +201,7 @@ CREATE TABLE MAP (
 );
 
 INSERT INTO MAP (id, fromid, toid, dir) VALUES (0, 0, 1, 3);
+INSERT INTO MAP (fromid, toid, dir) VALUES (0, 1, 3);
 -- TODO 不行我先把房间艹好先。。。留个例子.
 
 
@@ -500,7 +501,10 @@ INSERT INTO ENDING (sequel, desc) VALUES (
 ------------------------------------------------------------------------------------------------------------------------
 
 -- TODO 这么多表你真的应付的过来吗
-
+SELECT *
+FROM BASIC
+ORDER BY id
+    ASC;
 SELECT *
 FROM ROOM
 ORDER BY id

@@ -1,6 +1,7 @@
 package game.commands.implement;
 
 import data.database.SQLiteDatabase;
+import data.database.TempDatabase;
 import game.Game;
 import game.cells.item.Item;
 import game.commands.BaseCommand;
@@ -29,14 +30,9 @@ public class CommandUse implements BaseCommand {
 	}
 
 	private void init() {
-		try {
-			allItems = SQLiteDatabase.getInstance().getItems();
-			roomPairs = SQLiteDatabase.getInstance().getRoomItemPairs();
-			userItems = SQLiteDatabase.getInstance().getItems();
-			//TODO 一样，记得改成TextDatabase
-		} catch (SQLException e) {
-			Logger.log(e);
-		}
+		allItems = TempDatabase.getInstance().getAllItems();
+		roomPairs = TempDatabase.getInstance().getRoomPairs();
+		userItems = TempDatabase.getInstance().getUserItems();
 		String[] tmp = cmd.replace("use ", "").split(" on ");
 		this.A = Integer.parseInt(tmp[1]);
 		this.B = Integer.parseInt(tmp[2]);
