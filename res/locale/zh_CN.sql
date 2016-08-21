@@ -415,10 +415,6 @@ CREATE TABLE CHOICE (
   sequelB TEXT,
   choiceC TEXT,
   sequelC TEXT,
-  choiceD TEXT,
-  sequelD TEXT,
-  choiceE TEXT,
-  sequelE TEXT
 );
 
 INSERT INTO CHOICE (id, choiceA, sequelA, choiceB, sequelB) VALUES (
