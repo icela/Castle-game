@@ -128,7 +128,7 @@ INSERT INTO ROOM (name, welc) VALUES (
 
 -- 暂且先这样凑合。。。。。。
 INSERT INTO ROOM (name, welc, sequel) VALUES (
-  '计算机旁的书架', '有一本小本子，一张纸还有一个特殊的SD卡。', 'CHOOSE^0'    --18
+  '计算机旁的书架', '有一本小本子，一张纸还有一个特殊的SD卡。', 'CHOICE^0'    --18
 );
 
 INSERT INTO ROOM (name, welc) VALUES (
@@ -312,11 +312,11 @@ CREATE TABLE CHAT (
 );
 
 INSERT INTO CHAT (id, npcid, text, isp, sequel) VALUES (
-  0, 0, '很高兴见到你。请问你是谁？', 0, 'CHOOSE^0'
+  0, 0, '很高兴见到你。请问你是谁？', 0, 'CHOICE^0'
 );
 
 INSERT INTO CHAT (npcid, text, isp, sequel) VALUES (
-  0, '哦... ...欢迎您！远道而来的客人。向左通向教堂，向右通向古井，直走就是居民区，但是... ...居民区现在没人。', 0, 'CHOOSE^1' --1
+  0, '哦... ...欢迎您！远道而来的客人。向左通向教堂，向右通向古井，直走就是居民区，但是... ...居民区现在没人。', 0, 'CHOICE^1' --1
 );
 
 INSERT INTO CHAT (npcid, text, isp, sequel) VALUES (
@@ -324,7 +324,7 @@ INSERT INTO CHAT (npcid, text, isp, sequel) VALUES (
 );
 
 INSERT INTO CHAT (npcid, text, isp, sequel) VALUES (
-  1, '您好，欢迎来到城堡酒吧。要来一杯吗？', 0, 'CHOOSE^1'                       -- 3
+  1, '您好，欢迎来到城堡酒吧。要来一杯吗？', 0, 'CHOICE^1'                       -- 3
 );
 
 INSERT INTO CHAT (npcid, text, isp, sequel) VALUES (
@@ -332,15 +332,15 @@ INSERT INTO CHAT (npcid, text, isp, sequel) VALUES (
 );
 
 INSERT INTO CHAT (npcid, text, isp, sequel) VALUES (
-  1, '您是刚来这里的外地人吧？', 0, 'CHOOSE^1'                                    -- 5
+  1, '您是刚来这里的外地人吧？', 0, 'CHOICE^1'                                    -- 5
 );
 
 INSERT INTO CHAT (npcid, text, isp, sequel) VALUES (
-  1, '这是哪？这里就是城堡啊！', 0, 'CHOOSE^2'                                     -- 6
+  1, '这是哪？这里就是城堡啊！', 0, 'CHOICE^2'                                     -- 6
 );
 
 INSERT INTO CHAT (npcid, text, isp, sequel) VALUES (
-  1, '难怪我从没有见过您... ...您住在城堡里？', 0, 'CHOOSE^6'                      -- 7
+  1, '难怪我从没有见过您... ...您住在城堡里？', 0, 'CHOICE^6'                      -- 7
 );
 
 INSERT INTO CHAT (npcid, text, isp, sequel) VALUES (
@@ -407,7 +407,7 @@ INSERT INTO CHAT (npcid, text, isp, sequel) VALUES (
 ------------------------------------------------------------------------------------------------------------------------
 -- 最多支持五个选项
 -- id: 选项编号     tid: 对应对话编号       choice: 选项文字    sequel: 对应后果：后果表名^详细后果编号
-CREATE TABLE CHOOSE (
+CREATE TABLE CHOICE (
   id      INTEGER PRIMARY KEY AUTOINCREMENT,
   choiceA TEXT,
   sequelA TEXT,
@@ -421,35 +421,35 @@ CREATE TABLE CHOOSE (
   sequelE TEXT
 );
 
-INSERT INTO CHOOSE (id, choiceA, sequelA, choiceB, sequelB) VALUES (
+INSERT INTO CHOICE (id, choiceA, sequelA, choiceB, sequelB) VALUES (
   0, '去日出之村', 'ROOM^20', '去城堡', 'ROOM^1'
 );
 -- 日出之村守卫
-INSERT INTO CHOOSE (choiceA, sequelA, choiceB, sequelB) VALUES (
+INSERT INTO CHOICE (choiceA, sequelA, choiceB, sequelB) VALUES (
   '我是%PLAYER_NAME%，是一名... ...一名游客', 'CHAT^1', '我是... ...一位... ...呃... ...商人', 'CHAT^1' --0
 );
-INSERT INTO CHOOSE (choiceA, sequelA, choiceB, sequelB) VALUES (
+INSERT INTO CHOICE (choiceA, sequelA, choiceB, sequelB) VALUES (
   '居民区怎么会没人呢？', 'CHAT^2', '嗯... ...让我看看', 'END_OF_CHAT'                        --1
 );
-INSERT INTO CHOOSE (choiceA, sequelA, choiceB, sequelB) VALUES (
+INSERT INTO CHOICE (choiceA, sequelA, choiceB, sequelB) VALUES (
   '问问居民区的情况', 'CHAT^2', '嗯... ...让我看看... ...', 'END_OF_CHAT'                     --2
 );
-INSERT INTO CHOOSE (choiceA, sequelA, choiceB, sequelB, choiceC, sequelC) VALUES (
+INSERT INTO CHOICE (choiceA, sequelA, choiceB, sequelB, choiceC, sequelC) VALUES (
   '向左走', 'ROOM^', '向右走', 'ROOM^', '直走', 'ROOM^'                     --2
 );
-INSERT INTO CHOOSE (choiceA, sequelA, choiceB, sequelB) VALUES (
+INSERT INTO CHOICE (choiceA, sequelA, choiceB, sequelB) VALUES (
   '可以啊，非常乐意。', 'CHAT^2', '不... ...还是算了吧... ...抱歉。', 'CHAT^1'                --3
 );
 
-INSERT INTO CHOOSE (choiceA, sequelA, choiceB, sequelB) VALUES (
+INSERT INTO CHOICE (choiceA, sequelA, choiceB, sequelB) VALUES (
   '对，我是刚来的外地人。', 'CHAT^1', '我连这是哪都还不知道呢！', 'CHAT^2'                     --4
 );
 
-INSERT INTO CHOOSE (choiceA, sequelA, choiceB, sequelB) VALUES (
+INSERT INTO CHOICE (choiceA, sequelA, choiceB, sequelB) VALUES (
   '一直问下去', 'CHAT^', '问问城堡的来历', 'CHAT^'                                          --5
 );
 
-INSERT INTO CHOOSE (choiceA, sequelA, choiceB, sequelB) VALUES (
+INSERT INTO CHOICE (choiceA, sequelA, choiceB, sequelB) VALUES (
   '对，我就住在旁边的旅店。', 'CHAT^', '不，我不住在城堡里。', 'CHAT^'                            --6
 );
 ------------------------------------------------------------------------------------------------------------------------
@@ -538,7 +538,7 @@ FROM CHAT
 ORDER BY id
   ASC;
 SELECT *
-FROM CHOOSE
+FROM CHOICE
 ORDER BY id
   ASC;
 SELECT *

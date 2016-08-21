@@ -7,6 +7,7 @@ import game.cells.spirit.Reaction;
 import game.map.Exit;
 import game.map.Room;
 import util.error.Logger;
+import view.GUIConfig;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -42,10 +43,12 @@ public class SQLiteDatabase
 		return instance;
 	}
 
-	private String crossPlatformHandle(String input){
-		String output;
-		input.replaceAll("%PLAYER_NAME%",)
+	private String crossPlatformHandler(String input) {
+		input.replaceAll("%PLAYER_NAME%", GUIConfig.PLAYER_NAME);
+		input.replaceAll("%NEWLINE", System.getProperty("line.separator"));
+		return input;
 	}
+
 	public synchronized HashMap<String, String> getBasic() throws SQLException {
 		ResultSet set = statement.executeQuery("SELECT * FROM BASIC ORDER BY id ASC");
 		HashMap<String, String> basic = new HashMap<>(25, 10);
@@ -134,9 +137,9 @@ public class SQLiteDatabase
 		return items;
 	}
 
-	public synchronized ArrayList<Chat> getAllChats() throws SQLException{
-		ArrayList<Chat> chats=new ArrayList<>();
-		ResultSet chatSet=statement.executeQuery("SELECT * FROM CHAT ORDER BY id");
+	public synchronized ArrayList<Chat> getAllChats() throws SQLException {
+		ArrayList<Chat> chats = new ArrayList<>();
+		ResultSet chatSet = statement.executeQuery("SELECT * FROM CHAT ORDER BY id");
 		while (chatSet.next()) {
 			chats.add(new Chat(
 					chatSet.getInt("id"),
@@ -147,6 +150,7 @@ public class SQLiteDatabase
 		}
 		return chats;
 	}
+
 	public synchronized ArrayList<NPC> getCurrentNPC(int roomID) throws SQLException {
 		return getNPCSuper(statement.executeQuery("SELECT * FROM NPC WHERE room=" + roomID));
 	}
