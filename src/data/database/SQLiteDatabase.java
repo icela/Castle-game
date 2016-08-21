@@ -42,6 +42,10 @@ public class SQLiteDatabase
 		return instance;
 	}
 
+	private String crossPlatformHandle(String input){
+		String output;
+		input.replaceAll("%PLAYER_NAME%",)
+	}
 	public synchronized HashMap<String, String> getBasic() throws SQLException {
 		ResultSet set = statement.executeQuery("SELECT * FROM BASIC ORDER BY id ASC");
 		HashMap<String, String> basic = new HashMap<>(25, 10);

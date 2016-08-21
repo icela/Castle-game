@@ -1,6 +1,7 @@
 package game.cells.spirit;
 
 import util.interfaces.Echoer;
+import view.GUIConfig;
 
 public class Player extends Cell {
 
@@ -58,6 +59,7 @@ public class Player extends Cell {
 	 */
 	public Player(String name, int blood, int strike, int defence) {
 		super(name);
+		savePlayerName(name);
 		this.blood = blood;
 		this.strike = strike;
 		this.defence = defence;
@@ -119,6 +121,11 @@ public class Player extends Cell {
 
 	public void rename(String newName) {
 		this.name = newName;
+		savePlayerName(newName);
+	}
+
+	private void savePlayerName(String name) {
+		GUIConfig.PLAYER_NAME = name;
 	}
 
 	public int getBlood() {
