@@ -30,6 +30,7 @@ public abstract class Game implements MessageHandler, Echoer, Clearable {
 	private String[] commandNames;
 	private Map map;
 	public Player player;
+	private String specialMessage;
 
 	private boolean gameEnded = false;
 
@@ -42,12 +43,11 @@ public abstract class Game implements MessageHandler, Echoer, Clearable {
 		map = new Map();
 		items = TempDatabase.getInstance().getUserItems();
 		commandNames = new String[]{
-				"help", "go", "wild",
-				"exit", "state", "fight",
-				"sleep", "save", "rename",
-				"talk", "pack", "home",
-				"map", "pick", "use",
-				"reset", "version"
+				"help", "go", "exit",
+				"fight", "sleep", "save",
+				"rename", "talk", "pack",
+				"home", "map", "pick",
+				"use", "reset", "version"
 		};
 
 		int index = -1;
@@ -57,12 +57,10 @@ public abstract class Game implements MessageHandler, Echoer, Clearable {
 			echoln(TempDatabase.getInstance().getBasic("FORMAT_EXPLAIN"));
 		});
 		commands.put(commandNames[++index], this::goRoom);
-		commands.put(commandNames[++index], cmd -> echoln(map.wildRoom()));
 		commands.put(commandNames[++index], cmd -> {
 			saveData();
 			gameEnded = true;
 		});
-		commands.put(commandNames[++index], cmd -> echoln(player.stateToString()));
 		commands.put(commandNames[++index], cmd -> fight());
 		commands.put(commandNames[++index], new CommandSleep(this));
 		commands.put(commandNames[++index], cmd -> saveData());
@@ -72,6 +70,7 @@ public abstract class Game implements MessageHandler, Echoer, Clearable {
 				echoln(TempDatabase.getInstance().getBasic("RENAME_SUCCESS") + cmd);
 			} else echoln("格式错误。请按照\"rename [新名字]\"的格式重命名！");
 		});
+		commands.put(commandNames[++index], new CommandTalk(this));
 		commands.put(commandNames[++index], cmd -> {
 			NPC npc = map.currentRoom.isNPCExists(cmd);
 			if (npc != null) echoln(npc.getHello());
@@ -138,8 +137,15 @@ public abstract class Game implements MessageHandler, Echoer, Clearable {
 		echoln("");
 	}
 
+	public String getSpecialMessage(){
+		return specialMessage;
+	}
 	@Override
 	public boolean handleMessage(String line) {
+		if(!line.contains(" ")) {
+			line = specialMessage;
+			return false;
+		}
 		String[] words = line.split(" ");
 		BaseCommand func = commands.get(words[0]);
 		String value2 = "";

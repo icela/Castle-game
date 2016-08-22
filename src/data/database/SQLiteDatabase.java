@@ -46,7 +46,7 @@ public class SQLiteDatabase
 
 	private String crossPlatformHandler(String input) {
 		input.replaceAll("%PLAYER_NAME%", GUIConfig.PLAYER_NAME);
-		input.replaceAll("%NEWLINE", System.getProperty("line.separator"));
+		input.replaceAll("%NEWLINE", GUIConfig.NEWLINE);
 		return input;
 	}
 

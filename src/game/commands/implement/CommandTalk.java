@@ -70,7 +70,7 @@ public class CommandTalk implements BaseCommand {
 					game.echoln(currentNPCChat.get(Integer.parseInt(sequel.split("TALK^ ")[1])).getText());
 				else if (sequel.contains("CHOOSE^")) {
 					currentChoice = allChoices.get(Integer.parseInt(sequel.split("CHOOSE^")[1]));
-					game.echo("选项A：");
+					game.echo(currentChat.toString());
 				} else if (sequel.contains("END_OF_TALK"))
 					game.echoln("您与" + currentNPC.getName() + "的对话已经结束。");
 			}
