@@ -45,19 +45,15 @@ public class Choice {
 		return result;
 	}
 
-	public HashMap<String, String> getInfo() {
-		HashMap<String, String> result = new HashMap<>(4, 2);
-		result.put("ID", String.valueOf(id));
+	public String getSequelA() {
+		return sequelA;
+	}
 
-		result.put("CHOICEA", choiceA);
-		result.put("SEQUELA", sequelA);
+	public String getSequelB() {
+		return sequelB;
+	}
 
-		result.put("CHOICEB", choiceB);
-		result.put("SEQUELB", sequelB);
-		if (choiceC != null && sequelC != null) {
-			result.put("CHOICEC", choiceC);
-			result.put("SEQUELC", sequelC);
-		}
-		return result;
+	public String getSequelC() {
+		return sequelC;
 	}
 }

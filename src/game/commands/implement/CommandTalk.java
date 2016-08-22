@@ -46,8 +46,10 @@ public class CommandTalk implements BaseCommand {
 		// 不行我得理理思路。。。
 		// 首先需要判断玩家所处的这个房间里是不是有玩家想对话的NPC
 		// 玩家所处房间的编号中的所有NPC的编号与请求的NPC编号是否相等
-		if (currentNPCs.isEmpty())
-			game.echoln("房间内没有NPC！");
+		if (currentNPCs.isEmpty()) {
+			game.echoln("房间内没有指定的NPC。");
+			return;
+		}
 		Iterator<NPC> iter = currentNPCs.iterator();
 		boolean isEqual = false;
 		while (iter.hasNext()) {

@@ -140,6 +140,7 @@ public abstract class Game implements MessageHandler, Echoer, Clearable {
 	public String getSpecialMessage(){
 		return specialMessage;
 	}
+
 	@Override
 	public boolean handleMessage(String line) {
 		if(!line.contains(" ")) {
