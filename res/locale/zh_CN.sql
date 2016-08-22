@@ -18,22 +18,22 @@ INSERT INTO BASIC (key, value) VALUES ('Confirm', '确定');
 INSERT INTO BASIC (key, value) VALUES ('Cancel', '取消');
 
 INSERT INTO BASIC (key, value) VALUES ('MAP', '地图');
-
-INSERT INTO BASIC (key, value) VALUES ('RENAME_SUCCESS','重命名成功。新名字：')
-
-INSERT INTO BASIC (key, value) VALUES ('PRESS_BELOW','别点这里，点下面。')
-INSERT INTO BASIC (key, value) VALUES ('FORMAT_EXPLAIN','有些需要参数的命令请按如下格式输入：%NEWLINE%命令 [参数]%NEWLINE%如：go east')
+INSERT INTO BASIC (key, value) VALUES ('RENAME_SUCCESS','重命名成功。新名字：');
+INSERT INTO BASIC (key, value) VALUES ('PRESS_BELOW','别点这里，点下面。');
+INSERT INTO BASIC (key, value) VALUES ('FORMAT_EXPLAIN','有些需要参数的命令请按如下格式输入：%NEWLINE%命令 [参数]%NEWLINE%如：go east');
 INSERT INTO BASIC (key, value) VALUES ('MODEL_UNSUPPORTED','该功能无法在CUI模式下实现，请进入GUI模式。');
 INSERT INTO BASIC (key, value) VALUES ('NO_MAP','您还没有得到地图呢，请继续游戏以得到地图吧！');
 INSERT INTO BASIC (key, value) VALUES ('NO_CORRECT_ITEM','您还没有得到地图呢，请继续游戏以得到地图吧！');
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
-CREATE TABLE DESCRIBE(
+CREATE TABLE I_DESCRIBE(
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   command TEXT,
-  describe TEXT,
-
-)
+  describe TEXT
+);
+INSERT INTO I_DESCRIBE (id, command, describe) VALUES (
+  0,'测试用', '测试用'
+);
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
 -- event: 进入房间后触发的事件：事件类型^详细事件编号，暂未加入支持！
@@ -202,8 +202,7 @@ CREATE TABLE MAP (
 
 INSERT INTO MAP (id, fromid, toid, dir) VALUES (0, 0, 1, 3);
 INSERT INTO MAP (fromid, toid, dir) VALUES (0, 1, 3);
--- TODO 不行我先把房间艹好先。。。留个例子.
-
+-- TODO 不行我先把房间搞好先。。。留个例子.
 
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
@@ -293,8 +292,8 @@ CREATE TABLE NPC (
   id   INTEGER PRIMARY KEY AUTOINCREMENT,
   name TEXT,
   room INTEGER,
-  item INTEGER
-       hello TEXT
+  item INTEGER,
+  hello TEXT
 );
 
 INSERT INTO NPC (id, name, room) VALUES (0, '门卫', 2); -- 0
@@ -408,13 +407,13 @@ INSERT INTO CHAT (npcid, text, isp, sequel) VALUES (
 -- 最多支持五个选项
 -- id: 选项编号     tid: 对应对话编号       choice: 选项文字    sequel: 对应后果：后果表名^详细后果编号
 CREATE TABLE CHOICE (
-  id      INTEGER PRIMARY KEY AUTOINCREMENT,
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   choiceA TEXT,
   sequelA TEXT,
   choiceB TEXT,
   sequelB TEXT,
   choiceC TEXT,
-  sequelC TEXT,
+  sequelC TEXT
 );
 
 INSERT INTO CHOICE (id, choiceA, sequelA, choiceB, sequelB) VALUES (
@@ -460,7 +459,7 @@ INSERT INTO INFO (id, context) VALUES (
 );
 
 INSERT INTO INFO (context) VALUES (
-  '（封面题字）MilkTea\'s%NEWLINE%%NEWLINE%0001%NEWLINE%\t感谢上帝！%NEWLINE%\t我终于进入埃弗顿独立研究计划了！这里应该足够安全让我能做我想做的事！%NEWLINE%%NEWLINE%%NEWLINE%\t希望足够安全......%NEWLINE%1215%NEWLINE%\tGA-17（被划掉，看不清楚）了！整个基地都沉浸在喜（被划掉，看不清楚）可贺！！%NEWLINE%2071%NEWLINE%\t泄露更加严重了......%NEWLINE%\t希望足够安全。%NEWLINE%2094%NEWLINE%\t（被撕掉）'
+  '（封面题字）MilkTea''s%NEWLINE%%NEWLINE%0001%NEWLINE%\t感谢上帝！%NEWLINE%\t我终于进入埃弗顿独立研究计划了！这里应该足够安全让我能做我想做的事！%NEWLINE%%NEWLINE%%NEWLINE%\t希望足够安全......%NEWLINE%1215%NEWLINE%\tGA-17（被划掉，看不清楚）了！整个基地都沉浸在喜（被划掉，看不清楚）可贺！！%NEWLINE%2071%NEWLINE%\t泄露更加严重了......%NEWLINE%\t希望足够安全。%NEWLINE%2094%NEWLINE%\t（被撕掉）'
 );
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -476,7 +475,7 @@ CREATE TABLE ENDING (
 );
 
 INSERT INTO ENDING (id, sequel, desc) VALUES (
-  0, 1, '===============rnt很抱歉，您已死亡%NEWLINE%===============%NEWLINE%请键入reset指令重置游戏或键入exit指令退出游戏。'
+  0, 1, '===============%NEWLINE%很抱歉，您已死亡%NEWLINE%===============%NEWLINE%请键入reset指令重置游戏或键入exit指令退出游戏。'
 );
 
 INSERT INTO ENDING (sequel, desc) VALUES (
@@ -502,6 +501,14 @@ FROM BASIC
 ORDER BY id
     ASC;
 SELECT *
+FROM I_DESCRIBE
+ORDER BY id
+  ASC;
+SELECT *
+FROM ROOM
+ORDER BY id
+  ASC;
+SELECT *
 FROM ROOM
 ORDER BY id
   ASC;
@@ -514,15 +521,15 @@ FROM MAP
 ORDER BY id
   ASC;
 SELECT *
+FROM BOSS_GET_ITEM
+ORDER BY id
+  ASC;
+SELECT *
 FROM ITEM
 ORDER BY id
   ASC;
 SELECT *
 FROM REACTION
-ORDER BY id
-  ASC;
-SELECT *
-FROM BOSS_GET_ITEM
 ORDER BY id
   ASC;
 SELECT *
@@ -538,10 +545,10 @@ FROM CHOICE
 ORDER BY id
   ASC;
 SELECT *
-FROM ENDING
+FROM INFO
 ORDER BY id
   ASC;
 SELECT *
-FROM INFO
+FROM ENDING
 ORDER BY id
   ASC;
