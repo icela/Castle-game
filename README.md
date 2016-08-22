@@ -54,21 +54,28 @@ Map: (May need update)<br/>
 + [Eldath](https://github.com/lizhaohan001)
 
 # Notice
+
+## About programming
 + Enter before brace is strictly prohibited，because this project follows the tradition of Java.
 + [ice1000](https://github.com/ice1000) must be noticed before refacing.
 
+## About dependence
++ You can [download](http://pan.baidu.com/s/1dEXQYOx) the package of them or just download part of dependence.
++ (**NECESSARY**) SQLite JDBC Driver (You can download the newest version at [here](https://bitbucket.org/xerial/sqlite-jdbc/downloads))then move it into ```/lib``` directory.
++ Yahei Mono font (You can download it at [here](http://pan.baidu.com/s/1o8Ov1VW)) should be placed in ```\lib``` directory.
+
 # Development schedule
 
-+ [X] -> (Finished) Fight system.<br/>
-+ [X] -> (Finished) Level system.<br/>
-+ [X] -> (Finished) CUI ~~packaged by GUI~~.<br/>
-+ [X] -> (Finished) GUI version and CUI version coexist.<br/>
-+ [X] -> (Finished) Map saved in SQLite.<br/>
-+ [X] -> (Padding)  BOSS system.<br/>
-+ [X] -> (Padding)  Map system.<br/>
-+ [X] -> (Padding)  NPC system.<br/>
-+ [X] -> (Working) Archive system.<br/>
-+ [ ] -> (Working)  Odds, backpack system.<br/>
-+ [ ] -> (Working)  Shopping system.<br/>
-+ [ ] -> (Thinking) Communication to server-side.<br/>
++ [X] (Finished) Fight system.<br/>
++ [X] (Finished) Level system.<br/>
++ [X] (Finished) CUI ~~packaged by GUI~~.<br/>
++ [X] (Finished) GUI version and CUI version coexist.<br/>
++ [X] (Finished) Map saved in SQLite.<br/>
++ [X] (Padding)  BOSS system.<br/>
++ [X] (Padding)  Map system.<br/>
++ [X] (Padding)  NPC system.<br/>
++ [X] (Working) Archive system.<br/>
++ [ ] (Working)  Odds, backpack system.<br/>
++ [ ] (Working)  Shopping system.<br/>
++ [ ] (Thinking) Communication to server-side.<br/>
 

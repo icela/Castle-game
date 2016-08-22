@@ -52,8 +52,15 @@ GUI版与CUI版共存。<br/>
 + [Eldath](https://github.com/lizhaohan001)
 
 # 维护须知
+
+## 关于须知
 + 严禁大括号换行，本项目遵从Java语言的传统
 + 重构必须通知[ice1000](https://github.com/ice1000)
+
+## 关于依赖
++ 您可以在[这里](http://pan.baidu.com/s/1dEXQYOx)下载所有依赖的打包成的压缩文件，也可以选择单独的依赖文件下载。
++ （**必要**）SQLite JDBC 驱动（您可以在[这里](https://bitbucket.org/xerial/sqlite-jdbc/downloads)下载最新版本）并将其放置到 ```\lib``` 目录中。
++ Yahei Mono 字体（您可以在[这里](http://pan.baidu.com/s/1o8Ov1VW)下载）并将其放置到 ```\lib``` 目录中。
 
 # 开发进度
 - [X] （早已完成）战斗系统
