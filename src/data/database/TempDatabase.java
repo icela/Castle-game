@@ -3,8 +3,6 @@ package data.database;
 import game.cells.item.Item;
 import util.error.Logger;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -20,7 +18,7 @@ public class TempDatabase {
 
 	public TempDatabase() {
 		try {
-			allItems = SQLiteDatabase.getInstance().getItems();
+			allItems = SQLiteDatabase.getInstance().getAllItems();
 			roomPairs = TextDatabase.getInstance().getRoomPairs();
 			userItems = TextDatabase.getInstance().getUserItems();
 			basic = SQLiteDatabase.getInstance().getBasic();

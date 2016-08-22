@@ -31,9 +31,9 @@ public class Map {
 		itemPair = new HashMap<>();
 //			构造地图结构
 		try {
-			itemPair = SQLiteDatabase.getInstance().getRoomItemPairs();
-			rooms = SQLiteDatabase.getInstance().getRooms();
-			SQLiteDatabase.getInstance().getExits().forEach(exit -> setExit(
+			itemPair = SQLiteDatabase.getInstance().getAllRoomItemPairs();
+			rooms = SQLiteDatabase.getInstance().getAllRooms();
+			SQLiteDatabase.getInstance().getAllExits().forEach(exit -> setExit(
 					exit.from, exit.to,
 					pairs[exit.dir]
 			));

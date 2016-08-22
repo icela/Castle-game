@@ -3,6 +3,7 @@ package game.commands.implement;
 import data.database.SQLiteDatabase;
 import game.Game;
 import game.cells.spirit.Chat;
+import game.cells.spirit.Choice;
 import game.cells.spirit.NPC;
 import game.commands.BaseCommand;
 import util.error.Logger;
@@ -20,6 +21,8 @@ public class CommandTalk implements BaseCommand {
 	private final Game game;
 	private ArrayList<NPC> currentNPCs;
 	private ArrayList<Chat> currentNPCChat;
+	private ArrayList<Choice> allChoices;
+	private Choice currentChoice;
 	private NPC currentNPC;
 	private String npcID;
 
@@ -30,6 +33,7 @@ public class CommandTalk implements BaseCommand {
 	private void init(String cmd) {
 		this.npcID = cmd.split("talk ")[1];
 		try {
+			this.allChoices = SQLiteDatabase.getInstance().getAllChoice();
 			this.currentNPCs = SQLiteDatabase.getInstance().getCurrentNPC(game.getCurrentRoom().getId());
 		} catch (SQLException e) {
 			Logger.log(e);
@@ -64,10 +68,10 @@ public class CommandTalk implements BaseCommand {
 				String sequel = currentChat.getSequel();
 				if (sequel.contains("TALK^"))
 					game.echoln(currentNPCChat.get(Integer.parseInt(sequel.split("TALK^ ")[1])).getText());
-				else if(sequel.contains("CHOOSE^"))
-					game.echoln("请输入您的选择：");
-				//TODO 先弄出来一个Choice的spirit，然后再艹这里。
-				else if (sequel.contains("END_OF_TALK"))
+				else if (sequel.contains("CHOOSE^")) {
+					currentChoice = allChoices.get(Integer.parseInt(sequel.split("CHOOSE^")[1]));
+					game.echo("选项A：");
+				} else if (sequel.contains("END_OF_TALK"))
 					game.echoln("您与" + currentNPC.getName() + "的对话已经结束。");
 			}
 		}

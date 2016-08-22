@@ -6,6 +6,8 @@ package view;
  */
 public class GUIConfig {
 
+	public static final String NEWLINE=System.getProperty("line.separator");
+
 	public static final String VERSION = "V0.0.2 Alpha";
 
 	public static final String BUILD = "MjAxNjA4MTAwMDE=";

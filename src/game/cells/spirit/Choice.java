@@ -13,11 +13,10 @@ public class Choice {
 
 	int id;
 	@NotNull
-	String choiceA, sequelA;
+	String choiceA = "", sequelA = "";
 	@NotNull
-	String choiceB, sequelB;
-	@NotNull
-	String choiceC, sequelC;
+	String choiceB = "", sequelB = "";
+	String choiceC = "", sequelC = "";
 
 	public Choice(int id, String choiceA, String sequelA) {
 		this.id = id;
@@ -35,6 +34,15 @@ public class Choice {
 		this(id, choiceA, sequelA, choiceB, sequelB);
 		this.choiceC = choiceC;
 		this.sequelC = sequelC;
+	}
+
+	@Override
+	public String toString() {
+		String result;
+		result = choiceA + "\t" + choiceB;
+		if (choiceC.contains("") && sequelC.contains(""))
+			result = result + "\t" + choiceC;
+		return result;
 	}
 
 	public HashMap<String, String> getInfo() {

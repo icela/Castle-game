@@ -111,7 +111,7 @@ public class TextDatabase {
 	private ArrayList<Item> getAllItems() {
 		ArrayList<Item> temp = new ArrayList<>();
 		try {
-			temp = SQLiteDatabase.getInstance().getItems();
+			temp = SQLiteDatabase.getInstance().getAllItems();
 		} catch (SQLException e) {
 			Logger.log(e);
 		}

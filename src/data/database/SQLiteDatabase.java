@@ -2,6 +2,7 @@ package data.database;
 
 import game.cells.item.Item;
 import game.cells.spirit.Chat;
+import game.cells.spirit.Choice;
 import game.cells.spirit.NPC;
 import game.cells.spirit.Reaction;
 import game.map.Exit;
@@ -49,6 +50,24 @@ public class SQLiteDatabase
 		return input;
 	}
 
+	public synchronized ArrayList<Choice> getAllChoice() throws SQLException {
+		ResultSet set = statement.executeQuery("SELECT * FROM CHOICE ORDER BY id ASC");
+		ArrayList<Choice> choice = new ArrayList<>();
+		while (set.next()) {
+			choice.add(new Choice(
+					set.getInt("id"),
+					set.getString("choiceA"),
+					set.getString("sequelA"),
+					set.getString("choiceB"),
+					set.getString("sequelB"),
+					set.getString("choiceC"),
+					set.getString("sequelC")
+			));
+		}
+		set.close();
+		return choice;
+	}
+
 	public synchronized HashMap<String, String> getBasic() throws SQLException {
 		ResultSet set = statement.executeQuery("SELECT * FROM BASIC ORDER BY id ASC");
 		HashMap<String, String> basic = new HashMap<>(25, 10);
@@ -66,7 +85,7 @@ public class SQLiteDatabase
 	 * disc TEXT, welc TEXT,boss TEXT,blood INTEGER,
 	 * strike INTEGER, defence INTEGER,exp INTEGER, die TEXT);
 	 */
-	public synchronized ArrayList<Room> getRooms() throws SQLException {
+	public synchronized ArrayList<Room> getAllRooms() throws SQLException {
 		ResultSet set = statement.executeQuery("SELECT * FROM ROOM ORDER BY id ASC");
 		ArrayList<Room> rooms = new ArrayList<>();
 		while (set.next()) {
@@ -89,7 +108,7 @@ public class SQLiteDatabase
 	/**
 	 * CREATE TABLE MAP( id INTEGER PRIMARY KEY AUTOINCREMENT, fromid INTEGER, toid INTEGER, dir INTEGER);
 	 */
-	public synchronized ArrayList<Exit> getExits() throws SQLException {
+	public synchronized ArrayList<Exit> getAllExits() throws SQLException {
 		// 与顺序无关
 		ResultSet set = statement.executeQuery("SELECT * FROM MAP");
 		ArrayList<Exit> exitses = new ArrayList<>();
@@ -109,7 +128,7 @@ public class SQLiteDatabase
 	 *
 	 * @return items
 	 */
-	public synchronized ArrayList<Item> getItems() throws SQLException {
+	public synchronized ArrayList<Item> getAllItems() throws SQLException {
 		ResultSet set = statement.executeQuery("SELECT * FROM ITEM");
 		int itemID = set.getInt("id");
 		ResultSet reactionSet = statement.executeQuery(
@@ -193,7 +212,7 @@ public class SQLiteDatabase
 	 *
 	 * @return pair
 	 */
-	public synchronized HashMap<Integer, Integer> getRoomItemPairs() throws SQLException {
+	public synchronized HashMap<Integer, Integer> getAllRoomItemPairs() throws SQLException {
 		ResultSet set = statement.executeQuery("SELECT * FROM BOSS_GET_ITEM");
 		HashMap<Integer, Integer> pairs = new HashMap<>();
 		while (set.next()) pairs.put(set.getInt("room"), set.getInt("item"));
