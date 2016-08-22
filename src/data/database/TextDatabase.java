@@ -71,6 +71,8 @@ public class TextDatabase {
 			defence = Integer.parseInt(text[6]);
 			level = Integer.parseInt(text[7]);
 			experience = Integer.parseInt(text[8]);
+			userItems = stringToArray(text[9]);
+			roomPairs = stringToMap(text[10]);
 		}
 		if (inputVersion.compareTo(GUIConfig.ARCHIVE_V) < 0 || inputVersion.compareTo(GUIConfig.ARCHIVE_V) > 0)
 			ArchiveFileUnsupportedHandler.handleError(new ArchiveFileUnsupportedException(inputVersion));

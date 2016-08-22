@@ -66,7 +66,7 @@ public class CommandTalk implements BaseCommand {
 					game.echoln(currentNPCChat.get(Integer.parseInt(sequel.split("TALK^ ")[1])).getText());
 				else if(sequel.contains("CHOOSE^"))
 					game.echoln("请输入您的选择：");
-				//TODO 先弄出来一个Choose的spirit，然后再艹这里。
+				//TODO 先弄出来一个Choice的spirit，然后再艹这里。
 				else if (sequel.contains("END_OF_TALK"))
 					game.echoln("您与" + currentNPC.getName() + "的对话已经结束。");
 			}
