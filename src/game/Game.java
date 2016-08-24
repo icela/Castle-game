@@ -4,7 +4,6 @@ import data.database.TempDatabase;
 import data.database.TextDatabase;
 import game.cells.item.Item;
 import game.cells.item.ItemData;
-import game.cells.spirit.NPC;
 import game.cells.spirit.Player;
 import game.commands.BaseCommand;
 import game.commands.implement.*;
@@ -52,8 +51,7 @@ public abstract class Game implements MessageHandler, Echoer, Clearable {
 
 		int index = -1;
 		commands.put(commandNames[++index], cmd -> {
-			for (String s : commandNames)
-				echoln(s);
+			for (String s : commandNames) echoln(s);
 			echoln(TempDatabase.getInstance().getBasic("FORMAT_EXPLAIN"));
 		});
 		commands.put(commandNames[++index], this::goRoom);
@@ -71,11 +69,11 @@ public abstract class Game implements MessageHandler, Echoer, Clearable {
 			} else echoln("格式错误。请按照\"rename [新名字]\"的格式重命名！");
 		});
 		commands.put(commandNames[++index], new CommandTalk(this));
-		commands.put(commandNames[++index], cmd -> {
-			NPC npc = map.currentRoom.isNPCExists(cmd);
-			if (npc != null) echoln(npc.getHello());
-			else echoln("指定的名称不存在。注：Boss要在被打败之后才能对话。");
-		});
+//		commands.put(commandNames[++index], cmd -> {
+//			NPC npc = map.currentRoom.isNPCExists(cmd);
+//			if (npc != null) echoln(npc.getHello());
+//			else echoln("指定的名称不存在。注：Boss要在被打败之后才能对话。");
+//		});
 		commands.put(commandNames[++index], cmd -> {
 			if (!items.isEmpty()) {
 				echoln("背包中物品如下：");
