@@ -72,11 +72,6 @@ public abstract class Game implements MessageHandler, Echoer, Clearable {
 		});
 		commands.put(commandNames[++index], new CommandTalk(this));
 		commands.put(commandNames[++index], cmd -> {
-			NPC npc = map.currentRoom.isNPCExists(cmd);
-			if (npc != null) echoln(npc.getHello());
-			else echoln("指定的名称不存在。注：Boss要在被打败之后才能对话。");
-		});
-		commands.put(commandNames[++index], cmd -> {
 			if (!items.isEmpty()) {
 				echoln("背包中物品如下：");
 				items.stream().filter(item -> item.num > 0).forEach(item ->
